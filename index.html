@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Slider de Fotos con Flexbox</title>
+</head>
+<body>
+    
+<!-- Botón para abrir/cerrar la barra de navegación -->
+<button id="toggleButton" onclick="toggleNav()">Abrir Barra</button>
+
+<!-- Barra de navegación lateral -->
+<div id="mySidenav" class="sidenav">
+    <a href="#">Inicio</a>
+    <a href="#">Acerca de</a>
+    <a href="#">Servicios</a>
+    <a href="#">Contacto</a>
+    <button onclick="closeNav()">Cerrar Barra</button>
+</div>
+
+
+<!-- Contenido principal-->
+<div id="main-content">
+    <h1>Contenido Principal</h1>
+    <p>Este es el contenido principal de la página.</p>
+
+    <div class="slider">
+            <div class="slide">
+                <img src="Gato.jpg" alt="Imagen 1">
+                <div class="slide-details">
+                    <h2>Título de la Imagen 1</h2>
+                    <p>Descripción de la Imagen 1.</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="Gato2.jpg" alt="Imagen 2">
+                <div class="slide-details">
+                    <h2>Título de la Imagen 2</h2>
+                    <p>Descripción de la Imagen 2.</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="Gato3.jpg" alt="Imagen 3">
+                <div class="slide-details">
+                    <h2>Título de la Imagen 3</h2>
+                    <p>Descripción de la Imagen 3.</p>
+                </div>
+            </div>
+        </div>
+        <div class="controls">
+            <button class="prev" onclick="plusSlides(-1)">&#10094; Anterior</button>
+            <button class="next" onclick="plusSlides(1)">Siguiente &#10095;</button>
+        </div> 
+        
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

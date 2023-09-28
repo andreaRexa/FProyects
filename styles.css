@@ -1,0 +1,92 @@
+/* Estilos para el slider */
+.slider {
+    display: flex;
+    flex-direction: row; /* Coloca los elementos en una fila */
+    overflow: hidden;
+    position: relative;
+}
+
+.slide {
+    display: flex;
+    flex-direction: row; /* Coloca los elementos en una fila */
+    text-align: left;
+    width: 100%;
+}
+
+img {
+    max-width: 50%; /* Ancho máximo de la imagen */
+    height: auto;
+    object-fit: cover;
+}
+
+.slide-details {
+    flex: 1; /* Toma el espacio restante disponible en la fila */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+h2 {
+    font-size: 24px;
+    margin-top: 0;
+}
+
+p {
+    font-size: 18px;
+    color: #555;
+}
+
+/* Estilos para los controles (se pueden mantener igual) */
+.controls {
+    text-align: center;
+    margin-top: 20px;
+}
+
+button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+/* Estilos para la barra de navegación lateral cuando está colapsada */
+.sidenav {
+    height: 100%;
+    width: 0; /* Ancho inicial 0 para que esté oculta */
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #333;
+    overflow-x: hidden; /* Ocultar contenido horizontalmente */
+    transition: 0.3s; /* Animación de transición */
+}
+
+/* Estilos para los elementos de la barra de navegación */
+.sidenav a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+}
+
+/* Estilos para cambiar el color cuando se pasa el mouse por encima */
+.sidenav a:hover {
+    background-color: #555;
+}
+/* Estilos para el contenido principal */
+#main-content {
+    margin-left: 0; /* Inicialmente, sin margen a la izquierda */
+    transition: 0.3s; /* Animación de transición */
+}
+
+/* Estilos para el contenido cuando la barra de navegación está abierta */
+.sidenav-open #main-content {
+    margin-left: 250px; /* Ancho de la barra lateral expandida */
+}
+
