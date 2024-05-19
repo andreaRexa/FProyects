@@ -9,39 +9,37 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    // Definir la tabla asociada
+    protected $table = 'usuarios';
+
+    // Definir la clave primaria
+    protected $primaryKey = 'IdUsuario';
+
+    // Indicar si la clave primaria es autoincremental
+    public $incrementing = true;
+
+    // Definir el tipo de clave primaria
+    protected $keyType = 'int';
+
+    // Desactivar las marcas de tiempo por defecto (timestamps)
+    public $timestamps = true;
+
+    // Los atributos que se pueden asignar masivamente.
     protected $fillable = [
-        'name',
-        'email',
+        'Nombre',
+        'Apellidos',
         'password',
+        'CodRecContr',
+        'FotoUsuario',
+        'FechaCodRecContr',
+        'FechaCreacion',
+        'Correo',
+        'TipoUsuario'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
+    // Si no estás usando los timestamps de Laravel (created_at y updated_at), añade esto:
+    const CREATED_AT = 'FechaCreacion';
+    const UPDATED_AT = null;
 }
