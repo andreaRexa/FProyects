@@ -3,40 +3,53 @@
 @section('title', 'Mi perfil')
 
 @section('content')
-<div class="container mt-4"> <!-- Agregamos un margen top -->
+<div class="container mt-4"> 
     <div class="card">
         <div class="card-body">
             <div class="row">
                 <div class="col-md-4"> 
-                    <img src="{{ $imagenURL }}" class="img-fluid" alt="Imagen de perfil">  
+                    <img src="{{ $imagenURL }}" class="img-fluid" alt="Imagen de perfil" id="imagen-perfil">  
+                    <form id="updatefoto" action="{{ route('perfil.updatefoto') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        @method('post')
+                        <div class="form-group mt-3 text-center">
+                            <label for="foto_perfil">Actualizar Foto de perfil</label>
+                            <input type="file" class="form-control-file" id="foto_perfil" name="foto_perfil" accept=".jpg, .jpeg, .png">
+                        </div>
+                        <div class="mt-3 text-center">
+                            <button type="submit" class="btn btn-success mb-2">Actualizar Foto</button>
+                        </div>
+                    </form>
+                    
                     <div class="mt-3 text-center"> 
                         <button type="button" class="btn btn-dark mb-2" id="editar" onclick="habilitarEdicion()">Editar datos</button>
                         <button type="submit" class="btn btn-success mb-2" id="actualizar" style="display: none;" onclick="confirmarActualizacion()">Actualizar</button>
                         <button type="button" class="btn btn-secondary mb-2" id="cancelar" style="display: none;" onclick="cancelarEdicion()">Cancelar</button>
                     </div>
+                    
                     <div class="mt-3 text-center"> 
                         <button type="button" class="btn btn-danger">Eliminar perfil</button> 
                     </div>
                 </div>
                 <div class="col-md-5">
-                <form id="update-form" action="{{ route('perfil.update', ['id' => session('user.id')]) }}" method="post">
+                    <form id="formularioupdate" action="{{ route('perfil.update', ['id' => session('user.id')]) }}" method="post">
                         @csrf
                         @method('put')
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" name ="nombre" value="{{ session('user.nombre') }}" disabled>
+                            <input type="text" class="form-control" id="nombre" name="nombre" value="{{ session('user.nombre') }}" disabled>
                         </div>
                         <div class="form-group">
                             <label for="apellidos">Apellidos</label>
-                            <input type="text" class="form-control" id="apellidos" name ="apellidos" value="{{ session('user.apellidos') }}" disabled>
+                            <input type="text" class="form-control" id="apellidos" name="apellidos" value="{{ session('user.apellidos') }}" disabled>
                         </div>
                         <div class="form-group">
                             <label for="correo">Correo Electrónico</label>
-                            <input type="email" class="form-control" id="correo" name="email" value="{{session('user.email') }}" disabled>
+                            <input type="email" class="form-control" id="correo" name="email" value="{{ session('user.email') }}" disabled>
                         </div>
                         <div class="form-group">
                             <label for="fecha_creacion">Fecha de creación</label>
-                            <input type="text" class="form-control" id="fecha_creacion" value="{{ date('d-m-Y', strtotime( session('user.fecha_creacion'))) }}" disabled>
+                            <input type="text" class="form-control" id="fecha_creacion" value="{{ date('d-m-Y', strtotime(session('user.fecha_creacion'))) }}" disabled>
                         </div>
                         <div class="form-group">
                             <label for="rol">Rol</label>
@@ -86,6 +99,4 @@
         }
     }
 </script>
-
-
 @endsection

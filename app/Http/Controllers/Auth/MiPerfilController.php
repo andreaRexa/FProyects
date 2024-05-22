@@ -19,6 +19,33 @@ class MiPerfilController extends Controller
         return view('Auth.MiPerfil', ['imagenURL' => $imagenURL]);
     }
 
+    public function updatefoto(Request $request, $id)
+    {
+        // Validar la foto de perfil
+        $request->validate([
+            'foto_perfil' => 'required|mimes:jpg,jpeg,png|max:2048', // Permitir solo JPG y PNG, tamaño máximo de 2MB
+        ]);
+
+        $userData = $request->session()->get('user');
+        $user = User::findOrFail($userData['id']);
+
+        // Subir la nueva foto de perfil
+        if ($request->hasFile('foto_perfil')) {
+            $path = $request->file('foto_perfil')->store('FotosPerfil', 's3');
+            $user->foto_perfil = Storage::disk('s3')->url($path);
+        }
+
+        // Guardar los cambios
+        $user->save();
+
+        $fotourl=$user->FotoUsuario;
+
+        $request->session()->put('user.email', $user->fotourl);
+        $imagenURL = Storage::disk('s3')->url('FotosPerfil/'.$fotourl);
+
+        return view('Auth.MiPerfil', ['imagenURL' => $imagenURL]);
+    }
+
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
