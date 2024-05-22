@@ -19,7 +19,7 @@ class MiPerfilController extends Controller
         return view('Auth.MiPerfil', ['imagenURL' => $imagenURL]);
     }
 
-    public function updatefoto(Request $request, $id)
+    public function updatefoto(Request $request)
     {
         // Validar la foto de perfil
         $request->validate([
