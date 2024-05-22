@@ -31,7 +31,10 @@ class MiPerfilController extends Controller
 
         // Subir la nueva foto de perfil
         if ($request->hasFile('foto_perfil')) {
-            $path = $request->file('foto_perfil')->store('FotosPerfil', 's3');
+            $filename = $user->nombre . '.' . $request->file('foto_perfil')->getClientOriginalExtension();
+            $path = $request->file('foto_perfil')->storeAs('fotosPerfil', $filename, 's3');
+
+            // Actualizar la URL de la foto de perfil del usuario
             $user->foto_perfil = Storage::disk('s3')->url($path);
         }
 
