@@ -45,14 +45,15 @@ class MiPerfilController extends Controller
         }
     
         // Obtener la URL actualizada de la foto de perfil del usuario
-        $fotourl = $user->FotoUsuario;
+        /*$fotourl = $user->FotoUsuario;
         $imagenURL = Storage::disk('s3')->url('FotosPerfil/'.$fotourl);
     
         // Actualizar la URL de la foto de perfil en la sesión
         $request->session()->put('user.foto', $imagenURL);
     
         // Redireccionar o retornar la vista con la URL de la imagen actualizada
-        return view('Auth.MiPerfil', ['imagenURL' => $imagenURL]);
+        return view('Auth.MiPerfil', ['imagenURL' => $imagenURL]);*/
+        return redirect()->intended('FProyects');
     }
 
     public function update(Request $request, $id)
