@@ -39,7 +39,7 @@ class MiPerfilController extends Controller
             $fileContent = file_get_contents($request->file('foto_perfil')->getRealPath());
     
             // Guardar el archivo en AWS S3
-            dd(Storage::disk('s3')->put($path, $fileContent, 'public'));
+            Storage::disk('s3')->put($path, $fileContent, 'public');
     
             // Actualizar el nombre de la foto en la base de datos
             $user->FotoUsuario = $filename;
