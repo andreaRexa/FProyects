@@ -32,13 +32,11 @@ class MiPerfilController extends Controller
     
         // Subir la nueva foto de perfil
         if ($request->hasFile('foto_perfil')) {
-           // $file = request('foto_perfil');
+            $file = request('foto_perfil');
 
             $filename = Str::lower($user->Nombre) . '.' . $request->file('foto_perfil')->getClientOriginalExtension();
-            dd($filename);
-            Storage::disk('s3')->delete($filename);
-            //$path = 'FotosPerfil/' . $filename;
-            //$file->storeAs('FotosPerfil/', $filename, 's3');
+            $path = 'FotosPerfil/' . $filename;
+            $file->storeAs('FotosPerfil/', $filename, 's3');
     
             // Actualizar el nombre de la foto en la base de datos
             $user->FotoUsuario = $filename;
@@ -46,15 +44,14 @@ class MiPerfilController extends Controller
         }
     
         // Obtener la URL actualizada de la foto de perfil del usuario
-        /*$fotourl = $user->FotoUsuario;
+        $fotourl = $user->FotoUsuario;
         $imagenURL = Storage::disk('s3')->url('FotosPerfil/'.$fotourl);
     
         // Actualizar la URL de la foto de perfil en la sesión
         $request->session()->put('user.foto', $imagenURL);
     
         // Redireccionar o retornar la vista con la URL de la imagen actualizada
-        return view('Auth.MiPerfil', ['imagenURL' => $imagenURL]);*/
-        return redirect()->intended('FProyects');
+        return view('Auth.MiPerfil', ['imagenURL' => $imagenURL]);
     }
 
     public function update(Request $request, $id)
