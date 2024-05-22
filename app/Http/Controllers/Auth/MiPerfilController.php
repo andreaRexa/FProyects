@@ -33,7 +33,8 @@ class MiPerfilController extends Controller
         if ($request->hasFile('foto_perfil')) {
             $filename = $user->nombre . '.' . $request->file('foto_perfil')->getClientOriginalExtension();
             $path = $request->file('foto_perfil')->storeAs('FotosPerfil', $filename, 's3');
-            dd($path);
+            dd($path);//aa
+            
             // Actualizar la URL de la foto de perfil del usuario
             $user->foto_perfil = Storage::disk('s3')->url($path);
         }

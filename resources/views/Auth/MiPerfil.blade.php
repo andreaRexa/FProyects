@@ -13,7 +13,6 @@
                         @csrf
                         @method('post')
                         <div class="form-group mt-3 text-center">
-                            <label for="foto_perfil">Actualizar Foto de perfil</label>
                             <input type="file" class="form-control-file" id="foto_perfil" name="foto_perfil" accept=".jpg, .jpeg, .png">
                         </div>
                         <div class="mt-3 text-center">
