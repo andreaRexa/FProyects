@@ -35,6 +35,7 @@ class MiPerfilController extends Controller
            // $file = request('foto_perfil');
 
             $filename = Str::lower($user->Nombre) . '.' . $request->file('foto_perfil')->getClientOriginalExtension();
+            dd($filename);
             Storage::disk('s3')->delete($filename);
             //$path = 'FotosPerfil/' . $filename;
             //$file->storeAs('FotosPerfil/', $filename, 's3');
