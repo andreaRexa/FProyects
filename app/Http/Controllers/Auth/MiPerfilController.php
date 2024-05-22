@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User; 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class MiPerfilController extends Controller
 {
@@ -31,8 +32,8 @@ class MiPerfilController extends Controller
     
         // Subir la nueva foto de perfil
         if ($request->hasFile('foto_perfil')) {
-            $filename = $user->nombre . '.' . $request->file('foto_perfil')->getClientOriginalExtension();
-            dd($user);
+            $filename = Str::lower($user->Nombre) . '.' . $request->file('foto_perfil')->getClientOriginalExtension();
+            //dd($user);
             $path = $request->file('foto_perfil')->storeAs('FotosPerfil', $filename, 's3');
             // Actualizar la URL de la foto de perfil del usuario
             
