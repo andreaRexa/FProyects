@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User; 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Log;
+
 class MiPerfilController extends Controller
 {
     public function showMiPerfil(Request $request)
@@ -21,47 +21,38 @@ class MiPerfilController extends Controller
     }
 
     public function updatefoto(Request $request)
-{
-    // Validar la foto de perfil
-    $request->validate([
-        'foto_perfil' => 'required|mimes:jpg,jpeg,png|max:2048', // Permitir solo JPG y PNG, tamaño máximo de 2MB
-    ]);
+    {
+        // Validar la foto de perfil
+        $request->validate([
+            'foto_perfil' => 'required|mimes:jpg,jpeg,png|max:2048', // Permitir solo JPG y PNG, tamaño máximo de 2MB
+        ]);
+    
+        $userData = $request->session()->get('user');
+        $user = User::findOrFail($userData['id']);
+    
+        // Subir la nueva foto de perfil
+        if ($request->hasFile('foto_perfil')) {
+            $file = request('foto_perfil');
 
-    $userData = $request->session()->get('user');
-    $user = User::findOrFail($userData['id']);
-
-    // Subir la nueva foto de perfil
-    if ($request->hasFile('foto_perfil')) {
-        $file = request('foto_perfil');
-        $filename = Str::lower($user->Nombre) . '.' . $request->file('foto_perfil')->getClientOriginalExtension();
-        $path = 'FotosPerfil';
-
-        try {
-            $uploaded = $request->file('foto_perfil')->storeAs($path,$filename, 's3');
-            if ($uploaded) {
-                // Actualizar el nombre de la foto en la base de datos
-                $user->FotoUsuario = $filename;
-                $user->save();
-
-                // Obtener la URL actualizada de la foto de perfil del usuario
-                $fotourl = $user->FotoUsuario;
-                $imagenURL = Storage::disk('s3')->url('FotosPerfil/' . $fotourl);
-
-                // Actualizar la URL de la foto de perfil en la sesión
-                $request->session()->put('user.foto', $imagenURL);
-
-                // Redireccionar o retornar la vista con la URL de la imagen actualizada
-                return view('Auth.MiPerfil', ['imagenURL' => $imagenURL]);
-            } else {
-                Log::error('Failed to upload file to S3');
-                return redirect()->route('MiPerfil')->with('error', 'No se pudo subir la foto de perfil. Inténtalo de nuevo.');
-            }
-        } catch (\Exception $e) {
-            Log::error('S3 upload error: ' . $e->getMessage());
-            return redirect()->route('MiPerfil')->with('error', 'Ocurrió un error al subir la foto de perfil. Inténtalo de nuevo.');
+            $filename = Str::lower($user->Nombre) .'.'. $request->file('foto_perfil')->getClientOriginalExtension();
+            $path = 'FotosPerfil/' . $filename;
+            Storage::disk('s3')->put($path, file_get_contents($file));
+    
+            // Actualizar el nombre de la foto en la base de datos
+            $user->FotoUsuario = $filename;
+            $user->save();
         }
+    
+        // Obtener la URL actualizada de la foto de perfil del usuario
+        $fotourl = $user->FotoUsuario;
+        $imagenURL = Storage::disk('s3')->url('FotosPerfil/'.$fotourl);
+    
+        // Actualizar la URL de la foto de perfil en la sesión
+        $request->session()->put('user.foto', $imagenURL);
+    
+        // Redireccionar o retornar la vista con la URL de la imagen actualizada
+        return view('Auth.MiPerfil', ['imagenURL' => $imagenURL]);
     }
-}
 
     public function update(Request $request, $id)
     {
