@@ -21,7 +21,7 @@ class MiPerfilController extends Controller
     }
 
     public function updatefoto(Request $request)
-    {dd($request->all());
+    {
         // Validar la foto de perfil
         $request->validate([
             'foto_perfil' => 'required|mimes:jpg,jpeg,png|max:2048', // Permitir solo JPG y PNG, tamaño máximo de 2MB
@@ -34,7 +34,7 @@ class MiPerfilController extends Controller
         if ($request->hasFile('foto_perfil')) {
             $filename = Str::lower($user->Nombre) . '.' . $request->file('foto_perfil')->getClientOriginalExtension();
             $path = 'FotosPerfil/' . $filename;
-    
+            dd($path);
             // Leer el contenido del archivo
             $fileContent = file_get_contents($request->file('foto_perfil')->getRealPath());
     
