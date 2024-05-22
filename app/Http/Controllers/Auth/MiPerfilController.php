@@ -21,7 +21,7 @@ class MiPerfilController extends Controller
     }
 
     public function updatefoto(Request $request)
-    {
+    {dd($request->all());
         // Validar la foto de perfil
         $request->validate([
             'foto_perfil' => 'required|mimes:jpg,jpeg,png|max:2048', // Permitir solo JPG y PNG, tamaño máximo de 2MB
