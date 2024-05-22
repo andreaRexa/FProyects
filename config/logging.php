@@ -126,6 +126,12 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+        
+        'aws' => [
+            'driver' => 'custom',
+            'via' => \App\Logging\CustomAwsLogger::class,
+            'level' => 'debug',
+        ],
 
     ],
 
