@@ -14,7 +14,7 @@ class MiPerfilController extends Controller
         $userData = $request->session()->get('user');
         $user = User::findOrFail($userData['id']);
         $fotourl=$user->FotoUsuario;
-        $imagenURL = Storage::disk('s3')->url('fotosPerfil/'.$fotourl);
+        $imagenURL = Storage::disk('s3')->url('FotosPerfil/'.$fotourl);
 
         return view('Auth.MiPerfil', ['imagenURL' => $imagenURL]);
     }
