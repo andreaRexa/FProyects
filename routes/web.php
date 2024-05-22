@@ -9,7 +9,7 @@ Route::get('/', function () {
 });
 
 Route::get('FProyects', function () {
-    return view('');
+    return view('home');
 });
 
 
