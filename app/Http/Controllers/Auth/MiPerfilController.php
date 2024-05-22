@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User; 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-
+use Illuminate\Support\Facades\Log;
 class MiPerfilController extends Controller
 {
     public function showMiPerfil(Request $request)
@@ -34,7 +34,7 @@ class MiPerfilController extends Controller
     if ($request->hasFile('foto_perfil')) {
         $file = request('foto_perfil');
         $filename = Str::lower($user->Nombre) . '.' . $request->file('foto_perfil')->getClientOriginalExtension();
-        $path = 'FotosPerfil/' . $filename;
+        $path = 'FotosPerfil/';
 
         try {
             $uploaded = Storage::disk('s3')->put($path, file_get_contents($file));
