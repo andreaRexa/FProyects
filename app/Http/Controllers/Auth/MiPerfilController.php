@@ -36,7 +36,7 @@ class MiPerfilController extends Controller
 
             $filename = Str::lower($user->Nombre) .'.'. $request->file('foto_perfil')->getClientOriginalExtension();
             $path = 'FotosPerfil/' . $filename;
-            Storage::disk('s3')->put($path, file_get_contents($file));
+            dd(Storage::disk('s3')->put($path, file_get_contents($file)));
     
             // Actualizar el nombre de la foto en la base de datos
             $user->FotoUsuario = $filename;
