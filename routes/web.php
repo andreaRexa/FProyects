@@ -18,3 +18,4 @@ Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('FProyects/logout', [CerrarSesionController::class, 'cerrarSession'])->name('logout');
 Route::get('FProyects/MiPerfil', [MiPerfilController::class, 'showMiPerfil'])->name('MiPerfil');
 Route::put('/perfil/{id}', [MiPerfilController::class, 'update'])->name('perfil.update');
+Route::put('perfil/updatefoto', [MiPerfilController::class, 'updatefoto'])->name('perfil.updatefoto');
