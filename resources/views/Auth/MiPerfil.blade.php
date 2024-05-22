@@ -8,7 +8,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-4"> 
-                    <img src="/storage/imagenes/pepe.jpg" class="img-fluid" alt="Imagen de perfil">  
+                    <img src="{{ $imagenURL }}" class="img-fluid" alt="Imagen de perfil">  
                     <div class="mt-3 text-center"> 
                         <button type="button" class="btn btn-dark mb-2" id="editar" onclick="habilitarEdicion()">Editar datos</button>
                         <button type="submit" class="btn btn-success mb-2" id="actualizar" style="display: none;" onclick="confirmarActualizacion()">Actualizar</button>

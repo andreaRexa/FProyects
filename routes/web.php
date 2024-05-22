@@ -9,14 +9,8 @@ Route::get('/', function () {
 });
 
 Route::get('FProyects', function () {
-    return view('home');
+    return view('');
 });
-
-Route::get('/fondo', function () {
-    $path = Storage::disk('public')->path('fondo.jpg');
-    return response()->file($path);
-});
-
 
 
 Route::get('FProyects/loginForm', [LoginController::class, 'showLoginForm'])->name('loginForm');

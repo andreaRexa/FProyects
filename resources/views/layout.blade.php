@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         body {
-            background-image: url('/fondo');
+            background-image: url('/storage/imagenes/fondo.jpg');
             background-size: cover; 
             background-position: center; 
         }

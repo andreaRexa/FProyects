@@ -10,7 +10,12 @@ class MiPerfilController extends Controller
 {
     public function showMiPerfil(Request $request)
     {
-        return view('auth.MiPerfil');
+        $userData = $request->session()->get('user');
+        $user = User::findOrFail($userData['id']);
+        $fotourl=$user->FotoUsuario;
+        $imagenURL = Storage::disk('s3')->url('fotosPerfil/'.$fotourl);
+
+        return view('Auth.MiPerfil', ['imagenURL' => $imagenURL]);
     }
 
     public function update(Request $request, $id)
