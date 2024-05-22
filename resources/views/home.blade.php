@@ -12,6 +12,7 @@
         <li>Email: {{ session('user.email') }}</li>
         <li>Rol: {{ session('user.rol') }}</li>
         <li>FechaCreacion: {{ session('user.fecha_creacion') }}</li>
+        <li>foto: {{ session('user.foto') }}</li>
 
         <!-- Añade más elementos según sea necesario -->
     </ul>
