@@ -37,7 +37,7 @@ class MiPerfilController extends Controller
         $path = 'FotosPerfil';
 
         try {
-            $uploaded = $request->file('avatar')->storeAs($path,$filename, 's3');
+            $uploaded = $request->file('foto_perfil')->storeAs($path,$filename, 's3');
             if ($uploaded) {
                 // Actualizar el nombre de la foto en la base de datos
                 $user->FotoUsuario = $filename;
