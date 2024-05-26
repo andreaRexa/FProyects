@@ -57,23 +57,29 @@
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach($proyectos as $proyecto)
-                                        @if($proyecto->Estado === 0)
+                                <tbody>            
+                                    @if($proyectos->isEmpty())
                                         <tr>
-                                            <td>
-                                                <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->FotoProyecto) }}" alt="{{ $proyecto->nombre }}" style="width: 150px; height: 150px; object-fit: cover;" class="img-fluid">
-                                            </td>
-                                            <td class="align-middle">{{ $proyecto->NombreProyecto }}</td>
-                                            <td class="align-middle">{{ $proyecto->Descripcion }}</td>
-                                            <td class="align-middle">{{ $proyecto->proyectoAlumno->usuario->alumnoCiclo->ciclo->NombreCiclo }}</td>
-                                            <td class="align-middle">{{ $proyecto->proyectoAlumno->usuario->alumnoCiclo->FechaCurso }}</td>
-                                            <td class="align-middle">
-                                                <a href="" class="btn btn-primary">Ver más</a> <!-- Botón Ver más -->
-                                            </td>
+                                            <td colspan="6">No se encuentran proyectos con los filtros seleccionados.</td>
                                         </tr>
-                                        @endif
-                                    @endforeach
+                                    @else
+                                        @foreach($proyectos as $proyecto)
+                                            @if($proyecto->Estado === 0)
+                                            <tr>
+                                                <td>
+                                                    <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->FotoProyecto) }}" alt="{{ $proyecto->nombre }}" style="width: 150px; height: 150px; object-fit: cover;" class="img-fluid">
+                                                </td>
+                                                <td class="align-middle">{{ $proyecto->NombreProyecto }}</td>
+                                                <td class="align-middle">{{ $proyecto->Descripcion }}</td>
+                                                <td class="align-middle">{{ $proyecto->proyectoAlumno->usuario->alumnoCiclo->ciclo->NombreCiclo }}</td>
+                                                <td class="align-middle">{{ $proyecto->proyectoAlumno->usuario->alumnoCiclo->FechaCurso }}</td>
+                                                <td class="align-middle">
+                                                    <a href="" class="btn btn-primary">Ver más</a> <!-- Botón Ver más -->
+                                                </td>
+                                            </tr>
+                                            @endif
+                                        @endforeach
+                                    @endif    
                                 </tbody>
                             </table>
                         </div>

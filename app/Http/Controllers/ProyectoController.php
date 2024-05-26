@@ -13,8 +13,8 @@ class ProyectoController extends Controller
     public function showListadoProyectos()
     {
         $proyectos = Proyectos::with('proyectoAlumno.usuario.alumnoCiclo')->get();
-        $ciclos = Ciclo::distinct()->get(); 
-        $cursos = AlumnoCiclo::distinct()->get(); 
+        $ciclos = Ciclo::groupBy('NombreCiclo')->pluck('NombreCiclo');
+        $cursos = AlumnoCiclo::groupBy('FechaCurso')->pluck('FechaCurso'); 
         return view('Proyectos.listaProyectos', compact('proyectos', 'ciclos', 'cursos'));
     }
 
@@ -23,24 +23,24 @@ class ProyectoController extends Controller
         // Obtener todos los proyectos
         $query = Proyectos::query();
 
-        // Filtrar por nombre si se proporciona el parámetro "nombre" en la URL
+        // Filtrar por nombre 
         if ($request->filled('nombre')) {
-            $query->where('NombreProyecto', 'like', '%' . $request->input('nombre') . '%');
+            $query->whereRaw('LOWER(NombreProyecto) ~* ?', [strtolower($request->input('nombre'))]);
         }
 
-        // Filtrar por descripción si se proporciona el parámetro "descripcion" en la URL
+        // Filtrar por descripción 
         if ($request->filled('descripcion')) {
-            $query->where('Descripcion', 'like', '%' . $request->input('descripcion') . '%');
+            $query->whereRaw('LOWER(Descripcion) ~* ?', [strtolower($request->input('descripcion'))]);
         }
 
-        // Filtrar por ciclo si se proporciona el parámetro "ciclo" en la URL
+        // Filtrar por ciclo 
         if ($request->filled('ciclo')) {
             $query->whereHas('proyectoAlumno.usuario.alumnoCiclo.ciclo', function ($q) use ($request) {
-                $q->where('NombreCiclo', $request->input('ciclo'));
+                $q->whereRaw('LOWER(NombreCiclo) = ?', [strtolower($request->input('ciclo'))]);
             });
         }
 
-        // Filtrar por curso si se proporciona el parámetro "curso" en la URL
+        // Filtrar por curso
         if ($request->filled('curso')) {
             $query->whereHas('proyectoAlumno.usuario.alumnoCiclo', function ($q) use ($request) {
                 $q->where('FechaCurso', $request->input('curso'));
@@ -50,8 +50,8 @@ class ProyectoController extends Controller
         // Obtener los proyectos filtrados
         $proyectos = $query->get();
         //dd($query->toSql());
-        $ciclos = Ciclo::distinct()->get(); 
-        $cursos = AlumnoCiclo::distinct()->get(); 
+        $ciclos = Ciclo::groupBy('NombreCiclo')->pluck('NombreCiclo');
+        $cursos = AlumnoCiclo::groupBy('FechaCurso')->pluck('FechaCurso'); 
         
         // Cargar la vista con los proyectos filtrados
         return view('Proyectos.listaProyectos', compact('proyectos', 'ciclos', 'cursos'));
