@@ -27,13 +27,13 @@
                             <li class="list-group-item">Familia: {{ $proyecto->familia->NombreFamilia }}</li>
                             <li class="list-group-item">
                                 Autores:
-                                @foreach($proyecto->proyectoAlumno as $proyectoAlumno)
-                                    @foreach($proyectoAlumno->usuario as $autor)
-                                        {{ $autor->Nombre }} {{ $autor->Apellidos }}
-                                        @unless($loop->last)
-                                            ,
-                                        @endunless
-                                    @endforeach
+                                @foreach($proyecto->proyectoAlumno->usuario as $autor)
+                                    
+                                    {{ $autor->Nombre }} {{ $autor->Apellidos }}
+                                    @unless($loop->last)
+                                        ,
+                                    @endunless
+                                    
                                 @endforeach
                             </li>
 
