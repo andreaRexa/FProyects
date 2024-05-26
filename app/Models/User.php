@@ -54,7 +54,7 @@ class User extends Authenticatable
     
     public function proyectoAlumno()
     {
-        return $this->hasOne(ProyectoAlumno::class, 'IdUsuario', 'IdUsuario');
+        return $this->hasMany(ProyectoAlumno::class, 'IdUsuario', 'IdUsuario');
     }
     
 }
