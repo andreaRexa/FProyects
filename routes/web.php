@@ -22,3 +22,4 @@ Route::get('FProyects/MiPerfil', [MiPerfilController::class, 'showMiPerfil'])->n
 Route::put('/perfil/{id}', [MiPerfilController::class, 'update'])->name('perfil.update');
 Route::post('perfil/updatefoto', [MiPerfilController::class, 'updatefoto'])->name('perfil.updatefoto');
 Route::get('FProyects/proyectos', [ProyectoController::class, 'showListadoProyectos'])->name('proyectos');
+Route::get('FProyects/proyectos/filtro', [ProyectoController::class, 'filtar'])->name('filtrado');

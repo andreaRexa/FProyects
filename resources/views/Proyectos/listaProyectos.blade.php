@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h2 class="card-title">Filtrar Proyectos</h2>
-                        <form action="" method="GET">
+                        <form action="{{ route('filtrado') }}" method="GET">
                             <div class="form-group">
                                 <label for="nombre">Nombre:</label>
                                 <input type="text" class="form-control" id="nombre" name="nombre">

@@ -17,4 +17,41 @@ class ProyectoController extends Controller
         $cursos = AlumnoCiclo::All(); 
         return view('Proyectos.listaProyectos', compact('proyectos', 'ciclos', 'cursos'));
     }
+
+    public function filtar(Request $request)
+    {
+        // Obtener todos los proyectos
+        $query = Proyectos::query();
+
+        // Filtrar por nombre si se proporciona el parámetro "nombre" en la URL
+        if ($request->has('nombre')) {
+            $query->where('NombreProyecto', 'like', '%' . $request->input('nombre') . '%');
+        }
+
+        // Filtrar por descripción si se proporciona el parámetro "descripcion" en la URL
+        if ($request->has('descripcion')) {
+            $query->where('Descripcion', 'like', '%' . $request->input('descripcion') . '%');
+        }
+
+        // Filtrar por ciclo si se proporciona el parámetro "ciclo" en la URL
+        if ($request->has('ciclo')) {
+            $query->whereHas('proyectoAlumno.usuario.alumnoCiclo.ciclo', function ($q) use ($request) {
+                $q->where('NombreCiclo', $request->input('ciclo'));
+            });
+        }
+
+        // Filtrar por curso si se proporciona el parámetro "curso" en la URL
+        if ($request->has('curso')) {
+            $query->whereHas('proyectoAlumno.usuario.alumnoCiclo', function ($q) use ($request) {
+                $q->where('FechaCurso', $request->input('curso'));
+            });
+        }
+
+        // Obtener los proyectos filtrados
+        $proyectos = $query->get();
+
+        // Cargar la vista con los proyectos filtrados
+        return view('proyectos.listaProyectos', compact('proyectos'));
+    }
+
 }
