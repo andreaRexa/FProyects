@@ -26,14 +26,14 @@
                             <li class="list-group-item">Curso: {{ optional(optional($firstAlumno)->usuario->alumnoCiclo)->FechaCurso }}</li>
                             <li class="list-group-item">Fecha subida: {{ $proyecto->Fecha }}</li>
                             <li class="list-group-item">Familia: {{ $proyecto->familia->NombreFamilia }}</li>
-                            @if ($proyecto->proyectoAlumnos->isNotEmpty())
+                            
                                 @php
                                     $autores = $proyecto->proyectoAlumnos->map(function($proyectoAlumno) {
                                         return $proyectoAlumno->usuario->Nombre . ' ' . $proyectoAlumno->usuario->Apellidos;
                                     })->implode(', ');
                                 @endphp
                                 <li class="list-group-item">Autores: {{ $autores }}</li>
-                            @endif
+                            
                         </ul>
                         <div class="mt-4">
                             <h5 class="card-title">Archivos</h5>
