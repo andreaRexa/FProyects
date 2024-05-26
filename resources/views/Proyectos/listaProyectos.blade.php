@@ -42,8 +42,8 @@
                 </div>
             </div>
             <div class="col-md-8 mt-4"> <!-- Agregar margen superior -->
-                <div class="card">
-                    <div class="card-body" style="height: 70vh px; overflow-y: auto;">
+                <div class="card" style="height: 70vh;">
+                    <div class="card-body" style="height: 100%; overflow-y: auto;">
                         <div class="table-responsive" style="height: 100%;">
                             <table class="table table-striped">
                                 <thead class="thead-dark">
@@ -66,6 +66,9 @@
                                             <td>{{ $proyecto->Descripcion }}</td>
                                             <td>{{ $proyecto->proyectoAlumno->usuario->alumnoCiclo->ciclo->NombreCiclo }}</td>
                                             <td>{{ $proyecto->proyectoAlumno->usuario->alumnoCiclo->FechaCurso }}</td>
+                                            <td>
+                                                <a href="" class="btn btn-primary">Ver más</a> <!-- Botón Ver más -->
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
