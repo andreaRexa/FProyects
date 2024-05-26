@@ -45,7 +45,7 @@
                 <div class="card" style="height: 80vh;">
                     <div class="card-body" style="height: 100%; overflow-y: auto;">
                         <div class="table-responsive" style="height: 100%;">
-                            <table class="table table-striped text-center">
+                            <table class="table table-striped text-center align-middle"> <!-- Añadir clase align-middle para centrar verticalmente -->
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>Foto</th>
@@ -58,15 +58,15 @@
                                 </thead>
                                 <tbody>
                                     @foreach($proyectos as $proyecto)
-                                        <tr class="d-flex align-items-center"> <!-- Utilizar Flexbox para centrar verticalmente -->
+                                        <tr>
                                             <td>
-                                                <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->FotoProyecto) }}" alt="{{ $proyecto->nombre }}" style="width: 150px; height: 150px; object-fit: cover;" class="img-fluid"> <!-- Establecer tamaño uniforme para las imágenes -->
+                                                <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->FotoProyecto) }}" alt="{{ $proyecto->nombre }}" style="width: 150px; height: 150px; object-fit: cover;" class="img-fluid">
                                             </td>
-                                            <td class="d-flex align-items-center justify-content-center" style="height: 150px;">{{ $proyecto->NombreProyecto }}</td>
-                                            <td class="d-flex align-items-center justify-content-center" style="height: 150px;">{{ $proyecto->Descripcion }}</td>
-                                            <td class="d-flex align-items-center justify-content-center" style="height: 150px;">{{ $proyecto->proyectoAlumno->usuario->alumnoCiclo->ciclo->NombreCiclo }}</td>
-                                            <td class="d-flex align-items-center justify-content-center" style="height: 150px;">{{ $proyecto->proyectoAlumno->usuario->alumnoCiclo->FechaCurso }}</td>
-                                            <td class="d-flex align-items-center justify-content-center" style="height: 150px;">
+                                            <td class="align-middle">{{ $proyecto->NombreProyecto }}</td>
+                                            <td class="align-middle">{{ $proyecto->Descripcion }}</td>
+                                            <td class="align-middle">{{ $proyecto->proyectoAlumno->usuario->alumnoCiclo->ciclo->NombreCiclo }}</td>
+                                            <td class="align-middle">{{ $proyecto->proyectoAlumno->usuario->alumnoCiclo->FechaCurso }}</td>
+                                            <td class="align-middle">
                                                 <a href="" class="btn btn-primary">Ver más</a> <!-- Botón Ver más -->
                                             </td>
                                         </tr>
