@@ -49,9 +49,10 @@ class ProyectoController extends Controller
 
         // Obtener los proyectos filtrados
         $proyectos = $query->get();
-
+        $ciclos = Ciclo::All(); 
+        $cursos = AlumnoCiclo::All(); 
         // Cargar la vista con los proyectos filtrados
-        return view('proyectos.listaProyectos', compact('proyectos'));
+        return view('Proyectos.listaProyectos', compact('proyectos', 'ciclos', 'cursos'));
     }
 
 }
