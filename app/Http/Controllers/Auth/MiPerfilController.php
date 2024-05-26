@@ -14,8 +14,9 @@ class MiPerfilController extends Controller
     {
         $userData = $request->session()->get('user');
         $user = User::findOrFail($userData['id']);
-        $fotourl=$user->FotoUsuario;
-        $imagenURL = Storage::disk('s3')->url('FotosPerfil/'.$fotourl);
+        $fotoBlob = $user->FotoUsuario;
+
+        $imagenURL = $fotoBlob ? 'data:image/jpeg;base64,' . base64_encode($fotoBlob) : null;
 
         return view('Auth.MiPerfil', ['imagenURL' => $imagenURL]);
     }
@@ -26,30 +27,24 @@ class MiPerfilController extends Controller
         $request->validate([
             'foto_perfil' => 'required|mimes:jpg,jpeg,png|max:2048', // Permitir solo JPG y PNG, tamaño máximo de 2MB
         ]);
-    
+
         $userData = $request->session()->get('user');
         $user = User::findOrFail($userData['id']);
-    
+
         // Subir la nueva foto de perfil
         if ($request->hasFile('foto_perfil')) {
-            $file = request('foto_perfil');
+            $file = $request->file('foto_perfil');
+            $fileContents = file_get_contents($file);
 
-            $filename = Str::lower($user->Nombre) .'.'. $request->file('foto_perfil')->getClientOriginalExtension();
-            $path = 'FotosPerfil/' . $filename;
-            Storage::disk('s3')->put($path, file_get_contents($file));
-    
-            // Actualizar el nombre de la foto en la base de datos
-            $user->FotoUsuario = $filename;
+            // Actualizar el campo BLOB en la base de datos
+            $user->FotoUsuario = $fileContents;
             $user->save();
         }
-    
+
         // Obtener la URL actualizada de la foto de perfil del usuario
-        $fotourl = $user->FotoUsuario;
-        $imagenURL = Storage::disk('s3')->url('FotosPerfil/'.$fotourl);
-    
-        // Actualizar la URL de la foto de perfil en la sesión
-        $request->session()->put('user.foto', $imagenURL);
-    
+        $fotoBlob = $user->FotoUsuario;
+        $imagenURL = $fotoBlob ? 'data:image/jpeg;base64,' . base64_encode($fotoBlob) : null;
+
         // Redireccionar o retornar la vista con la URL de la imagen actualizada
         return view('Auth.MiPerfil', ['imagenURL' => $imagenURL]);
     }
