@@ -44,7 +44,7 @@ class LoginController extends Controller
             ];
 
             $request->session()->put('user', $userData); // Guardar los datos del usuario en la sesión
-            return redirect()->intended('FProyects'); // Redirigir a la ruta deseada después del inicio de sesión
+            return redirect()->intended('/'); // Redirigir a la ruta deseada después del inicio de sesión
         } else {
             // Autenticación fallida
             return back()->withErrors(['Correo' => 'Credenciales inválidas'])->withInput();
