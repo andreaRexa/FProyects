@@ -58,6 +58,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach($proyectos as $proyecto)
+                                        @if($proyecto->Estado === 0)
                                         <tr>
                                             <td>
                                                 <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->FotoProyecto) }}" alt="{{ $proyecto->nombre }}" style="width: 150px; height: 150px; object-fit: cover;" class="img-fluid">
@@ -70,6 +71,7 @@
                                                 <a href="" class="btn btn-primary">Ver más</a> <!-- Botón Ver más -->
                                             </td>
                                         </tr>
+                                        @endif
                                     @endforeach
                                 </tbody>
                             </table>

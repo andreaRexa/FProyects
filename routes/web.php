@@ -21,4 +21,4 @@ Route::get('FProyects/logout', [CerrarSesionController::class, 'cerrarSession'])
 Route::get('FProyects/MiPerfil', [MiPerfilController::class, 'showMiPerfil'])->name('MiPerfil');
 Route::put('/perfil/{id}', [MiPerfilController::class, 'update'])->name('perfil.update');
 Route::post('perfil/updatefoto', [MiPerfilController::class, 'updatefoto'])->name('perfil.updatefoto');
-Route::get('FProyects/proyectos', [ProyectoController::class, 'index'])->name('proyectos');
+Route::get('FProyects/proyectos', [ProyectoController::class, 'showListadoProyectos'])->name('proyectos');

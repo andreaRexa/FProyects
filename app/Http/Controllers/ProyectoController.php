@@ -10,7 +10,7 @@ use App\Models\AlumnoCiclo;
 
 class ProyectoController extends Controller
 {
-    public function index()
+    public function showListadoProyectos()
     {
         $proyectos = Proyectos::with('proyectoAlumno.usuario.alumnoCiclo')->get();
         $ciclos = Ciclo::All(); 
