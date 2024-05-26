@@ -11,6 +11,6 @@ class CerrarSesionController extends Controller
     public function cerrarSession(Request $request)
     {
         Session::flush();
-        return redirect()->intended('/');
+        return redirect()->intended('FProyects');
     }
 }
