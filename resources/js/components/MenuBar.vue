@@ -8,7 +8,7 @@
               <button class='btn' name='btnHome' type='submit'><i class="fas fa-home"></i></button>
             </form>
             <form action="/FProyects/proyectos" method="GET" class="form-inline mx-auto">
-              <button class='btn nav-link' id='Proyectos' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+              <button class='btn nav-link'name='btnProyectos' aria-haspopup='true' aria-expanded='false' type='submit'>
                 Proyectos
               </button>
             </form>
