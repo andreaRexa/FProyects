@@ -14,7 +14,7 @@ class ProyectoController extends Controller
     {
         $proyectos = Proyectos::with('proyectoAlumno.usuario.alumnoCiclo')->get();
         $ciclos = Ciclo::distinct()->get(); 
-    $cursos = AlumnoCiclo::distinct()->get(); 
+        $cursos = AlumnoCiclo::distinct()->get(); 
         return view('Proyectos.listaProyectos', compact('proyectos', 'ciclos', 'cursos'));
     }
 
@@ -49,7 +49,7 @@ class ProyectoController extends Controller
         
         // Obtener los proyectos filtrados
         $proyectos = $query->get();
-        dd($proyectos);
+        dd($query);
         $ciclos = Ciclo::distinct()->get(); 
         $cursos = AlumnoCiclo::distinct()->get(); 
         
