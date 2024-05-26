@@ -35,8 +35,7 @@
                                     <td class="align-middle">{{ $proyecto->NombreProyecto }}</td>
                                     <td class="align-middle">{{ $proyecto->Descripcion }}</td>
                                     @php
-                                        $firstAlumno = $proyecto->proyectoAlumnos->first();
-                                        
+                                        $firstAlumno = $proyecto->proyectoAlumnos->usuario->first(); 
                                     @endphp
                                     <td class="align-middle">{{ optional(optional($firstAlumno)->usuario->alumnoCiclo->ciclo)->NombreCiclo }}</td>
                                     <td class="align-middle">{{ optional(optional($firstAlumno)->usuario->alumnoCiclo)->FechaCurso }}</td>
