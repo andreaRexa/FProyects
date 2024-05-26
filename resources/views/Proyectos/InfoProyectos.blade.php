@@ -20,7 +20,7 @@
                         <h5 class="card-title">Información del Proyecto</h5>
                         <ul class="list-group">
                             @php
-                                $firstAlumno = $proyecto->proyectoAlumnos->first();
+                                $firstAlumno = $proyecto->proyectoAlumno->first();
                             @endphp
                             <li class="list-group-item">Ciclo: {{ optional(optional($firstAlumno)->usuario->alumnoCiclo->ciclo)->NombreCiclo }}</li>
                             <li class="list-group-item">Curso: {{ optional(optional($firstAlumno)->usuario->alumnoCiclo)->FechaCurso }}</li>
