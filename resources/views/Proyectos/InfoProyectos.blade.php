@@ -19,13 +19,16 @@
                     <div class="col-md-8">
                         <h5 class="card-title">Información del Proyecto</h5>
                         <ul class="list-group">
-                            <li class="list-group-item">Ciclo: {{ $proyecto->proyectoAlumno->usuario->alumnoCiclo->ciclo->NombreCiclo }}</li>
-                            <li class="list-group-item">Curso: {{ $proyecto->proyectoAlumno->usuario->alumnoCiclo->FechaCurso }}</li>
-                            <li class="list-group-item">Fecha subida: {{ $proyecto->Fecha}}</li>
+                            @php
+                                $firstAlumno = $proyecto->proyectoAlumnos->first();
+                            @endphp
+                            <li class="list-group-item">Ciclo: {{ optional(optional($firstAlumno)->usuario->alumnoCiclo->ciclo)->NombreCiclo }}</li>
+                            <li class="list-group-item">Curso: {{ optional(optional($firstAlumno)->usuario->alumnoCiclo)->FechaCurso }}</li>
+                            <li class="list-group-item">Fecha subida: {{ $proyecto->Fecha }}</li>
                             <li class="list-group-item">Familia: {{ $proyecto->familia->NombreFamilia }}</li>
-                            @if ($proyecto->proyectoAlumno)
+                            @if ($proyecto->proyectoAlumnos->isNotEmpty())
                                 @php
-                                    $autores = $proyecto->proyectoAlumno->map(function($proyectoAlumno) {
+                                    $autores = $proyecto->proyectoAlumnos->map(function($proyectoAlumno) {
                                         return $proyectoAlumno->usuario->Nombre . ' ' . $proyectoAlumno->usuario->Apellidos;
                                     })->implode(', ');
                                 @endphp
