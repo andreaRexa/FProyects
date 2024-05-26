@@ -19,7 +19,7 @@
             @foreach($proyectos as $proyecto)
                 <tr>
                     <td>
-                        <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->foto) }}" alt="{{ $proyecto->nombre }}" style="width: 100px;">
+                        <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->FotoProyecto) }}" alt="{{ $proyecto->nombre }}" style="width: 100px;">
                     </td>
                     <td>{{ $proyecto->NombreProyecto }}</td>
                     <td>{{ $proyecto->Descripcion }}</td>
