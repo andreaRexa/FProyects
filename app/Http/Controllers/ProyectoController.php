@@ -13,12 +13,12 @@ class ProyectoController extends Controller
     public function showListadoProyectos()
     {
         $proyectos = Proyectos::with('proyectoAlumno.usuario.alumnoCiclo')->get();
-        $ciclos = Ciclo::All(); 
-        $cursos = AlumnoCiclo::All(); 
+        $ciclos = Ciclo::distinct()->get(); 
+    $cursos = AlumnoCiclo::distinct()->get(); 
         return view('Proyectos.listaProyectos', compact('proyectos', 'ciclos', 'cursos'));
     }
 
-    public function filtar(Request $request)
+    public function filtrar(Request $request)
     {
         // Obtener todos los proyectos
         $query = Proyectos::query();
@@ -46,11 +46,12 @@ class ProyectoController extends Controller
                 $q->where('FechaCurso', $request->input('curso'));
             });
         }
-
+        dd($query);
         // Obtener los proyectos filtrados
         $proyectos = $query->get();
-        $ciclos = Ciclo::All(); 
-        $cursos = AlumnoCiclo::All(); 
+        $ciclos = Ciclo::distinct()->get(); 
+        $cursos = AlumnoCiclo::distinct()->get(); 
+        
         // Cargar la vista con los proyectos filtrados
         return view('Proyectos.listaProyectos', compact('proyectos', 'ciclos', 'cursos'));
     }
