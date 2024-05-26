@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listado de Proyectos</title>
-</head>
-<body>
+@extends('layout')
+
+@section('title', 'Listado de Proyectos')
+
+@section('content')
     <h1>Listado de Proyectos</h1>
 
     <table>
@@ -24,13 +21,12 @@
                     <td>
                         <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->foto) }}" alt="{{ $proyecto->nombre }}" style="width: 100px;">
                     </td>
-                    <td>{{ $proyecto->nombre }}</td>
-                    <td>{{ $proyecto->descripcion }}</td>
-                    <td>{{ $proyecto->proyectoAlumno->usuario->alumnoCiclo->ciclo->nombre }}</td>
+                    <td>{{ $proyecto->NombreProyecto }}</td>
+                    <td>{{ $proyecto->Descripcion }}</td>
+                    <td>{{ $proyecto->proyectoAlumno->usuario->alumnoCiclo->ciclo->NombreCiclo }}</td>
                     <td>{{ $proyecto->proyectoAlumno->usuario->alumnoCiclo->FechaCurso }}</td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-</body>
-</html>
+@endsection
