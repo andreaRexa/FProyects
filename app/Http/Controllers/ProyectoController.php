@@ -59,7 +59,7 @@ class ProyectoController extends Controller
 
     public function showDetalleProyecto($id)
     {
-        $proyecto = Proyecto::findOrFail($id);
+        $proyecto = Proyectos::findOrFail($id);
         return view('Proyectos.InfoProyectos', compact('proyecto'));
     }
 }
