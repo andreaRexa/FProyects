@@ -25,12 +25,12 @@ class ProyectoController extends Controller
 
         // Filtrar por nombre 
         if ($request->filled('nombre')) {
-            $query->whereRaw('LOWER(NombreProyecto) ~* ?', [strtolower($request->input('nombre'))]);
+            $query->whereRaw('LOWER(NombreProyecto) like ?', ['%' . strtolower($request->input('nombre')) . '%']);
         }
-
+        
         // Filtrar por descripción 
         if ($request->filled('descripcion')) {
-            $query->whereRaw('LOWER(Descripcion) ~* ?', [strtolower($request->input('descripcion'))]);
+            $query->whereRaw('LOWER(Descripcion) like ?', ['%' . strtolower($request->input('descripcion')) . '%']);
         }
 
         // Filtrar por ciclo 
