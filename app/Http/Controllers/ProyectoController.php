@@ -66,7 +66,7 @@ class ProyectoController extends Controller
     public function descargarArchivo($nombreProyecto)
     {
         // Buscar el proyecto por el nombre
-        $proyecto = Proyecto::where('NombreProyecto', $nombreProyecto)->firstOrFail();
+        $proyecto = Proyectos::where('NombreProyecto', $nombreProyecto)->firstOrFail();
 
         // Construir la ruta completa del archivo
         $rutaCompleta = 'ArchivosPublicos/' . str_replace(' ', '_', $proyecto->NombreProyecto) . '/' . $proyecto->Archivo;
@@ -78,7 +78,7 @@ class ProyectoController extends Controller
     public function descargarDocumentacion($nombreProyecto)
     {
         // Buscar el proyecto por el nombre
-        $proyecto = Proyecto::where('NombreProyecto', $nombreProyecto)->firstOrFail();
+        $proyecto = Proyectos::where('NombreProyecto', $nombreProyecto)->firstOrFail();
 
         // Construir la ruta completa de la documentación
         $rutaCompleta = 'ArchivosPublicos/' . str_replace(' ', '_', $proyecto->NombreProyecto) . '/' . $proyecto->Documentacion;
