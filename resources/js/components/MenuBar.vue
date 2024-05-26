@@ -7,9 +7,11 @@
             <form action="/FProyects" method="GET" class="form-inline mx-auto">
               <button class='btn' name='btnHome' type='submit'><i class="fas fa-home"></i></button>
             </form>
+            <form action="/FProyects/proyectos" method="GET" class="form-inline mx-auto">
               <button class='btn nav-link' id='Proyectos' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
-                Proyecto
+                Proyectos
               </button>
+            </form>
               <li v-if="userRole === 2" class="nav-item dropdown d-inline-block">
                 <button class="btn nav-link dropdown-toggle" id="alumnosDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" @click="toggleSubMenu('alumnos')">
                   Alumnos
