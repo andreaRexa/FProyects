@@ -49,7 +49,7 @@ class Proyectos extends Model
     // Relación con el modelo ProyectoAlumno
     public function proyectoAlumno()
     {
-        return $this->belongsTo(ProyectoAlumno::class, 'IdProyecto', 'IdProyecto');
+        return $this->hasMany(ProyectoAlumno::class, 'IdProyecto', 'IdProyecto');
     }
 
     
