@@ -11,7 +11,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->FotoProyecto) }}" alt="{{ $proyecto->NombreProyecto }}" class="card-img">
+                        <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->FotoProyecto) }}" alt="{{ $proyecto->NombreProyecto }}" class="card-img" style="width: 250px; height: 250px; object-fit: cover;">
                         <h5 class="card-title mt-4">Descripción</h5>
                         <p class="card-text">{{ $proyecto->Descripcion }}</p>
                     </div>
@@ -20,15 +20,13 @@
                         <ul class="list-group">
                             <li class="list-group-item">Ciclo: {{ $proyecto->proyectoAlumno->usuario->alumnoCiclo->ciclo->NombreCiclo }}</li>
                             <li class="list-group-item">Curso: {{ $proyecto->proyectoAlumno->usuario->alumnoCiclo->FechaCurso }}</li>
-                            <!-- Agrega más detalles del proyecto aquí -->
+                            <li class="list-group-item">Fecha subida: {{ $proyecto->Fecha}}</li>
+                            <li class="list-group-item">Familia: {{ $proyecto->familia->NombreFamilia }}</li>
+                            <li class="list-group-item">Autores: {{ $proyecto->proyectoAlumno->usuario->Nombre }}</li>
                         </ul>
                         <div class="mt-4">
                             <h5 class="card-title">Archivos</h5>
-                            <!-- Agrega aquí la sección para mostrar archivos relacionados con el proyecto -->
-                        </div>
-                        <div class="mt-4">
                             <h5 class="card-title">Documentación</h5>
-                            <!-- Agrega aquí la sección para mostrar la documentación relacionada con el proyecto -->
                         </div>
                     </div>
                 </div>
