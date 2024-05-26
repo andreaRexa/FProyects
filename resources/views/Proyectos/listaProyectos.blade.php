@@ -45,7 +45,7 @@
                 <div class="card" style="height: 80vh;">
                     <div class="card-body" style="height: 100%; overflow-y: auto;">
                         <div class="table-responsive" style="height: 100%;">
-                            <table class="table table-striped text-center">
+                            <table class="table table-striped text-center align-middle"> <!-- Añadir clase align-middle para centrar verticalmente -->
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>Foto</th>
@@ -60,7 +60,7 @@
                                     @foreach($proyectos as $proyecto)
                                         <tr>
                                             <td>
-                                                <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->FotoProyecto) }}" alt="{{ $proyecto->nombre }}" style="max-width: 100px; max-height: 200px;" class="img-fluid">
+                                                <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->FotoProyecto) }}" alt="{{ $proyecto->nombre }}" style="width: 250px; height: 250px; object-fit: cover;" class="img-fluid"> <!-- Establecer tamaño uniforme para las imágenes -->
                                             </td>
                                             <td>{{ $proyecto->NombreProyecto }}</td>
                                             <td>{{ $proyecto->Descripcion }}</td>
