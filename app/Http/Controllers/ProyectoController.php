@@ -24,24 +24,24 @@ class ProyectoController extends Controller
         $query = Proyectos::query();
 
         // Filtrar por nombre si se proporciona el parámetro "nombre" en la URL
-        if ($request->has('nombre')) {
+        if ($request->filled('nombre')) {
             $query->where('NombreProyecto', 'like', '%' . $request->input('nombre') . '%');
         }
 
         // Filtrar por descripción si se proporciona el parámetro "descripcion" en la URL
-        if ($request->has('descripcion')) {
+        if ($request->filled('descripcion')) {
             $query->where('Descripcion', 'like', '%' . $request->input('descripcion') . '%');
         }
 
         // Filtrar por ciclo si se proporciona el parámetro "ciclo" en la URL
-        if ($request->has('ciclo')) {
+        if ($request->filled('ciclo')) {
             $query->whereHas('proyectoAlumno.usuario.alumnoCiclo.ciclo', function ($q) use ($request) {
                 $q->where('NombreCiclo', $request->input('ciclo'));
             });
         }
 
         // Filtrar por curso si se proporciona el parámetro "curso" en la URL
-        if ($request->has('curso')) {
+        if ($request->filled('curso')) {
             $query->whereHas('proyectoAlumno.usuario.alumnoCiclo', function ($q) use ($request) {
                 $q->where('FechaCurso', $request->input('curso'));
             });
