@@ -5,11 +5,9 @@
 @section('content')
     <div class="container">
         <div class="card mt-4">
-            <div class="card-header">
+            <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="card-title">{{ $proyecto->NombreProyecto }}</h5>
-                <div class="float-right">
-                    <a href="javascript:history.back()" class="btn btn-primary btn-sm">&laquo; Volver</a>
-                </div>
+                <a href="javascript:history.back()" class="btn btn-primary btn-sm">&laquo; Volver</a>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -27,11 +25,10 @@
                             <li class="list-group-item">Familia: {{ $proyecto->familia->NombreFamilia }}</li>
                             @if ($proyecto->proyectoAlumno)
                                 @php
-                                    $autores = $proyecto->proyectoAlumno->usuario->pluck('Nombre', 'Apellidos')->implode(', ');
+                                    $autores = $proyecto->proyectoAlumno->usuario->Nombre . ' ' . $proyecto->proyectoAlumno->usuario->Apellidos . ',';
                                 @endphp
                                 <li class="list-group-item">Autores: {{ $autores }}</li>
                             @endif
-
                         </ul>
                         <div class="mt-4">
                             <h5 class="card-title">Archivos</h5>
