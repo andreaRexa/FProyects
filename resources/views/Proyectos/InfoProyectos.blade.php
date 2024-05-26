@@ -28,7 +28,7 @@
                             <li class="list-group-item">Familia: {{ $proyecto->familia->NombreFamilia }}</li>
                             
                                 @php
-                                    $autores = $proyecto->proyectoAlumnos->map(function($proyectoAlumno) {
+                                    $autores = $proyecto->proyectoAlumno->map(function($proyectoAlumno) {
                                         return $proyectoAlumno->usuario->Nombre . ' ' . $proyectoAlumno->usuario->Apellidos;
                                     })->implode(', ');
                                 @endphp
