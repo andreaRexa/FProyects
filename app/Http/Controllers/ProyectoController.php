@@ -12,7 +12,7 @@ class ProyectoController extends Controller
 {
     public function showListadoProyectos()
     {
-        $proyectos = Proyectos::with('proyectoAlumno.usuario.alumnoCiclo')->get();
+        $proyectos = Proyectos::with(['proyectoAlumnos.usuario.alumnoCiclo.ciclo', 'familia'])->get();
         $ciclos = Ciclo::groupBy('NombreCiclo')->pluck('NombreCiclo');
         $cursos = AlumnoCiclo::groupBy('FechaCurso')->pluck('FechaCurso'); 
         return view('Proyectos.listaProyectos', compact('proyectos', 'ciclos', 'cursos'));
