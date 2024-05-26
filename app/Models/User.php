@@ -42,4 +42,19 @@ class User extends Authenticatable
     // Si no estás usando los timestamps de Laravel (created_at y updated_at), añade esto:
     const CREATED_AT = 'FechaCreacion';
     const UPDATED_AT = null;
+
+    public function alumnoCiclo()
+    {
+        return $this->hasOne(AlumnoCiclo::class, 'IdUsuario', 'IdUsuario');
+    }
+    public function familiaAlumno()
+    {
+        return $this->hasOne(FamiliaAlumno::class, 'IdUsuario', 'IdUsuario');
+    }
+    
+    public function proyectoAlumno()
+    {
+        return $this->hasOne(ProyectoAlumno::class, 'IdUsuario', 'IdUsuario');
+    }
+    
 }

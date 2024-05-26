@@ -51,4 +51,6 @@ class Proyectos extends Model
     {
         return $this->belongsTo(ProyectoAlumno::class, 'IdProyecto', 'IdProyecto');
     }
+
+    
 }
