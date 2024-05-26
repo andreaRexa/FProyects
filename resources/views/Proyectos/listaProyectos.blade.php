@@ -45,8 +45,8 @@
                 <div class="card" style="height: 80vh;">
                     <div class="card-body" style="height: 100%; overflow-y: auto;">
                         <div class="table-responsive" style="height: 100%;">
-                            <table class="table table-striped">
-                                <thead class="thead-dark text-center">
+                            <table class="table table-striped text-center">
+                                <thead class="thead-dark">
                                     <tr>
                                         <th>Foto</th>
                                         <th>Nombre</th>
