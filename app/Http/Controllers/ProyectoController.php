@@ -46,9 +46,10 @@ class ProyectoController extends Controller
                 $q->where('FechaCurso', $request->input('curso'));
             });
         }
-        dd($query);
+        
         // Obtener los proyectos filtrados
         $proyectos = $query->get();
+        dd($proyectos);
         $ciclos = Ciclo::distinct()->get(); 
         $cursos = AlumnoCiclo::distinct()->get(); 
         
