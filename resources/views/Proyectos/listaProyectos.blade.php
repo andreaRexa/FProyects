@@ -4,8 +4,8 @@
 
 @section('content')
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-4">
+        <div class="row" style="height: 100vh;">
+            <div class="col-md-4 d-flex align-items-center justify-content-center">
                 <div class="card">
                     <div class="card-body">
                         <h2 class="card-title">Filtrar Proyectos</h2>
@@ -41,10 +41,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-body overflow-auto">
-                        <h2 class="card-title">Listado de Proyectos</h2>
+            <div class="col-md-8 d-flex align-items-center justify-content-center">
+                <div class="card w-100">
+                    <div class="card-body" style="max-height: 400px; overflow-y: auto;">
+                       
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead class="thead-dark">
