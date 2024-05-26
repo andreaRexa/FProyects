@@ -79,7 +79,15 @@
                                                         No disponible
                                                     @endif
                                                 </td>
-                                                <td class="align-middle">{{ $proyecto->proyectoAlumno->usuario->alumnoCiclo->FechaCurso }}</td>
+                                                <td class="align-middle">
+                                                    @if ($proyecto->proyectoAlumno && $proyecto->proyectoAlumno->usuario && $proyecto->proyectoAlumno->usuario->alumnoCiclo && $proyecto->proyectoAlumno->usuario->alumnoCiclo->FechaCurso)
+                                                        {{ $proyecto->proyectoAlumno->usuario->alumnoCiclo->ciclo->FechaCurso }}
+                                                    @else
+                                                        <!-- Manejo de caso en que los objetos sean null -->
+                                                        No disponible
+                                                    @endif
+                                                </td>
+                                                
                                                 <td class="align-middle">
                                                     <a href="{{ route('proyectos.detalle', $proyecto->IdProyecto) }}" class="btn btn-primary">Ver más</a>
                                                 </td>
