@@ -74,7 +74,7 @@
                                                 <td class="align-middle">{{ $proyecto->proyectoAlumno->usuario->alumnoCiclo->ciclo->NombreCiclo }}</td>
                                                 <td class="align-middle">{{ $proyecto->proyectoAlumno->usuario->alumnoCiclo->FechaCurso }}</td>
                                                 <td class="align-middle">
-                                                    <a href="" class="btn btn-primary">Ver más</a> <!-- Botón Ver más -->
+                                                    <a href="{{ route('proyectos.detalle', $proyecto->id) }}" class="btn btn-primary">Ver más</a>
                                                 </td>
                                             </tr>
                                             @endif
