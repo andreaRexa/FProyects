@@ -10,6 +10,6 @@ class ProyectoController extends Controller
     public function index()
     {
         $proyectos = Proyecto::with('proyectoAlumno.usuario.alumnoCiclo')->get();
-        return response()->json($proyectos);
+        return view('Proyectos.listaProyectos', compact('proyectos'));
     }
 }

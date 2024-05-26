@@ -3,7 +3,7 @@
 @section('title', 'Listado proyectos')
 
 @section('content')
-<div class="container mt-4"> 
-
-<div>
+    <div id="app">
+        <listado-proyectos :proyectos="@json($proyectos)"></listado-proyectos>
+    <div>
 @endsection

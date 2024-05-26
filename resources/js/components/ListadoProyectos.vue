@@ -18,11 +18,12 @@
 import axios from 'axios';
 
 export default {
-  data() {
-    return {
-      proyectos: [],
-    };
-  },
+    props: {
+        proyectos: {
+        type: Array,
+        required: true
+        }
+    },
   created() {
     this.obtenerProyectos();
   },
