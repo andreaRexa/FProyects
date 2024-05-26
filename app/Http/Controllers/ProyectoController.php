@@ -49,7 +49,7 @@ class ProyectoController extends Controller
         
         // Obtener los proyectos filtrados
         $proyectos = $query->get();
-        dd($query);
+        dd($query->toSql());
         $ciclos = Ciclo::distinct()->get(); 
         $cursos = AlumnoCiclo::distinct()->get(); 
         
