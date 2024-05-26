@@ -26,13 +26,12 @@
                             <li class="list-group-item">Curso: {{ optional(optional($firstAlumno)->usuario->alumnoCiclo)->FechaCurso }}</li>
                             <li class="list-group-item">Fecha subida: {{ $proyecto->Fecha }}</li>
                             <li class="list-group-item">Familia: {{ $proyecto->familia->NombreFamilia }}</li>
-                            
-                                @php
-                                    $autores = $proyecto->proyectoAlumno->map(function($proyectoAlumno) {
-                                        return $proyectoAlumno->usuario->Nombre . ' ' . $proyectoAlumno->usuario->Apellidos;
-                                    })->implode(', ');
-                                @endphp
-                                <li class="list-group-item">Autores: {{ $autores }}</li>
+                            @php
+                                $autores = $proyecto->proyectoAlumno->map(function($proyectoAlumno) {
+                                    return $proyectoAlumno->usuario->Nombre . ' ' . $proyectoAlumno->usuario->Apellidos;
+                                })->implode(', ');
+                            @endphp
+                            <li class="list-group-item">Autores: {{ $autores }}</li>
                             
                         </ul>
                         <div class="mt-4">
