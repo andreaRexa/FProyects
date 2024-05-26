@@ -22,6 +22,9 @@ export default {
       required: true
     }
   },
+  created() {
+    console.log(this.proyectos);
+  },
   methods: {
     obtenerCurso(proyecto) {
       if (proyecto.proyectoAlumno && proyecto.proyectoAlumno.usuario && proyecto.proyectoAlumno.usuario.alumnoCiclo) {
