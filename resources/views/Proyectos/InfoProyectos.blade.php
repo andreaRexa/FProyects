@@ -20,20 +20,12 @@
                             <li class="list-group-item">Curso: {{ $proyecto->proyectoAlumno->usuario->alumnoCiclo->FechaCurso }}</li>
                             <!-- Agrega más detalles del proyecto aquí -->
                         </ul>
+                        <h5 class="card-title mt-4">Archivos</h5>
+                        <!-- Agrega aquí la sección para mostrar archivos relacionados con el proyecto -->
+                        <h5 class="card-title mt-4">Documentación</h5>
+                        <!-- Agrega aquí la sección para mostrar la documentación relacionada con el proyecto -->
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="card mt-4">
-            <div class="card-body">
-                <h5 class="card-title">Archivos</h5>
-                <!-- Agrega aquí la sección para mostrar archivos relacionados con el proyecto -->
-            </div>
-        </div>
-        <div class="card mt-4">
-            <div class="card-body">
-                <h5 class="card-title">Documentación</h5>
-                <!-- Agrega aquí la sección para mostrar la documentación relacionada con el proyecto -->
             </div>
         </div>
     </div>
