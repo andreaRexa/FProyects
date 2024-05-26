@@ -11,6 +11,7 @@ class ProyectoController extends Controller
     public function index()
     {
         $proyectos = Proyectos::with('proyectoAlumno.usuario.alumnoCiclo')->get();
+        dd($proyectos);
         return view('Proyectos.listaProyectos', compact('proyectos'));
     }
 }
