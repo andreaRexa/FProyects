@@ -25,17 +25,12 @@
                             <li class="list-group-item">Curso: {{ $proyecto->proyectoAlumno->usuario->alumnoCiclo->FechaCurso }}</li>
                             <li class="list-group-item">Fecha subida: {{ $proyecto->Fecha}}</li>
                             <li class="list-group-item">Familia: {{ $proyecto->familia->NombreFamilia }}</li>
-                            <li class="list-group-item">
-                                Autores:
-                                @foreach($proyecto->proyectoAlumno->usuario as $autor)
-                                    
-                                    {{ $autor->Nombre }} {{ $autor->Apellidos }}
-                                    @unless($loop->last)
-                                        ,
-                                    @endunless
-                                    
-                                @endforeach
-                            </li>
+                            @if ($proyecto->proyectoAlumno)
+                                @php
+                                    $autores = $proyecto->proyectoAlumno->pluck('usuario.Nombre', 'usuario.Apellidos')->implode(', ');
+                                @endphp
+                                <li class="list-group-item">Autores: {{ $autores }}</li>
+                            @endif
 
                         </ul>
                         <div class="mt-4">
