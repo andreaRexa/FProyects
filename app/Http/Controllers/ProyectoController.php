@@ -56,10 +56,11 @@ class ProyectoController extends Controller
         // Cargar la vista con los proyectos filtrados
         return view('Proyectos.listaProyectos', compact('proyectos', 'ciclos', 'cursos'));
     }
-    
+
     public function showDetalleProyecto($id)
     {
         $proyecto = Proyecto::findOrFail($id);
-        return view('proyectos.detalle', compact('proyecto'));
+        
+        return view('Proyectos.InfoProyectos', compact('proyecto'));
     }
 }
