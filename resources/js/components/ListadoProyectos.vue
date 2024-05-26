@@ -15,27 +15,14 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
-    props: {
-        proyectos: {
-        type: Array,
-        required: true
-        }
-    },
-  created() {
-    this.obtenerProyectos();
+  props: {
+    proyectos: {
+      type: Array,
+      required: true
+    }
   },
   methods: {
-    async obtenerProyectos() {
-      try {
-        const response = await axios.get('/proyectos');
-        this.proyectos = response.data;
-      } catch (error) {
-        console.error('Error al obtener los proyectos:', error);
-      }
-    },
     obtenerCurso(proyecto) {
       if (proyecto.proyectoAlumno && proyecto.proyectoAlumno.usuario && proyecto.proyectoAlumno.usuario.alumnoCiclo) {
         return proyecto.proyectoAlumno.usuario.alumnoCiclo.FechaCurso;
