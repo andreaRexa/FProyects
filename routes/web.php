@@ -24,3 +24,5 @@ Route::post('perfil/updatefoto', [MiPerfilController::class, 'updatefoto'])->nam
 Route::get('FProyects/proyectos', [ProyectoController::class, 'showListadoProyectos'])->name('proyectos');
 Route::post('FProyects/proyectos', [ProyectoController::class, 'filtrar'])->name('filtrado');
 Route::get('FProyects/proyectos/{id}', [ProyectoController::class, 'showDetalleProyecto'])->name('proyectos.detalle');
+Route::get('/descargar-archivo/{nombreProyecto}', [ProyectoController::class, 'descargarArchivo'])->name('descargarArchivo');
+Route::get('/descargar-documentacion/{nombreProyecto}', [ProyectoController::class, 'descargarDocumentacion'])->name('descargarDocumentacion');

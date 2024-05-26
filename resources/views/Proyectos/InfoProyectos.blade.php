@@ -39,9 +39,13 @@
                                 <div class="col-md-6">
                                     <h5 class="card-title">Archivos</h5>
                                     @if($proyecto->ArchivosPriv == 1)
+                                       
                                         <img src="/storage/imagenes/nodisponible.png" alt="No disponible" style="width: 100px; height: 100px;">
+                                        
                                     @else
-                                        <img src="/storage/imagenes/zip.png" alt="Archivo ZIP" style="width: 100px; height: 100px;">
+                                        <a href="{{ route('descargarArchivo', $proyecto->NombreProyecto) }}">
+                                            <img src="/storage/imagenes/zip.png" alt="Archivo ZIP" style="width: 100px; height: 100px;">
+                                        </a>
                                         <p class="mt-2">{{ $proyecto->Archivos }}</p>
                                     @endif
                                 </div>
@@ -50,7 +54,9 @@
                                     @if($proyecto->DocumentacionPriv == 1)
                                         <img src="/storage/imagenes/nodisponible.png" alt="No disponible" style="width: 100px; height: 100px;">
                                     @else
-                                        <img src="/storage/imagenes/zip.png" alt="Archivo ZIP" style="width: 100px; height: 100px;">
+                                        <a href="{{ route('descargarDocumentacion', $proyecto->NombreProyecto) }}">
+                                            <img src="/storage/imagenes/zip.png" alt="Archivo ZIP" style="width: 100px; height: 100px;">
+                                        </a>
                                         <p class="mt-2">{{ $proyecto->Documentacion }}</p>
                                     @endif
                                 </div>

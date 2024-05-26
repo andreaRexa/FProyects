@@ -62,4 +62,28 @@ class ProyectoController extends Controller
         $proyecto = Proyectos::findOrFail($id);
         return view('Proyectos.InfoProyectos', compact('proyecto'));
     }
+
+    public function descargarArchivo($nombreProyecto)
+    {
+        // Buscar el proyecto por el nombre
+        $proyecto = Proyecto::where('NombreProyecto', $nombreProyecto)->firstOrFail();
+
+        // Construir la ruta completa del archivo
+        $rutaCompleta = 'ArchivosPublicos/' . str_replace(' ', '_', $proyecto->NombreProyecto) . '/' . $proyecto->Archivo;
+
+        // Descargar el archivo desde S3
+        return Storage::disk('s3')->download($rutaCompleta);
+    }
+
+    public function descargarDocumentacion($nombreProyecto)
+    {
+        // Buscar el proyecto por el nombre
+        $proyecto = Proyecto::where('NombreProyecto', $nombreProyecto)->firstOrFail();
+
+        // Construir la ruta completa de la documentación
+        $rutaCompleta = 'ArchivosPublicos/' . str_replace(' ', '_', $proyecto->NombreProyecto) . '/' . $proyecto->Documentacion;
+
+        // Descargar la documentación desde S3
+        return Storage::disk('s3')->download($rutaCompleta);
+    }
 }
