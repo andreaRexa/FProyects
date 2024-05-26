@@ -25,7 +25,7 @@
                             <li class="list-group-item">Familia: {{ $proyecto->familia->NombreFamilia }}</li>
                             @if ($proyecto->proyectoAlumno)
                                 @php
-                                    $autores = $proyecto->proyectoAlumno->usuario->Nombre . ' ' . $proyecto->proyectoAlumno->usuario->Apellidos . ',';
+                                    $autores = $proyecto->proyectoAlumno->usuario->pluck('Nombre', 'Apellidos')->implode(', ');
                                 @endphp
                                 <li class="list-group-item">Autores: {{ $autores }}</li>
                             @endif
