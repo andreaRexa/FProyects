@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Proyectos; 
 use App\Models\Ciclo;
 use App\Models\AlumnoCiclo;
+use Illuminate\Support\Facades\Storage;
 
 class ProyectoController extends Controller
 {
