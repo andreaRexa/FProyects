@@ -52,15 +52,15 @@
         
         <!-- Elementos a la derecha -->
         <div class="d-flex"> 
-          <form action="/FProyects/loginForm" method="GET" class="form-inline mx-auto" v-if="userRole === 0">
+          <form action="/loginForm" method="GET" class="form-inline mx-auto" v-if="userRole === 0">
             <button class='btn' name='btnlogin' type='submit'><i class="fas fa-user"></i></button>
           </form>
   
-          <form action="/FProyects/MiPerfil" method="GET" class="form-inline mx-auto" v-if="userRole > 0">
+          <form action="/MiPerfil" method="GET" class="form-inline mx-auto" v-if="userRole > 0">
               <button class='btn' name='btnMiPerfil' type='submit'><i class="fas fa-user"></i></button>
           </form>  
          
-          <form action="/FProyects/logout" method="GET" class="form-inline mx-auto" v-if="userRole > 0">
+          <form action="/logout" method="GET" class="form-inline mx-auto" v-if="userRole > 0">
             <button class='btn' name='btnLogOut' type='submit'><i class="fas fa-power-off"></i></button>
           </form>
           </div>
