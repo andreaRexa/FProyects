@@ -42,11 +42,11 @@
                 </div>
             </div>
             <div class="col-md-10 mt-4"> <!-- Agregar margen superior -->
-                <div class="card" style="height: 90vh;">
+                <div class="card" style="height: 80vh;">
                     <div class="card-body" style="height: 100%; overflow-y: auto;">
                         <div class="table-responsive" style="height: 100%;">
                             <table class="table table-striped">
-                                <thead class="thead-dark">
+                                <thead class="thead-dark text-center">
                                     <tr>
                                         <th>Foto</th>
                                         <th>Nombre</th>
@@ -60,7 +60,7 @@
                                     @foreach($proyectos as $proyecto)
                                         <tr>
                                             <td>
-                                                <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->FotoProyecto) }}" alt="{{ $proyecto->nombre }}" style="max-width: 100px;" class="img-fluid">
+                                                <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->FotoProyecto) }}" alt="{{ $proyecto->nombre }}" style="max-width: 100px; max-height: 200px;" class="img-fluid">
                                             </td>
                                             <td>{{ $proyecto->NombreProyecto }}</td>
                                             <td>{{ $proyecto->Descripcion }}</td>
