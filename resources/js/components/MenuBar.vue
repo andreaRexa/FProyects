@@ -4,10 +4,10 @@
         <!-- Elementos a la izquierda -->
         <div class="d-flex">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <form action="/FProyects" method="GET" class="form-inline mx-auto">
+            <form action="/" method="GET" class="form-inline mx-auto">
               <button class='btn' name='btnHome' type='submit'><i class="fas fa-home"></i></button>
             </form>
-            <form action="/FProyects/proyectos" method="GET" class="form-inline mx-auto">
+            <form action="proyectos" method="GET" class="form-inline mx-auto">
               <button class='btn nav-link'name='btnProyectos' aria-haspopup='true' aria-expanded='false' type='submit'>
                 Proyectos
               </button>
@@ -54,15 +54,15 @@
         
         <!-- Elementos a la derecha -->
         <div class="d-flex"> 
-          <form action="/FProyects/loginForm" method="GET" class="form-inline mx-auto" v-if="userRole === 0">
+          <form action="/loginForm" method="GET" class="form-inline mx-auto" v-if="userRole === 0">
             <button class='btn' name='btnlogin' type='submit'><i class="fas fa-user"></i></button>
           </form>
   
-          <form action="/FProyects/MiPerfil" method="GET" class="form-inline mx-auto" v-if="userRole > 0">
+          <form action="/MiPerfil" method="GET" class="form-inline mx-auto" v-if="userRole > 0">
               <button class='btn' name='btnMiPerfil' type='submit'><i class="fas fa-user"></i></button>
           </form>  
          
-          <form action="/FProyects/logout" method="GET" class="form-inline mx-auto" v-if="userRole > 0">
+          <form action="/logout" method="GET" class="form-inline mx-auto" v-if="userRole > 0">
             <button class='btn' name='btnLogOut' type='submit'><i class="fas fa-power-off"></i></button>
           </form>
           </div>
