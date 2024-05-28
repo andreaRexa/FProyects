@@ -70,7 +70,7 @@ class ProyectoController extends Controller
         $proyecto = Proyectos::where('NombreProyecto', $nombreProyecto)->firstOrFail();
 
         // Construir la ruta completa del archivo
-        $rutaCompleta = 'ArchivosPublicos/' . str_replace(' ', '_', $proyecto->NombreProyecto) . '/' . $proyecto->Archivo;
+        $rutaCompleta = 'ArchivosPublicos/' . str_replace(' ', '_', $proyecto->NombreProyecto) . '/' . $proyecto->Archivos;
 
         // Descargar el archivo desde S3
         return Storage::disk('s3')->download($rutaCompleta);
@@ -80,11 +80,28 @@ class ProyectoController extends Controller
     {
         // Buscar el proyecto por el nombre
         $proyecto = Proyectos::where('NombreProyecto', $nombreProyecto)->firstOrFail();
-
+    
         // Construir la ruta completa de la documentación
         $rutaCompleta = 'ArchivosPublicos/' . str_replace(' ', '_', $proyecto->NombreProyecto) . '/' . $proyecto->Documentacion;
-
+        
+        // Verificar si el archivo existe y obtener sus metadatos
+        $exists = Storage::disk('s3')->exists($rutaCompleta);
+        if (!$exists) {
+            return response()->json(['error' => 'Archivo no encontrado'], 404);
+        }
+    
+        // Obtener metadatos del archivo
+        $metadata = Storage::disk('s3')->getMetadata($rutaCompleta);
+        if (!$metadata) {
+            return response()->json(['error' => 'No se pueden obtener los metadatos del archivo'], 500);
+        }
+    
         // Descargar la documentación desde S3
-        return Storage::disk('s3')->download($rutaCompleta);
+        try {
+            return Storage::disk('s3')->download($rutaCompleta);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error al descargar el archivo: ' . $e->getMessage()], 500);
+        }
     }
+    
 }

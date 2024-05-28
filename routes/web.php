@@ -6,23 +6,25 @@ use App\Http\Controllers\Auth\CerrarSesionController;
 use App\Http\Controllers\Auth\MiPerfilController;
 use App\Http\Controllers\ProyectoController;
 
+// Ruta principal
 Route::get('/', function () {
-    return view('/');
-});
-
-Route::get('FProyects', function () {
     return view('home');
 });
 
-
-Route::get('FProyects/loginForm', [LoginController::class, 'showLoginForm'])->name('loginForm');
+// Ruta Login y logout
+Route::get('loginForm', [LoginController::class, 'showLoginForm'])->name('loginForm');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
-Route::get('FProyects/logout', [CerrarSesionController::class, 'cerrarSession'])->name('logout');
-Route::get('FProyects/MiPerfil', [MiPerfilController::class, 'showMiPerfil'])->name('MiPerfil');
+Route::get('logout', [CerrarSesionController::class, 'cerrarSession'])->name('logout');
+
+// Ruta a mi perfil, actualización de datos y perfil
+Route::get('MiPerfil', [MiPerfilController::class, 'showMiPerfil'])->name('MiPerfil');
 Route::put('/perfil/{id}', [MiPerfilController::class, 'update'])->name('perfil.update');
 Route::post('perfil/updatefoto', [MiPerfilController::class, 'updatefoto'])->name('perfil.updatefoto');
-Route::get('FProyects/proyectos', [ProyectoController::class, 'showListadoProyectos'])->name('proyectos');
-Route::post('FProyects/proyectos', [ProyectoController::class, 'filtrar'])->name('filtrado');
-Route::get('FProyects/proyectos/{id}', [ProyectoController::class, 'showDetalleProyecto'])->name('proyectos.detalle');
+
+// Rutas relacionadas con proyectos
+Route::get('proyectos', [ProyectoController::class, 'showListadoProyectos'])->name('proyectos');
+Route::post('proyectos', [ProyectoController::class, 'filtrar'])->name('filtrado');
+Route::get('proyectos/{id}', [ProyectoController::class, 'showDetalleProyecto'])->name('proyectos.detalle');
 Route::get('/descargar-archivo/{nombreProyecto}', [ProyectoController::class, 'descargarArchivo'])->name('descargarArchivo');
 Route::get('/descargar-documentacion/{nombreProyecto}', [ProyectoController::class, 'descargarDocumentacion'])->name('descargarDocumentacion');
+
