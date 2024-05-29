@@ -146,8 +146,8 @@
         $('#btn-guardar').click(function(e) {
             e.preventDefault();
             // Seleccionar todas las opciones disponibles
-            $('#cursosDisponibles option').prop('selected', true);
-            //$('#form-editar-ciclo').submit()
+            $('#cursosDelCiclo option').prop('selected', true);
+            $('#form-editar-ciclo').submit()
         });
         $('#btn-add-curso').click(function() {
             $('#cursosDelCiclo option:selected').appendTo('#cursosDisponibles');
