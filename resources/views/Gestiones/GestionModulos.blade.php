@@ -24,7 +24,7 @@
                             <tbody>
                                 @if(empty($ciclos))
                                     <tr>
-                                        <td colspan="4">No se han encontrado ciclos<td>
+                                        <td colspan="4">No se han encontrado ciclos</td>
                                     </tr>        
                                 @else
                                     @foreach($ciclos as $ciclo)

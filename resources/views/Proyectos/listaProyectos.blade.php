@@ -61,7 +61,7 @@
                                 <tbody>
                                     @if(empty($proyectos))
                                         <tr>
-                                            <td colspan="6">No se han encontrado proyectos<td>
+                                            <td colspan="6">No se han encontrado proyectos</td>
                                         </tr>        
                                     @else
                                         @foreach($proyectos as $proyecto)
