@@ -12,8 +12,8 @@ class GestionesController extends Controller
     public function showListadoModulos()
     {
         $ciclosConCursos = Ciclo::with('cursos')
-                                ->join('familia', 'ciclo.IdFamilia', '=', 'familia.IdFamilia')
-                                ->select('ciclo.IdCiclo', 'ciclo.NombreCiclo', 'familia.NombreFamilia')
+                                ->join('familias', 'ciclo.IdFamilia', '=', 'familias.IdFamilia')
+                                ->select('ciclo.IdCiclo', 'ciclo.NombreCiclo', 'familias.NombreFamilia')
                                 ->get(); 
 
         return view('Gestiones.GestionModulos', compact('ciclosConCursos'));
