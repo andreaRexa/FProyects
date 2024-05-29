@@ -21,7 +21,7 @@
                             </thead>
                             <tbody>
                                 @foreach($ciclos as $ciclo)
-                                    <tr class="ciclo-item" data-curso-id="{{ $ciclo->IdCiclo }}">
+                                    <tr class="ciclo-item" data-ciclo-id="{{ $ciclo->IdCiclo }}">
                                         <td>{{ $ciclo->IdCiclo }}</td>
                                         <td>{{ $ciclo->NombreCiclo }}</td>
                                         <td>{{ $ciclo->NombreFamilia }}</td>
@@ -61,10 +61,10 @@
     <!-- Botones de eliminar y editar -->
     <div class="row mt-3">
         <div class="col-md-8">
-            <form action="{{ route('modulos.eliminar', $modulo->id) }}" method="POST">
+            <form action="{{ route('modulos.eliminar') }}" method="POST" id="form-eliminar-ciclo">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger">Eliminar ciclo</button>
+                <button type="submit" class="btn btn-danger" id="btn-eliminar-ciclo">Eliminar ciclo</button>
             </form>
             <a href="#" class="btn btn-primary" id="btn-editar-ciclo">Editar ciclo</a>
         </div>
@@ -97,6 +97,27 @@
             } else {
                 // Mostrar una alerta si no se ha seleccionado ningún ciclo
                 alert('Por favor, selecciona un ciclo antes de editar.');
+            }
+        });
+
+        // Al hacer clic en "Eliminar ciclo"
+        $('#btn-eliminar-ciclo').click(function(e) {
+            e.preventDefault();
+
+            var cicloSeleccionado = $('.ciclo-item.table-active');
+
+            if (cicloSeleccionado.length > 0) {
+                // Obtener el ID del ciclo seleccionado
+                var cicloId = cicloSeleccionado.data('ciclo-id');
+                
+                // Asignar el ID del ciclo seleccionado al formulario de eliminación
+                $('#form-eliminar-ciclo').attr('action', '{{ route("modulos.eliminar") }}/' + cicloId);
+
+                // Enviar la solicitud de eliminación
+                $('#form-eliminar-ciclo').submit();
+            } else {
+                // Mostrar una alerta si no se ha seleccionado ningún ciclo
+                alert('Por favor, selecciona un ciclo antes de eliminar.');
             }
         });
     });
