@@ -64,7 +64,7 @@
                         <div class="form-group">
                             <label for="cursos">Cursos</label>
                             <div class="d-flex justify-content-between">
-                                <select multiple class="form-control" id="cursosDelCiclo[]" name="cursosDelCiclo[]" style="width: 45%; height: 150px;">
+                                <select multiple class="form-control" id="cursosDelCiclo" name="cursosDelCiclo[]" style="width: 45%; height: 150px;">
                                     <!-- Cursos del ciclo -->
                                 </select>
                                 <div class="d-flex flex-column justify-content-center mx-2">
@@ -145,11 +145,11 @@
         });
 
         $('#btn-add-curso').click(function() {
-            $('#cursosDelCiclo[] option:selected').appendTo('#cursosDisponibles');
+            $('#cursosDelCiclo option:selected').appendTo('#cursosDisponibles');
         });
 
         $('#btn-remove-curso').click(function() {
-            $('#cursosDisponibles option:selected').appendTo('#cursosDelCiclo[]');
+            $('#cursosDisponibles option:selected').appendTo('#cursosDelCiclo');
         });
 
         $('#btn-cancelar').click(function() {
