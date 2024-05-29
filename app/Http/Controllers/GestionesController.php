@@ -51,12 +51,12 @@ class GestionesController extends Controller
         // Primero, obtenemos los IDs de los cursos seleccionados desde el formulario
         $cursosDelCiclo = $request->input('cursosDelCiclo');
         
-        // Luego, actualizamos los cursos asociados al ciclo
-        $ciclo->cursos()->detach(); // Eliminamos todos los cursos asociados actualmente
+        // Eliminamos todos los cursos asociados actualmente
+        $ciclo->cursos()->delete();
         
-        // Iteramos sobre los IDs de los cursos seleccionados y los asociamos al ciclo
+        // Iteramos sobre los IDs de los cursos seleccionados y los creamos asociados al ciclo
         foreach ($cursosDelCiclo as $cursoId) {
-            $ciclo->cursos()->attach($cursoId);
+            $ciclo->cursos()->create(['IdCurso' => $cursoId]);
         }
         
         
