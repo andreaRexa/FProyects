@@ -38,12 +38,27 @@ class GestionesController extends Controller
 
     public function editarModulo(Request $request)
     {
+        // Buscar el ciclo por su ID
         $ciclo = Ciclo::findOrFail($request->ciclo_id);
+        
+        // Actualizar el nombre del ciclo con el valor enviado en el formulario
         $ciclo->NombreCiclo = $request->nombre;
+        
+        // Guardar los cambios en el ciclo
         $ciclo->save();
-        dd($request);
+        
         // Actualizar los cursos del ciclo
-        $ciclo->cursos()->sync($request->cursosDelCiclo);
+        // Primero, obtenemos los IDs de los cursos seleccionados desde el formulario
+        $cursosDelCiclo = $request->input('cursosDelCiclo');
+        
+        // Luego, actualizamos los cursos asociados al ciclo
+        $ciclo->cursos()->detach(); // Eliminamos todos los cursos asociados actualmente
+        
+        // Iteramos sobre los IDs de los cursos seleccionados y los asociamos al ciclo
+        foreach ($cursosDelCiclo as $cursoId) {
+            $ciclo->cursos()->attach($cursoId);
+        }
+        
         
         return redirect()->back();
     }
