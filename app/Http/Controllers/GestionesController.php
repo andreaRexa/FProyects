@@ -41,7 +41,7 @@ class GestionesController extends Controller
         $ciclo = Ciclo::findOrFail($request->ciclo_id);
         $ciclo->NombreCiclo = $request->nombre;
         $ciclo->save();
-
+        dd($request);
         // Actualizar los cursos del ciclo
         $ciclo->cursos()->sync($request->cursosDelCiclo);
         
