@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class EncryptExistingPasswords extends Migration
+class EncryptExistingPasswords2 extends Migration
 {
     /**
      * Run the migrations.
@@ -24,7 +24,7 @@ class EncryptExistingPasswords extends Migration
             // Debes ajustar esta lógica según tu caso específico.
             if (strlen($user->password) < 60) {
                 DB::table('users')
-                    ->where('id', $user->id)
+                    ->where('IdUsuario', $user->IdUsuario)
                     ->update(['password' => Hash::make($user->password)]);
             }
         }
