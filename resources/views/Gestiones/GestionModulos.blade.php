@@ -3,7 +3,8 @@
 @section('title', 'Gestion modulos')
 
 @section('content')
-<input type="text" id="idfamilia" name="idfamilia" value = "{{ $ciclo->IdFamilia }}">
+<input type="text" id="idfamilia" name="idfamilia" value = "{{ $IdFamilia }}">
+
 <div class="container d-flex justify-content-center align-items-start min-vh-100 mt-5">
     <div class="row w-100">
         <div class="col-md-8">
