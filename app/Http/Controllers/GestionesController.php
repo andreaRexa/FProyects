@@ -15,7 +15,7 @@ class GestionesController extends Controller
                                 ->join('familias', 'ciclos.IdFamilia', '=', 'familias.IdFamilia')
                                 ->select('ciclos.IdCiclo', 'ciclos.NombreCiclo', 'familias.NombreFamilia')
                                 ->get(); 
-
+        dd($ciclosConCursos);
         return view('Gestiones.GestionModulos', compact('ciclosConCursos'));
     }
 }
