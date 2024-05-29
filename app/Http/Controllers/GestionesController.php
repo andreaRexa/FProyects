@@ -13,7 +13,7 @@ class GestionesController extends Controller
     {
         $ciclosConCursos = Ciclo::with('cursos')
                                 ->join('familias', 'ciclo.IdFamilia', '=', 'familias.IdFamilia')
-                                ->select('ciclo.IdCiclo', 'ciclo.NombreCiclo', 'familias.NombreFamilia')
+                                ->select('ciclos.IdCiclo', 'ciclos.NombreCiclo', 'familias.NombreFamilia')
                                 ->get(); 
 
         return view('Gestiones.GestionModulos', compact('ciclosConCursos'));
