@@ -3,7 +3,7 @@
 @section('title', 'Gestion modulos')
 
 @section('content')
-<input type="text" id="idfamilia" name="idfamilia" value = "{{ $IdFamilia }}">
+<input type="hidden" id="idfamiliaIn" name="idfamiliaIn" value = "{{ $IdFamilia }}">
 
 <div class="container d-flex justify-content-center align-items-start min-vh-100 mt-5">
     <div class="row w-100">
@@ -152,11 +152,12 @@
         });
 
         $('#btn-nuevo-ciclo').click(function() {
+            var idFamilia = $('#idfamiliaIn').val();
             // Limpiar los campos del formulario de edición
             $('#nombre').val('');
             $('#ciclo_id').val('');
             $('#accion').val("nuevo");
-            $('#idfamilia').val($IdFamilia);
+            $('#idfamilia').val(idFamilia);
             $('#cursosDelCiclo').empty();
             $('#cursosDisponibles').empty();
             
