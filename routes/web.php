@@ -34,5 +34,5 @@ Route::get('/descargar-documentacion/{nombreProyecto}', [ProyectoController::cla
 // Rutas relacionadas con gestiones
 Route::get('gestionesModulos', [GestionesController::class, 'showListadoModulos'])->name('gestionesModulos');
 Route::delete('/modulos/{id}', [GestionesController::class, 'eliminarModulo'])->name('modulos.eliminar');
-Route::get('/modulos/{id}/editar', [GestionesController::class, 'editarModulo'])->name('modulos.editar');
+Route::get('/modulos/editar', [GestionesController::class, 'editarModulo'])->name('modulos.editar');
 

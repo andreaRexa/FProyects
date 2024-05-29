@@ -43,19 +43,24 @@
         </div>
         <div class="col-md-4">
             <!-- Formulario de edición -->
-            <div class="card card-formulario">
+            <div class="card card-formulario" id="formulario-edicion" style="display: none;">
                 <div class="card-body">
-                    <h5 class="card-title">Editar Módulo</h5>
-                    <form action="{{ route('modulos.editar', $modulo->id) }}" method="GET">
+                    <h5 class="card-title">Editar ciclo</h5>
+                    <form action="{{ route('modulos.editar') }}" method="POST">
+                        @csrf
+                        <!-- Campo oculto para el ID del ciclo -->
                         <input type="hidden" id="ciclo-seleccionado-id" name="ciclo_id">
+
+                        <!-- Campos del formulario para editar el módulo -->
                         <div class="form-group">
-                            <label for="nombre">Nombre del Módulo</label>
-                            <input type="text" class="form-control" id="nombre" placeholder="Nombre del Módulo">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre del Módulo">
                         </div>
-                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
                     </form>
                 </div>
             </div>
+
         </div>
     </div>
     <!-- Botones de eliminar y editar -->
@@ -91,6 +96,7 @@
                 
                 // Asignar el ID del ciclo seleccionado al campo oculto del formulario
                 $('#ciclo-seleccionado-id').val(cicloId);
+            
 
                 // Mostrar el formulario de edición
                 $('#formulario-edicion').show();
