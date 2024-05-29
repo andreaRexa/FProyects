@@ -5,12 +5,12 @@
 @section('content')
 <div class="container d-flex justify-content-center align-items-start min-vh-100 mt-5">
     <div class="row w-100">
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title text-center">Ciclos</h5>
-                    <div class="table-responsive">
-                        <table class="table">
+                    <div class="table-responsive" style="max-height: 600px; overflow-y: auto;">
+                        <table class="table table-hover">
                             <thead>
                                 <tr>
                                     <th>ID Ciclo</th>
@@ -49,7 +49,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <!-- Formulario de edición -->
             <div class="card card-formulario" style="display:none;">
                 <div class="card-body">
@@ -64,14 +64,14 @@
                         <div class="form-group">
                             <label for="cursos">Cursos del Ciclo</label>
                             <div class="d-flex justify-content-between">
-                                <select multiple class="form-control" id="cursosDelCiclo" style="width: 45%;">
+                                <select multiple class="form-control" id="cursosDelCiclo" style="width: 45%; height: 150px;">
                                     <!-- Cursos del ciclo -->
                                 </select>
                                 <div class="d-flex flex-column justify-content-center mx-2">
                                     <button type="button" id="btn-add-curso" class="btn btn-primary mb-2">&rarr;</button>
                                     <button type="button" id="btn-remove-curso" class="btn btn-primary">&larr;</button>
                                 </div>
-                                <select multiple class="form-control id-cursosDisponibles" style="width: 45%;">
+                                <select multiple class="form-control" id="cursosDisponibles" style="width: 45%; height: 150px;">
                                     @foreach($cursosDisponibles as $curso)
                                         <option value="{{ $curso->IdCurso }}">{{ $curso->Curso }}</option>
                                     @endforeach
