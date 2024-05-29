@@ -56,9 +56,10 @@
                     <form id="form-editar-ciclo" method="POST">
                         @csrf
                         @method('PUT')
+                        <input type="hidden" id="ciclo_id" name="ciclo_id">
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre del Ciclo">
+                            <input type="text" action="{{ route('modulos.editar') }}"  class="form-control" id="nombre" name="nombre" placeholder="Nombre del Ciclo">
                         </div>
                         <div class="form-group">
                             <label for="cursos">Cursos</label>
@@ -103,6 +104,7 @@
                 var cursosDelCiclo = cicloSeleccionado.find('select option');
 
                 $('#nombre').val(nombreCiclo);
+                $('#ciclo_id').val(cicloId);
                 $('#cursosDelCiclo').empty();
                 $('#cursosDisponibles').empty();
 

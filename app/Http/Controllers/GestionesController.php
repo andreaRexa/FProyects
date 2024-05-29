@@ -36,9 +36,14 @@ class GestionesController extends Controller
         return redirect()->back();
     }
 
-    public function editarModulo(Request $request, $id)
+    public function editarModulo(Request $request)
     {
-        // Lógica para editar el módulo...
+        $ciclo = Ciclo::findOrFail($request->ciclo_id);
+        $ciclo->NombreCiclo = $request->nombre;
+        $ciclo->save();
+
+        // Actualizar los cursos del ciclo
+        $ciclo->cursos()->sync($request->cursosDelCiclo);
         
         return redirect()->back();
     }
