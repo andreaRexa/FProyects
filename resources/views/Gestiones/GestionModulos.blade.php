@@ -27,7 +27,6 @@
                                         <td>{{ $ciclo->NombreFamilia }}</td>
                                         <td>
                                             <select class="form-control select-cursos" id="selectCursos{{ $ciclo->IdCiclo }}">
-                                                <option value="">Listado de curso</option>
                                                 @foreach($ciclo->cursos as $curso)
                                                     <option value="{{ $curso->IdCurso }}">{{ $curso->curso->Curso }}</option>
                                                 @endforeach
@@ -72,9 +71,7 @@
                                     <button type="button" id="btn-remove-curso" class="btn btn-primary">&larr;</button>
                                 </div>
                                 <select multiple class="form-control" id="cursosDisponibles" style="width: 45%; height: 150px;">
-                                    @foreach($cursosDisponibles as $curso)
-                                        <option value="{{ $curso->IdCurso }}">{{ $curso->Curso }}</option>
-                                    @endforeach
+                                    <!-- Cursos disponibles -->
                                 </select>
                             </div>
                         </div>
@@ -107,6 +104,7 @@
 
                 $('#nombre').val(nombreCiclo);
                 $('#cursosDelCiclo').empty();
+                $('#cursosDisponibles').empty();
 
                 cursosDelCiclo.each(function() {
                     $('#cursosDelCiclo').append($('<option>', {
@@ -114,6 +112,19 @@
                         text: $(this).text()
                     }));
                 });
+
+                var cursosDelCicloIds = cursosDelCiclo.map(function() {
+                    return $(this).val();
+                }).get();
+
+                @foreach($cursosDisponibles as $curso)
+                    if (!cursosDelCicloIds.includes('{{ $curso->IdCurso }}')) {
+                        $('#cursosDisponibles').append($('<option>', {
+                            value: '{{ $curso->IdCurso }}',
+                            text: '{{ $curso->Curso }}'
+                        }));
+                    }
+                @endforeach
 
                 $('.card-formulario').show();
                 $('#form-editar-ciclo').attr('action', '/modulos/' + cicloId);
