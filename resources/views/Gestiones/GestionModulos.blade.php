@@ -30,7 +30,7 @@
                                     <div class="col">
                                         <select class="form-control" id="selectCursos{{ $ciclo->IdCiclo }}">
                                             <option value="">Seleccionar un curso...</option>
-                                            @foreach($ciclosConCursos->cursos as $curso)
+                                            @foreach($ciclosConCursos->cursos->curso as $curso)
                                                 <option value="{{ $curso->IdCurso }}">{{ $curso->Curso }}</option>
                                             @endforeach
                                         </select>
