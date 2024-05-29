@@ -77,7 +77,7 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <button type="submit" id="btn-guardar" class="btn btn-primary">Guardar</button>
+                            <button id="btn-guardar" class="btn btn-primary">Guardar</button>
                             <button type="button" id="btn-cancelar" class="btn btn-secondary">Cancelar</button>
                         </div>
                     </form>
@@ -143,9 +143,11 @@
                 alert('Por favor, selecciona un ciclo antes de eliminar.');
             }
         });
-        $('#btn-guardar').click(function() {
+        $('#btn-guardar').click(function(e) {
+            e.preventDefault();
             // Seleccionar todas las opciones disponibles
             $('#cursosDisponibles option').prop('selected', true);
+            $('#form-eliminar-ciclo').submit()
         });
         $('#btn-add-curso').click(function() {
             $('#cursosDelCiclo option:selected').appendTo('#cursosDisponibles');
