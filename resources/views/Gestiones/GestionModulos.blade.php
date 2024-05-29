@@ -24,7 +24,7 @@
                                     <tr class="ciclo-item" data-ciclo-id="{{ $ciclo->IdCiclo }}">
                                         <td>{{ $ciclo->IdCiclo }}</td>
                                         <td>{{ $ciclo->NombreCiclo }}</td>
-                                        <td>{{ $ciclo->NombreFamilia }}</td>
+                                        <td>{{ $ciclo->familia->NombreFamilia }}</td>
                                         <td>
                                             <select class="form-control select-cursos" id="selectCursos{{ $ciclo->IdCiclo }}">
                                                 <option value="">Listado de curso</option>
@@ -43,91 +43,103 @@
         </div>
         <div class="col-md-4">
             <!-- Formulario de edición -->
-            <div class="card card-formulario" id="formulario-edicion" style="display: none;">
+            <div class="card card-formulario" style="display:none;">
                 <div class="card-body">
-                    <h5 class="card-title">Editar ciclo</h5>
-                    <form action="{{ route('modulos.editar') }}" method="POST">
+                    <h5 class="card-title">Editar Módulo</h5>
+                    <form id="form-editar-ciclo" method="POST">
                         @csrf
-                        <!-- Campo oculto para el ID del ciclo -->
-                        <input type="hidden" id="ciclo-seleccionado-id" name="ciclo_id">
-
-                        <!-- Campos del formulario para editar el módulo -->
+                        @method('PUT')
                         <div class="form-group">
-                            <label for="nombre">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre del Módulo">
+                            <label for="nombre">Nombre del Ciclo</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre del Ciclo">
                         </div>
-                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        <div class="form-group">
+                            <label for="cursos">Cursos del Ciclo</label>
+                            <div class="d-flex">
+                                <select multiple class="form-control" id="cursosDelCiclo" style="width: 45%;">
+                                    <!-- Cursos del ciclo -->
+                                </select>
+                                <div class="d-flex flex-column justify-content-center mx-2">
+                                    <button type="button" id="btn-add-curso" class="btn btn-primary mb-2">&rarr;</button>
+                                    <button type="button" id="btn-remove-curso" class="btn btn-primary">&larr;</button>
+                                </div>
+                                <select multiple class="form-control" id="cursosDisponibles" style="width: 45%;">
+                                    @foreach($cursosDisponibles as $curso)
+                                        <option value="{{ $curso->IdCurso }}">{{ $curso->Curso }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
     <!-- Botones de eliminar y editar -->
     <div class="row mt-3">
         <div class="col-md-8">
-            <form action="" method="POST" id="form-eliminar-ciclo">
+            <button id="btn-editar-ciclo" class="btn btn-primary">Editar ciclo</button>
+            <form id="form-eliminar-ciclo" method="POST" style="display:inline;">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger" id="btn-eliminar-ciclo">Eliminar ciclo</button>
+                <button id="btn-eliminar-ciclo" class="btn btn-danger">Eliminar ciclo</button>
             </form>
-            <a href="#" class="btn btn-primary" id="btn-editar-ciclo">Editar ciclo</a>
         </div>
     </div>
 </div>
 
 <script>
     $(document).ready(function() {
+        var cicloSeleccionado;
+
         $('.ciclo-item').click(function() {
-            // Remover la clase de selección de todas las filas
             $('.ciclo-item').removeClass('table-active');
-            
-            // Agregar la clase de selección solo a la fila clicada
             $(this).addClass('table-active');
+            cicloSeleccionado = $(this);
         });
 
-        // Mostrar el formulario de edición al hacer clic en "Editar ciclo"
         $('#btn-editar-ciclo').click(function() {
-            var cicloSeleccionado = $('.ciclo-item.table-active');
+            if (cicloSeleccionado) {
+                var cicloId = cicloSeleccionado.data('ciclo-id');
+                var nombreCiclo = cicloSeleccionado.find('td').eq(1).text();
+                var cursosDelCiclo = cicloSeleccionado.find('select option');
 
-            if (cicloSeleccionado.length > 0) {
-                // Obtener el ID del ciclo seleccionado
-                var cicloId = cicloSeleccionado.data('curso-id');
-                
-                // Asignar el ID del ciclo seleccionado al campo oculto del formulario
-                $('#ciclo-seleccionado-id').val(cicloId);
-            
+                $('#nombre').val(nombreCiclo);
+                $('#cursosDelCiclo').empty();
 
-                // Mostrar el formulario de edición
-                $('#formulario-edicion').show();
+                cursosDelCiclo.each(function() {
+                    $('#cursosDelCiclo').append($('<option>', {
+                        value: $(this).val(),
+                        text: $(this).text()
+                    }));
+                });
+
+                $('.card-formulario').show();
+                $('#form-editar-ciclo').attr('action', '/modulos/' + cicloId);
             } else {
-                // Mostrar una alerta si no se ha seleccionado ningún ciclo
                 alert('Por favor, selecciona un ciclo antes de editar.');
             }
         });
 
-        // Al hacer clic en "Eliminar ciclo"
         $('#btn-eliminar-ciclo').click(function(e) {
             e.preventDefault();
-
-            var cicloSeleccionado = $('.ciclo-item.table-active');
-
-            if (cicloSeleccionado.length > 0) {
-                // Obtener el ID del ciclo seleccionado
+            if (cicloSeleccionado) {
                 var cicloId = cicloSeleccionado.data('ciclo-id');
-                
-                // Asignar el ID del ciclo seleccionado al formulario de eliminación
-                $('#form-eliminar-ciclo').attr('action', '{{ route("modulos.eliminar") }}/' + cicloId);
-
-                // Enviar la solicitud de eliminación
-                $('#form-eliminar-ciclo').submit();
+                $('#form-eliminar-ciclo').attr('action', '/modulos/' + cicloId).submit();
             } else {
-                // Mostrar una alerta si no se ha seleccionado ningún ciclo
                 alert('Por favor, selecciona un ciclo antes de eliminar.');
             }
         });
+
+        $('#btn-add-curso').click(function() {
+            $('#cursosDisponibles option:selected').appendTo('#cursosDelCiclo');
+        });
+
+        $('#btn-remove-curso').click(function() {
+            $('#cursosDelCiclo option:selected').appendTo('#cursosDisponibles');
+        });
     });
 </script>
-
 
 @endsection

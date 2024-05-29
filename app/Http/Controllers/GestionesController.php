@@ -21,7 +21,9 @@ class GestionesController extends Controller
                                 ->where('familias.IdAdministrador', $IdAdmin)
                                 ->get(); 
         //dd($ciclosConCursos);
-        return view('Gestiones.GestionModulos', compact('ciclos'));
+        
+        $cursosDisponibles = Cursos::all();
+        return view('Gestiones.GestionModulos', compact('ciclos','cursosDisponibles'));
 
         
     }
