@@ -3,12 +3,12 @@
 @section('title', 'Gestion modulos')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8">
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="row w-100">
+        <div class="col-md-10 mx-auto">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Ciclos</h5>
+                    <h5 class="card-title text-center">Ciclos</h5>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -38,24 +38,32 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="text-center mt-3">
+                        <button id="btn-editar-ciclo" class="btn btn-primary">Editar ciclo</button>
+                        <form id="form-eliminar-ciclo" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button id="btn-eliminar-ciclo" class="btn btn-danger">Eliminar ciclo</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-10 mx-auto mt-4">
             <!-- Formulario de edición -->
             <div class="card card-formulario" style="display:none;">
                 <div class="card-body">
-                    <h5 class="card-title">Editar Módulo</h5>
+                    <h5 class="card-title text-center">Editar ciclo</h5>
                     <form id="form-editar-ciclo" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
-                            <label for="nombre">Nombre del Ciclo</label>
+                            <label for="nombre">Nombre</label>
                             <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre del Ciclo">
                         </div>
                         <div class="form-group">
-                            <label for="cursos">Cursos del Ciclo</label>
-                            <div class="d-flex">
+                            <label for="cursos">Cursos</label>
+                            <div class="d-flex justify-content-between">
                                 <select multiple class="form-control" id="cursosDelCiclo" style="width: 45%;">
                                     <!-- Cursos del ciclo -->
                                 </select>
@@ -70,21 +78,13 @@
                                 </select>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="button" id="btn-cancelar" class="btn btn-secondary">Cancelar</button>
+                        </div>
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- Botones de eliminar y editar -->
-    <div class="row mt-3">
-        <div class="col-md-8">
-            <button id="btn-editar-ciclo" class="btn btn-primary">Editar ciclo</button>
-            <form id="form-eliminar-ciclo" method="POST" style="display:inline;">
-                @csrf
-                @method('DELETE')
-                <button id="btn-eliminar-ciclo" class="btn btn-danger">Eliminar ciclo</button>
-            </form>
         </div>
     </div>
 </div>
@@ -138,6 +138,10 @@
 
         $('#btn-remove-curso').click(function() {
             $('#cursosDelCiclo option:selected').appendTo('#cursosDisponibles');
+        });
+
+        $('#btn-cancelar').click(function() {
+            $('.card-formulario').hide();
         });
     });
 </script>
