@@ -24,7 +24,7 @@
                                     <tr class="ciclo-item" data-ciclo-id="{{ $ciclo->IdCiclo }}">
                                         <td>{{ $ciclo->IdCiclo }}</td>
                                         <td>{{ $ciclo->NombreCiclo }}</td>
-                                        <td>{{ $ciclo->familia->NombreFamilia }}</td>
+                                        <td>{{ $ciclo->NombreFamilia }}</td>
                                         <td>
                                             <select class="form-control select-cursos" id="selectCursos{{ $ciclo->IdCiclo }}">
                                                 <option value="">Listado de curso</option>
