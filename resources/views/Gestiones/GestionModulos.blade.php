@@ -5,7 +5,7 @@
 @section('content')
 <div class="container d-flex justify-content-center align-items-start min-vh-100 mt-5">
     <div class="row w-100">
-        <div class="col-md-10 mx-auto">
+        <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title text-center">Ciclos</h5>
@@ -24,7 +24,7 @@
                                     <tr class="ciclo-item" data-ciclo-id="{{ $ciclo->IdCiclo }}">
                                         <td>{{ $ciclo->IdCiclo }}</td>
                                         <td>{{ $ciclo->NombreCiclo }}</td>
-                                        <td>{{ $ciclo->NombreFamilia }}</td>
+                                        <td>{{ $ciclo->familia->NombreFamilia }}</td>
                                         <td>
                                             <select class="form-control select-cursos" id="selectCursos{{ $ciclo->IdCiclo }}">
                                                 <option value="">Listado de curso</option>
@@ -49,7 +49,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-10 mx-auto mt-4">
+        <div class="col-md-4">
             <!-- Formulario de edición -->
             <div class="card card-formulario" style="display:none;">
                 <div class="card-body">
@@ -71,7 +71,7 @@
                                     <button type="button" id="btn-add-curso" class="btn btn-primary mb-2">&rarr;</button>
                                     <button type="button" id="btn-remove-curso" class="btn btn-primary">&larr;</button>
                                 </div>
-                                <select multiple class="form-control" id="cursosDisponibles" style="width: 45%;">
+                                <select multiple class="form-control id-cursosDisponibles" style="width: 45%;">
                                     @foreach($cursosDisponibles as $curso)
                                         <option value="{{ $curso->IdCurso }}">{{ $curso->Curso }}</option>
                                     @endforeach
