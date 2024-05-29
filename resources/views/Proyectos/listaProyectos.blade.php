@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Listado de Proyectos')
+@section('title', 'Listado de proyectos')
 
 @section('content')
     <div class="container-fluid">

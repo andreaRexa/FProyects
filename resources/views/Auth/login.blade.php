@@ -25,7 +25,7 @@
                     @csrf
 
                     <div class="form-group">
-                        <label for="email">Correo Electrónico</label>
+                        <label for="email">Correo electrónico</label>
                         <input id="email" type="email" class="form-control" name="Correo" value="{{ old('email') }}" required autocomplete="email" autofocus>
                     </div>
 

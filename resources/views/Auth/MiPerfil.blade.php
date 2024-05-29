@@ -43,7 +43,7 @@
                             <input type="text" class="form-control" id="apellidos" name="apellidos" value="{{ session('user.apellidos') }}" disabled>
                         </div>
                         <div class="form-group">
-                            <label for="correo">Correo Electrónico</label>
+                            <label for="correo">Correo electrónico</label>
                             <input type="email" class="form-control" id="correo" name="email" value="{{ session('user.email') }}" disabled>
                         </div>
                         <div class="form-group">
