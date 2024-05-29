@@ -37,6 +37,22 @@ class ProyectoController extends Controller
         return view('Proyectos.listaProyectos', compact('proyectos', 'ciclos', 'cursos'));
     }
 
+    public function showListadoProyectosFamilia(Request $request)
+    {
+        // Obtener el usuario logueado
+        $userData = $request->session()->get('user');
+        $IdAdmin = $userData['id'];
+
+        // Obtener los proyectos del alumno logueado
+        $proyectos = Proyecto::whereHas('familia', function ($query) {
+            $query->where('IdAdministrador',$IdAdmin);
+        })->get();
+
+        $ciclos = Ciclo::groupBy('NombreCiclo')->pluck('NombreCiclo');
+        $cursos = AlumnoCiclo::groupBy('FechaCurso')->pluck('FechaCurso'); 
+    
+        return view('Proyectos.listaProyectos', compact('proyectos', 'ciclos', 'cursos'));
+    }
     public function filtrar(Request $request)
     {
         // Obtener todos los proyectos

@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\CerrarSesionController;
 use App\Http\Controllers\Auth\MiPerfilController;
 use App\Http\Controllers\ProyectoController;
+use App\Http\Controllers\GestionesController;
 
 // Ruta principal
 Route::get('/', function () {
@@ -25,7 +26,10 @@ Route::post('perfil/updatefoto', [MiPerfilController::class, 'updatefoto'])->nam
 Route::get('proyectos', [ProyectoController::class, 'showListadoProyectos'])->name('proyectos');
 Route::post('proyectosFiltrado', [ProyectoController::class, 'filtrar'])->name('filtrado');
 Route::get('proyectosAlumno', [ProyectoController::class, 'showListadoProyectosAlumno'])->name('proyectosAlumno');
+Route::get('proyectoFamilia', [ProyectoController::class, 'showListadoProyectosFamilia'])->name('proyectosAlumno');
 Route::get('proyectos/{id}', [ProyectoController::class, 'showDetalleProyecto'])->name('proyectos.detalle');
 Route::get('/descargar-archivo/{nombreProyecto}', [ProyectoController::class, 'descargarArchivo'])->name('descargarArchivo');
 Route::get('/descargar-documentacion/{nombreProyecto}', [ProyectoController::class, 'descargarDocumentacion'])->name('descargarDocumentacion');
 
+// Rutas relacionadas con gestiones
+Route::get('gestionesModulos', [GestionesController::class, 'showListadoModulos'])->name('gestionesModulos');

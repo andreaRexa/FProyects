@@ -1,8 +1,6 @@
-<!-- resources/views/auth/login.blade.php -->
-
 @extends('layout')
 
-@section('title', 'Iniciar Sesión')
+@section('title', 'Iniciar sesión')
 
 @section('content')
 <div class="row justify-content-center align-items-center" style="height: 100vh;">

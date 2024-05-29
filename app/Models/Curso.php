@@ -11,6 +11,10 @@ class Curso extends Model
 
     protected $primaryKey = 'IdCurso';
 
+    protected $fillable = [
+        'Curso'
+    ];
+    
     public function ciclos()
     {
         return $this->belongsToMany(Ciclo::class, 'cicloscursos', 'IdCurso', 'IdCiclo');

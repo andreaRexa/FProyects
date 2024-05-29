@@ -19,9 +19,9 @@
                 <!-- Menú desplegable Alumnos -->
                 <div class="dropdown-menu" aria-labelledby="alumnosDropdown" v-show="subMenus.alumnos">
                  
-                  <li class="nav-item"><button class="btn nav-link" name="btnNuevoProd" type="submit" href="#">Subir proyecto</button></li>
+                  <li class="nav-item"><button class="btn nav-link" name="btnSubirProyecto" type="submit" href="#">Subir proyecto</button></li>
                   <form action="proyectosAlumno" method="GET" class="form-inline mx-auto">  
-                    <li class="nav-item"><button class="btn nav-link" name="btnNuevoProd" type="submit">Mis proyectos</button></li>
+                    <li class="nav-item"><button class="btn nav-link" name="btnMisProyectosAlumno" type="submit">Mis proyectos</button></li>
                   </form>
                 </div>
               </li>
@@ -30,9 +30,13 @@
                 Familias
               </button>
               <div class="dropdown-menu" aria-labelledby="familiaDropdown" v-show="subMenus.familia">
-                <li class='nav-item'><button class='btn nav-link' name='btnNuevoProd' type='submit' href='#'>Mis proyectos</button></li>
-                <li class='nav-item'><button class='btn nav-link' name='btnNuevoProd' type='submit' href='#'>Gestión de alumnos</button></li>
-                <li class='nav-item'><button class='btn nav-link' name='btnNuevoProd' type='submit' href='#'>Gestión de modulos</button></li>
+                <form action="proyectoFamilia" method="GET" class="form-inline mx-auto">
+                  <li class='nav-item'><button class='btn nav-link' name='btnMisProyectosFamilia' type='submit' href='#'>Mis proyectos</button></li>
+                </form>
+                <li class='nav-item'><button class='btn nav-link' name='btnGestAlumnos' type='submit' href='#'>Gestión de alumnos</button></li>
+                <form action="gestionesModulos" method="GET" class="form-inline mx-auto">
+                  <li class='nav-item'><button class='btn nav-link' name='btnGestModulos' type='submit' href='#'>Gestión de modulos</button></li>
+                </form>
               </div>
             </li>
             <li class="nav-item dropdown d-inline-block" v-if="userRole === 4" >
@@ -40,8 +44,8 @@
                 Administradores
               </button>
               <div class="dropdown-menu" aria-labelledby="administradoresDropdown" v-show="subMenus.administradores">
-                <li class='nav-item'><button class='btn nav-link' name='btnNuevoProd' type='submit' href='#'>Gestión de familias</button></li>
-                <li class='nav-item'><button class='btn nav-link' name='btnNuevoProd' type='submit' href='#'>Gestión de usuarios</button></li>
+                <li class='nav-item'><button class='btn nav-link' name='btnGestFamilias' type='submit' href='#'>Gestión de familias</button></li>
+                <li class='nav-item'><button class='btn nav-link' name='btnGestUsuarios' type='submit' href='#'>Gestión de usuarios</button></li>
               </div>
             </li>
           </ul>
