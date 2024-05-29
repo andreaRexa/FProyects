@@ -52,6 +52,7 @@ class GestionesController extends Controller
         $cursosDelCiclo = $request->cursosDelCiclo;
         // Eliminamos todos los cursos asociados actualmente
         $ciclo->cursos()->delete();
+        dd($cursosDelCiclo);
         if (!empty($cursosSeleccionados)) {
             // Iteramos sobre los IDs de los cursos seleccionados y los creamos asociados al ciclo
             foreach ($cursosDelCiclo as $cursoId) {
