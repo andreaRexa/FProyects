@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Ciclos y Cursos</h5>
                     <ul class="list-group">
-                        @foreach($ciclos as $ciclo)
+                        @foreach($ciclosConCursos as $ciclo)
                             <li class="list-group-item">
                                 <div class="row">
                                     <div class="col">
@@ -30,7 +30,7 @@
                                     <div class="col">
                                         <select class="form-control" id="selectCursos{{ $ciclo->IdCiclo }}">
                                             <option value="">Seleccionar un curso...</option>
-                                            @foreach($ciclo->cursos as $curso)
+                                            @foreach($ciclosConCursos->cursos as $curso)
                                                 <option value="{{ $curso->IdCurso }}">{{ $curso->Curso }}</option>
                                             @endforeach
                                         </select>
