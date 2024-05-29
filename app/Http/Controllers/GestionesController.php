@@ -9,7 +9,7 @@ use App\Models\Ciclo;
 class GestionesController extends Controller
 {
     //Modulos
-    public function showListadoModulos()
+    public function showListadoModulos(Request $request)
     {
         // Obtener el usuario logueado
         $userData = $request->session()->get('user');
