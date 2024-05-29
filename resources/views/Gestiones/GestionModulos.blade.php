@@ -5,7 +5,7 @@
 @section('content')
 <div class="container d-flex justify-content-center align-items-start min-vh-100 mt-5">
     <div class="row w-100">
-        <div class="col-md-9">
+        <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title text-center">Ciclos</h5>
@@ -37,7 +37,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="text-center mt-3">
+                    <div class="text-center mt-4">
                         <button id="btn-editar-ciclo" class="btn btn-primary">Editar ciclo</button>
                         <form id="form-eliminar-ciclo" method="POST" style="display:inline;">
                             @csrf
@@ -52,16 +52,16 @@
             <!-- Formulario de edición -->
             <div class="card card-formulario" style="display:none;">
                 <div class="card-body">
-                    <h5 class="card-title text-center">Editar Módulo</h5>
+                    <h5 class="card-title text-center">Editar ciclo</h5>
                     <form id="form-editar-ciclo" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
-                            <label for="nombre">Nombre del Ciclo</label>
+                            <label for="nombre">Nombre</label>
                             <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre del Ciclo">
                         </div>
                         <div class="form-group">
-                            <label for="cursos">Cursos del Ciclo</label>
+                            <label for="cursos">Cursos</label>
                             <div class="d-flex justify-content-between">
                                 <select multiple class="form-control" id="cursosDelCiclo" style="width: 45%; height: 150px;">
                                     <!-- Cursos del ciclo -->
@@ -144,11 +144,12 @@
         });
 
         $('#btn-add-curso').click(function() {
-            $('#cursosDisponibles option:selected').appendTo('#cursosDelCiclo');
+            $('#cursosDelCiclo option:selected').appendTo('#cursosDisponibles');
         });
 
         $('#btn-remove-curso').click(function() {
-            $('#cursosDelCiclo option:selected').appendTo('#cursosDisponibles');
+            $('#cursosDisponibles option:selected').appendTo('#cursosDelCiclo');
+            
         });
 
         $('#btn-cancelar').click(function() {
