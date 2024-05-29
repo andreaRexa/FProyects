@@ -53,13 +53,13 @@
             <div class="card card-formulario" style="display:none;">
                 <div class="card-body">
                     <h5 class="card-title text-center">Editar ciclo</h5>
-                    <form id="form-editar-ciclo" method="POST">
+                    <form id="form-editar-ciclo" action="{{ route('modulos.editar') }}" method="POST">
                         @csrf
                         @method('PUT')
                         <input type="hidden" id="ciclo_id" name="ciclo_id">
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
-                            <input type="text" action="{{ route('modulos.editar') }}"  class="form-control" id="nombre" name="nombre" placeholder="Nombre del Ciclo">
+                            <input type="text"  class="form-control" id="nombre" name="nombre" placeholder="Nombre del Ciclo">
                         </div>
                         <div class="form-group">
                             <label for="cursos">Cursos</label>
@@ -129,7 +129,6 @@
                 @endforeach
 
                 $('.card-formulario').show();
-                $('#form-editar-ciclo').attr('action', '/modulos/' + cicloId);
             } else {
                 alert('Por favor, selecciona un ciclo antes de editar.');
             }
