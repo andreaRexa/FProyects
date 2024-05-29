@@ -36,7 +36,7 @@ class GestionesController extends Controller
         return redirect()->back();
     }
 
-    public function editarModulo(Request $request)
+    public function nuevoEditarModulo(Request $request)
     {
         // Buscar el ciclo por su ID
         $ciclo = Ciclo::findOrFail($request->ciclo_id);

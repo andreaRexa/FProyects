@@ -38,6 +38,7 @@
                         </table>
                     </div>
                     <div class="text-center mt-4">
+                        <button id="btn-nuevo-ciclo" class="btn btn-success">Nuevo</button>
                         <button id="btn-editar-ciclo" class="btn btn-primary">Editar ciclo</button>
                         <form id="form-eliminar-ciclo" method="POST" style="display:inline;">
                             @csrf
@@ -143,6 +144,23 @@
                 alert('Por favor, selecciona un ciclo antes de eliminar.');
             }
         });
+        $('#btn-nuevo-ciclo').click(function() {
+            // Limpiar los campos del formulario de edición
+            $('#nombre').val('');
+            $('#ciclo_id').val('');
+            $('#cursosDelCiclo').empty();
+            $('#cursosDisponibles').empty();
+
+            @foreach($cursosDisponibles as $curso)    
+                $('#cursosDisponibles').append($('<option>', {
+                    value: '{{ $curso->IdCurso }}',
+                    text: '{{ $curso->Curso }}'
+                }));      
+            @endforeach
+            // Mostrar el formulario de edición
+            $('.card-formulario').show();
+        });
+
         $('#btn-guardar').click(function(e) {
             e.preventDefault();
             // Seleccionar todas las opciones disponibles
