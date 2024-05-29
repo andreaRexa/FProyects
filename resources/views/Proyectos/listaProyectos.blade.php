@@ -59,23 +59,29 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($proyectos as $proyecto)
+                                    @if(empty($proyectos))
                                         <tr>
-                                            <td>
-                                                <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->FotoProyecto) }}" alt="{{ $proyecto->NombreProyecto }}" style="width: 150px; height: 150px; object-fit: cover;" class="img-fluid">
-                                            </td>
-                                            <td class="align-middle">{{ $proyecto->NombreProyecto }}</td>
-                                            <td class="align-middle">{{ $proyecto->Descripcion }}</td>
-                                            @php
-                                                $firstAlumno = $proyecto->proyectoAlumno->first(); 
-                                            @endphp
-                                            <td class="align-middle">{{ optional(optional($firstAlumno)->usuario->alumnoCiclo->ciclo)->NombreCiclo }}</td>
-                                            <td class="align-middle">{{ optional(optional($firstAlumno)->usuario->alumnoCiclo)->FechaCurso }}</td>
-                                            <td class="align-middle">
-                                                <a href="{{ route('proyectos.detalle', $proyecto->IdProyecto) }}" class="btn btn-primary">Ver más</a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                            <td colspan="6">No se han encontrado proyectos<td>
+                                        </tr>        
+                                    @else
+                                        @foreach($proyectos as $proyecto)
+                                            <tr>
+                                                <td>
+                                                    <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->FotoProyecto) }}" alt="{{ $proyecto->NombreProyecto }}" style="width: 150px; height: 150px; object-fit: cover;" class="img-fluid">
+                                                </td>
+                                                <td class="align-middle">{{ $proyecto->NombreProyecto }}</td>
+                                                <td class="align-middle">{{ $proyecto->Descripcion }}</td>
+                                                @php
+                                                    $firstAlumno = $proyecto->proyectoAlumno->first(); 
+                                                @endphp
+                                                <td class="align-middle">{{ optional(optional($firstAlumno)->usuario->alumnoCiclo->ciclo)->NombreCiclo }}</td>
+                                                <td class="align-middle">{{ optional(optional($firstAlumno)->usuario->alumnoCiclo)->FechaCurso }}</td>
+                                                <td class="align-middle">
+                                                    <a href="{{ route('proyectos.detalle', $proyecto->IdProyecto) }}" class="btn btn-primary">Ver más</a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

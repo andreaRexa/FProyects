@@ -22,21 +22,27 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($ciclos as $ciclo)
-                                    <tr class="ciclo-item" data-ciclo-id="{{ $ciclo->IdCiclo }}">
-                                        <td>{{ $ciclo->IdCiclo }}</td>
-                                        <td>{{ $ciclo->NombreCiclo }}</td>
-                                        <td>{{ $ciclo->NombreFamilia }}</td>
-                                        <td>
-                                            <select class="form-control select-cursos" id="selectCursos{{ $ciclo->IdCiclo }}">
-                                                @foreach($ciclo->cursos as $curso)
-                                                    <option value="{{ $curso->IdCurso }}">{{ $curso->curso->Curso }}</option>
-                                                @endforeach
-                                            </select>      
-                                        </td>
-                                        
-                                    </tr>
-                                @endforeach
+                                @if(empty($ciclos))
+                                    <tr>
+                                        <td colspan="4">No se han encontrado ciclos<td>
+                                    </tr>        
+                                @else
+                                    @foreach($ciclos as $ciclo)
+                                        <tr class="ciclo-item" data-ciclo-id="{{ $ciclo->IdCiclo }}">
+                                            <td>{{ $ciclo->IdCiclo }}</td>
+                                            <td>{{ $ciclo->NombreCiclo }}</td>
+                                            <td>{{ $ciclo->NombreFamilia }}</td>
+                                            <td>
+                                                <select class="form-control select-cursos" id="selectCursos{{ $ciclo->IdCiclo }}">
+                                                    @foreach($ciclo->cursos as $curso)
+                                                        <option value="{{ $curso->IdCurso }}">{{ $curso->curso->Curso }}</option>
+                                                    @endforeach
+                                                </select>      
+                                            </td>
+                                            
+                                        </tr>
+                                    @endforeach
+                                @endif    
                             </tbody>
                         </table>
                     </div>
