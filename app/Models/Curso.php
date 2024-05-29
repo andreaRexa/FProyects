@@ -14,9 +14,9 @@ class Curso extends Model
     protected $fillable = [
         'Curso'
     ];
-    
+
     public function ciclos()
     {
-        return $this->belongsToMany(Ciclo::class, 'cicloscursos', 'IdCurso', 'IdCiclo');
+        return $this->belongsToMany(CicloCurso::class, 'IdCurso', 'IdCurso');
     }
 }

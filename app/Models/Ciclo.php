@@ -26,6 +26,6 @@ class Ciclo extends Model
     
     public function cursos()
     {
-        return $this->hasMany(Curso::class, 'cicloscursos', 'IdCiclo', 'IdCurso');
+        return $this->hasMany(CicloCurso::class, 'IdCiclo', 'IdCiclo');
     }
 }
