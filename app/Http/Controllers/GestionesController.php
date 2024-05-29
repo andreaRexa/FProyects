@@ -18,7 +18,7 @@ class GestionesController extends Controller
 
         $ciclos = Ciclo::with('cursos.curso')
                                 ->join('familias', 'ciclos.IdFamilia', '=', 'familias.IdFamilia')
-                                ->select('ciclos.IdCiclo', 'ciclos.NombreCiclo', 'familias.NombreFamilia')
+                                ->select('ciclos.IdCiclo', 'ciclos.NombreCiclo', 'familias.NombreFamilia','familias.IdFamilia')
                                 ->where('familias.IdAdministrador', $IdAdmin)
                                 ->get(); 
         //dd($ciclosConCursos);
@@ -38,29 +38,37 @@ class GestionesController extends Controller
 
     public function nuevoEditarModulo(Request $request)
     {
-        dd($request);
-        // Buscar el ciclo por su ID
-        $ciclo = Ciclo::findOrFail($request->ciclo_id);
-        
-        // Actualizar el nombre del ciclo con el valor enviado en el formulario
-        $ciclo->NombreCiclo = $request->nombre;
-        
-        // Guardar los cambios en el ciclo
-        $ciclo->save();
-        
-        // Actualizar los cursos del ciclo
-        // Primero, obtenemos los IDs de los cursos seleccionados desde el formulario
-        $cursosDelCiclo = $request->cursosDelCiclo;
-        // Eliminamos todos los cursos asociados actualmente
-        $ciclo->cursos()->delete();
-        //dd($cursosDelCiclo);
-        if ($cursosDelCiclo!==null) {
-            // Iteramos sobre los IDs de los cursos seleccionados y los creamos asociados al ciclo
-            foreach ($cursosDelCiclo as $cursoId) {
-                $ciclo->cursos()->create(['IdCurso' => $cursoId]);
+        if($request->accion === "nuevo"){
+            // Crear un nuevo ciclo con los datos del formulario
+            $ciclo = new Ciclo();
+            $ciclo->NombreCiclo = $request->nombre;
+            $ciclo->IdFamilia = $request->idfamilia;
+            // Asignar otros atributos según sea necesario
+            $ciclo->save();
+
+        }else{   
+            // Buscar el ciclo por su ID
+            $ciclo = Ciclo::findOrFail($request->ciclo_id);
+            
+            // Actualizar el nombre del ciclo con el valor enviado en el formulario
+            $ciclo->NombreCiclo = $request->nombre;
+            
+            // Guardar los cambios en el ciclo
+            $ciclo->save();
+            
+            // Actualizar los cursos del ciclo
+            // Primero, obtenemos los IDs de los cursos seleccionados desde el formulario
+            $cursosDelCiclo = $request->cursosDelCiclo;
+            // Eliminamos todos los cursos asociados actualmente
+            $ciclo->cursos()->delete();
+            //dd($cursosDelCiclo);
+            if ($cursosDelCiclo!==null) {
+                // Iteramos sobre los IDs de los cursos seleccionados y los creamos asociados al ciclo
+                foreach ($cursosDelCiclo as $cursoId) {
+                    $ciclo->cursos()->create(['IdCurso' => $cursoId]);
+                }
             }
         }
-        
         
         return redirect()->back();
     }

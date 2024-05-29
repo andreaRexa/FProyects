@@ -32,6 +32,7 @@
                                                 @endforeach
                                             </select>      
                                         </td>
+                                        <td class="oculto">{{ $ciclo->IdFamilia }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -58,6 +59,8 @@
                         @csrf
                         @method('PUT')
                         <input type="hidden" id="ciclo_id" name="ciclo_id">
+                        <input type="hidden" id="accion" name="accion">
+                        <input type="hidden" id="idfamilia" name="idfamilia">
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
                             <input type="text"  class="form-control" id="nombre" name="nombre" placeholder="Nombre del Ciclo">
@@ -106,6 +109,7 @@
 
                 $('#nombre').val(nombreCiclo);
                 $('#ciclo_id').val(cicloId);
+                $('#accion').val("editar");
                 $('#cursosDelCiclo').empty();
                 $('#cursosDisponibles').empty();
 
@@ -145,11 +149,15 @@
             }
         });
         $('#btn-nuevo-ciclo').click(function() {
+            var idFamilia = cicloSeleccionado.find('.oculto').text();
             // Limpiar los campos del formulario de edición
             $('#nombre').val('');
             $('#ciclo_id').val('');
+            $('#accion').val("nuevo");
+            $('#idfamilia').val(idFamilia);
             $('#cursosDelCiclo').empty();
             $('#cursosDisponibles').empty();
+            
 
             @foreach($cursosDisponibles as $curso)    
                 $('#cursosDisponibles').append($('<option>', {
