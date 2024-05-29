@@ -18,9 +18,11 @@
                 </button>
                 <!-- Menú desplegable Alumnos -->
                 <div class="dropdown-menu" aria-labelledby="alumnosDropdown" v-show="subMenus.alumnos">
-                  
+                 
                   <li class="nav-item"><button class="btn nav-link" name="btnNuevoProd" type="submit" href="#">Subir proyecto</button></li>
-                  <li class="nav-item"><button class="btn nav-link" name="btnNuevoProd" type="submit" href="proyectosAlumno">Mis proyectos</button></li>
+                  <form action="proyectosAlumno" method="GET" class="form-inline mx-auto">  
+                    <li class="nav-item"><button class="btn nav-link" name="btnNuevoProd" type="submit">Mis proyectos</button></li>
+                  </form>
                 </div>
               </li>
             <li v-if="userRole === 3" class="nav-item dropdown d-inline-block">
