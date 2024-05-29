@@ -39,9 +39,12 @@ class GestionesController extends Controller
 
     public function nuevoEditarModulo(Request $request)
     {
+        
         if($request->accion === "nuevo"){
+            $maxId = Ciclo::max('IdCiclo');
             // Crear un nuevo ciclo con los datos del formulario
             $ciclo = new Ciclo();
+            $ciclo->IdCiclo = $maxId+1;
             $ciclo->NombreCiclo = $request->nombre;
             $ciclo->IdFamilia = $request->idfamilia;
             // Asignar otros atributos según sea necesario
