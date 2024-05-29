@@ -36,7 +36,8 @@ class User extends Authenticatable
         'FechaCodRecContr',
         'FechaCreacion',
         'Correo',
-        'TipoUsuario'
+        'TipoUsuario',
+        'NIA'
     ];
 
     // Si no estás usando los timestamps de Laravel (created_at y updated_at), añade esto:

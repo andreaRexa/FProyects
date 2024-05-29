@@ -23,4 +23,9 @@ class Ciclo extends Model
     {
         return $this->belongsTo(Familia::class, 'IdFamilia', 'IdFamilia');
     }
+    
+    public function cursos()
+    {
+        return $this->belongsToMany(Curso::class, 'cicloscursos', 'IdCiclo', 'IdCurso');
+    }
 }

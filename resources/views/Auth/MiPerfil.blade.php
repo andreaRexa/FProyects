@@ -30,7 +30,7 @@
                         <button type="button" class="btn btn-danger">Eliminar perfil</button> 
                     </div>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-4">
                     <form id="formularioupdate" action="{{ route('perfil.update', ['id' => session('user.id')]) }}" method="post">
                         @csrf
                         @method('put')
@@ -54,7 +54,16 @@
                             <label for="rol">Rol</label>
                             <input type="text" class="form-control" id="rol" value="{{ App\constantes::arrTipoUsuarios[session('user.rol')] }}" disabled>
                         </div>
+                        @if(session('user.id')===2)
+                        <div class="form-group">
+                            <label for="NIA">NIA</label>
+                            <input type="text" class="form-control" id="NIA" value="{{ session('user.NIA') }}" disabled>
+                        </div>
+                        @endif
                     </form>
+                </div>
+                <div class="col-md-4">
+
                 </div>
             </div>
         </div>
