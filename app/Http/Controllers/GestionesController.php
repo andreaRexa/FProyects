@@ -50,7 +50,6 @@ class GestionesController extends Controller
         // Actualizar los cursos del ciclo
         // Primero, obtenemos los IDs de los cursos seleccionados desde el formulario
         $cursosDelCiclo = $request->cursosDelCiclo;
-        dd($cursosDelCiclo);
         // Eliminamos todos los cursos asociados actualmente
         $ciclo->cursos()->delete();
         
