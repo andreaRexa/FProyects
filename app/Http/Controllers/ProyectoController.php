@@ -44,7 +44,7 @@ class ProyectoController extends Controller
         $IdAdmin = $userData['id'];
 
         // Obtener los proyectos del alumno logueado
-        $proyectos = Proyectos::whereHas('familia', function ($query) {
+        $proyectos = Proyectos::whereHas('familia', function ($query) use ($IdAdmin) {
             $query->where('IdAdministrador',$IdAdmin);
         })->get();
 
