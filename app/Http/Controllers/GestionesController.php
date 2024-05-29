@@ -49,7 +49,18 @@ class GestionesController extends Controller
             $ciclo->IdFamilia = $request->idfamilia;
             // Asignar otros atributos según sea necesario
             $ciclo->save();
-
+            // Actualizar los cursos del ciclo
+            // Primero, obtenemos los IDs de los cursos seleccionados desde el formulario
+            $cursosDelCiclo = $request->cursosDelCiclo;
+            // Eliminamos todos los cursos asociados actualmente
+            $ciclo->cursos()->delete();
+            //dd($cursosDelCiclo);
+            if ($cursosDelCiclo!==null) {
+                // Iteramos sobre los IDs de los cursos seleccionados y los creamos asociados al ciclo
+                foreach ($cursosDelCiclo as $cursoId) {
+                    $ciclo->cursos()->create(['IdCurso' => $cursoId]);
+                }
+            }
         }else{   
             // Buscar el ciclo por su ID
             $ciclo = Ciclo::findOrFail($request->ciclo_id);
@@ -59,21 +70,21 @@ class GestionesController extends Controller
             
             // Guardar los cambios en el ciclo
             $ciclo->save();
-        
-        }
-
-        // Actualizar los cursos del ciclo
-        // Primero, obtenemos los IDs de los cursos seleccionados desde el formulario
-        $cursosDelCiclo = $request->cursosDelCiclo;
-        // Eliminamos todos los cursos asociados actualmente
-        $ciclo->cursos()->delete();
-        //dd($cursosDelCiclo);
-        if ($cursosDelCiclo!==null) {
-            // Iteramos sobre los IDs de los cursos seleccionados y los creamos asociados al ciclo
-            foreach ($cursosDelCiclo as $cursoId) {
-                $ciclo->cursos()->create(['IdCurso' => $cursoId]);
+            // Actualizar los cursos del ciclo
+            // Primero, obtenemos los IDs de los cursos seleccionados desde el formulario
+            $cursosDelCiclo = $request->cursosDelCiclo;
+            // Eliminamos todos los cursos asociados actualmente
+            $ciclo->cursos()->delete();
+            //dd($cursosDelCiclo);
+            if ($cursosDelCiclo!==null) {
+                // Iteramos sobre los IDs de los cursos seleccionados y los creamos asociados al ciclo
+                foreach ($cursosDelCiclo as $cursoId) {
+                    $ciclo->cursos()->create(['IdCurso' => $cursoId]);
+                }
             }
         }
+
+
         
         return redirect()->back();
     }
