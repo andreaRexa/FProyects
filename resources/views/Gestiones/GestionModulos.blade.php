@@ -66,7 +66,7 @@
     <!-- Botones de eliminar y editar -->
     <div class="row mt-3">
         <div class="col-md-8">
-            <form action="{{ route('modulos.eliminar') }}" method="POST" id="form-eliminar-ciclo">
+            <form action="" method="POST" id="form-eliminar-ciclo">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger" id="btn-eliminar-ciclo">Eliminar ciclo</button>
