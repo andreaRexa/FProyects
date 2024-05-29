@@ -145,12 +145,11 @@
         });
 
         $('#btn-add-curso').click(function() {
-            $('#cursosDelCiclo option:selected').appendTo('#cursosDisponibles');
+            $('#cursosDelCiclo[] option:selected').appendTo('#cursosDisponibles');
         });
 
         $('#btn-remove-curso').click(function() {
-            $('#cursosDisponibles option:selected').appendTo('#cursosDelCiclo');
-            
+            $('#cursosDisponibles option:selected').appendTo('#cursosDelCiclo[]');
         });
 
         $('#btn-cancelar').click(function() {
