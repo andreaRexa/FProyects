@@ -48,7 +48,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <!-- Formulario de edición -->
             <div class="card card-formulario" style="display:none;">
                 <div class="card-body">
@@ -76,7 +76,7 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
                             <button type="button" id="btn-cancelar" class="btn btn-secondary">Cancelar</button>
                         </div>
                     </form>
