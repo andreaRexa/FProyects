@@ -22,5 +22,21 @@ class GestionesController extends Controller
                                 ->get(); 
         //dd($ciclosConCursos);
         return view('Gestiones.GestionModulos', compact('ciclos'));
+
+        
+    }
+
+    public function eliminarModulo($id)
+    {
+        $modulo = Ciclo::findOrFail($id);
+        $modulo->delete();
+        return redirect()->back();
+    }
+
+    public function editarModulo(Request $request, $id)
+    {
+        // Lógica para editar el módulo...
+        
+        return redirect()->back();
     }
 }
