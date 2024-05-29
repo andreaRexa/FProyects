@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Ciclo;
+use App\Models\Curso;
 
 class GestionesController extends Controller
 {
@@ -22,7 +23,7 @@ class GestionesController extends Controller
                                 ->get(); 
         //dd($ciclosConCursos);
         
-        $cursosDisponibles = Cursos::all();
+        $cursosDisponibles = Curso::all();
         return view('Gestiones.GestionModulos', compact('ciclos','cursosDisponibles'));
 
         
