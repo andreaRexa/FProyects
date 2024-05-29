@@ -23,8 +23,8 @@ Route::post('perfil/updatefoto', [MiPerfilController::class, 'updatefoto'])->nam
 
 // Rutas relacionadas con proyectos
 Route::get('proyectos', [ProyectoController::class, 'showListadoProyectos'])->name('proyectos');
-Route::post('proyectos', [ProyectoController::class, 'filtrar'])->name('filtrado');
-Route::get('proyectos', [ProyectoController::class, 'showListadoProyectosAlumno'])->name('proyectosAlumno');
+Route::post('proyectosFiltrado', [ProyectoController::class, 'filtrar'])->name('filtrado');
+Route::get('proyectosAlumno', [ProyectoController::class, 'showListadoProyectosAlumno'])->name('proyectosAlumno');
 Route::get('proyectos/{id}', [ProyectoController::class, 'showDetalleProyecto'])->name('proyectos.detalle');
 Route::get('/descargar-archivo/{nombreProyecto}', [ProyectoController::class, 'descargarArchivo'])->name('descargarArchivo');
 Route::get('/descargar-documentacion/{nombreProyecto}', [ProyectoController::class, 'descargarDocumentacion'])->name('descargarDocumentacion');
