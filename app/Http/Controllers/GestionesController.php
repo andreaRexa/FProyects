@@ -17,14 +17,14 @@ class GestionesController extends Controller
         $IdAdmin = $userData['id'];
 
         $ciclos = Ciclo::with('cursos.curso')
-                                ->join('familias', 'ciclos.IdFamilia', '=', 'familias.IdFamilia')
-                                ->select('ciclos.IdCiclo', 'ciclos.NombreCiclo', 'familias.NombreFamilia','familias.IdFamilia')
-                                ->where('familias.IdAdministrador', $IdAdmin)
-                                ->get(); 
-        //dd($ciclosConCursos);
+                            ->join('familias', 'ciclos.IdFamilia', '=', 'familias.IdFamilia')
+                            ->select('ciclos.IdCiclo', 'ciclos.NombreCiclo', 'familias.NombreFamilia')
+                            ->where('familias.IdAdministrador', $IdAdmin)
+                            ->get(); 
         
         $cursosDisponibles = Curso::all();
-        return view('Gestiones.GestionModulos', compact('ciclos','cursosDisponibles'));
+        $IdFamilia=Familia::where('IdAdministrador', $IdAdmin)->pluck('IdFamilia')->first();
+        return view('Gestiones.GestionModulos', compact('ciclos','cursosDisponibles','IdFamilia'));
 
         
     }

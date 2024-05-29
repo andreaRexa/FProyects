@@ -32,7 +32,7 @@
                                                 @endforeach
                                             </select>      
                                         </td>
-                                        <td class="oculto">{{ $ciclo->IdFamilia }}</td>
+                                        
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -148,13 +148,13 @@
                 alert('Por favor, selecciona un ciclo antes de eliminar.');
             }
         });
+
         $('#btn-nuevo-ciclo').click(function() {
-            var idFamilia = cicloSeleccionado.find('.oculto').text();
             // Limpiar los campos del formulario de edición
             $('#nombre').val('');
             $('#ciclo_id').val('');
             $('#accion').val("nuevo");
-            $('#idfamilia').val(idFamilia);
+            $('#idfamilia').val($IdFamilia);
             $('#cursosDelCiclo').empty();
             $('#cursosDisponibles').empty();
             
