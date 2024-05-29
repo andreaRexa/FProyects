@@ -19,8 +19,8 @@
                 <!-- Menú desplegable Alumnos -->
                 <div class="dropdown-menu" aria-labelledby="alumnosDropdown" v-show="subMenus.alumnos">
                   
-                  <li class="nav-item"><button class="btn nav-link" name="btnNuevoProd" type="submit" href="proyectosAlumno">Subir Proyecto</button></li>
-                  <li class="nav-item"><button class="btn nav-link" name="btnNuevoProd" type="submit" href="#">Mis Proyectos</button></li>
+                  <li class="nav-item"><button class="btn nav-link" name="btnNuevoProd" type="submit" href="#">Subir Proyecto</button></li>
+                  <li class="nav-item"><button class="btn nav-link" name="btnNuevoProd" type="submit" href="proyectosAlumno">Mis Proyectos</button></li>
                 </div>
               </li>
             <li v-if="userRole === 3" class="nav-item dropdown d-inline-block">
