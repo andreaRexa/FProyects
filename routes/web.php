@@ -13,7 +13,7 @@ Route::get('/', function () {
 
 // Ruta Login y logout
 Route::get('loginForm', [LoginController::class, 'showLoginForm'])->name('loginForm');
-Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::post('login', [LoginController::class, 'login'])->name('login');
 Route::get('logout', [CerrarSesionController::class, 'cerrarSession'])->name('logout');
 
 // Ruta a mi perfil, actualización de datos y perfil
