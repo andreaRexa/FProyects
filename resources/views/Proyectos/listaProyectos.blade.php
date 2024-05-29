@@ -59,7 +59,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if($proyectos === null)
+                                    @if($proyectos->count() === 0)
                                         <tr>
                                             <td colspan="6">No se han encontrado proyectos</td>
                                         </tr>        
