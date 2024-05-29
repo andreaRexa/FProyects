@@ -3,7 +3,7 @@
 @section('title', 'Gestion modulos')
 
 @section('content')
-<div class="container d-flex justify-content-center align-items-center min-vh-100">
+<div class="container d-flex justify-content-center align-items-start min-vh-100 mt-5">
     <div class="row w-100">
         <div class="col-md-10 mx-auto">
             <div class="card">
@@ -53,16 +53,16 @@
             <!-- Formulario de edición -->
             <div class="card card-formulario" style="display:none;">
                 <div class="card-body">
-                    <h5 class="card-title text-center">Editar ciclo</h5>
+                    <h5 class="card-title text-center">Editar Módulo</h5>
                     <form id="form-editar-ciclo" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
-                            <label for="nombre">Nombre</label>
+                            <label for="nombre">Nombre del Ciclo</label>
                             <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre del Ciclo">
                         </div>
                         <div class="form-group">
-                            <label for="cursos">Cursos</label>
+                            <label for="cursos">Cursos del Ciclo</label>
                             <div class="d-flex justify-content-between">
                                 <select multiple class="form-control" id="cursosDelCiclo" style="width: 45%;">
                                     <!-- Cursos del ciclo -->
@@ -79,7 +79,7 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                             <button type="button" id="btn-cancelar" class="btn btn-secondary">Cancelar</button>
                         </div>
                     </form>
