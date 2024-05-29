@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class EncryptExistingPasswords2 extends Migration
+class EncryptExistingPasswords3 extends Migration
 {
     /**
      * Run the migrations.
