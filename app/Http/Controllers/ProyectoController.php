@@ -19,7 +19,7 @@ class ProyectoController extends Controller
         return view('Proyectos.listaProyectos', compact('proyectos', 'ciclos', 'cursos'));
     }
 
-    public function showListadoProyectosAlumno()
+    public function showListadoProyectosAlumno(Request $request)
     {
         // Obtener el usuario logueado
         $userData = $request->session()->get('user');
