@@ -16,11 +16,9 @@
                     <div class="carousel-inner">
                         @foreach($proyectos as $index => $proyecto)
                             <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                                <div class="position-relative"> 
-                                    <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->FotoProyecto) }}" alt="{{ $proyecto->NombreProyecto }}" class="d-block w-100" style="max-width: 500px; max-height: 300px; object-fit: cover; margin: 0 auto;">
-                                    <div class="overlay position-absolute top-0 start-0 end-0 p-3" style="background-color: rgba(0, 0, 0, 0.5);"> <!-- Capa de superposición transparente para el título del proyecto -->
-                                        <h5 class="text-white">{{ $proyecto->NombreProyecto }}</h5> 
-                                    </div>
+                                <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->FotoProyecto) }}" alt="{{ $proyecto->NombreProyecto }}" class="d-block w-100" style="max-width: 500px; max-height: 300px; object-fit: cover; margin: 0 auto;">
+                                <div class="carousel-caption d-none d-md-block" style="color: #fff; bottom: 20px; width: 100%; left: 0; right: 0; text-align: center;"> 
+                                    <h5 style="font-size: 24px;">{{ $proyecto->NombreProyecto }}</h5>
                                 </div>
                             </div>
                         @endforeach
