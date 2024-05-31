@@ -18,17 +18,17 @@ class RecContraseniaController extends Controller
             'email' => 'required|email|exists:users,email',
         ]);
 
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('correo', $request->email)->first();
 
         // Generar y guardar un código de recuperación
         $code = Str::random(6);
         User::updateOrCreate(
-            ['email' => $user->email],
+            ['email' => $user->correo],
             ['code' => Hash::make($code)]
         );
 
         // Enviar el código de recuperación por correo electrónico
-        Mail::to($user->email)->send(new ResetPasswordMail($code));
+        Mail::to($user->correo)->send(new ResetPasswordMail($code));
 
         return redirect()->route('password.reset', ['email' => $user->email]);
 
