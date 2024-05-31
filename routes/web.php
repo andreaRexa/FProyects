@@ -7,7 +7,7 @@ use App\Http\Controllers\Auth\MiPerfilController;
 use App\Http\Controllers\ProyectoController;
 use App\Http\Controllers\GestionesController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\RecContraseniaController;
+use App\Http\Controllers\Auth\RecContraseniaController;
 
 // Ruta principal
 Route::get('/', [HomeController::class, 'showHome']);
