@@ -1,6 +1,8 @@
 @extends('layout')
 
 @section('title', 'Recuperar contraseña')
+
+@section('content')
     <!-- Formulario para enviar correo electrónico con el código de recuperación -->
     <form action="{{ route('password.enviarcod') }}" method="POST" id="FormCodigo">
         @csrf

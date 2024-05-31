@@ -2,6 +2,7 @@
 
 @section('title', 'Recuperar contraseña')
 
+@section('content')
     <!-- Formulario para ingresar el código y restablecer la contraseña -->
     <form action="{{ route('password.resetPass') }}" method="POST" id="ResetPass" style="display: none;">
         @csrf
@@ -20,5 +21,5 @@
         </div>
         <button type="submit" class="btn btn-primary">Restablecer contraseña</button>
     </form>
-    
+
 @endsection
