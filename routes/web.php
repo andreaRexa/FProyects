@@ -8,9 +8,7 @@ use App\Http\Controllers\ProyectoController;
 use App\Http\Controllers\GestionesController;
 
 // Ruta principal
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', );
 
 // Ruta Login y logout
 Route::get('loginForm', [LoginController::class, 'showLoginForm'])->name('loginForm');
