@@ -37,7 +37,7 @@ class Proyectos extends Model
     // Relación con el modelo Familia
     public function familia()
     {
-        return $this->hasMany(Familia::class, 'IdFamilia', 'IdFamilia');
+        return $this->belongsTo(Familia::class, 'IdFamilia', 'IdFamilia');
     }
 
     // Relación con el modelo Valoracion
