@@ -18,7 +18,7 @@
                         @foreach($proyectos as $index => $proyecto)
                             <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
                                 <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->FotoProyecto) }}" alt="{{ $proyecto->NombreProyecto }}" class="d-block w-100" style="max-width: 500px; max-height: 300px; object-fit: cover; margin: 0 auto;">
-                                <div class="carousel-caption d-none d-md-block"> <!-- Mostrar nombre del proyecto en el carrusel --
+                                <div class="carousel-caption d-none d-md-block"> 
                                     <h5>{{ $proyecto->NombreProyecto }}</h5>
                                 </div>
                             </div>
