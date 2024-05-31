@@ -33,7 +33,7 @@ class RecContraseniaController extends Controller
         // Enviar el código de recuperación por correo electrónico
         Mail::to($user->Correo)->send(new ResetPasswordMail($code));
 
-        return view('Auth.RecContraseña',['email' => $email]);
+        return view('Auth.RecContraseña',['email' => $user->Correo]);
     }
 
     
