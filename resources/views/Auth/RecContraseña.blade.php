@@ -7,7 +7,6 @@
     <div class="col-md-4">
         <div class="card">
             <div class="card-header">Recuperar contraseña</div>
-
             <div class="card-body">
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -19,7 +18,7 @@
                     </div>
                 @endif
                 <!-- Formulario para ingresar el código y restablecer la contraseña -->
-                <form action="{{ route('password.resetPass') }}" method="POST" id="ResetPass" style="display: none;">
+                <form action="{{ route('password.resetPass') }}" method="POST" id="ResetPass">
                     @csrf
                     <input type="hidden" name="email" value="{{ $email }}">
                     <div class="form-group">
