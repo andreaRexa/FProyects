@@ -37,7 +37,7 @@
                 </form>
 
                 <div class="form-group">
-                    <a href="">¿Olvidaste tu contraseña?</a>
+                    <a href="{{ route('pass.olvidada') }}">¿Olvidaste tu contraseña?</a>
                 </div>
             </div>
         </div>

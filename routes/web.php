@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\MiPerfilController;
 use App\Http\Controllers\ProyectoController;
 use App\Http\Controllers\GestionesController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RecContraseniaController;
 
 // Ruta principal
 Route::get('/', [HomeController::class, 'showHome']);
@@ -15,6 +16,11 @@ Route::get('/', [HomeController::class, 'showHome']);
 Route::get('loginForm', [LoginController::class, 'showLoginForm'])->name('loginForm');
 Route::post('login', [LoginController::class, 'login'])->name('login');
 Route::get('logout', [CerrarSesionController::class, 'cerrarSession'])->name('logout');
+
+//Ruta relacionada con la recuperacion de contraseña
+Route::get('/pass-olvidada', [RecContraseniaController::class, 'showFormEmail'])->name('pass.olvidada');
+Route::post('/pass-olvidada/cod', [RecContraseniaController::class, 'enviarCod'])->name('password.enviarcod');
+Route::post('/pass-olvidada/reset-pass', [RecContraseniaController::class, 'enviarCod'])->name('password.resetPass');
 
 // Ruta a mi perfil, actualización de datos y perfil
 Route::get('MiPerfil', [MiPerfilController::class, 'showMiPerfil'])->name('MiPerfil');
