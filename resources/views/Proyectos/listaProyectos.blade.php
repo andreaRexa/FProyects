@@ -64,7 +64,7 @@
                                                 <td colspan="6">No se han encontrado proyectos</td>
                                             </tr>        
                                     @else
-                                        @if($proyectos[0]->Estado === 1)
+                                        @if($proyectos[0]->Estado !== 1)
                                             @foreach($proyectos as $proyecto)
                                                 <tr>
                                                     <td>
