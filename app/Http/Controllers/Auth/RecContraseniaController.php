@@ -27,7 +27,7 @@ class RecContraseniaController extends Controller
         $code = mt_rand(100000, 999999);
         User::updateOrCreate(
             ['Correo' => $user->Correo],
-            ['CodRecContr' => Hash::make($code)]
+            ['CodRecContr' => $code]
         );
 
         // Enviar el código de recuperación por correo electrónico
