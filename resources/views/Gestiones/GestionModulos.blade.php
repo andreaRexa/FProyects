@@ -22,7 +22,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if(empty($ciclos))
+                                @if($ciclos->count() === 0)
                                     <tr>
                                         <td colspan="4">No se han encontrado ciclos</td>
                                     </tr>        
