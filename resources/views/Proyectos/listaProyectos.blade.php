@@ -63,9 +63,9 @@
                                             <tr>
                                                 <td colspan="6">No se han encontrado proyectos</td>
                                             </tr>        
-                                    @else
-                                        @if($proyectos[0]->Estado !== 1)
-                                            @foreach($proyectos as $proyecto)
+                                    @else      
+                                        @foreach($proyectos as $proyecto)
+                                            @if($proyecto->Estado !== 1 || ( session('user.id') === optional(optional($proyecto->proyectoAlumno->first())->usuario)->IdUsuario))
                                                 <tr>
                                                     <td>
                                                         <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->FotoProyecto) }}" alt="{{ $proyecto->NombreProyecto }}" style="width: 150px; height: 150px; object-fit: cover;" class="img-fluid">
@@ -80,9 +80,9 @@
                                                     <td class="align-middle">
                                                         <a href="{{ route('proyectos.detalle', $proyecto->IdProyecto) }}" class="btn btn-primary">Ver más</a>
                                                     </td>
-                                                </tr>
-                                            @endforeach
-                                        @endif
+                                                </tr>                                                
+                                            @endif
+                                        @endforeach
                                     @endif
                                 </tbody>
                             </table>
