@@ -15,7 +15,7 @@ class RecContraseniaController extends Controller
     function enviarCod (Request $request) {
 
         $request->validate([
-            'email' => 'required|email|exists:users,email',
+            'email' => 'required|email',
         ]);
 
         $user = User::where('correo', $request->email)->first();
@@ -23,14 +23,12 @@ class RecContraseniaController extends Controller
         // Generar y guardar un código de recuperación
         $code = Str::random(6);
         User::updateOrCreate(
-            ['email' => $user->correo],
-            ['code' => Hash::make($code)]
+            ['Correo' => $user->Correo],
+            ['CodRecContr' => Hash::make($code)]
         );
 
         // Enviar el código de recuperación por correo electrónico
-        Mail::to($user->correo)->send(new ResetPasswordMail($code));
-
-        return redirect()->route('password.reset', ['email' => $user->email]);
+        Mail::to($user->Correo)->send(new ResetPasswordMail($code));
 
         return view('Auth.RecContraseña');
     }
