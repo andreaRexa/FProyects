@@ -15,21 +15,25 @@
                                 <a href="{{ route('proyectos.detalle', $proyecto->IdProyecto) }}"> <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->FotoProyecto) }}" alt="{{ $proyecto->NombreProyecto }}" class="d-block w-100" style="max-width: 500px; max-height: 300px; object-fit: cover; margin: 0 auto;"></a>
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $proyecto->NombreProyecto }}</h5>
-                                       
                                     </div>
                                 </div>
                             </div>
                         @endforeach
                     </div>
-                    <a class="carousel-control-prev" href="#photoCarousel" role="button" data-slide="prev">
+                    <a class="carousel-control-prev" href="#photoCarousel" role="button" data-slide="prev" style="color: #007bff;">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">Anterior</span>
                     </a>
-                    <a class="carousel-control-next" href="#photoCarousel" role="button" data-slide="next">
+                    <a class="carousel-control-next" href="#photoCarousel" role="button" data-slide="next" style="color: #007bff;">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">Siguiente</span>
                     </a>
                 </div>
+                <ol class="carousel-indicators mt-3">
+                    @foreach($proyectos as $index => $proyecto)
+                        <li data-target="#photoCarousel" data-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}" style="background-color: #007bff;"></li>
+                    @endforeach
+                </ol>
                 <div class="card mt-4">
                     <div class="card-body">
                         <h5 class="card-title" style="color: #333; font-size: 24px; font-weight: bold;">¿Cuál es el objetivo de FProyects?</h5>
