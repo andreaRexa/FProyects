@@ -16,7 +16,7 @@
                     <div class="carousel-inner">
                         @foreach($proyectos as $index => $proyecto)
                             <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                                <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->FotoProyecto) }}" alt="{{ $proyecto->NombreProyecto }}" class="d-block w-100" style="max-width: 500px; max-height: 300px; object-fit: cover; margin: 0 auto;">
+                                <a href="{{ route('proyectos.detalle', $proyecto->IdProyecto) }}"> <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->FotoProyecto) }}" alt="{{ $proyecto->NombreProyecto }}" class="d-block w-100" style="max-width: 500px; max-height: 300px; object-fit: cover; margin: 0 auto;"></a>
                                 <div class="carousel-caption d-none d-md-block" style="color: #fff; bottom: 20px; width: 100%; left: 0; right: 0; text-align: center;"> 
                                     <h5 style="font-size: 24px;">{{ $proyecto->NombreProyecto }}</h5>
                                 </div>
