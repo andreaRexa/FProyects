@@ -6,9 +6,10 @@ use App\Http\Controllers\Auth\CerrarSesionController;
 use App\Http\Controllers\Auth\MiPerfilController;
 use App\Http\Controllers\ProyectoController;
 use App\Http\Controllers\GestionesController;
+use App\Http\Controllers\HomeController;
 
 // Ruta principal
-Route::get('/', );
+Route::get('/', [HomeController::class, 'showHome']);
 
 // Ruta Login y logout
 Route::get('loginForm', [LoginController::class, 'showLoginForm'])->name('loginForm');
