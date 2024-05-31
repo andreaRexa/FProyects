@@ -25,6 +25,7 @@ class ProyectoAlumno extends Model
         return $this->belongsTo(User::class, 'IdUsuario', 'IdUsuario');
     }
 
+    // Relación con el modelo Proyecto
     public function proyecto()
     {
         return $this->belongsTo(Proyectos::class, 'IdProyecto', 'IdProyecto');

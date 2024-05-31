@@ -10,7 +10,7 @@ class AlumnoCiclo extends Model
     use HasFactory;
 
     protected $table = 'alumnociclo';
-    public $timestamps = false; // Si la tabla no tiene timestamps (created_at, updated_at)
+    public $timestamps = false; 
     protected $primaryKey = ['IdUsuario', 'IdCiclo'];
     public $incrementing = false;
 

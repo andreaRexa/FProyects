@@ -11,7 +11,7 @@ class Familia extends Model
 
     protected $table = 'familias';
     protected $primaryKey = 'IdFamilia';
-    public $timestamps = false; // Si la tabla no tiene timestamps (created_at, updated_at)
+    public $timestamps = false; 
 
     protected $fillable = [
         'NombreFamilia',

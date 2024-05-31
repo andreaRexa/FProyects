@@ -40,7 +40,6 @@ class User extends Authenticatable
         'NIA'
     ];
 
-    // Si no estás usando los timestamps de Laravel (created_at y updated_at), añade esto:
     const CREATED_AT = 'FechaCreacion';
     const UPDATED_AT = null;
 

@@ -45,7 +45,6 @@ class MiPerfilController extends Controller
         $fotoBlob = $user->FotoUsuario;
         $imagenURL = $fotoBlob ? 'data:image/jpeg;base64,' . base64_encode($fotoBlob) : null;
 
-        // Redireccionar o retornar la vista con la URL de la imagen actualizada
         return view('Auth.MiPerfil', ['imagenURL' => $imagenURL]);
     }
 
@@ -69,10 +68,9 @@ class MiPerfilController extends Controller
             $request->session()->put('user.apellidos', $updatedUser->Apellidos);
             $request->session()->put('user.email', $updatedUser->Correo);
     
-            // Redireccionar al usuario a una página de confirmación o a donde desees
+            
             return redirect()->route('MiPerfil')->with('success', 'Perfil actualizado correctamente.');
         } else {
-            // Manejar el caso en que no se pueda encontrar al usuario actualizado
             return redirect()->route('MiPerfil')->with('error', 'No se pudo actualizar el perfil. Inténtalo de nuevo.');
         }
     }

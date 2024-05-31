@@ -19,13 +19,13 @@ class Proyectos extends Model
         'Archivos',
         'Documentacion',
         'Estado',
-        'IdValoraracion',
         'Fecha',
         'IdCiclo',
         'FotoProyecto',
         'IdFamilia',
         'ArchivosPriv',
-        'DocumentacionPriv'
+        'DocumentacionPriv',
+        'MediaValoracion'
     ];
 
     // Relación con el modelo Ciclo
@@ -52,5 +52,10 @@ class Proyectos extends Model
         return $this->hasMany(ProyectoAlumno::class, 'IdProyecto', 'IdProyecto');
     }
 
+    // Relación con el modelo Valoracion
+    public function valoraciones()
+    {
+        return $this->hasMany(Valoracion::class, 'IdProyecto', 'IdProyecto');
+    }
     
 }

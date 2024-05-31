@@ -11,11 +11,14 @@ class Valoracion extends Model
 
     protected $table = 'valoracion';
     protected $primaryKey = 'IdValoracion';
-    public $timestamps = false; // Si la tabla no tiene timestamps (created_at, updated_at)
+    public $timestamps = false; 
 
     protected $fillable = [
         'IdUsuario',
         'Valoracion',
+        'IdProyecto',
+        'FechaVal'
+
     ];
 
     // Relación con el modelo Usuario
@@ -23,4 +26,12 @@ class Valoracion extends Model
     {
         return $this->belongsTo(User::class, 'IdUsuario', 'IdUsuario');
     }
+
+    // Relación con el modelo Proyecto
+    public function proyecto()
+    {
+        return $this->belongsTo(Proyecto::class, 'IdProyecto', 'IdProyecto');
+    }
+
+
 }

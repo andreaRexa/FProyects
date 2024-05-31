@@ -15,6 +15,7 @@ class Curso extends Model
         'Curso'
     ];
 
+    // Relación con el modelo cicloscurso
     public function ciclos()
     {
         return $this->belongsToMany(CicloCurso::class, 'IdCurso', 'IdCurso');

@@ -11,7 +11,7 @@ class Ciclo extends Model
 
     protected $table = 'ciclos';
     protected $primaryKey = 'IdCiclo';
-    public $timestamps = false; // Si la tabla no tiene timestamps (created_at, updated_at)
+    public $timestamps = false; 
 
     protected $fillable = [
         'NombreCiclo',
@@ -23,7 +23,8 @@ class Ciclo extends Model
     {
         return $this->belongsTo(Familia::class, 'IdFamilia', 'IdFamilia');
     }
-    
+
+    // Relación con el modelo ciclocurso
     public function cursos()
     {
         return $this->hasMany(CicloCurso::class, 'IdCiclo', 'IdCiclo');
