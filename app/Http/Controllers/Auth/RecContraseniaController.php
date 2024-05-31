@@ -12,7 +12,7 @@ class RecContraseniaController extends Controller
         return view('Auth.RecContraseñaEmail');
     }
 
-    function enviarCod () {
+    function enviarCod (Request $request) {
 
         $request->validate([
             'email' => 'required|email|exists:users,email',
