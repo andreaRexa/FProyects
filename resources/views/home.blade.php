@@ -15,11 +15,11 @@
         
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="data:image/jpeg;base64,{{ base64_encode($proyectos[0]->FotoProyecto) }}" alt="{{ $proyectos[0]->NombreProyecto }}" class="d-block w-100">
+                <img src="data:image/jpeg;base64,{{ base64_encode($proyectos[0]->FotoProyecto) }}" alt="{{ $proyectos[0]->NombreProyecto }}" class="d-block w-100" style="width: 250px; height: 150px; object-fit: cover;">
             </div>
             @foreach($proyectos as $proyecto)
                 <div class="carousel-item">
-                    <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->FotoProyecto) }}" alt="{{ $proyecto->NombreProyecto }}" class="d-block w-100">
+                    <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->FotoProyecto) }}" alt="{{ $proyecto->NombreProyecto }}" class="d-block w-100" style="width: 250px; height: 150px; object-fit: cover;">
                 </div>
             @endforeach
         </div>
