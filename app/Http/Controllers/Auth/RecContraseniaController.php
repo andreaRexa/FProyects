@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User; 
-use App\Http\Controllers\Auth\Str;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ResetPasswordMail;
+use Illuminate\Support\Facades\Hash;
 
 class RecContraseniaController extends Controller
 {
@@ -22,7 +24,7 @@ class RecContraseniaController extends Controller
         $user = User::where('correo', $request->email)->first();
 
         // Generar y guardar un código de recuperación
-        $code = Str::random(6);
+        $code = mt_rand(100000, 999999);
         User::updateOrCreate(
             ['Correo' => $user->Correo],
             ['CodRecContr' => Hash::make($code)]
