@@ -52,11 +52,11 @@ class RecContraseniaController extends Controller
         if (intval($request->codigo) === $User->CodRecContr) {
             // Actualizar la contraseña del usuario
             $User->password = bcrypt($request->password);
-            $User->save();
-
             // Eliminar el código de recuperación
             $User->CodRecContr = 0;
 
+
+            $User->save();
             return redirect()->route('login')->with('success', '¡Tu contraseña ha sido restablecida correctamente!');
         } else {
             return redirect()->route('password.resetPass')->withErrors(['codigo' => 'El código de recuperación es inválido. Por favor, inténtalo de nuevo.']);
