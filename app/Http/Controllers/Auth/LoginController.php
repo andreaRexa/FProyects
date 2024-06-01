@@ -79,17 +79,19 @@ class LoginController extends Controller
         }
 
         // Crear el usuario
-        $user = User::create([
-            'Nombre' => $request->Nombre,
-            'Apellidos' => $request->Apellidos,
-            'password' => bcrypt($request->password),
-            'FotoUsuario' => $fotoUsuario,
-            'TipoUsuario' => 1,
-            'CodRecContr' => 0,
-            'NIA' => 0,
-            'FechaCreacion' => Carbon::now(),
-            'Correo' => $request->Correo
-        ]);
+        $maxId = User::max('IdCiclo');
+        $user = new User();
+        $user->IdUsuario = $maxId + 1;
+        $user->Nombre = $request->Nombre;
+        $user->Apellidos = $request->Apellidos;
+        $user->password = bcrypt($request->password);
+        $user->FotoUsuario = $fotoUsuario;
+        $user->TipoUsuario = 1;
+        $user->CodRecContr = 0;
+        $user->NIA = 0;
+        $user->FechaCreacion = Carbon::now();
+        $user->Correo = $request->Correo;
+
 
         // Redireccionar con un mensaje de éxito
         return redirect()->route('loginForm')->with('success', 'Registro exitoso. Por favor, inicia sesión.');
