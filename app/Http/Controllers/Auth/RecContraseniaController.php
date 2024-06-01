@@ -57,7 +57,7 @@ class RecContraseniaController extends Controller
 
 
             $User->save();
-            return redirect()->route('login')->with('success', '¡Tu contraseña ha sido restablecida correctamente!');
+            return redirect()->route('loginForm')->with('success', '¡Tu contraseña ha sido restablecida correctamente!');
         } else {
             return redirect()->route('password.resetPass')->withErrors(['codigo' => 'El código de recuperación es inválido. Por favor, inténtalo de nuevo.']);
         }
