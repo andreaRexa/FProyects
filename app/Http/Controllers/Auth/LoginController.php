@@ -79,7 +79,7 @@ class LoginController extends Controller
         }
 
         // Crear el usuario
-        $maxId = User::max('IdCiclo');
+        $maxId = User::max('IdUsuario');
         $user = new User();
         $user->IdUsuario = $maxId + 1;
         $user->Nombre = $request->Nombre;
