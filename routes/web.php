@@ -17,7 +17,7 @@ Route::get('loginForm', [LoginController::class, 'showLoginForm'])->name('loginF
 Route::post('login', [LoginController::class, 'login'])->name('login');
 Route::get('logout', [CerrarSesionController::class, 'cerrarSession'])->name('logout');
 Route::get('registroForm', [LoginController::class, 'registroForm'])->name('registroForm');
-Route::get('registro', [LoginController::class, 'registro'])->name('registro');
+Route::post('registro', [LoginController::class, 'registro'])->name('registro');
 
 //Ruta relacionada con la recuperacion de contraseña
 Route::get('/pass-olvidada', [RecContraseniaController::class, 'showFormEmail'])->name('pass.olvidada');

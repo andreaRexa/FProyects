@@ -66,7 +66,7 @@ class LoginController extends Controller
         if ($request->hasFile('FotoUsuario')) {
             $fotoUsuario = file_get_contents($request->file('FotoUsuario'));
         } else {
-            $fotoUsuario = file_get_contents('/storage/imagenes/userdefecto.jpg');
+            $fotoUsuario = file_get_contents('/storage/imagenes/userdefecto.png');
         }
 
         // Crear el usuario
