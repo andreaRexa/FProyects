@@ -92,7 +92,7 @@ class LoginController extends Controller
         $user->FechaCreacion = Carbon::now();
         $user->Correo = $request->Correo;
 
-
+        $user->save();
         // Redireccionar con un mensaje de éxito
         return redirect()->route('loginForm')->with('success', 'Registro exitoso. Por favor, inicia sesión.');
     }
