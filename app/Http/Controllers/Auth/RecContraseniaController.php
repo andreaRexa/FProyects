@@ -47,7 +47,7 @@ class RecContraseniaController extends Controller
         $User = User::where('Correo', $request->email)->first();
 
         // Verificar si el código de recuperación es válido
-        if ($User && $request->codigo === $User->codigo) {
+        if ($request->codigo === $User->codigo) {
             // Actualizar la contraseña del usuario
             $User->password = Hash::make($request->password);
             $user->save();
@@ -57,7 +57,7 @@ class RecContraseniaController extends Controller
 
             return redirect()->route('login')->with('success', '¡Tu contraseña ha sido restablecida correctamente!');
         } else {
-            return back()->withErrors(['codigo' => 'El código de recuperación es inválido. Por favor, inténtalo de nuevo.']);
+            return redirect()->route('password.resetPass')->withErrors(['codigo' => 'El código de recuperación es inválido. Por favor, inténtalo de nuevo.']);
         }
     } 
 }
