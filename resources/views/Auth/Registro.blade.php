@@ -29,7 +29,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="FotoUsuario">Foto de Usuario:</label>
-                                <input type="file" class="form-control-file" id="FotoUsuario" name="FotoUsuario">
+                                <input type="file" class="form-control-file" id="FotoUsuario" name="FotoUsuario" accept=".jpg, .jpeg, .png">
                             </div>
                             <div class="form-group">
                                 <label for="Correo">Correo:</label>

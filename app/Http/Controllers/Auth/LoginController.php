@@ -57,11 +57,10 @@ class LoginController extends Controller
             'Nombre' => 'required|string|max:255',
             'Apellidos' => 'required|string|max:255',
             'password' => 'required|string|min:8|confirmed',
-            'FotoUsuario' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'Correo' => 'required|string|email|max:255|unique:users,email',
-            'NIA' => 'required|numeric|unique:users,nia',
+            'FotoUsuario' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'Correo' => 'required|string|email|max:255|unique:users,email'
         ]);
-
+        dd($request);
         // Manejar la carga de la foto de usuario
         if ($request->hasFile('FotoUsuario')) {
             $fotoUsuario = file_get_contents($request->file('FotoUsuario'));
