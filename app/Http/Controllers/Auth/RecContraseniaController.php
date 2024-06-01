@@ -38,7 +38,7 @@ class RecContraseniaController extends Controller
 
     public function resetPass(Request $request)
     {
-        dd($request);
+        //dd($request);
         $request->validate([
             'email' => 'required|email',
             'codigo' => 'required|numeric',
