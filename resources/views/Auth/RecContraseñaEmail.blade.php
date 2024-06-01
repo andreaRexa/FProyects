@@ -19,7 +19,7 @@
                     </div>
                 @endif
                 <!-- Formulario para enviar correo electrónico con el código de recuperación -->
-                <form action="{{ route('password.enviarcod') }}" method="POST" id="FormCodigo">
+                <form action="{{ route('password.enviarcod') }}" method="GET" id="FormCodigo">
                     @csrf
                     <div class="form-group">
                         <label for="email">Correo electrónico:</label>
