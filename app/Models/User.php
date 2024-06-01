@@ -33,7 +33,6 @@ class User extends Authenticatable
         'password',
         'CodRecContr',
         'FotoUsuario',
-        'FechaCodRecContr',
         'FechaCreacion',
         'Correo',
         'TipoUsuario',

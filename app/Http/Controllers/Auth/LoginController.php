@@ -50,4 +50,42 @@ class LoginController extends Controller
             return back()->withErrors(['Correo' => 'Credenciales inválidas'])->withInput();
         }
     }
+    public function registro(Request $request)
+    {
+        // Validar la solicitud
+        $request->validate([
+            'Nombre' => 'required|string|max:255',
+            'Apellidos' => 'required|string|max:255',
+            'password' => 'required|string|min:8|confirmed',
+            'FotoUsuario' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'Correo' => 'required|string|email|max:255|unique:users,email',
+            'NIA' => 'required|numeric|unique:users,nia',
+        ]);
+
+        // Manejar la carga de la foto de usuario
+        if ($request->hasFile('FotoUsuario')) {
+            $fotoUsuario = file_get_contents($request->file('FotoUsuario'));
+        } else {
+            $fotoUsuario = file_get_contents('/storage/imagenes/userdefecto.jpg');
+        }
+
+        // Crear el usuario
+        $user = User::create([
+            'nombre' => $request->Nombre,
+            'apellidos' => $request->Apellidos,
+            'password' => Hash::make($request->password),
+            'foto_usuario' => $fotoUsuario,
+            'TipoUsuario' => 1,
+            'email' => $request->Correo
+        ]);
+
+        // Redireccionar con un mensaje de éxito
+        return redirect()->route('loginForm')->with('success', 'Registro exitoso. Por favor, inicia sesión.');
+
+    }
+
+    public function registroForm(Request $request)
+    {
+        return view('Auth.Registro');
+    }
 }

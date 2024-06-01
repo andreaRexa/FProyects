@@ -18,7 +18,11 @@
                         </ul>
                     </div>
                 @endif
-
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
 
@@ -39,8 +43,5 @@
                 <div class="form-group">
                     <a href="{{ route('pass.olvidada') }}">¿Olvidaste tu contraseña?</a>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
+                <div class="form-group">
+                    <a href
