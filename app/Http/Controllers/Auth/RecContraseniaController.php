@@ -46,7 +46,7 @@ class RecContraseniaController extends Controller
         ]);
 
         $User = User::where('Correo', $request->email)->first();
-
+        dd($request->codigo === $User->codigo);
         // Verificar si el código de recuperación es válido
         
         if ($request->codigo === $User->codigo) {
