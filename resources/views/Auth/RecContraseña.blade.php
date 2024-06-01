@@ -22,8 +22,8 @@
                     @csrf
                     <input type="hidden" name="email" value="{{ $email }}">
                     <div class="form-group">
-                        <label for="code">Código de recuperación:</label>
-                        <input type="text" class="form-control" id="code" name="code" required>
+                        <label for="codigo">Código de recuperación:</label>
+                        <input type="text" class="form-control" id="codigo" name="codigo" required>
                     </div>
                     <div class="form-group">
                         <label for="password">Nueva contraseña:</label>

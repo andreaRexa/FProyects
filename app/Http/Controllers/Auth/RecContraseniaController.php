@@ -36,5 +36,28 @@ class RecContraseniaController extends Controller
         return view('Auth.RecContraseña',['email' => $user->Correo]);
     }
 
-    
+    public function resetPass(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'codigo' => 'required|numeric',
+            'password' => 'required|min:8|confirmed',
+        ]);
+
+        $User = User::where('Correo', $request->email)->first();
+
+        // Verificar si el código de recuperación es válido
+        if ($User && $request->codigo === $User->codigo) {
+            // Actualizar la contraseña del usuario
+            $User->password = Hash::make($request->password);
+            $user->save();
+
+            // Eliminar el código de recuperación
+            $User->CodRecContr->delete();
+
+            return redirect()->route('login')->with('success', '¡Tu contraseña ha sido restablecida correctamente!');
+        } else {
+            return back()->withErrors(['codigo' => 'El código de recuperación es inválido. Por favor, inténtalo de nuevo.']);
+        }
+    } 
 }
