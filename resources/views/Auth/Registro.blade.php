@@ -29,6 +29,10 @@
                                 <input type="text" class="form-control" id="Apellidos" name="Apellidos" required>
                             </div>
                             <div class="form-group">
+                                <label for="Correo">Correo:</label>
+                                <input type="email" class="form-control" id="Correo" name="Correo" required>
+                            </div>
+                            <div class="form-group">
                                 <label for="password">Contraseña:</label>
                                 <input type="password" class="form-control" id="password" name="password" required>
                             </div>
@@ -40,10 +44,7 @@
                                 <label for="FotoUsuario">Foto de Usuario:</label>
                                 <input type="file" class="form-control-file" id="FotoUsuario" name="FotoUsuario" accept=".jpg, .jpeg, .png">
                             </div>
-                            <div class="form-group">
-                                <label for="Correo">Correo:</label>
-                                <input type="email" class="form-control" id="Correo" name="Correo" required>
-                            </div>
+
                             <button type="submit" class="btn btn-primary">Registrarse</button>
                         </form>
                     </div>
