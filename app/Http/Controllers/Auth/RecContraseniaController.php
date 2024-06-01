@@ -47,6 +47,7 @@ class RecContraseniaController extends Controller
         $User = User::where('Correo', $request->email)->first();
 
         // Verificar si el código de recuperación es válido
+        dd($request);
         if ($request->codigo === $User->codigo) {
             // Actualizar la contraseña del usuario
             $User->password = Hash::make($request->password);

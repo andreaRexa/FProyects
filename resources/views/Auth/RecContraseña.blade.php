@@ -30,8 +30,8 @@
                         <input type="password" class="form-control" id="password" name="password" required>
                     </div>
                     <div class="form-group">
-                        <label for="password_confirmation">Confirmar contraseña:</label>
-                        <input type="password" class="form-control" id="password_confirmation" name="password_conf" required>
+                        <label for="password_conf">Confirmar contraseña:</label>
+                        <input type="password" class="form-control" id="password_conf" name="password_conf" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Restablecer contraseña</button>
                 </form>
