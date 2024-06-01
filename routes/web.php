@@ -20,7 +20,7 @@ Route::get('logout', [CerrarSesionController::class, 'cerrarSession'])->name('lo
 //Ruta relacionada con la recuperacion de contraseña
 Route::get('/pass-olvidada', [RecContraseniaController::class, 'showFormEmail'])->name('pass.olvidada');
 Route::get('/pass-olvidada/cod', [RecContraseniaController::class, 'enviarCod'])->name('password.enviarcod');
-Route::post('/pass-olvidada/reset-pass', [RecContraseniaController::class, 'resetPass'])->name('password.resetPass');
+Route::any('/pass-olvidada/reset-pass', [RecContraseniaController::class, 'resetPass'])->name('password.resetPass');
 
 
 // Ruta a mi perfil, actualización de datos y perfil
