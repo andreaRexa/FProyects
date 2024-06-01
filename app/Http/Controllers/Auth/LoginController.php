@@ -50,18 +50,25 @@ class LoginController extends Controller
             return back()->withErrors(['Correo' => 'Credenciales inválidas'])->withInput();
         }
     }
+
     public function registro(Request $request)
     {
+        // Verificar si el correo electrónico ya existe en la base de datos
+        $existingUser = User::where('Correo', $request->Correo)->first();
+
+        if ($existingUser) {
+            // Si el correo electrónico ya existe, redirige de vuelta al formulario de registro con un mensaje de error
+            return redirect()->back()->withErrors(['Correo' => 'El correo electrónico ya está en uso.'])->withInput();
+        }
+
         // Validar la solicitud
         $request->validate([
             'Nombre' => 'required|string|max:255',
             'Apellidos' => 'required|string|max:255',
             'password' => 'required|string|min:8|confirmed',
             'FotoUsuario' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'Correo' => 'required|string|email|max:255|unique:users,email'
+            'Correo' => 'required|string|email|max:255',
         ]);
-
-        //dd($request);
 
         // Manejar la carga de la foto de usuario
         if ($request->hasFile('FotoUsuario')) {
@@ -74,7 +81,7 @@ class LoginController extends Controller
         $user = User::create([
             'Nombre' => $request->Nombre,
             'Apellidos' => $request->Apellidos,
-            'password' => Hash::make($request->password),
+            'password' => bcrypt($request->password),
             'FotoUsuario' => $fotoUsuario,
             'TipoUsuario' => 1,
             'Correo' => $request->Correo
@@ -82,7 +89,6 @@ class LoginController extends Controller
 
         // Redireccionar con un mensaje de éxito
         return redirect()->route('loginForm')->with('success', 'Registro exitoso. Por favor, inicia sesión.');
-
     }
 
     public function registroForm(Request $request)
