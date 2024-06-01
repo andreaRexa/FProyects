@@ -14,7 +14,7 @@ Route::get('/', [HomeController::class, 'showHome']);
 
 // Ruta Login y logout
 Route::get('loginForm', [LoginController::class, 'showLoginForm'])->name('loginForm');
-Route::post('login', [LoginController::class, 'login'])->name('login');
+Route::any('login', [LoginController::class, 'login'])->name('login');
 Route::get('logout', [CerrarSesionController::class, 'cerrarSession'])->name('logout');
 
 //Ruta relacionada con la recuperacion de contraseña
