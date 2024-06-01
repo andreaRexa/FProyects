@@ -105,7 +105,7 @@ class ProyectoController extends Controller
 
         // Construir la ruta completa del archivo
         $rutaCompleta = 'ArchivosPublicos/' . str_replace(' ', '_', $proyecto->NombreProyecto) . '/' . $proyecto->Archivos;
-        dd(Storage::disk('s3')->get($rutaCompleta));
+        dd(Storage::disk('s3')->get($rutaCompleta),$rutaCompleta);
         // Descargar el archivo desde S3
         return Storage::disk('s3')->download($rutaCompleta);
     }
