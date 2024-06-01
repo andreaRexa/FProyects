@@ -23,7 +23,7 @@
                     <input type="hidden" name="email" value="{{ $email }}">
                     <div class="form-group">
                         <label for="codigo">Código de recuperación:</label>
-                        <input type="text" class="form-control" id="codigo" name="codigo" required>
+                        <input type="number" class="form-control" id="codigo" name="codigo" required>
                     </div>
                     <div class="form-group">
                         <label for="password">Nueva contraseña:</label>
