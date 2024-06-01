@@ -55,7 +55,7 @@ class RecContraseniaController extends Controller
             $User->save();
 
             // Eliminar el código de recuperación
-            $User->CodRecContr->delete();
+            $User->CodRecContr = 0;
 
             return redirect()->route('login')->with('success', '¡Tu contraseña ha sido restablecida correctamente!');
         } else {
