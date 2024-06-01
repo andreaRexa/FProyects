@@ -46,12 +46,12 @@ class RecContraseniaController extends Controller
         ]);
 
         $User = User::where('Correo', $request->email)->first();
-        dd($request->codigo === $User->codigo);
+        dd($request->codigo, $User->CodRecContr, gettype($request->codigo), gettype($User->codigo),$request->codigo === $User->CodRecContr);
         // Verificar si el código de recuperación es válido
         
-        if ($request->codigo === $User->codigo) {
+        if ($request->codigo === $User->CodRecContr) {
             // Actualizar la contraseña del usuario
-            $User->password = Hash::make($request->password);
+            $User->password = bcrypt($request->password);
             $User->save();
 
             // Eliminar el código de recuperación
