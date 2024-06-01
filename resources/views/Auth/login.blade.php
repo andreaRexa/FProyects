@@ -44,4 +44,10 @@
                     <a href="{{ route('pass.olvidada') }}">¿Olvidaste tu contraseña?</a>
                 </div>
                 <div class="form-group">
-                    <a href
+                    <a href="{{ route('registroForm') }}">¿Aun no tienes cuenta?</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
