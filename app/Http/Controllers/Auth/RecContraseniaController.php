@@ -46,10 +46,10 @@ class RecContraseniaController extends Controller
         ]);
 
         $User = User::where('Correo', $request->email)->first();
-        dd($request->codigo,intval($request->codigo), $User->CodRecContr, gettype($request->codigo), gettype($User->CodRecContr),intval($request->codigo) === $User->CodRecContr);
+        //dd($request->codigo,intval($request->codigo), $User->CodRecContr, gettype($request->codigo), gettype($User->CodRecContr),intval($request->codigo) === $User->CodRecContr);
         // Verificar si el código de recuperación es válido
         
-        if ($request->codigo === $User->CodRecContr) {
+        if (intval($request->codigo) === $User->CodRecContr) {
             // Actualizar la contraseña del usuario
             $User->password = bcrypt($request->password);
             $User->save();
