@@ -60,7 +60,9 @@ class LoginController extends Controller
             'FotoUsuario' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'Correo' => 'required|string|email|max:255|unique:users,email'
         ]);
-        dd($request);
+
+        //dd($request);
+
         // Manejar la carga de la foto de usuario
         if ($request->hasFile('FotoUsuario')) {
             $fotoUsuario = file_get_contents($request->file('FotoUsuario'));
@@ -70,12 +72,12 @@ class LoginController extends Controller
 
         // Crear el usuario
         $user = User::create([
-            'nombre' => $request->Nombre,
-            'apellidos' => $request->Apellidos,
+            'Nombre' => $request->Nombre,
+            'Apellidos' => $request->Apellidos,
             'password' => Hash::make($request->password),
-            'foto_usuario' => $fotoUsuario,
+            'FotoUsuario' => $fotoUsuario,
             'TipoUsuario' => 1,
-            'email' => $request->Correo
+            'Correo' => $request->Correo
         ]);
 
         // Redireccionar con un mensaje de éxito
