@@ -121,9 +121,9 @@
         }
 
         
-        var usuarios = @json($usuarios);
+        var usuarios = {!! json_encode($usuarios) !!};
         $(document).ready(function() {
-            $('#btnFromSol').click(function() {
+            $('#btnFromSol').click(function(e) {
                 e.preventDefault();             
                 var indice = $(this).closest('tr').index();
                 var usuario = usuarios[indice];
