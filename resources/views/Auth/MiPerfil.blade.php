@@ -64,7 +64,7 @@
                 </div>
             </div>
             <div class="text-right mt-4">
-                <button type="button" class="btn btn-primary" onclick="mostrarFormularioMatricula()">Mostrar Formulario de Matrícula</button>
+                <button type="button" class="btn btn-primary" onclick="mostrarFormularioMatricula()">Matriculacion</button>
             </div>
         </div>
     </div>
@@ -86,13 +86,17 @@
                     </select>  
                 </div>     
                 <div class="form-group">
-                <label for="selectModulos">Modulos</label>
-                    <select class="form-control" id="selectModulos">
-                    </select>
-                    <div class="form-group">
-                <label for="selectCursos">Cursos</label>      
+                    <label for="selectModulos">Modulos</label>
+                        <select class="form-control" id="selectModulos">
+                        </select>
+                </div>    
+                <div class="form-group">
+                    <label for="selectCursos">Cursos</label>      
                     <select class="form-control" id="selectCursos">
                     </select>   
+                </div>
+                <div class="form-group">
+                    <label for="passFamilia">Contraseña familia</label> 
                 </div>
                 <div class="text-right">
                     <button type="submit" class="btn btn-primary">Matricularse</button>
@@ -138,6 +142,31 @@
 
     function mostrarFormularioMatricula() {
         $('#formularioMatricula').css('display', 'block');
+    }
+
+    $('#selectFamilia').change(function() {
+        cargarCiclos();
+    });
+
+    function cargarCiclos() {
+        var idFamiliaSeleccionada = $('#selectFamilia').val(); // Obtener el valor de la familia seleccionada
+        $('#selectModulos').empty(); // Limpiar los ciclos antes de cargar los nuevos
+
+        // Iterar sobre todos los ciclos disponibles
+        @foreach($ciclos as $ciclo)
+            // Verificar si el ciclo pertenece a la familia seleccionada
+            @if($ciclo->idFamilia == " + idFamiliaSeleccionada + ")
+                // Agregar el ciclo al select
+                $('#selectModulos').append($('<option>', {
+                    value: '{{ $ciclo->IdCiclo }}',
+                    text: '{{ $ciclo->NombreCiclo }}'
+                }));
+            @endif
+        @endforeach
+    }
+    
+    function cargarCursos() {
+
     }
 </script>
 @endsection
