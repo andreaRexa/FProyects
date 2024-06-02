@@ -145,7 +145,7 @@ class GestionesController extends Controller
                         )
                         ->where('familias.IdAdministrador', $IdAdmin)
                         ->get();
-        return $usuariosForm;
+        return response()->json($usuariosForm);
     }
 
     public function eliminarSol(Request $request){

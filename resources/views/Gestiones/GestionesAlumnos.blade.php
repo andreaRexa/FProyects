@@ -125,7 +125,7 @@
                 e.preventDefault();             
                 var indice = $(this).closest('tr').index();
                 $.ajax({
-                    url: '{{ route("getUsuario") }}', // Ruta a tu controlador para obtener el usuario
+                    url: '{{ route("getUsuario") }}',
                     type: 'GET',
                     dataType: 'json',
                     success: function(data) {
