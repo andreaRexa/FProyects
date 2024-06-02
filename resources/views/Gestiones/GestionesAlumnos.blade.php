@@ -79,9 +79,9 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
-                                <input type="text" id="usuId" name="usuId" class="form-control" readonly>
-                                <input type="text" id="cicloId" name="cicloId" class="form-control" readonly>
-                                <input type="text" id="famId" name="famId" class="form-control" readonly>
+                                <input type="hidden" id="usuId" name="usuId" class="form-control" readonly>
+                                <input type="hidden" id="cicloId" name="cicloId" class="form-control" readonly>
+                                <input type="hidden" id="famId" name="famId" class="form-control" readonly>
                                 <div class="mb-3">
                                     <label for="nombreIn" class="form-label">Nombre:</label>
                                     <input type="text" id="nombreIn" name="nombreIn" class="form-control" readonly>

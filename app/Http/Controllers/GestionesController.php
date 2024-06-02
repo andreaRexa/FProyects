@@ -136,4 +136,28 @@ class GestionesController extends Controller
         
         return redirect()->intended('gestionesAlumnos');
     }
+
+    public function aprobarSolicitud(Request $request){
+        $user = User::findOrFail($request->usuId);
+
+        if(!$user->TipoUsuario !==2){
+            $user->TipoUsuario=2;
+            $user->NIA=$request->nia;
+            $user->save();
+        }
+
+        $familiaAlumno = new FamiliaAlumno();
+        $familiaAlumno->IdFamilia=$request->famId;
+        $familiaAlumno->IdUsuario=$request->usuId;
+        $familiaAlumno->save();
+
+        $alumnoCiclo = new AlumnoCiclo();
+        $alumnoCiclo->IdUsuario=$request->usuId;
+        $alumnoCiclo->IdCiclo=$request->cicloId;
+        $alumnoCiclo->FechaCurso=$request->curso;
+        $alumnoCiclo->save();
+        
+        return redirect()->intended('gestionesAlumnos');
+
+    }
 }
