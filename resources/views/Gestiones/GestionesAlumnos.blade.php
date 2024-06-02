@@ -49,6 +49,7 @@
                                     <td>{{ $usuario->Correo }}</td>
                                     <td>
                                         <button class="btn btn-sm btn-success" id = "btnFromSol">✔️</button>
+                                        <input type="hidden" name="IdUsu" value="{{ $usuario->IdUsuario }}">
                                         <form action="{{ route('eliminarsol') }}" method="POST" style="display:inline;">
                                             @csrf
                                             <input type="hidden" name="IdSolicitud" value="{{ $usuario->IdSolicitud }}">
@@ -68,36 +69,38 @@
                     <form action="{{ route('aprobarSolicitud') }}" method="POST">
                         @csrf
                         <div class="row">
-                            <div class="col-md-4">
-                                <img src="" id="foto" class="img-fluid rounded" style="width: 100px; height: 100px;">
-                            </div>                           
-                            <div class="col-md-8">                           
-                                <div class="mb-3">
-                                    <label for="nombre" class="form-label">Nombre:</label>
-                                    <input type="text" id="nombre" name="nombre" class="form-control" readonly>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="apellidos" class="form-label">Apellidos:</label>
-                                    <input type="text" id="apellidos" name="apellidos" class="form-control" readonly>
+                            @foreach($usuarios as $usuario)
+                                <div class="col-md-4">
+                                    <img src="" id="foto" class="img-fluid rounded" style="width: 100px; height: 100px;">
+                                </div>                           
+                                <div class="col-md-8">                           
+                                    <div class="mb-3">
+                                        <label for="nombre" class="form-label">Nombre:</label>
+                                        <input type="text" id="nombre" name="nombre" class="form-control" readonly>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="apellidos" class="form-label">Apellidos:</label>
+                                        <input type="text" id="apellidos" name="apellidos" class="form-control" readonly>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="correo" class="form-label">Correo:</label>
-                            <input type="email" id="correo" name="correo" class="form-control" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label for="ciclo" class="form-label">Ciclo:</label>
-                            <input type="text" id="ciclo" name="ciclo" class="form-control" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label for="curso" class="form-label">Curso:</label>
-                            <input type="text" id="curso" name="curso" class="form-control" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label for="nia" class="form-label">NIA:</label>
-                            <input type="text" id="nia" name="nia" class="form-control" required>
-                        </div>
+                            <div class="mb-3">
+                                <label for="correo" class="form-label">Correo:</label>
+                                <input type="email" id="correo" name="correo" class="form-control" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="ciclo" class="form-label">Ciclo:</label>
+                                <input type="text" id="ciclo" name="ciclo" class="form-control" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="curso" class="form-label">Curso:</label>
+                                <input type="text" id="curso" name="curso" class="form-control" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="nia" class="form-label">NIA:</label>
+                                <input type="text" id="nia" name="nia" class="form-control" required>
+                            </div>
+                            @endforeach
                         <button type="submit" class="btn btn-primary">Enviar</button>
                     </form>
                 </div>
@@ -107,36 +110,28 @@
 </div>
 
 <script>
-        function mostrarFormulario(usuario) {
-            // Llenar los campos del formulario con la información del usuario
-            $('#foto').attr('src', 'data:image/jpeg;base64,' + usuario.FotoUsuario);
-            $('#nombre').val(usuario.Nombre);
-            $('#apellidos').val(usuario.Apellidos);
-            $('#correo').val(usuario.Correo);
-            $('#ciclo').val(usuario.Nombreciclo);
-            $('#curso').val(usuario.Curso);
-
-            // Mostrar el formulario
-            $('#formularioTarjeta').show();
-        }
+               @foreach($cursosDisponibles as $curso)    
+                $('#cursosDisponibles').append($('<option>', {
+                    value: '{{ $curso->IdCurso }}',
+                    text: '{{ $curso->Curso }}'
+                }));      
+            @endforeach
 
         $(document).ready(function() {
-            $('#btnFromSol').click(function(e) {
-                e.preventDefault();             
-                var indice = $(this).closest('tr').index();
-                $.ajax({
-                    url: '{{ route("getUsuario") }}',
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function(data) {
-                        var usuario = data[indice];
-                        mostrarFormulario(usuario);
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(error);
+            $('#btnFromSol').click(function(e) { 
+                var IdUsu = $('#IdUsu').val();
+                @foreach($usuarios as $usuario) {
+                    if(IdUsu ==='{{ $usuario->IdUsuario }}')       
+                        $('#foto').attr('src', 'data:image/jpeg;base64,' + '{{ $usuario->FotoUsuario }}');
+                        $('#nombre').val('{{ $usuario->Nombre }}');
+                        $('#apellidos').val('{{ $usuario->Apellidos }}');
+                        $('#correo').val('{{ $usuario->Correo }}');
+                        $('#ciclo').val('{{ $usuario->Nombreciclo }}');
+                        $('#curso').val('{{ $usuario->Curso }}');
                     }
-                });
-            });
+                @endforeach
+                $('#formularioTarjeta').show();mostrarFormulario(usuario);
+            });  
 
             $('#cancelar').click(function() {
                 $('#formularioAprobar').hide();

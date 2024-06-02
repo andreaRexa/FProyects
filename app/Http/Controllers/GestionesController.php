@@ -122,35 +122,6 @@ class GestionesController extends Controller
         return view('Gestiones.GestionesAlumnos', compact('alumnos','usuarios'));
 
     }
-    
-    public function getUsuarios(Request $request){
-        $userData = $request->session()->get('user');
-        $IdAdmin = $userData['id'];
-        $usuariosForm = User::join('solAlumnosPendientes', 'usuarios.IdUsuario', '=', 'solAlumnosPendientes.IdUsuario')
-                        ->join('ciclos', 'ciclos.IdCiclo', '=', 'solAlumnosPendientes.IdCiclo')
-                        ->join('cursos', 'cursos.IdCurso', '=', 'solAlumnosPendientes.IdCurso')
-                        ->join('familias', 'familias.IdFamilia', '=', 'solAlumnosPendientes.IdFamilia')
-                        ->select(
-                            'usuarios.FotoUsuario', 
-                            'usuarios.Apellidos', 
-                            'usuarios.Nombre', 
-                            'usuarios.Correo', 
-                            'usuarios.IdUsuario', 
-                            'familias.IdFamilia', 
-                            'ciclos.IdCiclo', 
-                            'ciclos.Nombreciclo', 
-                            'cursos.IdCurso', 
-                            'solAlumnosPendientes.IdSolicitud', 
-                            'cursos.Curso'
-                        )
-                        ->where('familias.IdAdministrador', $IdAdmin)
-                        ->get();
-                        $usuariosFormJson = $usuariosForm->map(function ($usuario) {
-                            return $usuario->toArray();
-                        });
-                    
-                        return new JsonResponse($usuariosFormJson);
-    }
 
     public function eliminarSol(Request $request){
         // Obtener los IDs de los elementos a eliminar desde la solicitud
