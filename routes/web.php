@@ -50,6 +50,6 @@ Route::put('/modulos/editar', [GestionesController::class, 'nuevoEditarModulo'])
 //Alumnos
 Route::get('gestionesAlumnos', [GestionesController::class, 'showListadoAlumnos'])->name('gestionesAlumnos');
 Route::post('gestionesAlumnos/eliminarsol', [GestionesController::class, 'eliminarSol'])->name('eliminarsol');
-Route::post('gestionesAlumnos/getUsuario', [GestionesController::class, 'getUsuarios'])->name('getUsuario');
+Route::get('gestionesAlumnos/getUsuario', [GestionesController::class, 'getUsuarios'])->name('getUsuario');
 Route::post('gestionesAlumnos/aprobarSolicitud', [GestionesController::class, 'aprobarSolicitud'])->name('aprobarSolicitud');
 
