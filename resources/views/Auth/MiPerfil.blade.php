@@ -107,66 +107,69 @@
 </div>
 
 <script>
-    function habilitarEdicion() {
-        $('#nombre').prop('disabled', false);
-        $('#apellidos').prop('disabled', false);
-        $('#correo').prop('disabled', false);
+    $(document).ready(function() {
+        function habilitarEdicion() {
+            $('#nombre').prop('disabled', false);
+            $('#apellidos').prop('disabled', false);
+            $('#correo').prop('disabled', false);
 
-        // Mostrar botones de "Actualizar" y "Cancelar"
-        $('#actualizar').css('display', 'inline-block');
-        $('#cancelar').css('display', 'inline-block');
+            // Mostrar botones de "Actualizar" y "Cancelar"
+            $('#actualizar').css('display', 'inline-block');
+            $('#cancelar').css('display', 'inline-block');
 
-        // Ocultar botón de "Editar datos"
-        $('#editar').css('display', 'none');
-    }
-
-    function cancelarEdicion() {
-        // Deshabilitar los campos y restablecer sus valores
-        $('#nombre').val("{{ session('user.nombre') }}").prop('disabled', true);
-        $('#apellidos').val("{{ session('user.apellidos') }}").prop('disabled', true);
-        $('#correo').val("{{ session('user.email') }}").prop('disabled', true);
-
-        // Ocultar botones de "Actualizar" y "Cancelar"
-        $('#actualizar').css('display', 'none');
-        $('#cancelar').css('display', 'none');
-
-        // Mostrar botón de "Editar datos"
-        $('#editar').css('display', 'inline-block');
-    }
-
-    function confirmarActualizacion() {
-        if (confirm('¿Estás seguro de que deseas actualizar tus datos?')) {
-            $('#formularioupdate').submit(); // Enviar el formulario si se confirma la actualización
+            // Ocultar botón de "Editar datos"
+            $('#editar').css('display', 'none');
         }
-    }
 
-    function mostrarFormularioMatricula() {
-        $('#formularioMatricula').css('display', 'block');
-    }
+        function cancelarEdicion() {
+            // Deshabilitar los campos y restablecer sus valores
+            $('#nombre').val("{{ session('user.nombre') }}").prop('disabled', true);
+            $('#apellidos').val("{{ session('user.apellidos') }}").prop('disabled', true);
+            $('#correo').val("{{ session('user.email') }}").prop('disabled', true);
 
-    $('#selectFamilia').change(function() {
-        cargarCiclos();
-    });
+            // Ocultar botones de "Actualizar" y "Cancelar"
+            $('#actualizar').css('display', 'none');
+            $('#cancelar').css('display', 'none');
 
-    function cargarCiclos() {
-        var idFamiliaSeleccionada = $('#selectFamilia').val(); // Obtener el valor de la familia seleccionada
-        $('#selectModulos').empty(); // Limpiar los ciclos antes de cargar los nuevos
+            // Mostrar botón de "Editar datos"
+            $('#editar').css('display', 'inline-block');
+        }
 
-        // Iterar sobre todos los ciclos disponibles
-        @foreach($ciclos as $ciclo)
-            // Verificar si el ciclo pertenece a la familia seleccionada
-            @if($ciclo->idFamilia == " + idFamiliaSeleccionada + ")
-                // Agregar el ciclo al select
-                $('#selectModulos').append($('<option>', {
-                    value: '{{ $ciclo->IdCiclo }}',
-                    text: '{{ $ciclo->NombreCiclo }}'
-                }));
-            @endif
-        @endforeach
-    }
-    
-    function cargarCursos() {
+        function confirmarActualizacion() {
+            if (confirm('¿Estás seguro de que deseas actualizar tus datos?')) {
+                $('#formularioupdate').submit(); // Enviar el formulario si se confirma la actualización
+            }
+        }
 
+        function mostrarFormularioMatricula() {
+            $('#formularioMatricula').css('display', 'block');
+        }
+
+        $('#selectFamilia').change(function() {
+            cargarCiclos();
+        });
+
+        function cargarCiclos() {
+            var idFamiliaSeleccionada = $('#selectFamilia').val(); // Obtener el valor de la familia seleccionada
+            console.log(idFamiliaSeleccionada);
+            $('#selectModulos').empty(); // Limpiar los ciclos antes de cargar los nuevos
+
+            // Iterar sobre todos los ciclos disponibles
+            @foreach($ciclos as $ciclo)
+                // Verificar si el ciclo pertenece a la familia seleccionada
+                @if($ciclo->idFamilia == " + idFamiliaSeleccionada + ")
+                    // Agregar el ciclo al select
+                    $('#selectModulos').append($('<option>', {
+                        value: '{{ $ciclo->IdCiclo }}',
+                        text: '{{ $ciclo->NombreCiclo }}'
+                    }));
+                @endif
+            @endforeach
+        }
+
+        function cargarCursos() {
+
+        }
     }
 </script>
 @endsection
