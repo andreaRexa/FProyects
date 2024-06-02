@@ -9,6 +9,7 @@ use App\Models\Curso;
 use App\Models\Familia;
 use App\Models\User;
 use App\Models\FamiliaAlumno;
+use App\Models\SolAlumnosPendientes;
 class GestionesController extends Controller
 {
     //Modulos
@@ -98,8 +99,8 @@ class GestionesController extends Controller
                     ->where('familias.IdAdministrador', $IdAdmin)
                     ->orderBy('usuarios.Apellidos') 
                     ->get(['usuarios.*']); 
-                    
-        $usuarios = DB::table('usuarios')
+
+        $usuarios = User::table('usuarios')
                     ->join('solAlumnosPendientes', 'usuarios.IdUsuario', '=', 'solAlumnosPendientes.IdUsuario')
                     ->join('ciclos', 'ciclos.IdCiclo', '=', 'solAlumnosPendientes.IdCiclo')
                     ->join('cursos', 'cursos.IdCurso', '=', 'solAlumnosPendientes.IdCurso')
