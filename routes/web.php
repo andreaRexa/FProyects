@@ -43,7 +43,10 @@ Route::get('/descargar-archivo/{nombreProyecto}', [ProyectoController::class, 'd
 Route::get('/descargar-documentacion/{nombreProyecto}', [ProyectoController::class, 'descargarDocumentacion'])->name('descargarDocumentacion');
 
 // Rutas relacionadas con gestiones
+//Modulos
 Route::get('gestionesModulos', [GestionesController::class, 'showListadoModulos'])->name('gestionesModulos');
 Route::delete('/modulos/{id}', [GestionesController::class, 'eliminarModulo'])->name('modulos.eliminar');
 Route::put('/modulos/editar', [GestionesController::class, 'nuevoEditarModulo'])->name('modulos.editar');
+//Alumnos
+Route::get('gestionesAlumnos', [GestionesController::class, 'showListadoAlumnos'])->name('gestionesAlumnos');
 

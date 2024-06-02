@@ -33,7 +33,9 @@
                 <form action="proyectoFamilia" method="GET" class="form-inline mx-auto">
                   <li class='nav-item'><button class='btn nav-link' name='btnMisProyectosFamilia' type='submit' href='#'>Mis proyectos</button></li>
                 </form>
-                <li class='nav-item'><button class='btn nav-link' name='btnGestAlumnos' type='submit' href='#'>Gestión de alumnos</button></li>
+                <form action="gestionesAlumnos" method="GET" class="form-inline mx-auto">
+                  <li class='nav-item'><button class='btn nav-link' name='btnGestAlumnos' type='submit' href='#'>Gestión de alumnos</button></li>
+                </form>               
                 <form action="gestionesModulos" method="GET" class="form-inline mx-auto">
                   <li class='nav-item'><button class='btn nav-link' name='btnGestModulos' type='submit' href='#'>Gestión de modulos</button></li>
                 </form>

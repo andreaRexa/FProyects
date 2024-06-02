@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Ciclo;
 use App\Models\Curso;
 use App\Models\Familia;
-
+use App\Models\Usuario;
+use App\Models\FamiliaAlumno;
 class GestionesController extends Controller
 {
     //Modulos
@@ -85,8 +86,19 @@ class GestionesController extends Controller
             }
         }
 
-
-        
         return redirect()->back();
+    }
+
+    public function showListadoAlumnos(){
+        // Obtener el usuario logueado
+        $userData = $request->session()->get('user');
+        $IdAdmin = $userData['id'];
+        $alumnos = Usuario::join('familialumno', 'usuarios.IdUsuario', '=', 'familialumno.IdUsuario')
+                    ->join('familias', 'familias.IdFamilia', '=', 'familialumno.IdFamilia')
+                    ->where('usuarios.IdAdministrador', $IdAdmin)
+                    ->get();
+
+        return view('Gestiones.GestionAlumnos', compact('alumnos'));
+
     }
 }
