@@ -63,7 +63,7 @@
                 </div>
             </div>
 
-            <div class="card mt-4" id="formularioTarjeta" style="display: none;">
+            <div class="card mt-4" id="formularioAprobar" style="display: none;">
                 <div class="card-body">
                     <h4 class="card-title">Aprobar Solicitud</h4>
                     <form action="{{ route('aprobarSolicitud') }}" method="POST">
