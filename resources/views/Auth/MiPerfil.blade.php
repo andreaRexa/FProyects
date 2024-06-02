@@ -89,11 +89,11 @@
             <h5>Formulario de Matricula</h5>
         </div>
         <div class="card-body">
-            <form id="matriculacion" action="{{ route('matriculacion') }}" method="post">
+            <form id="matriculacion" action="{{ route('matriculacion') }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="selectFamilia">Familias</label>
-                    <select class="form-control" id="selectFamilia">
+                    <select class="form-control" id="selectFamilia" name="selectFamilia">
                         @foreach($familias as $familia)
                             <option value="{{ $familia->IdFamilia }}">{{ $familia->NombreFamilia }}</option>
                         @endforeach
@@ -101,12 +101,12 @@
                 </div>     
                 <div class="form-group">
                     <label for="selectModulos">Modulos</label>
-                        <select class="form-control" id="selectModulos">
+                        <select class="form-control" id="selectModulos" name="selectModulos">
                         </select>
                 </div>    
                 <div class="form-group">
                     <label for="selectCursos">Cursos</label>      
-                    <select class="form-control" id="selectCursos">
+                    <select class="form-control" id="selectCursos" name="selectCursos">
                     </select>   
                 </div>
                 <div class="form-group">
