@@ -31,6 +31,20 @@
                     </div>
                 </div>
                 <div class="col-md-4">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
                     <form id="formularioupdate" action="{{ route('perfil.update', ['id' => session('user.id')]) }}" method="post">
                         @csrf
                         @method('put')

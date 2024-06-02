@@ -66,6 +66,20 @@ class MiPerfilController extends Controller
 
     public function update(Request $request, $id)
     {
+        // Verificar si el correo electrónico ya existe en la base de datos
+        $existingUser = User::where('Correo', $request->email)->first();
+
+        if ($existingUser) {
+            // Si el correo electrónico ya existe, redirige de vuelta al formulario de registro con un mensaje de error
+            return redirect()->back()->withErrors(['Correo' => 'El correo electrónico ya está en uso.'])->withInput();
+        }
+        
+        // Validar la solicitud
+        $request->validate([
+                'nombre' => 'required|string|max:255',
+                'apellidos' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255',
+        ]);
         $user = User::findOrFail($id);
         
         // Actualizar los datos del usuario con los datos del formulario
@@ -82,9 +96,7 @@ class MiPerfilController extends Controller
             // Actualizar los valores correspondientes en la sesión con los nuevos datos
             $request->session()->put('user.nombre', $updatedUser->Nombre);
             $request->session()->put('user.apellidos', $updatedUser->Apellidos);
-            $request->session()->put('user.email', $updatedUser->Correo);
-    
-            
+            $request->session()->put('user.email', $updatedUser->Correo);        
             return redirect()->route('MiPerfil')->with('success', 'Perfil actualizado correctamente.');
         } else {
             return redirect()->route('MiPerfil')->with('error', 'No se pudo actualizar el perfil. Inténtalo de nuevo.');
