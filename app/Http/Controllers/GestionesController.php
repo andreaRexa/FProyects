@@ -89,7 +89,7 @@ class GestionesController extends Controller
         return redirect()->back();
     }
 
-    public function showListadoAlumnos(){
+    public function showListadoAlumnos(Request $request){
         // Obtener el usuario logueado
         $userData = $request->session()->get('user');
         $IdAdmin = $userData['id'];
