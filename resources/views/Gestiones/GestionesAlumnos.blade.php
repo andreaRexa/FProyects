@@ -110,13 +110,6 @@
 </div>
 
 <script>
-               @foreach($cursosDisponibles as $curso)    
-                $('#cursosDisponibles').append($('<option>', {
-                    value: '{{ $curso->IdCurso }}',
-                    text: '{{ $curso->Curso }}'
-                }));      
-            @endforeach
-
         $(document).ready(function() {
             $('#btnFromSol').click(function(e) { 
                 var IdUsu = $('#IdUsu').val();
