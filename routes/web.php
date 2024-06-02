@@ -31,6 +31,7 @@ Route::put('/perfil/{id}', [MiPerfilController::class, 'update'])->name('perfil.
 Route::post('perfil/updatefoto', [MiPerfilController::class, 'updatefoto'])->name('perfil.updatefoto');
 Route::post('perfil/matriculacion', [MiPerfilController::class, 'matriculacion'])->name('matriculacion');
 Route::get('/getCiclos/{idFamilia}', [MiPerfilController::class, 'getCiclos'])->name('getCiclos');
+Route::get('/getCursos/{idCiclo}', [MiPerfilController::class, 'getCursos'])->name('getCursos');
 
 // Rutas relacionadas con proyectos
 Route::get('proyectos', [ProyectoController::class, 'showListadoProyectos'])->name('proyectos');

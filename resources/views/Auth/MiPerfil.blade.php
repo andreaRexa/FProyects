@@ -145,8 +145,29 @@
             $('#formularioMatricula').css('display', 'block');
         });
 
-        $('#selectFamilia').change(function() {
-            var idFamiliaSeleccionada = $(this).val();
+    // Función para obtener y cargar los cursos
+        function cargarCursos(idCiclo) {
+            $.ajax({
+                url: '{{ route("getCursos", ":idCiclo") }}'.replace(':idCiclo', idCiclo),
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    $('#selectCursos').empty();
+                    $.each(data, function(index, curso) {
+                        $('#selectCursos').append($('<option>', {
+                            value: curso.IdCurso,
+                            text: curso.Curso
+                        }));
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        }
+
+        // Función para cargar los ciclos al inicio de la página
+        function cargarCiclos(idFamiliaSeleccionada) {
             $.ajax({
                 url: '{{ route("getCiclos", ":idFamilia") }}'.replace(':idFamilia', idFamiliaSeleccionada),
                 type: 'GET',
@@ -159,11 +180,33 @@
                             text: ciclo.NombreCiclo
                         }));
                     });
+
+                    // Obtener el primer ciclo de la lista y cargar los cursos
+                    var primerCiclo = data[0];
+                    if (primerCiclo) {
+                        cargarCursos(primerCiclo.IdCiclo);
+                    }
                 },
                 error: function(xhr, status, error) {
                     console.error(error);
                 }
             });
+        }
+
+        // Cargar los ciclos al inicio de la página
+        var idFamiliaSeleccionada = $('#selectFamilia').val();
+        cargarCiclos(idFamiliaSeleccionada);
+
+        // Manejar el cambio de selección de familia
+        $('#selectFamilia').change(function() {
+            var idFamiliaSeleccionada = $(this).val();
+            cargarCiclos(idFamiliaSeleccionada);
+        });
+
+        // Manejar el cambio de selección de ciclo
+        $('#selectModulos').change(function() {
+            var idCicloSeleccionado = $(this).val();
+            cargarCursos(idCicloSeleccionado);
         });
 
     });

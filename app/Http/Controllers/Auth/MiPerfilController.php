@@ -23,13 +23,19 @@ class MiPerfilController extends Controller
         $familias = Familia::all();
         return view('Auth.MiPerfil', compact( 'imagenURL','familias'));
     }
-    
+
     public function getCiclos($idFamilia)
     {
         $ciclos = Ciclo::where('IdFamilia', $idFamilia)->get();
         return response()->json($ciclos);
     }
-
+    
+    public function getCursos($idCiclo)
+    {
+        $cicloCurso = CicloCurso::where('IdCiclo', $idCiclo)->with('curso')->get();
+        $cursos = $cicloCurso->pluck('curso');
+        return response()->json($cursos);
+    }
     public function updatefoto(Request $request)
     {
         // Validar la foto de perfil
