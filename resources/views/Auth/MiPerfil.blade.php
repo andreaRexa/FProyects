@@ -3,9 +3,6 @@
 @section('title', 'Mi perfil')
 
 @section('content')
-@foreach($ciclos as $ciclo)
-    {{$ciclo->NombreCiclo}}
-@endforeach
 <div class="container mt-4"> 
     <div class="card">
         <div class="card-body">
@@ -150,13 +147,15 @@
 
         $('#selectFamilia').change(function() {
             var idFamiliaSeleccionada = $('#selectFamilia').val(); // Obtener el valor de la familia seleccionada
-            console.log(idFamiliaSeleccionada);
+            console.log('Id de la familia seleccionada:', idFamiliaSeleccionada);
             $('#selectModulos').empty(); // Limpiar los ciclos antes de cargar los nuevos
 
             // Iterar sobre todos los ciclos disponibles
             @foreach($ciclos as $ciclo)
+                console.log('Dentro del bucle para ciclo:', '{{ $ciclo->IdCiclo }}'); // Depurar el ciclo actual
                 // Verificar si el ciclo pertenece a la familia seleccionada
-                @if($ciclo->IdFamilia == " + idFamiliaSeleccionada + ")
+                @if($ciclo->IdFamilia == " + idFamiliaSeleccionada")
+                    console.log('Ciclo pertenece a la familia seleccionada:', '{{ $ciclo->NombreCiclo }}'); // Depurar el ciclo que coincide
                     // Agregar el ciclo al select
                     $('#selectModulos').append($('<option>', {
                         value: '{{ $ciclo->IdCiclo }}',
