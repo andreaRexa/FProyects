@@ -37,7 +37,7 @@ class MiPerfilController extends Controller
         })
         ->where('IdFamilia', $idFamilia)
         ->get();
-
+        dd($ciclosDisponibles);
         return response()->json($ciclosDisponibles);
     }
 
