@@ -5,8 +5,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <!-- Tabla de alumnos en 8 columnas -->
-        <div class="col-lg-6">
+        <div class="col-lg-7 mt-4">
             <div class="card">
                 <div class="card-body">
                     <table class="table">
@@ -31,7 +30,7 @@
         </div>
 
         <!-- Lista de alumnos con detalles en 4 columnas -->
-        <div class="col-lg-6">
+        <div class="col-lg-5 mt-4">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Solicitudes pedientes</h4>
