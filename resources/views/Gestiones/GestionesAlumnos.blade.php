@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-lg-7 mt-4">
+        <div class="col-lg-8 mt-4">
             <div class="card">
                 <div class="card-body">
                     <table class="table">
@@ -30,7 +30,7 @@
         </div>
 
         <!-- Lista de alumnos con detalles en 4 columnas -->
-        <div class="col-lg-5 mt-4">
+        <div class="col-lg-6 mt-4">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Solicitudes pedientes</h4>
@@ -48,11 +48,11 @@
                             @foreach($usuarios as $usuario)
                                 <tr>
                                     <td>
-                                        <img src="data:image/jpeg;base64,{{ base64_encode($alumno->FotoUsuario) }}" alt="Foto de {{ $alumno->Nombre }}" class="img-fluid rounded" style="width: 50px; height: 50px;">
+                                        <img src="data:image/jpeg;base64,{{ base64_encode($usuario->FotoUsuario) }}" alt="Foto de {{ $usuario->Nombre }}" class="img-fluid rounded" style="width: 50px; height: 50px;">
                                     </td>
-                                    <td>{{ $alumno->Nombre }}</td>
-                                    <td>{{ $alumno->Apellidos }}</td>
-                                    <td>{{ $alumno->Correo }}</td>
+                                    <td>{{ $usuario->Nombre }}</td>
+                                    <td>{{ $usuario->Apellidos }}</td>
+                                    <td>{{ $usuario->Correo }}</td>
                                     <td>
                                         <a href="" class="btn btn-sm btn-success">✔️</a>
                                         <form action="" method="POST" style="display:inline;">
