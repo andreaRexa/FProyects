@@ -123,6 +123,9 @@ class MiPerfilController extends Controller
         $solicitud->IdFamilia = $request->selectFamilia;
         $solicitud->IdCiclo = $request->selectModulos;
         $solicitud->IdCurso = $request->selectCursos;
-        $solicitud->save;
+        dd($solicitud);
+        //$solicitud->save;
+
+        return redirect()->route('MiPerfil')->with('success', 'Solicitud enviada');
     }
 }
