@@ -124,6 +124,8 @@ class GestionesController extends Controller
     }
     
     public function getUsuarios(){
+        $userData = $request->session()->get('user');
+        $IdAdmin = $userData['id'];
         $usuarios = User::join('solAlumnosPendientes', 'usuarios.IdUsuario', '=', 'solAlumnosPendientes.IdUsuario')
                         ->join('ciclos', 'ciclos.IdCiclo', '=', 'solAlumnosPendientes.IdCiclo')
                         ->join('cursos', 'cursos.IdCurso', '=', 'solAlumnosPendientes.IdCurso')
@@ -145,6 +147,7 @@ class GestionesController extends Controller
                         ->get();
         return $usuarios;
     }
+
     public function eliminarSol(Request $request){
         // Obtener los IDs de los elementos a eliminar desde la solicitud
         $IdSolicitud = $request->IdSolicitud;
