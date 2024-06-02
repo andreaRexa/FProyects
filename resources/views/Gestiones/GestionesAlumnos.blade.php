@@ -6,10 +6,14 @@
 <div class="container">
     <h2 class="text-center my-4">Gestión de Alumnos</h2>
     <div class="row">
+        <!-- Tabla de alumnos en 8 columnas -->
         <div class="col-lg-8">
             <div class="card">
                 <div class="card-body">
                     <table class="table">
+                        <thead>
+                            <th colspan="5">Lista de alumnos</th>
+                        </thead>
                         <tbody>
                             @foreach($alumnos->chunk(5) as $chunk)
                                 <tr>
@@ -26,17 +30,43 @@
                 </div>
             </div>
         </div>
+
+        <!-- Lista de alumnos con detalles en 4 columnas -->
         <div class="col-lg-4">
             <div class="card">
                 <div class="card-body">
-                    <h4>Lista de elementos adicionales</h4>
-                    <ul class="list-group">
-                        <li class="list-group-item">Elemento 1</li>
-                        <li class="list-group-item">Elemento 2</li>
-                        <li class="list-group-item">Elemento 3</li>
-                        <li class="list-group-item">Elemento 4</li>
-                        <li class="list-group-item">Elemento 5</li>
-                    </ul>
+                    <h4 class="card-title">Solicitudes pedientes</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Foto</th>
+                                <th>Nombre</th>
+                                <th>Apellidos</th>
+                                <th>Correo</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($usuarios as $usuario)
+                                <tr>
+                                    <td>
+                                        <img src="data:image/jpeg;base64,{{ base64_encode($alumno->FotoUsuario) }}" alt="Foto de {{ $alumno->Nombre }}" class="img-fluid rounded" style="width: 50px; height: 50px;">
+                                    </td>
+                                    <td>{{ $alumno->Nombre }}</td>
+                                    <td>{{ $alumno->Apellidos }}</td>
+                                    <td>{{ $alumno->Correo }}</td>
+                                    <td>
+                                        <a href="" class="btn btn-sm btn-success">✔️</a>
+                                        <form action="" method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger">❌</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

@@ -98,8 +98,24 @@ class GestionesController extends Controller
                     ->where('familias.IdAdministrador', $IdAdmin)
                     ->orderBy('usuarios.Apellidos') 
                     ->get(['usuarios.*']); 
-
-        return view('Gestiones.GestionesAlumnos', compact('alumnos'));
+                    
+        $usuarios = DB::table('usuarios')
+                    ->join('solAlumnosPendientes', 'usuarios.IdUsuario', '=', 'solAlumnosPendientes.IdUsuario')
+                    ->join('ciclos', 'ciclos.IdCiclo', '=', 'solAlumnosPendientes.IdCiclo')
+                    ->join('cursos', 'cursos.IdCurso', '=', 'solAlumnosPendientes.IdCurso')
+                    ->select(
+                        'usuarios.FotoUsuario', 
+                        'usuarios.Apellidos', 
+                        'usuarios.Nombre', 
+                        'usuarios.Correo', 
+                        'solAlumnosPendientes.IdFamilia', 
+                        'ciclos.IdCiclo', 
+                        'ciclos.Nombreciclo', 
+                        'cursos.IdCurso', 
+                        'cursos.Curso'
+                    )
+                    ->get();
+        return view('Gestiones.GestionesAlumnos', compact('alumnos','usuarios'));
 
     }
 }
