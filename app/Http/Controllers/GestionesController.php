@@ -123,7 +123,8 @@ class GestionesController extends Controller
     }
 
     public function eliminarSol(Request $request){
-        $solicitud = SolAlumnosPendientes::findOrFail($request->idBorrar);
+        $id= $request->idBorrar;
+        $solicitud = SolAlumnosPendientes::findOrFail($id);
         $solicitud->delete();
         
         return redirect()->intended('gestionesAlumnos');
