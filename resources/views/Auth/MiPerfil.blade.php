@@ -107,7 +107,7 @@
 </div>
 
 <script>
-    $(document).ready(function()) {
+    $(document).ready(function() {
         function habilitarEdicion() {
             $('#nombre').prop('disabled', false);
             $('#apellidos').prop('disabled', false);
@@ -170,6 +170,6 @@
         function cargarCursos() {
 
         }
-    }
+    });
 </script>
 @endsection
