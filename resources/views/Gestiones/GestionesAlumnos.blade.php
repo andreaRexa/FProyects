@@ -121,7 +121,7 @@
         }
 
         
-        var usuarios = <?php echo json_encode($usuarios); ?>;
+        var usuarios = @json($usuarios);
         $(document).ready(function() {
             $('#btnFromSol').click(function() {
                 e.preventDefault();             
