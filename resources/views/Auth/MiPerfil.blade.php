@@ -3,6 +3,9 @@
 @section('title', 'Mi perfil')
 
 @section('content')
+@foreach($ciclos as $ciclo)
+    {{$ciclo->NombreCiclo}}
+@endforeach
 <div class="container mt-4"> 
     <div class="card">
         <div class="card-body">
@@ -148,7 +151,6 @@
         $('#selectFamilia').change(function() {
             var idFamiliaSeleccionada = $('#selectFamilia').val(); // Obtener el valor de la familia seleccionada
             console.log(idFamiliaSeleccionada);
-            console.log($ciclos);
             $('#selectModulos').empty(); // Limpiar los ciclos antes de cargar los nuevos
 
             // Iterar sobre todos los ciclos disponibles
