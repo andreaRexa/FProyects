@@ -98,7 +98,7 @@ class GestionesController extends Controller
                     ->where('familias.IdAdministrador', $IdAdmin)
                     ->get();
 
-        return view('Gestiones.GestionAlumnos', compact('alumnos'));
+        return view('Gestiones.GestionesAlumnos', compact('alumnos'));
 
     }
 }
