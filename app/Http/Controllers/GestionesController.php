@@ -135,8 +135,8 @@ class GestionesController extends Controller
                                         ->where('IdFamilia', $idFamilia)
                                         ->where('IdCiclo', $idCiclo)
                                         ->where('IdCurso', $idCurso)
-                                        ->firstOrFail();
-        dd($solicitud);
+                                        ->get();
+        //dd($solicitud);
         // Eliminar la solicitud
         $solicitud->delete();
         
