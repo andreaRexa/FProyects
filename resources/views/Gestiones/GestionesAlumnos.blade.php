@@ -48,7 +48,14 @@
                                     <td>{{ $usuario->Apellidos }}</td>
                                     <td>{{ $usuario->Correo }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-sm btn-success btnFromSol" data-usuario-id="{{ $usuario->IdUsuario }}">✔️</button>
+                                        <button type="button" class="btn btn-sm btn-success btnFromSol"
+                                                data-nombre="{{ $usuario->Nombre }}"
+                                                data-apellidos="{{ $usuario->Apellidos }}"
+                                                data-correo="{{ $usuario->Correo }}"
+                                                data-ciclo="{{ $usuario->Nombreciclo }}"
+                                                data-curso="{{ $usuario->Curso }}">
+                                            ✔️
+                                        </button>
                                         <form action="{{ route('eliminarsol') }}" method="POST" style="display:inline;">
                                             @csrf
                                             <input type="hidden" name="IdSolicitud" value="{{ $usuario->IdSolicitud }}">
@@ -113,16 +120,11 @@
 <script>
     $(document).ready(function() {
         $('.btnFromSol').click(function(e) { 
-            var usuarioId = $(this).data('usuario-id');
-            var usuario = {!! json_encode($usuarios) !!}.find(function(usuario) {
-                return usuario.IdUsuario === usuarioId;
-            });
-                                                 
-            $('#nombreIn').val(usuario.Nombre);
-            $('#apellidos').val(usuario.Apellidos);
-            $('#correo').val(usuario.Correo);
-            $('#ciclo').val(usuario.Nombreciclo);
-            $('#curso').val(usuario.Curso);
+            $('#nombreIn').val($(this).data('nombre'));
+            $('#apellidos').val($(this).data('apellidos'));
+            $('#correo').val($(this).data('correo'));
+            $('#ciclo').val($(this).data('ciclo'));
+            $('#curso').val($(this).data('curso'));
             
             $('#formularioAprobar').css('display', 'inline-block');
         });  
@@ -131,5 +133,6 @@
             $('#formularioAprobar').css('display', 'none');
         });
     });
+
 </script>
 @endsection
