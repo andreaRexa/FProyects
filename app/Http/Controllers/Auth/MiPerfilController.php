@@ -23,7 +23,7 @@ class MiPerfilController extends Controller
         $familias = Familia::all();
         $ciclos = Ciclo::all();
         $cursos = Curso::all();
-        return view('Auth.MiPerfil', compact(['imagenURL' => $imagenURL],'familias','ciclos','cursos'));
+        return view('Auth.MiPerfil', compact( 'imagenURL','familias','ciclos','cursos'));
     }
 
     public function updatefoto(Request $request)
