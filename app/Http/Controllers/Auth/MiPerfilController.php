@@ -104,28 +104,46 @@ class MiPerfilController extends Controller
         }
     }
     
-    public function matriculacion (Request $request){
-        // Verificar si la pass de la contreseña de la familia es correcta
-        $passFamilia = Familia::where('ContraseniaFamilia', $request->passFamilia)->first();
-        //dd($request);
-        if (!$passFamilia) {
-            // Si el correo electrónico ya existe, redirige de vuelta al formulario de registro con un mensaje de error
-            return redirect()->back()->withErrors(['passFamilia' => 'La contraseña de la famila es erronea'])->withInput();
-        }
-        
+    public function matriculacion(Request $request)
+    {
         // Validar la solicitud
         $request->validate([
-                'passFamilia' => 'required|string|max:16',
+            'passFamilia' => 'required|string|max:16',
         ]);
-        $solicitud = new SolAlumnosPendientes();
+    
+        // Verificar si la contraseña de la familia es correcta
+        $passFamilia = Familia::where('ContraseniaFamilia', $request->passFamilia)->first();
+    
+        if (!$passFamilia) {
+            // Si la contraseña de la familia es incorrecta, redirige de vuelta al formulario de matriculación con un mensaje de error
+            return redirect()->back()->withErrors(['passFamilia' => 'La contraseña de la familia es incorrecta'])->withInput();
+        }
+    
+        // Verificar si ya existe una solicitud pendiente para el mismo usuario y la misma familia
         $userData = $request->session()->get('user');
+        $existingSolicitud = SolAlumnosPendientes::where('IdUsuario', $userData['id'])
+                                ->where('IdFamilia', $request->selectFamilia)
+                                ->exists();
+    
+        if ($existingSolicitud) {
+            // Si ya existe una solicitud pendiente, redirige de vuelta al formulario de matriculación con un mensaje de error
+            return redirect()->back()->withErrors(['error' => 'Ya tienes una solicitud pendiente para esta familia'])->withInput();
+        }
+    
+        // Crear y guardar la solicitud
+        $solicitud = new SolAlumnosPendientes();
         $solicitud->IdUsuario = $userData['id'];
         $solicitud->IdFamilia = $request->selectFamilia;
         $solicitud->IdCiclo = $request->selectModulos;
         $solicitud->IdCurso = $request->selectCursos;
-        //dd($solicitud);
-        $solicitud->save;
-
-        return redirect()->route('MiPerfil')->with('success', 'Solicitud enviada');
+    
+        try {
+            $solicitud->save();
+            return redirect()->route('MiPerfil')->with('success', 'Solicitud enviada');
+        } catch (\Exception $e) {
+            // Manejar cualquier excepción que pueda ocurrir durante el proceso de guardado
+            return redirect()->back()->withErrors(['error' => 'Ha ocurrido un error al enviar la solicitud. Por favor, intenta de nuevo más tarde.'])->withInput();
+        }
     }
+    
 }
