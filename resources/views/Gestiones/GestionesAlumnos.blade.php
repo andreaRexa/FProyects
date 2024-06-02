@@ -19,7 +19,7 @@
                             @foreach($alumnos as $alumno)
                             <tr>
                                 <td>
-                                    <img src="{{ $alumno->FotoUsuario }}" alt="Foto de {{ $alumno->Nombre }}" class="img-fluid rounded-circle mr-2" style="max-width: 50px;">
+                                    <img src="data:image/jpeg;base64,{{ base64_encode($alumno->FotoUsuario) }}" alt="Foto de {{ $alumno->Nombre }}" class="img-fluid rounded-circle mr-2" style="max-width: 50px;">
                                     <span>{{ $alumno->Nombre }} {{ $alumno->Apellido }}</span>
                                 </td>
                             </tr>
