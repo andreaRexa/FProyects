@@ -93,7 +93,7 @@ class GestionesController extends Controller
         // Obtener el usuario logueado
         $userData = $request->session()->get('user');
         $IdAdmin = $userData['id'];
-        $alumnos = Usuario::join('familialumno', 'usuarios.IdUsuario', '=', 'familialumno.IdUsuario')
+        $alumnos = User::join('familialumno', 'usuarios.IdUsuario', '=', 'familialumno.IdUsuario')
                     ->join('familias', 'familias.IdFamilia', '=', 'familialumno.IdFamilia')
                     ->where('usuarios.IdAdministrador', $IdAdmin)
                     ->get();
