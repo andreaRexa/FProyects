@@ -153,7 +153,10 @@
             // Iterar sobre todos los ciclos disponibles
             @foreach($ciclos as $ciclo)
                 console.log('Dentro del bucle para ciclo:', '{{ $ciclo->IdCiclo }}'); // Depurar el ciclo actual
-                console.log('Dentro del bucle para ciclo:', '$ciclo->IdFamilia == " + idFamiliaSeleccionada"'); // Depurar el ciclo actual
+                console.log('Dentro del bucle para ciclo:', '{{ $ciclo->IdFamilia }}'); // Depurar el valor de $ciclo->IdFamilia
+                console.log('Id de la familia seleccionada:', idFamiliaSeleccionada); // Depurar el valor de idFamiliaSeleccionada
+                console.log('¿Coincide la familia seleccionada con la familia del ciclo?', '{{ $ciclo->IdFamilia == '' + idFamiliaSeleccionada }}'); // Depurar el resultado de la comparación
+
                 // Verificar si el ciclo pertenece a la familia seleccionada
 
                 @if($ciclo->IdFamilia == " + idFamiliaSeleccionada")
