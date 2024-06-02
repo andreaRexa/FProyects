@@ -42,6 +42,7 @@ class LoginController extends Controller
                 'rol' => $user->TipoUsuario,
                 'foto' => $user->FotoUsuario,
                 'fecha_creacion' => $user->FechaCreacion,
+                'NIA' => $user->NIA
             ];
 
             $request->session()->put('user', $userData); // Guardar los datos del usuario en la sesión

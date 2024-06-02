@@ -27,15 +27,39 @@ class MiPerfilController extends Controller
 
     public function getCiclos($idFamilia)
     {
-        $ciclos = Ciclo::where('IdFamilia', $idFamilia)->get();
-        return response()->json($ciclos);
+        $userData = $request->session()->get('user');
+
+        // Obtener los ciclos que el usuario no ha matriculado previamente
+        $ciclosDisponibles = Ciclo::whereNotIn('IdCiclo', function ($query) use ($idFamilia) {
+            $query->select('IdCiclo')
+                ->from('alumnociclo')
+                ->where('IdUsuario', $userData['id']);
+        })
+        ->where('IdFamilia', $idFamilia)
+        ->get();
+
+        return response()->json($ciclosDisponibles);
     }
 
     public function getCursos($idCiclo)
     {
-        $cicloCurso = CicloCurso::where('IdCiclo', $idCiclo)->with('curso')->get();
-        $cursos = $cicloCurso->pluck('curso');
-        return response()->json($cursos);
+        $userData = $request->session()->get('user');
+
+        // Obtener los cursos que el usuario no ha matriculado previamente en el ciclo seleccionado
+        $cursosDisponibles = Curso::whereNotIn('IdCurso', function ($query) use ($idCiclo) {
+            $query->select('IdCurso')
+                ->from('alumnocurso')
+                ->where('IdCiclo', $idCiclo)
+                ->where('IdUsuario', $userData['id']);
+        })
+        ->whereIn('IdCurso', function ($query) use ($idCiclo) {
+            $query->select('IdCurso')
+                ->from('ciclocurso')
+                ->where('IdCiclo', $idCiclo);
+        })
+        ->get();
+
+        return response()->json($cursosDisponibles);
     }
     
     public function updatefoto(Request $request)
