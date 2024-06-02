@@ -100,10 +100,10 @@ class GestionesController extends Controller
                     ->orderBy('usuarios.Apellidos') 
                     ->get(['usuarios.*']); 
 
-        $usuarios = User::table('usuarios')
-                    ->join('solAlumnosPendientes', 'usuarios.IdUsuario', '=', 'solAlumnosPendientes.IdUsuario')
+        $usuarios = User::join('solAlumnosPendientes', 'usuarios.IdUsuario', '=', 'solAlumnosPendientes.IdUsuario')
                     ->join('ciclos', 'ciclos.IdCiclo', '=', 'solAlumnosPendientes.IdCiclo')
                     ->join('cursos', 'cursos.IdCurso', '=', 'solAlumnosPendientes.IdCurso')
+                    ->join('familias', 'familias.IdFamilia', '=', 'solAlumnosPendientes.IdFamilia')
                     ->select(
                         'usuarios.FotoUsuario', 
                         'usuarios.Apellidos', 
@@ -115,6 +115,7 @@ class GestionesController extends Controller
                         'cursos.IdCurso', 
                         'cursos.Curso'
                     )
+                    ->where('familias.IdAdministrador', $IdAdmin)
                     ->get();
         return view('Gestiones.GestionesAlumnos', compact('alumnos','usuarios'));
 
