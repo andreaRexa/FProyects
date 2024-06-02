@@ -16,13 +16,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($alumnos as $alumno)
-                            <tr>
-                                <td>
-                                    <img src="data:image/jpeg;base64,{{ base64_encode($alumno->FotoUsuario) }}" alt="Foto de {{ $alumno->Nombre }}" class="img-fluid rounded-circle mr-2" style="max-width: 50px;">
-                                    <span>{{ $alumno->Nombre }} {{ $alumno->Apellido }}</span>
-                                </td>
-                            </tr>
+                            @foreach($alumnos->chunk(5) as $chunk)
+                                <tr>
+                                    @foreach($chunk as $alumno)
+                                        <td class="text-center">
+                                            <img src="data:image/jpeg;base64,{{ base64_encode($alumno->FotoUsuario) }}" alt="Foto de {{ $alumno->Nombre }}" class="img-fluid rounded" style="width: 350px; height: 350px;">
+                                            <div>{{ $alumno->Nombre }} {{ $alumno->Apellido }}</div>
+                                        </td>
+                                    @endforeach
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>
