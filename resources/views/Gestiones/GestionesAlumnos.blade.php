@@ -30,14 +30,13 @@
         </div>
 
         <!-- Lista de alumnos con detalles en 4 columnas -->
-        <div class="col-lg-6 mt-4">
+        <div class="col-lg-5 mt-4">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Solicitudes pedientes</h4>
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Foto</th>
                                 <th>Nombre</th>
                                 <th>Apellidos</th>
                                 <th>Correo</th>
@@ -47,9 +46,6 @@
                         <tbody>
                             @foreach($usuarios as $usuario)
                                 <tr>
-                                    <td>
-                                        <img src="data:image/jpeg;base64,{{ base64_encode($usuario->FotoUsuario) }}" alt="Foto de {{ $usuario->Nombre }}" class="img-fluid rounded" style="width: 50px; height: 50px;">
-                                    </td>
                                     <td>{{ $usuario->Nombre }}</td>
                                     <td>{{ $usuario->Apellidos }}</td>
                                     <td>{{ $usuario->Correo }}</td>
