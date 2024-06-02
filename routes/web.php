@@ -49,4 +49,5 @@ Route::delete('/modulos/{id}', [GestionesController::class, 'eliminarModulo'])->
 Route::put('/modulos/editar', [GestionesController::class, 'nuevoEditarModulo'])->name('modulos.editar');
 //Alumnos
 Route::get('gestionesAlumnos', [GestionesController::class, 'showListadoAlumnos'])->name('gestionesAlumnos');
+Route::post('gestionesAlumnos/eliminarsol', [GestionesController::class, 'eliminarSol'])->name('eliminarsol');
 

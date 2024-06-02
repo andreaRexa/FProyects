@@ -28,8 +28,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Lista de alumnos con detalles en 4 columnas -->
         <div class="col-lg-5 mt-4">
             <div class="card">
                 <div class="card-body">
@@ -54,6 +52,7 @@
                                         <form action="" method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
+                                            <input type="hidden" name="idBorrar" name="{{ $usuario->IdUsuario }}">
                                             <button type="submit" class="btn btn-sm btn-danger">❌</button>
                                         </form>
                                     </td>

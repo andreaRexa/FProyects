@@ -124,7 +124,7 @@ class MiPerfilController extends Controller
         $existingSolicitud = SolAlumnosPendientes::where('IdUsuario', $userData['id'])
                                 ->where('IdFamilia', $request->selectFamilia)
                                 ->exists();
-    
+
         if ($existingSolicitud) {
             // Si ya existe una solicitud pendiente, redirige de vuelta al formulario de matriculación con un mensaje de error
             return redirect()->back()->withErrors(['error' => 'Ya tienes una solicitud pendiente para esta familia'])->withInput();

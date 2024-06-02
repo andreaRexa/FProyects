@@ -120,4 +120,11 @@ class GestionesController extends Controller
         return view('Gestiones.GestionesAlumnos', compact('alumnos','usuarios'));
 
     }
+
+    public function eliminarSol(Request $request){
+        $solicitud = SolAlumnosPendientes::findOrFail($request->idBorrar);
+        $solicitud->delete();
+        
+        return redirect()->intended('gestionesAlumnos');
+    }
 }

@@ -68,7 +68,7 @@
                             <label for="rol">Rol</label>
                             <input type="text" class="form-control" id="rol" value="{{ App\constantes::arrTipoUsuarios[session('user.rol')] }}" disabled>
                         </div>
-                        @if(session('user.id') === 2)
+                        @if(session('user.rol') === 2)
                             <div class="form-group">
                                 <label for="NIA">NIA</label>
                                 <input type="text" class="form-control" id="NIA" value="{{ session('user.NIA') }}" disabled>
@@ -161,7 +161,7 @@
             $('#formularioMatricula').css('display', 'block');
         });
 
-    // Función para obtener y cargar los cursos
+        // Función para obtener y cargar los cursos
         function cargarCursos(idCiclo) {
             $.ajax({
                 url: '{{ route("getCursos", ":idCiclo") }}'.replace(':idCiclo', idCiclo),
