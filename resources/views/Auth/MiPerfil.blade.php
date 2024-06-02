@@ -148,7 +148,7 @@
         $('#selectFamilia').change(function() {
             var idFamiliaSeleccionada = $('#selectFamilia').val(); // Obtener el valor de la familia seleccionada
             console.log(idFamiliaSeleccionada);
-           
+            console.log($ciclos);
             $('#selectModulos').empty(); // Limpiar los ciclos antes de cargar los nuevos
 
             // Iterar sobre todos los ciclos disponibles
