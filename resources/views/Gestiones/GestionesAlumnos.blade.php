@@ -48,7 +48,7 @@
                                     <td>{{ $usuario->Apellidos }}</td>
                                     <td>{{ $usuario->Correo }}</td>
                                     <td>
-                                        <button class="btn btn-sm btn-success" id = "btnFromSol">✔️</button>
+                                        <button type="button" class="btn btn-sm btn-success" id = "btnFromSol">✔️</button>
                                         <input type="hidden" name="IdUsu" value="{{ $usuario->IdUsuario }}">
                                         <form action="{{ route('eliminarsol') }}" method="POST" style="display:inline;">
                                             @csrf
