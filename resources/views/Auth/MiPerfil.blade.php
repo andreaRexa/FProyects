@@ -115,7 +115,7 @@
                 </div>
                 <div class="text-right">
                     <button type="submit" class="btn btn-primary">Matricularse</button>
-                    
+                    <button type="button" id = "cancelarMat" class="btn btn-danger">Cancelar</button>                  
                 </div>
             </form>
         </div>
@@ -161,6 +161,9 @@
             $('#formularioMatricula').css('display', 'block');
         });
 
+        $('#cancelarMat').click(function() {
+            $('#formularioMatricula').css('display', 'none');
+        });
         // Función para obtener y cargar los cursos
         function cargarCursos(idCiclo) {
             $.ajax({

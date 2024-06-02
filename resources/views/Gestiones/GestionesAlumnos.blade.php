@@ -48,7 +48,7 @@
                                     <td>{{ $usuario->Apellidos }}</td>
                                     <td>{{ $usuario->Correo }}</td>
                                     <td>
-                                        <button class="btn btn-sm btn-success" onclick="mostrarFormulario('{{ $usuario->IdSolicitud }}')">✔️</button>
+                                        <button class="btn btn-sm btn-success" id = "btnFromSol">✔️</button>
                                         <form action="{{ route('eliminarsol') }}" method="POST" style="display:inline;">
                                             @csrf
                                             <input type="hidden" name="IdSolicitud" value="{{ $usuario->IdSolicitud }}">
@@ -67,7 +67,37 @@
                     <h4 class="card-title">Aprobar Solicitud</h4>
                     <form action="{{ route('aprobarSolicitud') }}" method="POST">
                         @csrf
-                        <!-- Agrega aquí los campos del formulario -->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="" id="foto" class="img-fluid rounded" style="width: 100px; height: 100px;">
+                            </div>                           
+                            <div class="col-md-8">                           
+                                <div class="mb-3">
+                                    <label for="nombre" class="form-label">Nombre:</label>
+                                    <input type="text" id="nombre" name="nombre" class="form-control" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="apellidos" class="form-label">Apellidos:</label>
+                                    <input type="text" id="apellidos" name="apellidos" class="form-control" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="correo" class="form-label">Correo:</label>
+                            <input type="email" id="correo" name="correo" class="form-control" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ciclo" class="form-label">Ciclo:</label>
+                            <input type="text" id="ciclo" name="ciclo" class="form-control" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="curso" class="form-label">Curso:</label>
+                            <input type="text" id="curso" name="curso" class="form-control" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nia" class="form-label">NIA:</label>
+                            <input type="text" id="nia" name="nia" class="form-control" required>
+                        </div>
                         <button type="submit" class="btn btn-primary">Enviar</button>
                     </form>
                 </div>
@@ -77,14 +107,36 @@
 </div>
 
 <script>
-    // Función para mostrar u ocultar el formulario
-    function mostrarFormulario(idSolicitud) {
-        var formularioTarjeta = document.getElementById('formularioTarjeta');
-        if (formularioTarjeta.style.display === "none") {
-            formularioTarjeta.style.display = "block";
-        } else {
-            formularioTarjeta.style.display = "none";
+        function mostrarFormulario(usuario) {
+            // Llenar los campos del formulario con la información del usuario
+            $('#foto').attr('src', 'data:image/jpeg;base64,' + usuario.FotoUsuario);
+            $('#nombre').val(usuario.Nombre);
+            $('#apellidos').val(usuario.Apellidos);
+            $('#correo').val(usuario.Correo);
+            $('#ciclo').val(usuario.Nombreciclo);
+            $('#curso').val(usuario.Curso);
+
+            // Mostrar el formulario
+            $('#formularioTarjeta').show();
         }
-    }
+
+        
+        var usuarios = <?php echo json_encode($usuarios); ?>;
+        $(document).ready(function() {
+            $('#btnFromSol').click(function() {
+                e.preventDefault(); // Prevenir el comportamiento predeterminado del botón
+                // Obtener el índice del usuario correspondiente a este botón
+                var indice = $(this).closest('tr').index();
+                // Obtener el usuario correspondiente al índice
+                var usuario = usuarios[indice];
+                // Mostrar el formulario con la información del usuario
+                mostrarFormulario(usuario);
+            });
+
+        $('#cancelar').click(function() {
+            $('#formularioAprobar').css('display', 'none');
+        });
+    });
+
 </script>
 @endsection
