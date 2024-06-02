@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-lg-8 mt-4">
+        <div class="col-lg-7 mt-4">
             <div class="card">
                 <div class="card-body">
                     <table class="table">
