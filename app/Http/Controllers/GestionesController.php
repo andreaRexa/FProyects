@@ -123,10 +123,10 @@ class GestionesController extends Controller
 
     }
     
-    public function getUsuarios(){
+    public function getUsuarios(Request $request){
         $userData = $request->session()->get('user');
         $IdAdmin = $userData['id'];
-        $usuarios = User::join('solAlumnosPendientes', 'usuarios.IdUsuario', '=', 'solAlumnosPendientes.IdUsuario')
+        $usuariosForm = User::join('solAlumnosPendientes', 'usuarios.IdUsuario', '=', 'solAlumnosPendientes.IdUsuario')
                         ->join('ciclos', 'ciclos.IdCiclo', '=', 'solAlumnosPendientes.IdCiclo')
                         ->join('cursos', 'cursos.IdCurso', '=', 'solAlumnosPendientes.IdCurso')
                         ->join('familias', 'familias.IdFamilia', '=', 'solAlumnosPendientes.IdFamilia')
@@ -145,7 +145,7 @@ class GestionesController extends Controller
                         )
                         ->where('familias.IdAdministrador', $IdAdmin)
                         ->get();
-        return $usuarios;
+        return $usuariosForm;
     }
 
     public function eliminarSol(Request $request){
