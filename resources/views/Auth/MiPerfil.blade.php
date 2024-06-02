@@ -148,12 +148,13 @@
         $('#selectFamilia').change(function() {
             var idFamiliaSeleccionada = $('#selectFamilia').val(); // Obtener el valor de la familia seleccionada
             console.log(idFamiliaSeleccionada);
+           
             $('#selectModulos').empty(); // Limpiar los ciclos antes de cargar los nuevos
 
             // Iterar sobre todos los ciclos disponibles
             @foreach($ciclos as $ciclo)
                 // Verificar si el ciclo pertenece a la familia seleccionada
-                @if($ciclo->idFamilia == " + idFamiliaSeleccionada + ")
+                @if($ciclo->IdFamilia == " + idFamiliaSeleccionada + ")
                     // Agregar el ciclo al select
                     $('#selectModulos').append($('<option>', {
                         value: '{{ $ciclo->IdCiclo }}',
