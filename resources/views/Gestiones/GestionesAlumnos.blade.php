@@ -112,7 +112,7 @@
 <script>
         $(document).ready(function() {
             $('#btnFromSol').click(function(e) { 
-                var IdUsu = $('#IdUsu').val();
+                /*var IdUsu = $('#IdUsu').val();
                 @foreach($usuarios as $usuario) {
                     if(IdUsu ==='{{ $usuario->IdUsuario }}')       
                         $('#foto').attr('src', 'data:image/jpeg;base64,' + '{{ $usuario->FotoUsuario }}');
@@ -122,7 +122,7 @@
                         $('#ciclo').val('{{ $usuario->Nombreciclo }}');
                         $('#curso').val('{{ $usuario->Curso }}');
                     }
-                @endforeach
+                @endforeach*/
                 $('#formularioAprobar').css('display', 'inline-block');
             });  
 
