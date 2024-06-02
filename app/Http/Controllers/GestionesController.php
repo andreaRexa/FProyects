@@ -99,30 +99,34 @@ class GestionesController extends Controller
                     ->where('familias.IdAdministrador', $IdAdmin)
                     ->orderBy('usuarios.Apellidos') 
                     ->get(['usuarios.*']); 
+        $usuarios=getUsuarios();
 
-        $usuarios = User::join('solAlumnosPendientes', 'usuarios.IdUsuario', '=', 'solAlumnosPendientes.IdUsuario')
-                    ->join('ciclos', 'ciclos.IdCiclo', '=', 'solAlumnosPendientes.IdCiclo')
-                    ->join('cursos', 'cursos.IdCurso', '=', 'solAlumnosPendientes.IdCurso')
-                    ->join('familias', 'familias.IdFamilia', '=', 'solAlumnosPendientes.IdFamilia')
-                    ->select(
-                        'usuarios.FotoUsuario', 
-                        'usuarios.Apellidos', 
-                        'usuarios.Nombre', 
-                        'usuarios.Correo', 
-                        'usuarios.IdUsuario', 
-                        'familias.IdFamilia', 
-                        'ciclos.IdCiclo', 
-                        'ciclos.Nombreciclo', 
-                        'cursos.IdCurso', 
-                        'solAlumnosPendientes.IdSolicitud', 
-                        'cursos.Curso'
-                    )
-                    ->where('familias.IdAdministrador', $IdAdmin)
-                    ->get();
         return view('Gestiones.GestionesAlumnos', compact('alumnos','usuarios'));
 
     }
-
+    
+    public function getUsuarios(){
+        $usuarios = User::join('solAlumnosPendientes', 'usuarios.IdUsuario', '=', 'solAlumnosPendientes.IdUsuario')
+        ->join('ciclos', 'ciclos.IdCiclo', '=', 'solAlumnosPendientes.IdCiclo')
+        ->join('cursos', 'cursos.IdCurso', '=', 'solAlumnosPendientes.IdCurso')
+        ->join('familias', 'familias.IdFamilia', '=', 'solAlumnosPendientes.IdFamilia')
+        ->select(
+            'usuarios.FotoUsuario', 
+            'usuarios.Apellidos', 
+            'usuarios.Nombre', 
+            'usuarios.Correo', 
+            'usuarios.IdUsuario', 
+            'familias.IdFamilia', 
+            'ciclos.IdCiclo', 
+            'ciclos.Nombreciclo', 
+            'cursos.IdCurso', 
+            'solAlumnosPendientes.IdSolicitud', 
+            'cursos.Curso'
+        )
+        ->where('familias.IdAdministrador', $IdAdmin)
+        ->get();
+        return $usuarios;
+    }
     public function eliminarSol(Request $request){
         // Obtener los IDs de los elementos a eliminar desde la solicitud
         $IdSolicitud = $request->IdSolicitud;

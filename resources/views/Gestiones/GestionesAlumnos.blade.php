@@ -120,18 +120,26 @@
             $('#formularioTarjeta').show();
         }
 
-        
-        var usuarios = {!! json_encode($usuarios) !!};
         $(document).ready(function() {
             $('#btnFromSol').click(function(e) {
                 e.preventDefault();             
                 var indice = $(this).closest('tr').index();
-                var usuario = usuarios[indice];
-                mostrarFormulario(usuario);
+                $.ajax({
+                    url: '{{ route("getUsuario") }}', // Ruta a tu controlador para obtener el usuario
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        var usuario = data[indice];
+                        mostrarFormulario(usuario);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                    }
+                });
             });
 
             $('#cancelar').click(function() {
-                $('#formularioAprobar').css('display', 'none');
+                $('#formularioAprobar').hide();
             });
         });
 
