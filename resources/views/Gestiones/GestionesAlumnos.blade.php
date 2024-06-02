@@ -4,10 +4,9 @@
 
 @section('content')
 <div class="container">
-    <h2 class="text-center my-4">Gestión de Alumnos</h2>
     <div class="row">
         <!-- Tabla de alumnos en 8 columnas -->
-        <div class="col-lg-8">
+        <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
                     <table class="table">
@@ -19,7 +18,7 @@
                                 <tr>
                                     @foreach($chunk as $alumno)
                                         <td class="text-center">
-                                            <img src="data:image/jpeg;base64,{{ base64_encode($alumno->FotoUsuario) }}" alt="Foto de {{ $alumno->Nombre }}" class="img-fluid rounded" style="width: 150px; height: 150px;">
+                                            <img src="data:image/jpeg;base64,{{ base64_encode($alumno->FotoUsuario) }}" alt="Foto de {{ $alumno->Nombre }}" class="img-fluid rounded" style="width: 100px; height: 100px;">
                                             <div>{{ $alumno->Apellidos }}, {{ $alumno->Nombre }}</div>
                                         </td>
                                     @endforeach
@@ -32,7 +31,7 @@
         </div>
 
         <!-- Lista de alumnos con detalles en 4 columnas -->
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Solicitudes pedientes</h4>
