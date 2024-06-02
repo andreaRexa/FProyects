@@ -110,27 +110,25 @@
 </div>
 
 <script>
-        var fotoUsuario = '{{ $usuario->FotoUsuario }}';
-        $(document).ready(function() {
-            $('#btnFromSol').click(function(e) { 
-                var IdUsu = $('#IdUsu').val();
-                @foreach($usuarios as $usuario) {
-                    if(IdUsu ==='{{ $usuario->IdUsuario }}')       
-                        $('#foto').attr('src', 'data:image/jpeg;base64,'+fotoUsuario);
-                        $('#nombre').val('{{ $usuario->Nombre }}');
-                        $('#apellidos').val('{{ $usuario->Apellidos }}');
-                        $('#correo').val('{{ $usuario->Correo }}');
-                        $('#ciclo').val('{{ $usuario->Nombreciclo }}');
-                        $('#curso').val('{{ $usuario->Curso }}');
-                    }
-                @endforeach
-                $('#formularioAprobar').css('display', 'inline-block');
-            });  
-
-            $('#cancelar').click(function() {
-                $('#formularioAprobar').css('display', 'none');
-            });
+    var fotoUsuario = '{{ $usuario->FotoUsuario }}';
+    $(document).ready(function() {
+        $('#btnFromSol').click(function(e) {
+            e.preventDefault();
+            var IdUsu = $(this).siblings("input[name='IdUsu']").val();
+            var usuario = $.grep(usuarios, function(obj){return obj.IdUsuario === IdUsu;})[0];
+            $('#foto').attr('src', 'data:image/jpeg;base64,' + fotoUsuario);
+            $('#nombre').val(usuario.Nombre);
+            $('#apellidos').val(usuario.Apellidos);
+            $('#correo').val(usuario.Correo);
+            $('#ciclo').val(usuario.Nombreciclo);
+            $('#curso').val(usuario.Curso);
+            $('#formularioTarjeta').show();
         });
 
+        $('#cancelar').click(function() {
+            $('#formularioTarjeta').hide();
+        });
+    });
 </script>
+
 @endsection
