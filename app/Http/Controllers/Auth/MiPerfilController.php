@@ -42,30 +42,11 @@ class MiPerfilController extends Controller
         return response()->json($ciclosDisponibles);
     }
     
-    public function getCursos($idCiclo, Request $request)
+    public function getCursos($idCiclo)
     {
-        $userData = $request->session()->get('user');
-        $userId = $userData['id'];
-
-        // Subconsulta para obtener los cursos matriculados por el usuario en el ciclo específico
-        $subQuery1 = Alumnociclo::select('IdCurso')
-            ->where('IdCiclo', $idCiclo)
-            ->where('IdUsuario', $userId)
-            ->whereIn('FechaCurso', function ($query) {
-                $query->select('FechaCurso')
-                    ->from('alumnociclo');
-            });
-
-        // Subconsulta para obtener los cursos asociados al ciclo específico
-        $subQuery2 = CicloCurso::select('IdCurso')
-            ->where('IdCiclo', $idCiclo);
-
-        // Consulta principal para obtener los cursos disponibles
-        $cursosDisponibles = Curso::whereNotIn('IdCurso', $subQuery1)
-            ->whereIn('IdCurso', $subQuery2)
-            ->get();
-
-        return response()->json($cursosDisponibles);
+        $cicloCurso = CicloCurso::where('IdCiclo', $idCiclo)->with('curso')->get();
+        $cursos = $cicloCurso->pluck('curso');
+        return response()->json($cursos);
     }
 
     
