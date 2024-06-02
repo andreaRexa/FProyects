@@ -71,8 +71,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="nombre" class="form-label">Nombre:</label>
-                                    <input type="text" id="nombre" name="nombre" class="form-control" readonly>
+                                    <label for="nombreIn" class="form-label">Nombre:</label>
+                                    <input type="text" id="nombreIn" name="nombreIn" class="form-control" readonly>
                                 </div>
                                 <div class="mb-3">
                                     <label for="apellidos" class="form-label">Apellidos:</label>
@@ -117,7 +117,7 @@
                 var IdUsu = $('#IdUsu').val();
                 @foreach($usuarios as $usuario) {
                     if(IdUsu ==='{{ $usuario->IdUsuario }}')                              
-                        $('#nombre').val('{{ $usuario->Nombre }}');
+                        $('#nombreIn').val('{{ $usuario->Nombre }}');
                         $('#apellidos').val('{{ $usuario->Apellidos }}');
                         $('#correo').val('{{ $usuario->Correo }}');
                         $('#ciclo').val('{{ $usuario->Nombreciclo }}');
