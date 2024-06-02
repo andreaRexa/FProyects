@@ -128,7 +128,7 @@ class GestionesController extends Controller
         $idFamilia = $request->idFamBorrar;
         $idCiclo = $request->idCicloBorrar;
         $idCurso = $request->idCursoBorrar;
-        dd($idUsuario, $idFamilia, $idCiclo, $idCurso);
+        //dd($idUsuario, $idFamilia, $idCiclo, $idCurso);
 
         // Buscar la solicitud en la base de datos utilizando los IDs
         $solicitud = SolAlumnosPendientes::where('IdUsuario', $idUsuario)
