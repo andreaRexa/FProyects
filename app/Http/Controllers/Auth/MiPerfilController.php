@@ -46,31 +46,28 @@ class MiPerfilController extends Controller
     {
         $userData = $request->session()->get('user');
         $userId = $userData['id'];
-    
-        $cursosDisponibles = Curso::whereNotIn('IdCurso', function ($query) use ($idCiclo, $userId) {
-            $query->select('IdCurso')
-                ->from('alumnociclo')
-                ->where('IdCiclo', $idCiclo)
-                ->where('IdUsuario', $userId)
-                ->whereIn('FechaCurso', function ($subQuery) use ($idCiclo) {
-                    $subQuery->select('FechaCurso')
-                        ->from('alumnociclo')
-                        ->whereIn('IdCurso', function ($innerQuery) use ($idCiclo) {
-                            $innerQuery->select('IdCurso')
-                                ->from('cicloscursos')
-                                ->where('IdCiclo', $idCiclo);
-                        });
-                });
-        })
-        ->whereIn('IdCurso', function ($query) use ($idCiclo) {
-            $query->select('IdCurso')
-                ->from('cicloscursos')
-                ->where('IdCiclo', $idCiclo);
-        })
-        ->get();
-    
+
+        // Subconsulta para obtener los cursos matriculados por el usuario en el ciclo específico
+        $subQuery1 = Alumnociclo::select('IdCurso')
+            ->where('IdCiclo', $idCiclo)
+            ->where('IdUsuario', $userId)
+            ->whereIn('FechaCurso', function ($query) {
+                $query->select('FechaCurso')
+                    ->from('alumnociclo');
+            });
+
+        // Subconsulta para obtener los cursos asociados al ciclo específico
+        $subQuery2 = CicloCurso::select('IdCurso')
+            ->where('IdCiclo', $idCiclo);
+
+        // Consulta principal para obtener los cursos disponibles
+        $cursosDisponibles = Curso::whereNotIn('IdCurso', $subQuery1)
+            ->whereIn('IdCurso', $subQuery2)
+            ->get();
+
         return response()->json($cursosDisponibles);
     }
+
     
     
     public function updatefoto(Request $request)
