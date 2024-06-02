@@ -146,14 +146,12 @@
         });
 
         $('#selectFamilia').change(function() {
-            var idFamiliaSeleccionada = $('#selectFamilia').val(); // Obtener el valor de la familia seleccionada
+            var idFamiliaSeleccionada = $(this).val(); // Obtener el valor de la familia seleccionada
             $('#selectModulos').empty(); // Limpiar los ciclos antes de cargar los nuevos
             // Iterar sobre todos los ciclos disponibles
             @foreach($ciclos as $ciclo)
                 // Verificar si el ciclo pertenece a la familia seleccionada
-
-                @if($ciclo->IdFamilia == " + idFamiliaSeleccionada")
-                    
+                @if($ciclo->IdFamilia == "+idFamiliaSeleccionada")
                     // Agregar el ciclo al select
                     $('#selectModulos').append($('<option>', {
                         value: '{{ $ciclo->IdCiclo }}',
