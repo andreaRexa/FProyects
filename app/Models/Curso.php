@@ -10,7 +10,7 @@ class Curso extends Model
     use HasFactory;
 
     protected $primaryKey = 'IdCurso';
-
+    protected $table = 'cursos';
     protected $fillable = [
         'Curso'
     ];

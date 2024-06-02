@@ -69,10 +69,10 @@
                             <input type="text" class="form-control" id="rol" value="{{ App\constantes::arrTipoUsuarios[session('user.rol')] }}" disabled>
                         </div>
                         @if(session('user.id') === 2)
-                        <div class="form-group">
-                            <label for="NIA">NIA</label>
-                            <input type="text" class="form-control" id="NIA" value="{{ session('user.NIA') }}" disabled>
-                        </div>
+                            <div class="form-group">
+                                <label for="NIA">NIA</label>
+                                <input type="text" class="form-control" id="NIA" value="{{ session('user.NIA') }}" disabled>
+                            </div>
                         @endif
                     </form>
                 </div>
