@@ -54,7 +54,7 @@
                             <label for="rol">Rol</label>
                             <input type="text" class="form-control" id="rol" value="{{ App\constantes::arrTipoUsuarios[session('user.rol')] }}" disabled>
                         </div>
-                        @if(session('user.id')===2)
+                        @if(session('user.id') === 2)
                         <div class="form-group">
                             <label for="NIA">NIA</label>
                             <input type="text" class="form-control" id="NIA" value="{{ session('user.NIA') }}" disabled>
@@ -62,49 +62,82 @@
                         @endif
                     </form>
                 </div>
-                <div class="col-md-4">
-
-                </div>
             </div>
+            <div class="text-right mt-4">
+                <button type="button" class="btn btn-primary" onclick="mostrarFormularioMatricula()">Mostrar Formulario de Matrícula</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Formulario de Matrícula -->
+    <div class="card mt-4" id="formularioMatricula" style="display: none;">
+        <div class="card-header" >
+            <h5>Formulario de Matricula</h5>
+        </div>
+        <div class="card-body">
+            <form id="matriculacion" action="{{ route('matriculacion') }}" method="post">
+                @csrf
+                <div class="form-group">
+                    <label for="selectFamilia">Familias</label>
+                    <select class="form-control" id="selectFamilia">
+                        @foreach($familias as $familia)
+                            <option value="{{ $familia->IdFamilia }}">{{ $familia->NombreFamilia }}</option>
+                        @endforeach
+                    </select>  
+                </div>     
+                <div class="form-group">
+                <label for="selectModulos">Modulos</label>
+                    <select class="form-control" id="selectModulos">
+                    </select>
+                    <div class="form-group">
+                <label for="selectCursos">Cursos</label>      
+                    <select class="form-control" id="selectCursos">
+                    </select>   
+                </div>
+                <div class="text-right">
+                    <button type="submit" class="btn btn-primary">Matricularse</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
 <script>
     function habilitarEdicion() {
-        document.getElementById('nombre').disabled = false;
-        document.getElementById('apellidos').disabled = false;
-        document.getElementById('correo').disabled = false;
+        $('#nombre').prop('disabled', false);
+        $('#apellidos').prop('disabled', false);
+        $('#correo').prop('disabled', false);
 
         // Mostrar botones de "Actualizar" y "Cancelar"
-        document.getElementById('actualizar').style.display = 'inline-block';
-        document.getElementById('cancelar').style.display = 'inline-block';
+        $('#actualizar').css('display', 'inline-block');
+        $('#cancelar').css('display', 'inline-block');
 
         // Ocultar botón de "Editar datos"
-        document.getElementById('editar').style.display = 'none';
+        $('#editar').css('display', 'none');
     }
 
     function cancelarEdicion() {
         // Deshabilitar los campos y restablecer sus valores
-        document.getElementById('nombre').value = "{{ session('user.nombre') }}";
-        document.getElementById('apellidos').value = "{{ session('user.apellidos') }}";
-        document.getElementById('correo').value = "{{ session('user.email') }}";
-        document.getElementById('nombre').disabled = true;
-        document.getElementById('apellidos').disabled = true;
-        document.getElementById('correo').disabled = true;
+        $('#nombre').val("{{ session('user.nombre') }}").prop('disabled', true);
+        $('#apellidos').val("{{ session('user.apellidos') }}").prop('disabled', true);
+        $('#correo').val("{{ session('user.email') }}").prop('disabled', true);
 
         // Ocultar botones de "Actualizar" y "Cancelar"
-        document.getElementById('actualizar').style.display = 'none';
-        document.getElementById('cancelar').style.display = 'none';
+        $('#actualizar').css('display', 'none');
+        $('#cancelar').css('display', 'none');
 
         // Mostrar botón de "Editar datos"
-        document.getElementById('editar').style.display = 'inline-block';
+        $('#editar').css('display', 'inline-block');
     }
 
     function confirmarActualizacion() {
         if (confirm('¿Estás seguro de que deseas actualizar tus datos?')) {
-            document.getElementById('update-form').submit(); // Enviar el formulario si se confirma la actualización
+            $('#formularioupdate').submit(); // Enviar el formulario si se confirma la actualización
         }
+    }
+
+    function mostrarFormularioMatricula() {
+        $('#formularioMatricula').css('display', 'block');
     }
 </script>
 @endsection

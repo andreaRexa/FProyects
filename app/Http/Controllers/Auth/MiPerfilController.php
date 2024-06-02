@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User; 
+use App\Models\Familia; 
+use App\Models\Ciclo; 
+use App\Models\Curso; 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -17,8 +20,10 @@ class MiPerfilController extends Controller
         $fotoBlob = $user->FotoUsuario;
 
         $imagenURL = $fotoBlob ? 'data:image/jpeg;base64,' . base64_encode($fotoBlob) : null;
-
-        return view('Auth.MiPerfil', ['imagenURL' => $imagenURL]);
+        $familias = Familia::all();
+        $ciclos = Ciclo::all();
+        $cursos = Curso::all();
+        return view('Auth.MiPerfil', compact(['imagenURL' => $imagenURL],'familias','ciclos','cursos'));
     }
 
     public function updatefoto(Request $request)
