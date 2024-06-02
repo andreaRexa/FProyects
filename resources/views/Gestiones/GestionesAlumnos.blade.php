@@ -48,7 +48,7 @@
                                     <td>{{ $usuario->Apellidos }}</td>
                                     <td>{{ $usuario->Correo }}</td>
                                     <td>
-                                        <a href="" class="btn btn-sm btn-success">✔️</a>
+                                        <button class="btn btn-sm btn-success" onclick="mostrarFormulario('{{ $usuario->IdSolicitud }}')">✔️</button>
                                         <form action="{{ route('eliminarsol') }}" method="POST" style="display:inline;">
                                             @csrf
                                             <input type="hidden" name="IdSolicitud" value="{{ $usuario->IdSolicitud }}">
@@ -61,7 +61,30 @@
                     </table>
                 </div>
             </div>
+
+            <div class="card mt-4" id="formularioTarjeta" style="display: none;">
+                <div class="card-body">
+                    <h4 class="card-title">Aprobar Solicitud</h4>
+                    <form action="{{ route('aprobarSolicitud') }}" method="POST">
+                        @csrf
+                        <!-- Agrega aquí los campos del formulario -->
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+    // Función para mostrar u ocultar el formulario
+    function mostrarFormulario(idSolicitud) {
+        var formularioTarjeta = document.getElementById('formularioTarjeta');
+        if (formularioTarjeta.style.display === "none") {
+            formularioTarjeta.style.display = "block";
+        } else {
+            formularioTarjeta.style.display = "none";
+        }
+    }
+</script>
 @endsection
