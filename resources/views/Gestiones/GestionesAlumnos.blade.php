@@ -19,7 +19,7 @@
                                     @foreach($chunk as $alumno)
                                         <td class="text-center">
                                             <img src="data:image/jpeg;base64,{{ base64_encode($alumno->FotoUsuario) }}" alt="Foto de {{ $alumno->Nombre }}" class="img-fluid rounded" style="width: 150px; height: 150px;">
-                                            <div>{{ $alumno->Nombre }} {{ $alumno->Apellido }}</div>
+                                            <div>{{ $alumno->Apellidos }},{{ $alumno->Nombre }} </div>
                                         </td>
                                     @endforeach
                                 </tr>

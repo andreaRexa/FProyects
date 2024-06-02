@@ -96,7 +96,8 @@ class GestionesController extends Controller
         $alumnos = User::join('familialumno', 'usuarios.IdUsuario', '=', 'familialumno.IdUsuario')
                     ->join('familias', 'familias.IdFamilia', '=', 'familialumno.IdFamilia')
                     ->where('familias.IdAdministrador', $IdAdmin)
-                    ->get();
+                    ->orderBy('usuarios.Apellidos') 
+                    ->get(['usuarios.*']); 
 
         return view('Gestiones.GestionesAlumnos', compact('alumnos'));
 
