@@ -101,6 +101,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary">Enviar</button>
+                                <button type="button" id="cancelar" class="btn btn-danger">Cancelar</button>
                             </div>
                         </div>
                     </form>
@@ -111,13 +112,11 @@
 </div>
 
 <script>
-        var fotoUsuario = '{{ $usuario->FotoUsuario }}';
         $(document).ready(function() {
             $('#btnFromSol').click(function(e) { 
                 var IdUsu = $('#IdUsu').val();
                 @foreach($usuarios as $usuario) {
-                    if(IdUsu ==='{{ $usuario->IdUsuario }}')       
-                        
+                    if(IdUsu ==='{{ $usuario->IdUsuario }}')                              
                         $('#nombre').val('{{ $usuario->Nombre }}');
                         $('#apellidos').val('{{ $usuario->Apellidos }}');
                         $('#correo').val('{{ $usuario->Correo }}');
