@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User; 
 use App\Models\Familia; 
 use App\Models\Ciclo; 
-use App\Models\Curso; 
+use App\Models\CicloCurso; 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -29,13 +29,14 @@ class MiPerfilController extends Controller
         $ciclos = Ciclo::where('IdFamilia', $idFamilia)->get();
         return response()->json($ciclos);
     }
-    
+
     public function getCursos($idCiclo)
     {
         $cicloCurso = CicloCurso::where('IdCiclo', $idCiclo)->with('curso')->get();
         $cursos = $cicloCurso->pluck('curso');
         return response()->json($cursos);
     }
+    
     public function updatefoto(Request $request)
     {
         // Validar la foto de perfil
