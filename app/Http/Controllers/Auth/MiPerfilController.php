@@ -54,19 +54,16 @@ class MiPerfilController extends Controller
                 ->whereIn('FechaCurso', function ($subQuery) {
                     $subQuery->select('FechaCurso')
                         ->from('alumnociclo')
-                        ->join('ciclocurso', 'alumnociclo.IdCiclo', '=', 'ciclocurso.IdCiclo')
-                        ->whereColumn('alumnociclo.IdCurso', 'ciclocurso.IdCurso');
+                        ->join('cicloscursos', 'alumnociclo.IdCiclo', '=', 'cicloscursos.IdCiclo');
                 });
         })
         ->whereIn('IdCurso', function ($query) use ($idCiclo) {
             $query->select('IdCurso')
-                ->from('ciclocurso')
+                ->from('cicloscursos')
                 ->where('IdCiclo', $idCiclo);
         })
         ->get();
         
-        return response()->json($cursosDisponibles);
-
         return response()->json($cursosDisponibles);
     }
     
