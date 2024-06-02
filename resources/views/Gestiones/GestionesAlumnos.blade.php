@@ -110,12 +110,13 @@
 </div>
 
 <script>
+        var fotoUsuario = '{{ $usuario->FotoUsuario }}';
         $(document).ready(function() {
             $('#btnFromSol').click(function(e) { 
                 var IdUsu = $('#IdUsu').val();
                 @foreach($usuarios as $usuario) {
                     if(IdUsu ==='{{ $usuario->IdUsuario }}')       
-                        $('#foto').attr('src', 'data:image/jpeg;base64,{{ $usuario->FotoUsuario }}');
+                        $('#foto').attr('src', 'data:image/jpeg;base64,'+fotoUsuario);
                         $('#nombre').val('{{ $usuario->Nombre }}');
                         $('#apellidos').val('{{ $usuario->Apellidos }}');
                         $('#correo').val('{{ $usuario->Correo }}');
