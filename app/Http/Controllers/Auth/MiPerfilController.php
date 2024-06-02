@@ -45,17 +45,16 @@ class MiPerfilController extends Controller
     public function getCursos($idCiclo, Request $request)
     {
         $userData = $request->session()->get('user');
-
-        // Obtener los cursos que el usuario no ha matriculado previamente en el ciclo seleccionado y comparar con FechaCurso
-        $cursosDisponibles = Curso::whereNotIn('IdCurso', function ($query) use ($idCiclo, $userData) {
+        $userId =$userData['id']; 
+        $cursosDisponibles = Curso::whereNotIn('IdCurso', function ($query) use ($idCiclo, $userId) {
             $query->select('IdCurso')
                 ->from('alumnociclo')
                 ->where('IdCiclo', $idCiclo)
-                ->where('IdUsuario', $userData['id'])
-                ->where('FechaCurso', function($subQuery) {
+                ->where('IdUsuario', $userId)
+                ->whereIn('FechaCurso', function ($subQuery) {
                     $subQuery->select('FechaCurso')
                         ->from('alumnociclo')
-                        ->whereColumn('alumnociclo.IdCiclo', 'ciclocurso.IdCiclo')
+                        ->join('ciclocurso', 'alumnociclo.IdCiclo', '=', 'ciclocurso.IdCiclo')
                         ->whereColumn('alumnociclo.IdCurso', 'ciclocurso.IdCurso');
                 });
         })
@@ -65,6 +64,8 @@ class MiPerfilController extends Controller
                 ->where('IdCiclo', $idCiclo);
         })
         ->get();
+        
+        return response()->json($cursosDisponibles);
 
         return response()->json($cursosDisponibles);
     }
