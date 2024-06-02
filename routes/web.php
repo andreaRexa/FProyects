@@ -29,6 +29,7 @@ Route::any('/pass-olvidada/reset-pass', [RecContraseniaController::class, 'reset
 Route::get('MiPerfil', [MiPerfilController::class, 'showMiPerfil'])->name('MiPerfil');
 Route::put('/perfil/{id}', [MiPerfilController::class, 'update'])->name('perfil.update');
 Route::post('perfil/updatefoto', [MiPerfilController::class, 'updatefoto'])->name('perfil.updatefoto');
+Route::post('perfil/matriculacion', [MiPerfilController::class, 'matriculacion'])->name('matriculacion');
 
 // Rutas relacionadas con proyectos
 Route::get('proyectos', [ProyectoController::class, 'showListadoProyectos'])->name('proyectos');
