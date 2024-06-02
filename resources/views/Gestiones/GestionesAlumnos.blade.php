@@ -123,11 +123,11 @@
                         $('#curso').val('{{ $usuario->Curso }}');
                     }
                 @endforeach
-                $('#formularioTarjeta').show();mostrarFormulario(usuario);
+                $('#formularioAprobar').css('display', 'inline-block');
             });  
 
             $('#cancelar').click(function() {
-                $('#formularioAprobar').hide();
+                $('#formularioAprobar').css('display', 'none');
             });
         });
 
