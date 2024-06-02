@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Ciclo;
 use App\Models\Curso;
 use App\Models\Familia;
-use App\Models\Usuario;
+use App\Models\User;
 use App\Models\FamiliaAlumno;
 class GestionesController extends Controller
 {
