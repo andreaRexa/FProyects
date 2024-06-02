@@ -124,19 +124,16 @@
         var usuarios = <?php echo json_encode($usuarios); ?>;
         $(document).ready(function() {
             $('#btnFromSol').click(function() {
-                e.preventDefault(); // Prevenir el comportamiento predeterminado del botón
-                // Obtener el índice del usuario correspondiente a este botón
+                e.preventDefault();             
                 var indice = $(this).closest('tr').index();
-                // Obtener el usuario correspondiente al índice
                 var usuario = usuarios[indice];
-                // Mostrar el formulario con la información del usuario
                 mostrarFormulario(usuario);
             });
 
-        $('#cancelar').click(function() {
-            $('#formularioAprobar').css('display', 'none');
+            $('#cancelar').click(function() {
+                $('#formularioAprobar').css('display', 'none');
+            });
         });
-    });
 
 </script>
 @endsection
