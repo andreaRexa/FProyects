@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Familia; 
 use App\Models\Ciclo; 
 use App\Models\CicloCurso; 
+use App\Models\Alumnociclo; 
 use App\Models\SolAlumnosPendientes; 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -25,28 +26,28 @@ class MiPerfilController extends Controller
         return view('Auth.MiPerfil', compact( 'imagenURL','familias'));
     }
 
-    public function getCiclos($idFamilia)
+    public function getCiclos($idFamilia, Request $request)
     {
         $userData = $request->session()->get('user');
-
+    
         // Obtener los ciclos que el usuario no ha matriculado previamente
-        $ciclosDisponibles = Ciclo::whereNotIn('IdCiclo', function ($query) use ($idFamilia) {
+        $ciclosDisponibles = Ciclo::whereNotIn('IdCiclo', function ($query) use ($idFamilia, $userData) {
             $query->select('IdCiclo')
                 ->from('alumnociclo')
                 ->where('IdUsuario', $userData['id']);
         })
         ->where('IdFamilia', $idFamilia)
         ->get();
-        dd($ciclosDisponibles);
+    
         return response()->json($ciclosDisponibles);
     }
-
-    public function getCursos($idCiclo)
+    
+    public function getCursos($idCiclo, Request $request)
     {
         $userData = $request->session()->get('user');
-
+    
         // Obtener los cursos que el usuario no ha matriculado previamente en el ciclo seleccionado
-        $cursosDisponibles = Curso::whereNotIn('IdCurso', function ($query) use ($idCiclo) {
+        $cursosDisponibles = Curso::whereNotIn('IdCurso', function ($query) use ($idCiclo, $userData) {
             $query->select('IdCurso')
                 ->from('alumnocurso')
                 ->where('IdCiclo', $idCiclo)
@@ -58,7 +59,7 @@ class MiPerfilController extends Controller
                 ->where('IdCiclo', $idCiclo);
         })
         ->get();
-
+    
         return response()->json($cursosDisponibles);
     }
     
