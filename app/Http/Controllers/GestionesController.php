@@ -9,6 +9,7 @@ use App\Models\Curso;
 use App\Models\Familia;
 use App\Models\User;
 use App\Models\FamiliaAlumno;
+use App\Models\AlumnoCiclo;
 use App\Models\SolAlumnosPendientes;
 class GestionesController extends Controller
 {
@@ -156,7 +157,12 @@ class GestionesController extends Controller
         $alumnoCiclo->IdCiclo=$request->cicloId;
         $alumnoCiclo->FechaCurso=$request->curso;
         $alumnoCiclo->save();
-        
+
+        $IdSolicitud = $request->IdSolicitudApr;
+
+        $solicitud = SolAlumnosPendientes::findOrFail($IdSolicitud);
+
+        $solicitud->delete();
         return redirect()->intended('gestionesAlumnos');
 
     }

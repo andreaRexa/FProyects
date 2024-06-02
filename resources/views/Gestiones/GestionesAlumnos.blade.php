@@ -56,7 +56,8 @@
                                                 data-curso="{{ $usuario->Curso }}"
                                                 data-idusu="{{ $usuario->IdUsuario }}"
                                                 data-idciclo="{{ $usuario->IdCiclo }}"
-                                                data-idfam="{{ $usuario->IdFamilia }}">
+                                                data-idfam="{{ $usuario->IdFamilia }}"
+                                                data-idsol="{{ $usuario->IdSolicitud }}">
                                             ✔️
                                         </button>
                                         <form action="{{ route('eliminarsol') }}" method="POST" style="display:inline;">
@@ -81,6 +82,7 @@
                             <div class="col-md-6">
                                 <input type="hidden" id="usuId" name="usuId" class="form-control" readonly>
                                 <input type="hidden" id="cicloId" name="cicloId" class="form-control" readonly>
+                                <input type="hidden" id="IdSolicitudApr" name="IdSolicitudApr" class="form-control" readonly>
                                 <input type="hidden" id="famId" name="famId" class="form-control" readonly>
                                 <div class="mb-3">
                                     <label for="nombreIn" class="form-label">Nombre:</label>
@@ -134,6 +136,7 @@
             $('#usuId').val($(this).data('idusu'));
             $('#cicloId').val($(this).data('idciclo'));
             $('#famId').val($(this).data('idfam'));
+            $('#IdSolicitudApr').val($(this).data('idsol'));
             
             $('#formularioAprobar').css('display', 'inline-block');
         });  
