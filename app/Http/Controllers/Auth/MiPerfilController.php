@@ -21,9 +21,13 @@ class MiPerfilController extends Controller
 
         $imagenURL = $fotoBlob ? 'data:image/jpeg;base64,' . base64_encode($fotoBlob) : null;
         $familias = Familia::all();
-        $ciclos = Ciclo::all();
-        $cursos = Curso::all();
-        return view('Auth.MiPerfil', compact( 'imagenURL','familias','ciclos','cursos'));
+        return view('Auth.MiPerfil', compact( 'imagenURL','familias'));
+    }
+    
+    public function getCiclos($idFamilia)
+    {
+        $ciclos = Ciclo::where('IdFamilia', $idFamilia)->get();
+        return response()->json($ciclos);
     }
 
     public function updatefoto(Request $request)

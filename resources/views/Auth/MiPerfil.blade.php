@@ -146,19 +146,24 @@
         });
 
         $('#selectFamilia').change(function() {
-            var idFamiliaSeleccionada = $(this).val(); // Obtener el valor de la familia seleccionada
-            $('#selectModulos').empty(); // Limpiar los ciclos antes de cargar los nuevos
-            // Iterar sobre todos los ciclos disponibles
-            @foreach($ciclos as $ciclo)
-                // Verificar si el ciclo pertenece a la familia seleccionada
-                @if($ciclo->IdFamilia == "+idFamiliaSeleccionada")
-                    // Agregar el ciclo al select
-                    $('#selectModulos').append($('<option>', {
-                        value: '{{ $ciclo->IdCiclo }}',
-                        text: '{{ $ciclo->NombreCiclo }}'
-                    }));
-                @endif
-            @endforeach
+            var idFamiliaSeleccionada = $(this).val();
+            $.ajax({
+                url: '{{ route("getCiclos", ":idFamilia") }}'.replace(':idFamilia', idFamiliaSeleccionada),
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    $('#selectModulos').empty();
+                    $.each(data, function(index, ciclo) {
+                        $('#selectModulos').append($('<option>', {
+                            value: ciclo.IdCiclo,
+                            text: ciclo.NombreCiclo
+                        }));
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
         });
 
     });
