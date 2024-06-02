@@ -129,9 +129,10 @@ class MiPerfilController extends Controller
             // Si ya existe una solicitud pendiente, redirige de vuelta al formulario de matriculación con un mensaje de error
             return redirect()->back()->withErrors(['error' => 'Ya tienes una solicitud pendiente para esta familia'])->withInput();
         }
-    
+        $maxId = SolAlumnosPendientes::max('IdSolicitud');
         // Crear y guardar la solicitud
         $solicitud = new SolAlumnosPendientes();
+        $solicitud->IdSolicitud =$maxId+1;
         $solicitud->IdUsuario = $userData['id'];
         $solicitud->IdFamilia = $request->selectFamilia;
         $solicitud->IdCiclo = $request->selectModulos;

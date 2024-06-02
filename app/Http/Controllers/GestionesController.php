@@ -110,10 +110,11 @@ class GestionesController extends Controller
                         'usuarios.Nombre', 
                         'usuarios.Correo', 
                         'usuarios.IdUsuario', 
-                        'solAlumnosPendientes.IdFamilia', 
+                        'familias.IdFamilia', 
                         'ciclos.IdCiclo', 
                         'ciclos.Nombreciclo', 
                         'cursos.IdCurso', 
+                        'solAlumnosPendientes.IdSolicitud', 
                         'cursos.Curso'
                     )
                     ->where('familias.IdAdministrador', $IdAdmin)
@@ -124,18 +125,11 @@ class GestionesController extends Controller
 
     public function eliminarSol(Request $request){
         // Obtener los IDs de los elementos a eliminar desde la solicitud
-        $idUsuario = $request->idUsuBorrar;
-        $idFamilia = $request->idFamBorrar;
-        $idCiclo = $request->idCicloBorrar;
-        $idCurso = $request->idCursoBorrar;
+        $IdSolicitud = $request->IdSolicitud;
         //dd($idUsuario, $idFamilia, $idCiclo, $idCurso);
 
         // Buscar la solicitud en la base de datos utilizando los IDs
-        $solicitud = SolAlumnosPendientes::where('IdUsuario', $idUsuario)
-                                        ->where('IdFamilia', $idFamilia)
-                                        ->where('IdCiclo', $idCiclo)
-                                        ->where('IdCurso', $idCurso)
-                                        ->get();
+        $solicitud = SolAlumnosPendientes::get($IdSolicitud);
         //dd($solicitud);
         // Eliminar la solicitud
         $solicitud->delete();

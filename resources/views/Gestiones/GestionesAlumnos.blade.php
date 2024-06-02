@@ -51,10 +51,7 @@
                                         <a href="" class="btn btn-sm btn-success">✔️</a>
                                         <form action="{{ route('eliminarsol') }}" method="POST" style="display:inline;">
                                             @csrf
-                                            <input type="hidden" name="idUsuBorrar" value="{{ $usuario->IdUsuario }}">
-                                            <input type="hidden" name="idFamBorrar" value="{{ $usuario->IdFamilia }}">
-                                            <input type="hidden" name="idCicloBorrar" value="{{ $usuario->IdCiclo }}">
-                                            <input type="hidden" name="idCursoBorrar" value="{{ $usuario->IdCurso }}">
+                                            <input type="hidden" name="IdSolicitud" value="{{ $usuario->IdSolicitud }}">
                                             <button type="submit" class="btn btn-sm btn-danger">❌</button>
                                         </form>
                                     </td>

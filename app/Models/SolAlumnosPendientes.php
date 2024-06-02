@@ -19,7 +19,7 @@ class SolAlumnosPendientes extends Model
         'IdCurso'
     ];
 
-    protected $primaryKey = ['IdUsuario', 'IdFamilia', 'IdCiclo', 'IdCurso'];
+    protected $primaryKey = 'IdSolicitud';
     public $incrementing = false;
 
     // Relación con el modelo Usuario
