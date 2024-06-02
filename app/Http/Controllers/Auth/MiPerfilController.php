@@ -45,16 +45,21 @@ class MiPerfilController extends Controller
     public function getCursos($idCiclo, Request $request)
     {
         $userData = $request->session()->get('user');
-        $userId =$userData['id']; 
+        $userId = $userData['id'];
+    
         $cursosDisponibles = Curso::whereNotIn('IdCurso', function ($query) use ($idCiclo, $userId) {
             $query->select('IdCurso')
                 ->from('alumnociclo')
                 ->where('IdCiclo', $idCiclo)
                 ->where('IdUsuario', $userId)
-                ->whereIn('FechaCurso', function ($subQuery) {
+                ->whereIn('FechaCurso', function ($subQuery) use ($idCiclo) {
                     $subQuery->select('FechaCurso')
                         ->from('alumnociclo')
-                        ->join('cicloscursos', 'alumnociclo.IdCiclo', '=', 'cicloscursos.IdCiclo');
+                        ->whereIn('IdCurso', function ($innerQuery) use ($idCiclo) {
+                            $innerQuery->select('IdCurso')
+                                ->from('cicloscursos')
+                                ->where('IdCiclo', $idCiclo);
+                        });
                 });
         })
         ->whereIn('IdCurso', function ($query) use ($idCiclo) {
@@ -63,9 +68,10 @@ class MiPerfilController extends Controller
                 ->where('IdCiclo', $idCiclo);
         })
         ->get();
-        
+    
         return response()->json($cursosDisponibles);
     }
+    
     
     public function updatefoto(Request $request)
     {
