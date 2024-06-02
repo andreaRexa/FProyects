@@ -111,9 +111,11 @@
                 </div>
                 <div class="form-group">
                     <label for="passFamilia">Contraseña familia</label> 
+                    <input type="text" class="form-control" id="passFamilia" name="passFamilia" required>
                 </div>
                 <div class="text-right">
                     <button type="submit" class="btn btn-primary">Matricularse</button>
+                    
                 </div>
             </form>
         </div>

@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Familia; 
 use App\Models\Ciclo; 
 use App\Models\CicloCurso; 
+use App\Models\SolAlumnosPendientes; 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -103,5 +104,25 @@ class MiPerfilController extends Controller
         }
     }
     
-    
+    public function matriculacion (Request $request){
+        // Verificar si la pass de la contreseña de la familia es correcta
+        $passFamilia = Familia::where('ContraseniaFamilia', $request->passFamilia)->first();
+
+        if ($existingUser) {
+            // Si el correo electrónico ya existe, redirige de vuelta al formulario de registro con un mensaje de error
+            return redirect()->back()->withErrors(['passFamilia' => 'La contraseña de la famila es erronea'])->withInput();
+        }
+        
+        // Validar la solicitud
+        $request->validate([
+                'passFamilia' => 'required|string|max:16',
+        ]);
+        $solicitud = new SolAlumnosPendientes();
+        $userData = $request->session()->get('user');
+        $solicitud->IdUsuario = $userData['id'];
+        $solicitud->IdFamilia = $request->selectFamilia;
+        $solicitud->IdCiclo = $request->selectModulos;
+        $solicitud->IdCurso = $request->selectCursos;
+        $solicitud->save;
+    }
 }
