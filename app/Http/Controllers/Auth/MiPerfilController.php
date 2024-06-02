@@ -107,7 +107,7 @@ class MiPerfilController extends Controller
     public function matriculacion (Request $request){
         // Verificar si la pass de la contreseña de la familia es correcta
         $passFamilia = Familia::where('ContraseniaFamilia', $request->passFamilia)->first();
-        dd($request);
+        //dd($request);
         if (!$passFamilia) {
             // Si el correo electrónico ya existe, redirige de vuelta al formulario de registro con un mensaje de error
             return redirect()->back()->withErrors(['passFamilia' => 'La contraseña de la famila es erronea'])->withInput();
@@ -124,7 +124,7 @@ class MiPerfilController extends Controller
         $solicitud->IdCiclo = $request->selectModulos;
         $solicitud->IdCurso = $request->selectCursos;
         //dd($solicitud);
-        //$solicitud->save;
+        $solicitud->save;
 
         return redirect()->route('MiPerfil')->with('success', 'Solicitud enviada');
     }
