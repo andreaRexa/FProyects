@@ -21,9 +21,9 @@
                     </form>
                     
                     <div class="mt-3 text-center"> 
-                        <button type="button" class="btn btn-dark mb-2" id="editar" onclick="habilitarEdicion()">Editar datos</button>
-                        <button type="submit" class="btn btn-success mb-2" id="actualizar" style="display: none;" onclick="confirmarActualizacion()">Actualizar</button>
-                        <button type="button" class="btn btn-secondary mb-2" id="cancelar" style="display: none;" onclick="cancelarEdicion()">Cancelar</button>
+                        <button type="button" class="btn btn-dark mb-2" id="editar">Editar datos</button>
+                        <button type="submit" class="btn btn-success mb-2" id="actualizar" style="display: none;">Actualizar</button>
+                        <button type="button" class="btn btn-secondary mb-2" id="cancelar" style="display: none;">Cancelar</button>
                     </div>
                     
                     <div class="mt-3 text-center"> 
@@ -64,7 +64,7 @@
                 </div>
             </div>
             <div class="text-right mt-4">
-                <button type="button" class="btn btn-primary" onclick="mostrarFormularioMatricula()">Matriculacion</button>
+                <button type="button" class="btn btn-primary" id="bntMatr" >Matriculacion</button>
             </div>
         </div>
     </div>
@@ -108,7 +108,7 @@
 
 <script>
     $(document).ready(function() {
-        function habilitarEdicion() {
+        $('#editar').click(function() {
             $('#nombre').prop('disabled', false);
             $('#apellidos').prop('disabled', false);
             $('#correo').prop('disabled', false);
@@ -119,9 +119,9 @@
 
             // Ocultar botón de "Editar datos"
             $('#editar').css('display', 'none');
-        }
+        });
 
-        function cancelarEdicion() {
+        $('#cancelar').click(function() {
             // Deshabilitar los campos y restablecer sus valores
             $('#nombre').val("{{ session('user.nombre') }}").prop('disabled', true);
             $('#apellidos').val("{{ session('user.apellidos') }}").prop('disabled', true);
@@ -133,23 +133,19 @@
 
             // Mostrar botón de "Editar datos"
             $('#editar').css('display', 'inline-block');
-        }
+        });
 
-        function confirmarActualizacion() {
+        $('#actualizar').click(function() {
             if (confirm('¿Estás seguro de que deseas actualizar tus datos?')) {
                 $('#formularioupdate').submit(); // Enviar el formulario si se confirma la actualización
             }
-        }
-
-        function mostrarFormularioMatricula() {
-            $('#formularioMatricula').css('display', 'block');
-        }
-
-        $('#selectFamilia').change(function() {
-            cargarCiclos();
         });
 
-        function cargarCiclos() {
+        $('#bntMatr').click(function() {
+            $('#formularioMatricula').css('display', 'block');
+        });
+
+        $('#selectFamilia').change(function() {
             var idFamiliaSeleccionada = $('#selectFamilia').val(); // Obtener el valor de la familia seleccionada
             console.log(idFamiliaSeleccionada);
             $('#selectModulos').empty(); // Limpiar los ciclos antes de cargar los nuevos
@@ -165,11 +161,8 @@
                     }));
                 @endif
             @endforeach
-        }
+        });
 
-        function cargarCursos() {
-
-        }
     });
 </script>
 @endsection
