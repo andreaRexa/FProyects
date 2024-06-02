@@ -129,7 +129,7 @@ class GestionesController extends Controller
         //dd($idUsuario, $idFamilia, $idCiclo, $idCurso);
 
         // Buscar la solicitud en la base de datos utilizando los IDs
-        $solicitud = SolAlumnosPendientes::get($IdSolicitud);
+        $solicitud = SolAlumnosPendientes::findOrFail($IdSolicitud);
         //dd($solicitud);
         // Eliminar la solicitud
         $solicitud->delete();
