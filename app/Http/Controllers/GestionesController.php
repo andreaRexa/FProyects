@@ -109,6 +109,7 @@ class GestionesController extends Controller
                         'usuarios.Apellidos', 
                         'usuarios.Nombre', 
                         'usuarios.Correo', 
+                        'usuarios.IdUsuario', 
                         'solAlumnosPendientes.IdFamilia', 
                         'ciclos.IdCiclo', 
                         'ciclos.Nombreciclo', 
