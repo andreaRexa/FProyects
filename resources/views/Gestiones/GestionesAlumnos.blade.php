@@ -48,8 +48,7 @@
                                     <td>{{ $usuario->Apellidos }}</td>
                                     <td>{{ $usuario->Correo }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-sm btn-success" id = "btnFromSol">✔️</button>
-                                        <input type="hidden" name="IdUsu" value="{{ $usuario->IdUsuario }}">
+                                        <button type="button" class="btn btn-sm btn-success btnFromSol" data-usuario-id="{{ $usuario->IdUsuario }}">✔️</button>
                                         <form action="{{ route('eliminarsol') }}" method="POST" style="display:inline;">
                                             @csrf
                                             <input type="hidden" name="IdSolicitud" value="{{ $usuario->IdSolicitud }}">
@@ -112,25 +111,25 @@
 </div>
 
 <script>
-        $(document).ready(function() {
-            $('#btnFromSol').click(function(e) { 
-                var IdUsu = $('#IdUsu').val();
-                @foreach($usuarios as $usuario) {
-                    if(IdUsu ==='{{ $usuario->IdUsuario }}')                              
-                        $('#nombreIn').val('{{ $usuario->Nombre }}');
-                        $('#apellidos').val('{{ $usuario->Apellidos }}');
-                        $('#correo').val('{{ $usuario->Correo }}');
-                        $('#ciclo').val('{{ $usuario->Nombreciclo }}');
-                        $('#curso').val('{{ $usuario->Curso }}');
-                    }
-                @endforeach
-                $('#formularioAprobar').css('display', 'inline-block');
-            });  
-
-            $('#cancelar').click(function() {
-                $('#formularioAprobar').css('display', 'none');
+    $(document).ready(function() {
+        $('.btnFromSol').click(function(e) { 
+            var usuarioId = $(this).data('usuario-id');
+            var usuario = {!! json_encode($usuarios) !!}.find(function(usuario) {
+                return usuario.IdUsuario === usuarioId;
             });
-        });
+                                                 
+            $('#nombreIn').val(usuario.Nombre);
+            $('#apellidos').val(usuario.Apellidos);
+            $('#correo').val(usuario.Correo);
+            $('#ciclo').val(usuario.Nombreciclo);
+            $('#curso').val(usuario.Curso);
+            
+            $('#formularioAprobar').css('display', 'inline-block');
+        });  
 
+        $('#cancelar').click(function() {
+            $('#formularioAprobar').css('display', 'none');
+        });
+    });
 </script>
 @endsection
