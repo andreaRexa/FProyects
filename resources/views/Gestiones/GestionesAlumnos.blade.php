@@ -69,39 +69,40 @@
                     <form action="{{ route('aprobarSolicitud') }}" method="POST">
                         @csrf
                         <div class="row">
-                            @foreach($usuarios as $usuario)
-                                <div class="col-md-4">
-                                    <img src="" id="foto" class="img-fluid rounded" style="width: 100px; height: 100px;">
-                                </div>                           
-                                <div class="col-md-8">                           
-                                    <div class="mb-3">
-                                        <label for="nombre" class="form-label">Nombre:</label>
-                                        <input type="text" id="nombre" name="nombre" class="form-control" readonly>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="apellidos" class="form-label">Apellidos:</label>
-                                        <input type="text" id="apellidos" name="apellidos" class="form-control" readonly>
-                                    </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="nombre" class="form-label">Nombre:</label>
+                                    <input type="text" id="nombre" name="nombre" class="form-control" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="apellidos" class="form-label">Apellidos:</label>
+                                    <input type="text" id="apellidos" name="apellidos" class="form-control" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="correo" class="form-label">Correo:</label>
+                                    <input type="email" id="correo" name="correo" class="form-control" readonly>
                                 </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="correo" class="form-label">Correo:</label>
-                                <input type="email" id="correo" name="correo" class="form-control" readonly>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="ciclo" class="form-label">Ciclo:</label>
+                                    <input type="text" id="ciclo" name="ciclo" class="form-control" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="curso" class="form-label">Curso:</label>
+                                    <input type="text" id="curso" name="curso" class="form-control" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="nia" class="form-label">NIA:</label>
+                                    <input type="text" id="nia" name="nia" class="form-control" required>
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="ciclo" class="form-label">Ciclo:</label>
-                                <input type="text" id="ciclo" name="ciclo" class="form-control" readonly>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">Enviar</button>
                             </div>
-                            <div class="mb-3">
-                                <label for="curso" class="form-label">Curso:</label>
-                                <input type="text" id="curso" name="curso" class="form-control" readonly>
-                            </div>
-                            <div class="mb-3">
-                                <label for="nia" class="form-label">NIA:</label>
-                                <input type="text" id="nia" name="nia" class="form-control" required>
-                            </div>
-                            @endforeach
-                        <button type="submit" class="btn btn-primary">Enviar</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -110,50 +111,27 @@
 </div>
 
 <script>
-    $(document).ready(function() {
-        $('#btnFromSol').click(function(e) {
-            e.preventDefault();
-            var IdUsu = $(this).siblings("input[name='IdUsu']").val();
-            var usuario = $.grep(usuarios, function(obj){return obj.IdUsuario === IdUsu;})[0];
-            // Convertir el blob a una URL
-            var blobUrl = URL.createObjectURL(base64toBlob('{{ $usuario->FotoUsuario }}', 'image/jpeg'));
-            $('#foto').attr('src', blobUrl);
-            $('#nombre').val(usuario.Nombre);
-            $('#apellidos').val(usuario.Apellidos);
-            $('#correo').val(usuario.Correo);
-            $('#ciclo').val(usuario.Nombreciclo);
-            $('#curso').val(usuario.Curso);
-            $('#formularioTarjeta').show();
+        var fotoUsuario = '{{ $usuario->FotoUsuario }}';
+        $(document).ready(function() {
+            $('#btnFromSol').click(function(e) { 
+                var IdUsu = $('#IdUsu').val();
+                @foreach($usuarios as $usuario) {
+                    if(IdUsu ==='{{ $usuario->IdUsuario }}')       
+                        
+                        $('#nombre').val('{{ $usuario->Nombre }}');
+                        $('#apellidos').val('{{ $usuario->Apellidos }}');
+                        $('#correo').val('{{ $usuario->Correo }}');
+                        $('#ciclo').val('{{ $usuario->Nombreciclo }}');
+                        $('#curso').val('{{ $usuario->Curso }}');
+                    }
+                @endforeach
+                $('#formularioAprobar').css('display', 'inline-block');
+            });  
+
+            $('#cancelar').click(function() {
+                $('#formularioAprobar').css('display', 'none');
+            });
         });
 
-        $('#cancelar').click(function() {
-            $('#formularioTarjeta').hide();
-        });
-    });
-
-    // Función para convertir una cadena base64 a un blob
-    function base64toBlob(base64Data, contentType) {
-        contentType = contentType || '';
-        var sliceSize = 1024;
-        var byteCharacters = atob(base64Data);
-        var byteArrays = [];
-
-        for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-            var slice = byteCharacters.slice(offset, offset + sliceSize);
-
-            var byteNumbers = new Array(slice.length);
-            for (var i = 0; i < slice.length; i++) {
-                byteNumbers[i] = slice.charCodeAt(i);
-            }
-
-            var byteArray = new Uint8Array(byteNumbers);
-            byteArrays.push(byteArray);
-        }
-
-        var blob = new Blob(byteArrays, { type: contentType });
-        return blob;
-    }
 </script>
-
-
 @endsection
