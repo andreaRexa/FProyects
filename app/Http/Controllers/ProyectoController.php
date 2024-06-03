@@ -69,7 +69,8 @@ class ProyectoController extends Controller
                     ->get();    
         $cursos = AlumnoCiclo::join('ciclos', 'ciclos.IdCiclo', '=', 'alumnoCiclo.IdCiclo')
                     ->where('IdUsuario', $alumnoId)
-                    ->get();          
+                    ->get();   
+                           
         return view('Proyectos.SubirEditarProyectos', compact('familias', 'ciclos', 'cursos'));
     }
 
