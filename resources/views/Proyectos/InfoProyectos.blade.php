@@ -54,7 +54,7 @@
                                     @if($proyecto->DocumentacionPriv == 1)
                                         <img src="/storage/imagenes/nodisponible.png" alt="No disponible" style="width: 100px; height: 100px;">
                                     @else
-                                        <a href="{{ route('descargarDocumentacion', $proyecto->NombreProyecto) }}">
+                                        <a href="https://fproyectsarchivos.s3.amazonaws.com/ArchivosPublicos/{{ $proyecto->Documentacion }}" download>
                                             <img src="/storage/imagenes/zip.png" alt="Archivo ZIP" style="width: 100px; height: 100px;">
                                         </a>
                                         <p class="mt-2">{{ $proyecto->Documentacion }}</p>
