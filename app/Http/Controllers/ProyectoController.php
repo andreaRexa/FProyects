@@ -106,7 +106,7 @@ class ProyectoController extends Controller
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Ajusta los tipos MIME y el tamaño máximo según sea necesario
         ]);
 
-        foreach ($autores as $autor) {
+        foreach ($request->autores as $autor) {
             $proyectoAlumno = new ProyectoAlumno();
             $proyectoAlumno->IdProyecto=$maxId;
             $proyectoAlumno->IdUsuario=$autor;
