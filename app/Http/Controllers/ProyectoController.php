@@ -86,16 +86,14 @@ class ProyectoController extends Controller
 
         // Filtrar por curso
         if ($request->filled('curso')) {
-            $query->whereHas('proyectoAlumno.usuario.alumnoCiclo', function ($q) use ($request) {
-                $q->where('FechaCurso', $request->input('curso'));
-            });
+            $query->where('IdCurso', $request->input('curso'));
         }
         
         // Obtener los proyectos filtrados
         $proyectos = $query->get();
         //dd($query->toSql());
         $ciclos = Ciclo::groupBy('NombreCiclo')->pluck('NombreCiclo');
-        $cursos = AlumnoCiclo::groupBy('FechaCurso')->pluck('FechaCurso'); 
+        $cursos = Curso::all();  
         
         // Cargar la vista con los proyectos filtrados
         return view('Proyectos.listaProyectos', compact('proyectos', 'ciclos', 'cursos'));
