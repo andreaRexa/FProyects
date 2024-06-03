@@ -95,9 +95,9 @@ class ProyectoController extends Controller
     }
 
     public function subirProyecto(Request $request){
-        $maxId = Proyecto::max('IdProyecto');
+        $maxId = Proyectos::max('IdProyecto');
       
-        $proyecto = new Proyecto();
+        $proyecto = new Proyectos();
         $proyecto->NombreProyecto = $request->nombre;
         $proyecto->Descripcion = $request->descripcion;
         $proyecto->Archivos = str_replace(' ', '_', $request->nombre).'_'.$request->archivos->getClientOriginalName(). '.' . $request->archivos->getClientOriginalExtension();
@@ -119,6 +119,7 @@ class ProyectoController extends Controller
         dd($proyecto);
         return redirect()->intended('proyectos'); 
     }
+
     public function filtrar(Request $request)
     {
         // Obtener todos los proyectos
