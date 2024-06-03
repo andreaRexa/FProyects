@@ -102,18 +102,14 @@ class ProyectoController extends Controller
     {
         // Buscar el proyecto por el nombre
         $proyecto = Proyectos::where('NombreProyecto', $nombreProyecto)->firstOrFail();
-    
-
-        // Registrar la ruta completa del archivo para depuración
-        Log::info('Ruta completa del archivo: ' . $rutaCompleta);
-    
+     
         // Verificar si el archivo existe
         if (!Storage::disk('s3')->exists($proyecto->Archivos)) {
             return response()->json(['error' => 'El archivo no existe.'], 404);
         }
     
         // Descargar el archivo desde S3
-        return Storage::disk('s3')->download($rutaCompleta);
+        return Storage::disk('s3')->download($proyecto->Archivos);
     }
 
     public function descargarDocumentacion($nombreProyecto)
