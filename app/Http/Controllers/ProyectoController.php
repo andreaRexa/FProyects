@@ -102,9 +102,18 @@ class ProyectoController extends Controller
     {
         // Buscar el proyecto por el nombre
         $proyecto = Proyectos::where('NombreProyecto', $nombreProyecto)->firstOrFail();
-
+    
         // Construir la ruta completa del archivo
         $rutaCompleta = str_replace(' ', '_', $proyecto->NombreProyecto) . '_' . $proyecto->Archivos;
+    
+        // Registrar la ruta completa del archivo para depuración
+        Log::info('Ruta completa del archivo: ' . $rutaCompleta);
+    
+        // Verificar si el archivo existe
+        if (!Storage::disk('s3')->exists($rutaCompleta)) {
+            return response()->json(['error' => 'El archivo no existe.'], 404);
+        }
+    
         // Descargar el archivo desde S3
         return Storage::disk('s3')->download($rutaCompleta);
     }
