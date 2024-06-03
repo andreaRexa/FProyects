@@ -102,11 +102,11 @@ class ProyectoController extends Controller
     {
         // Buscar el proyecto por el nombre
         $proyecto = Proyectos::where('NombreProyecto', $nombreProyecto)->firstOrFail();
-
+        $disco = 'archivosPublicos';
         // Construir la ruta completa del archivo
-        $rutaCompleta = 'ArchivosPublicos/' . str_replace(' ', '_', $proyecto->NombreProyecto) . '/' . $proyecto->Archivos;
+        $rutaCompleta = str_replace(' ', '_', $proyecto->NombreProyecto) . '/' . $proyecto->Archivos;
         // Descargar el archivo desde S3
-        return Storage::disk('s3')->download($rutaCompleta);
+        return Storage::disk($disco)->download($rutaCompleta);
     }
 
     public function descargarDocumentacion($nombreProyecto)
