@@ -96,28 +96,59 @@ class ProyectoController extends Controller
 
     public function subirProyecto(Request $request){
         $maxId = Proyectos::max('IdProyecto');
-      
+        // Validar los datos del formulario
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'required|string',
+            'archivos' => 'required|file|mimes:pdf,doc,docx', // Cambia los tipos MIME según sea necesario
+            'documentacion' => 'required|file|mimes:pdf,doc,docx', // Cambia los tipos MIME según sea necesario
+            'estado_proyecto' => 'required|boolean',
+            'ciclo' => 'required|integer',
+            'curso' => 'required|integer',
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Ajusta los tipos MIME y el tamaño máximo según sea necesario
+            'familia' => 'required|integer',
+            'estado_archivos' => 'required|boolean',
+            'estado_documentos' => 'required|boolean'
+        ]);
+
         $proyecto = new Proyectos();
         $proyecto->NombreProyecto = $request->nombre;
         $proyecto->Descripcion = $request->descripcion;
-        $proyecto->Archivos = str_replace(' ', '_', $request->nombre).'_'.$request->archivos->getClientOriginalName(). '.' . $request->archivos->getClientOriginalExtension();
-        $proyecto->Documentacion = str_replace(' ', '_', $request->nombre).'_'.$request->documentacion->getClientOriginalName(). '.' . $request->documentacion->getClientOriginalExtension();;
+
+        // Manejar archivo de proyecto
+        if ($request->hasFile('archivos')) {
+            $archivo = $request->file('archivos');
+            $archivoNombre = str_replace(' ', '_', $request->nombre) . '_' . $archivo->getClientOriginalName();
+            Storage::disk('s3')->put('ArchivosPublicos', file_get_contents($archivo));
+            $proyecto->Archivos = $archivoNombre;
+        }
+
+        // Manejar documentación del proyecto
+        if ($request->hasFile('documentacion')) {
+            $documentacion = $request->file('documentacion');
+            $documentacionNombre = str_replace(' ', '_', $request->nombre) . '_' . $documentacion->getClientOriginalName();
+            Storage::disk('s3')->put('ArchivosPublicos/', file_get_contents($documentacion));
+            $proyecto->Documentacion = $documentacionNombre;
+        }
+
+        // Manejar la imagen del proyecto
+        if ($request->hasFile('foto')) {
+            $foto = $request->file('foto');
+            $fotoBlob = base64_encode(file_get_contents($foto->getRealPath()));
+            $proyecto->FotoProyecto = $fotoBlob;
+        }
+
         $proyecto->Estado = $request->estado_proyecto;
         $proyecto->Fecha = Carbon::now();
         $proyecto->IdCiclo = $request->ciclo;
         $proyecto->IdCurso = $request->curso;
-        if ($request->hasFile('foto')) {
-            $foto = $request->file('foto');
-            $blob = base64_encode(file_get_contents($foto->getRealPath()));
-            $proyecto->FotoProyecto = $blob;
-        }
         $proyecto->IdFamilia = $request->familia;
         $proyecto->ArchivosPriv = $request->estado_archivos;
         $proyecto->DocumentacionPriv = $request->estado_documentos;
         $proyecto->MediaValoracion = 0.00;
+        $proyecto->save();
 
-        dd($proyecto);
-        return redirect()->intended('proyectos'); 
+        return redirect()->intended('proyectos');
     }
 
     public function filtrar(Request $request)
