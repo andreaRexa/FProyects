@@ -18,7 +18,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-4">       
-                        <img src="" alt="" class="card-fluid mt-2" style="width: 250px; height: 250px; object-fit: contain;">
+                        <img src="" alt="" id="fotoProyecto" name="fotoProyecto" class="card-fluid mt-2" style="width: 250px; height: 250px; object-fit: contain;">
                         <input type="file" id="foto" name="foto" class="form-control-file">
                         <div class="mt-3">
                             <label>Estado del Proyecto:</label><br>
@@ -102,7 +102,7 @@
         $('#foto').change(function() {
             var reader = new FileReader();
             reader.onload = function(e) {
-                $('#imagen-previa').attr('src', e.target.result);
+                $('#fotoProyecto').attr('src', e.target.result);
             }
             reader.readAsDataURL(this.files[0]);
         });
