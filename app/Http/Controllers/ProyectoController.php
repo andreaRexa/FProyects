@@ -98,56 +98,5 @@ class ProyectoController extends Controller
         return view('Proyectos.InfoProyectos', compact('proyecto'));
     }
 
-
-    public function descargarArchivo($nombreProyecto)
-    {
-        // Buscar el proyecto por el nombre
-        $proyecto = Proyectos::where('NombreProyecto', $nombreProyecto)->firstOrFail();
-    
-        // Verificar si el archivo existe
-        $nombreArchivo = 'ArchivosPublicos/' . $proyecto->Archivos;
-        //dd(Storage::disk('s3')->url($nombreArchivo));
-        // Obtener el flujo de datos del archivo desde S3
-        $archivoStream = Storage::disk('s3')->getDriver()->readStream($nombreArchivo);
-        
-        // Crear una respuesta HTTP con el flujo de datos del archivo
-        $response = new Response($archivoStream, 200, [
-            'Content-Type' => Storage::disk('s3')->mimeType($nombreArchivo),
-            'Content-Disposition' => 'attachment; filename="' . basename($nombreArchivo) . '"',
-        ]);
-    
-        // Cerrar el flujo de datos del archivo
-        fclose($archivoStream);
-    
-        return $response;
-    }
-
-    public function descargarDocumentacion($nombreProyecto)
-    {
-        // Buscar el proyecto por el nombre
-        $proyecto = Proyectos::where('NombreProyecto', $nombreProyecto)->firstOrFail();
-    
-        // Construir la ruta completa de la documentación
-        $rutaCompleta = 'ArchivosPublicos/' . str_replace(' ', '_', $proyecto->NombreProyecto) . '/' . $proyecto->Documentacion;
-        
-        // Verificar si el archivo existe y obtener sus metadatos
-        $exists = Storage::disk('s3')->exists($rutaCompleta);
-        if (!$exists) {
-            return response()->json(['error' => 'Archivo no encontrado'], 404);
-        }
-    
-        // Obtener metadatos del archivo
-        $metadata = Storage::disk('s3')->getMetadata($rutaCompleta);
-        if (!$metadata) {
-            return response()->json(['error' => 'No se pueden obtener los metadatos del archivo'], 500);
-        }
-    
-        // Descargar la documentación desde S3
-        try {
-            return Storage::disk('s3')->download($rutaCompleta);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Error al descargar el archivo: ' . $e->getMessage()], 500);
-        }
-    }
     
 }
