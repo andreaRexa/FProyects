@@ -112,6 +112,7 @@ class ProyectoController extends Controller
         ]);
 
         $proyecto = new Proyectos();
+        $proyecto->IdProyecto = $maxId + 1;
         $proyecto->NombreProyecto = $request->nombre;
         $proyecto->Descripcion = $request->descripcion;
 
@@ -148,7 +149,7 @@ class ProyectoController extends Controller
         $proyecto->MediaValoracion = 0.00;
         $proyecto->save();
 
-        return redirect()->intended('proyectos');
+        //return redirect()->intended('proyectos');
     }
 
     public function filtrar(Request $request)
