@@ -102,57 +102,59 @@ class ProyectoController extends Controller
     }
 
     public function descargarArchivo($nombreProyecto)
-{
-    try {
-        // Buscar el proyecto por el nombre
-        $proyecto = Proyectos::where('NombreProyecto', $nombreProyecto)->firstOrFail();
-        $disco = 'archivosPublicos';
-
-        // Construir la ruta completa del archivo
-        $rutaCompleta = 'ArchivosPublicos/' . str_replace(' ', '_', $proyecto->NombreProyecto) . '/' . $proyecto->Archivos;
-
-        // Log file path for debugging
-        Log::channel('custom_aws')->info("Attempting to access file: {$rutaCompleta}");
-
-        // Use AWS SDK to check file existence
-        $s3 = new S3Client([
-            'region'  => env('AWS_DEFAULT_REGION'),
-            'version' => 'latest',
-            'credentials' => [
-                'key'    => env('AWS_ACCESS_KEY_ID'),
-                'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            ],
-            'endpoint' => env('AWS_ENDPOINT'),
-            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
-        ]);
-
+    {
         try {
-            $result = $s3->headObject([
-                'Bucket' => env('AWS_BUCKET'),
-                'Key'    => $rutaCompleta,
+            // Buscar el proyecto por el nombre
+            $proyecto = Proyectos::where('NombreProyecto', $nombreProyecto)->firstOrFail();
+            $disco = 'archivosPublicos';
+    
+            // Construir la ruta completa del archivo
+            $rutaCompleta = str_replace(' ', '_', $proyecto->NombreProyecto) . '/' . $proyecto->Archivos;
+            $s3Path = 'ArchivosPublicos/' . $rutaCompleta;
+    
+            // Log file path for debugging
+            Log::channel('custom_aws')->info("Attempting to access file: {$s3Path}");
+    
+            // Use AWS SDK to check file existence
+            $s3 = new S3Client([
+                'region'  => env('AWS_DEFAULT_REGION'),
+                'version' => 'latest',
+                'credentials' => [
+                    'key'    => env('AWS_ACCESS_KEY_ID'),
+                    'secret' => env('AWS_SECRET_ACCESS_KEY'),
+                ],
+                'endpoint' => env('AWS_ENDPOINT'),
+                'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             ]);
-            Log::channel('custom_aws')->info("File exists. Size: " . $result['ContentLength']);
-        } catch (AwsException $e) {
-            Log::channel('custom_aws')->error("AWS S3 Error: " . $e->getAwsErrorMessage());
-            Log::channel('custom_aws')->error("Request ID: " . $e->getAwsRequestId());
-            Log::channel('custom_aws')->error("HTTP Status Code: " . $e->getStatusCode());
-            Log::channel('custom_aws')->error("Error Type: " . $e->getAwsErrorType());
-            Log::channel('custom_aws')->error("Error Code: " . $e->getAwsErrorCode());
-            return response()->json(['error' => 'File not found on S3.'], 404);
+    
+            try {
+                $result = $s3->headObject([
+                    'Bucket' => env('AWS_BUCKET'),
+                    'Key'    => $s3Path,
+                ]);
+                Log::channel('custom_aws')->info("File exists. Size: " . $result['ContentLength']);
+            } catch (AwsException $e) {
+                Log::channel('custom_aws')->error("AWS S3 Error: " . $e->getAwsErrorMessage());
+                Log::channel('custom_aws')->error("Request ID: " . $e->getAwsRequestId());
+                Log::channel('custom_aws')->error("HTTP Status Code: " . $e->getStatusCode());
+                Log::channel('custom_aws')->error("Error Type: " . $e->getAwsErrorType());
+                Log::channel('custom_aws')->error("Error Code: " . $e->getAwsErrorCode());
+                return response()->json(['error' => 'File not found on S3.'], 404);
+            }
+    
+            // Verificar si el archivo existe utilizando el disco configurado en Laravel
+            if (!Storage::disk($disco)->exists($rutaCompleta)) {
+                Log::channel('custom_aws')->error("File not found on Laravel storage disk: {$rutaCompleta}");
+                return response()->json(['error' => 'File not found.'], 404);
+            }
+    
+            // Descargar el archivo desde S3
+            return Storage::disk($disco)->download($rutaCompleta);
+    
+        } catch (\Exception $e) {
+            Log::channel('custom_aws')->error("Error downloading file: {$e->getMessage()}");
+            return response()->json(['error' => 'Unable to download file.'], 500);
         }
-
-        // Verificar si el archivo existe utilizando el disco configurado en Laravel
-        if (!Storage::disk($disco)->exists($rutaCompleta)) {
-            Log::channel('custom_aws')->error("File not found on Laravel storage disk: {$rutaCompleta}");
-            return response()->json(['error' => 'File not found.'], 404);
-        }
-
-        // Descargar el archivo desde S3
-        return Storage::disk($disco)->download($rutaCompleta);
-
-    } catch (\Exception $e) {
-        Log::channel('custom_aws')->error("Error downloading file: {$e->getMessage()}");
-        return response()->json(['error' => 'Unable to download file.'], 500);
     }
 }
 
