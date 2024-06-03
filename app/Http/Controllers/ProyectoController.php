@@ -100,15 +100,9 @@ class ProyectoController extends Controller
         $request->validate([
             'nombre' => 'required|string|max:255',
             'descripcion' => 'required|string',
-            'archivos' => 'required|file|mimes:pdf,doc,docx', // Cambia los tipos MIME según sea necesario
-            'documentacion' => 'required|file|mimes:pdf,doc,docx', // Cambia los tipos MIME según sea necesario
-            'estado_proyecto' => 'required|boolean',
-            'ciclo' => 'required|integer',
-            'curso' => 'required|integer',
+            'archivos' => 'required|file', // Cambia los tipos MIME según sea necesario
+            'documentacion' => 'required|file', // Cambia los tipos MIME según sea necesario
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Ajusta los tipos MIME y el tamaño máximo según sea necesario
-            'familia' => 'required|integer',
-            'estado_archivos' => 'required|boolean',
-            'estado_documentos' => 'required|boolean'
         ]);
 
         $proyecto = new Proyectos();
