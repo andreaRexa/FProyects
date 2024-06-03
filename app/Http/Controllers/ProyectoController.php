@@ -70,10 +70,27 @@ class ProyectoController extends Controller
         $cursos = AlumnoCurso::join('cursos', 'cursos.IdCurso', '=', 'alumnocurso.IdCurso')
                     ->where('IdUsuario', $alumnoId)
                     ->get();   
-
         return view('Proyectos.SubirEditarProyectos', compact('familias', 'ciclos', 'cursos'));
     }
 
+    public function obtenerAutores(Request $request){
+        $familia = $request->input('familia');
+        $ciclo = $request->input('ciclo');
+        $curso = $request->input('curso');
+    
+        // Consulta Eloquent para obtener la lista de alumnos disponibles
+        $alumnosDisponibles = Usuario::select('usuarios.IdUsuario', 'usuarios.Nombre')
+            ->join('alumnociclo as acc', 'usuarios.IdUsuario', '=', 'acc.IdUsuario')
+            ->join('alumnocurso as acur', 'usuarios.IdUsuario', '=', 'acur.IdUsuario')
+            ->join('familialumno as fa', 'usuarios.IdUsuario', '=', 'fa.IdUsuario')
+            ->where('acc.IdCiclo', $ciclo)
+            ->where('acur.IdCurso', $curso)
+            ->where('fa.IdFamilia', $familia)
+            ->pluck('Nombre', 'IdUsuario');
+    
+        // Devolver la lista de alumnos disponibles como respuesta AJAX
+        return response()->json($alumnosDisponibles);
+    }
     public function filtrar(Request $request)
     {
         // Obtener todos los proyectos

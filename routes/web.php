@@ -40,6 +40,7 @@ Route::get('proyectosAlumno', [ProyectoController::class, 'showListadoProyectosA
 Route::get('proyectoFamilia', [ProyectoController::class, 'showListadoProyectosFamilia'])->name('proyectosAlumno');
 Route::get('proyectos/{id}', [ProyectoController::class, 'showDetalleProyecto'])->name('proyectos.detalle');
 Route::get('subirproyectos', [ProyectoController::class, 'showSubir'])->name('subirproyectos');
+Route::post('subirproyectos/obtenerAutores', [ProyectoController::class, 'obtenerAutores'])->name('obtenerAutores');
 Route::get('/descargar-archivo/{nombreProyecto}', [ProyectoController::class, 'descargarArchivo'])->name('descargarArchivo');
 Route::get('/descargar-documentacion/{nombreProyecto}', [ProyectoController::class, 'descargarDocumentacion'])->name('descargarDocumentacion');
 
