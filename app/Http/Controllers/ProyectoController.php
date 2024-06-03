@@ -10,6 +10,7 @@ use App\Models\AlumnoCiclo;
 use App\Models\FamiliaAlumno;
 use App\Models\AlumnoCurso;
 use App\Models\Curso;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 class ProyectoController extends Controller
@@ -79,7 +80,7 @@ class ProyectoController extends Controller
         $curso = $request->input('curso');
     
         // Consulta Eloquent para obtener la lista de alumnos disponibles
-        $alumnosDisponibles = Usuario::select('usuarios.IdUsuario', 'usuarios.Nombre')
+        $alumnosDisponibles = User::select('usuarios.IdUsuario', 'usuarios.Nombre')
             ->join('alumnociclo as acc', 'usuarios.IdUsuario', '=', 'acc.IdUsuario')
             ->join('alumnocurso as acur', 'usuarios.IdUsuario', '=', 'acur.IdUsuario')
             ->join('familialumno as fa', 'usuarios.IdUsuario', '=', 'fa.IdUsuario')

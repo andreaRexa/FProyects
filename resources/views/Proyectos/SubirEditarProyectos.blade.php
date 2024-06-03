@@ -144,6 +144,7 @@
                 },
                 success: function(response) {
                     $('#autoresDisponibles').empty();
+                    console.log();
                     $.each(response, function(key, value) {
                         $('#autoresDisponibles').append('<option value="' + key + '">' + value + '</option>');
                     });
