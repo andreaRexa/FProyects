@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
     <div class="card mt-4">
-        <form action="" method="POST" enctype="multipart/form-data" id="form-subir-proyecto">
+        <form action="{{ route('subirproyectos.subir') }}" method="POST" enctype="multipart/form-data" id="form-subir-proyecto">
             @csrf
             @method('PUT')
             <div class="card-header d-flex justify-content-between align-items-center">
@@ -22,7 +22,7 @@
                         <input type="file" id="foto" name="foto" class="form-control-file">
                         <div class="mt-3">
                             <label>Estado del Proyecto:</label><br>
-                            <label><input type="radio" name="estado_proyecto" value="publico"> Público</label>&nbsp&nbsp
+                            <label><input type="radio" name="estado_proyecto" value="publico" checked> Público</label>&nbsp&nbsp
                             <label><input type="radio" name="estado_proyecto" value="privado"> Privado</label>
                         </div>
                         <div class="mt-3">
@@ -74,14 +74,14 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <h5 class="card-title">Archivos</h5>
-                                    <label><input type="radio" name="estado_archivos" value="publico"> Público</label>&nbsp&nbsp
+                                    <label><input type="radio" name="estado_archivos" value="publico" checked> Público</label>&nbsp&nbsp
                                     <label><input type="radio" name="estado_archivos" value="privado"> Privado</label><br>
                                     <img src="/storage/imagenes/zip.png" alt="Archivo ZIP" style="width: 100px; height: 100px;"><br>
                                     <input type="file" id="archivos" name="archivos" class="form-control-file">
                                 </div>
                                 <div class="col-md-6">
                                     <h5 class="card-title">Documentación</h5>
-                                    <label><input type="radio" name="estado_documentos" value="publico"> Público</label>&nbsp&nbsp
+                                    <label><input type="radio" name="estado_documentos" value="publico" checked> Público</label>&nbsp&nbsp
                                     <label><input type="radio" name="estado_documentos" value="privado"> Privado</label><br>
                                     <img src="/storage/imagenes/zip.png" alt="Archivo ZIP" style="width: 100px; height: 100px;"><br>
                                     <input type="file" id="documentacion" name="documentacion" class="form-control-file">

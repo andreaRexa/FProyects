@@ -13,6 +13,7 @@ use App\Models\Curso;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Carbon;
 class ProyectoController extends Controller
 {
     public function showListadoProyectos()
@@ -30,7 +31,7 @@ class ProyectoController extends Controller
         $alumnoId = $userData['id'];
     
         // Obtener los proyectos del alumno logueado
-        $proyectos = Proyectos::with('proyectoAlumno.usuario.alumnoCiclo')
+        $proyectos = c::with('proyectoAlumno.usuario.alumnoCiclo')
                                ->whereHas('proyectoAlumno', function($query) use ($alumnoId) {
                                    $query->where('IdUsuario', $alumnoId);
                                })->get();
@@ -93,6 +94,31 @@ class ProyectoController extends Controller
         return response()->json($alumnosDisponibles);
     }
 
+    public function subirProyecto(Request $request){
+        $maxId = Proyecto::max('IdProyecto');
+      
+        $proyecto = new Proyecto();
+        $proyecto->NombreProyecto = $request->nombre;
+        $proyecto->Descripcion = $request->descripcion;
+        $proyecto->Archivos = str_replace(' ', '_', $request->nombre).'_'.$request->archivos->getClientOriginalName(). '.' . $request->archivos->getClientOriginalExtension();
+        $proyecto->Documentacion = str_replace(' ', '_', $request->nombre).'_'.$request->documentacion->getClientOriginalName(). '.' . $request->documentacion->getClientOriginalExtension();;
+        $proyecto->Estado = $request->estado_proyecto;
+        $proyecto->Fecha = Carbon::now();
+        $proyecto->IdCiclo = $request->ciclo;
+        $proyecto->IdCurso = $request->curso;
+        if ($request->hasFile('foto')) {
+            $foto = $request->file('foto');
+            $blob = base64_encode(file_get_contents($foto->getRealPath()));
+            $proyecto->FotoProyecto = $blob;
+        }
+        $proyecto->IdFamilia = $request->familia;
+        $proyecto->ArchivosPriv = $request->estado_archivos;
+        $proyecto->DocumentacionPriv = $request->estado_documentos;
+        $proyecto->MediaValoracion = 0.00;
+
+        dd($proyecto);
+        return redirect()->intended('proyectos'); 
+    }
     public function filtrar(Request $request)
     {
         // Obtener todos los proyectos
