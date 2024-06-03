@@ -109,7 +109,7 @@ class ProyectoController extends Controller
        
         // Obtener el flujo de datos del archivo desde S3
         $archivoStream = Storage::disk('s3')->getDriver()->readStream($nombreArchivo);
-        
+        dd(Storage::disk('s3')->url($nombreArchivo));
         // Crear una respuesta HTTP con el flujo de datos del archivo
         $response = new Response($archivoStream, 200, [
             'Content-Type' => Storage::disk('s3')->mimeType($nombreArchivo),
