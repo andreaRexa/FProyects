@@ -122,8 +122,14 @@
             $('#form-subir-proyecto').submit()
         });
 
-         // AJAX para cargar la lista de alumnos disponibles
-         $('#familia, #ciclo, #curso').change(function() {
+        cargarAutoresDisponibles();
+
+        $('#familia, #ciclo, #curso').change(function() {
+            cargarAutoresDisponibles();
+            });
+        });
+
+        function cargarAutoresDisponibles() {
             var familia = $('#familia').val();
             var ciclo = $('#ciclo').val();
             var curso = $('#curso').val();
@@ -141,10 +147,11 @@
                     $.each(response, function(key, value) {
                         $('#autoresDisponibles').append('<option value="' + key + '">' + value + '</option>');
                     });
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
                 }
             });
-        });
- 
-    });
+        }
 </script>
 @endsection
