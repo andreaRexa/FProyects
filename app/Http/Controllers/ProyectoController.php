@@ -64,10 +64,10 @@ class ProyectoController extends Controller
         $familias = FamiliaAlumno::join('familias', 'familias.IdFamilia', '=', 'familialumno.IdFamilia')
                     ->where('IdUsuario', $alumnoId)
                     ->get();
-        $ciclos = AlumnoCiclo::join('ciclos', 'ciclos.IdCiclo', '=', 'alumnoCiclo.IdCiclo')
+        $ciclos = AlumnoCiclo::join('ciclos', 'ciclos.IdCiclo', '=', 'alumnociclo.IdCiclo')
                     ->where('IdUsuario', $alumnoId)
                     ->get();    
-        $cursos = AlumnoCiclo::join('ciclos', 'ciclos.IdCiclo', '=', 'alumnoCiclo.IdCiclo')
+        $cursos = AlumnoCurso::join('cursos', 'cursos.IdCurso', '=', 'alumnocurso.IdCurso')
                     ->where('IdUsuario', $alumnoId)
                     ->get();   
 
