@@ -105,7 +105,7 @@ class ProyectoController extends Controller
         $proyecto = Proyectos::where('NombreProyecto', $nombreProyecto)->firstOrFail();
     
         // Verificar si el archivo existe
-        $nombreArchivo = $proyecto->Archivos;
+        $nombreArchivo = 'ArchivosPublicos/' + $proyecto->Archivos;
        
         // Obtener el flujo de datos del archivo desde S3
         $archivoStream = Storage::disk('s3')->getDriver()->readStream($nombreArchivo);
