@@ -135,4 +135,5 @@ class ProyectoController extends Controller
         return view('Proyectos.InfoProyectos', compact('proyecto'));
     }
 
-  
+    
+}
