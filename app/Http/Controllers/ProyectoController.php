@@ -8,7 +8,7 @@ use App\Models\Proyectos;
 use App\Models\Ciclo;
 use App\Models\AlumnoCiclo;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Facades\Log;
 class ProyectoController extends Controller
 {
     public function showListadoProyectos()
