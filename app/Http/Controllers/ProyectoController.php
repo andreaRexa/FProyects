@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Proyectos; 
 use App\Models\Ciclo;
 use App\Models\AlumnoCiclo;
+use App\Models\Curso;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 class ProyectoController extends Controller
@@ -15,7 +16,7 @@ class ProyectoController extends Controller
     {
         $proyectos = Proyectos::with('proyectoAlumno.usuario.alumnoCiclo')->get();
         $ciclos = Ciclo::groupBy('NombreCiclo')->pluck('NombreCiclo');
-        $cursos = AlumnoCiclo::groupBy('FechaCurso')->pluck('FechaCurso'); 
+        $cursos = Curso::all(); 
         return view('Proyectos.listaProyectos', compact('proyectos', 'ciclos', 'cursos'));
     }
 
@@ -32,7 +33,7 @@ class ProyectoController extends Controller
                                })->get();
 
         $ciclos = Ciclo::groupBy('NombreCiclo')->pluck('NombreCiclo');
-        $cursos = AlumnoCiclo::groupBy('FechaCurso')->pluck('FechaCurso'); 
+        $cursos = Curso::all();  
     
         return view('Proyectos.listaProyectos', compact('proyectos', 'ciclos', 'cursos'));
     }
@@ -49,7 +50,7 @@ class ProyectoController extends Controller
         })->get();
 
         $ciclos = Ciclo::groupBy('NombreCiclo')->pluck('NombreCiclo');
-        $cursos = AlumnoCiclo::groupBy('FechaCurso')->pluck('FechaCurso'); 
+        $cursos = Curso::all(); 
     
         return view('Proyectos.listaProyectos', compact('proyectos', 'ciclos', 'cursos'));
     }

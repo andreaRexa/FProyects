@@ -19,12 +19,10 @@
                     <div class="col-md-8">
                         <h5 class="card-title">Información del Proyecto</h5>
                         <ul class="list-group">
-                            @php
-                                $firstAlumno = $proyecto->proyectoAlumno->first();
-                            @endphp
+
                             <li class="list-group-item">Familia: {{ $proyecto->familia->NombreFamilia }}</li>
-                            <li class="list-group-item">Ciclo: {{ optional(optional($firstAlumno)->usuario->alumnoCiclo->ciclo)->NombreCiclo }}</li>
-                            <li class="list-group-item">Curso: {{ optional(optional($firstAlumno)->usuario->alumnoCiclo)->FechaCurso }}</li>
+                            <li class="list-group-item">Ciclo: {{ $proyecto->ciclo->NombreCiclo }}</li>
+                            <li class="list-group-item">Curso: {{ $proyecto->curso->Curso }}</li>
                             <li class="list-group-item">Fecha subida: {{ $proyecto->Fecha }}</li>                 
                             @php
                                 $autores = $proyecto->proyectoAlumno->map(function($proyectoAlumno) {

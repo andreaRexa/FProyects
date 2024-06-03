@@ -100,6 +100,7 @@ class GestionesController extends Controller
                     ->where('familias.IdAdministrador', $IdAdmin)
                     ->orderBy('usuarios.Apellidos') 
                     ->get(['usuarios.*']); 
+                    
         $usuarios=User::join('solAlumnosPendientes', 'usuarios.IdUsuario', '=', 'solAlumnosPendientes.IdUsuario')
                         ->join('ciclos', 'ciclos.IdCiclo', '=', 'solAlumnosPendientes.IdCiclo')
                         ->join('cursos', 'cursos.IdCurso', '=', 'solAlumnosPendientes.IdCurso')
