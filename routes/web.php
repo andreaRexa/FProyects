@@ -39,7 +39,7 @@ Route::post('proyectosFiltrado', [ProyectoController::class, 'filtrar'])->name('
 Route::get('proyectosAlumno', [ProyectoController::class, 'showListadoProyectosAlumno'])->name('proyectosAlumno');
 Route::get('proyectoFamilia', [ProyectoController::class, 'showListadoProyectosFamilia'])->name('proyectosAlumno');
 Route::get('proyectos/{id}', [ProyectoController::class, 'showDetalleProyecto'])->name('proyectos.detalle');
-Route::get('proyectos/subirproyecto', [ProyectoController::class, 'showSubir'])->name('subirproyectos');
+Route::get('subirproyectos', [ProyectoController::class, 'showSubir'])->name('subirproyectos');
 Route::get('/descargar-archivo/{nombreProyecto}', [ProyectoController::class, 'descargarArchivo'])->name('descargarArchivo');
 Route::get('/descargar-documentacion/{nombreProyecto}', [ProyectoController::class, 'descargarDocumentacion'])->name('descargarDocumentacion');
 
