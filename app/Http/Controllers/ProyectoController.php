@@ -98,18 +98,32 @@ class ProyectoController extends Controller
         return view('Proyectos.InfoProyectos', compact('proyecto'));
     }
 
+
     public function descargarArchivo($nombreProyecto)
     {
         // Buscar el proyecto por el nombre
         $proyecto = Proyectos::where('NombreProyecto', $nombreProyecto)->firstOrFail();
-     
+    
         // Verificar si el archivo existe
-        if (!Storage::disk('s3')->get($proyecto->Archivos)) {
+        $nombreArchivo = $proyecto->Archivos;
+    
+        if (!Storage::disk('s3')->exists($nombreArchivo)) {
             return response()->json(['error' => 'El archivo no existe.'], 404);
         }
     
-        // Descargar el archivo desde S3
-        return Storage::disk('s3')->download($proyecto->Archivos);
+        // Obtener el flujo de datos del archivo desde S3
+        $archivoStream = Storage::disk('s3')->getDriver()->readStream($nombreArchivo);
+    
+        // Crear una respuesta HTTP con el flujo de datos del archivo
+        $response = new Response($archivoStream, 200, [
+            'Content-Type' => Storage::disk('s3')->mimeType($nombreArchivo),
+            'Content-Disposition' => 'attachment; filename="' . basename($nombreArchivo) . '"',
+        ]);
+    
+        // Cerrar el flujo de datos del archivo
+        fclose($archivoStream);
+    
+        return $response;
     }
 
     public function descargarDocumentacion($nombreProyecto)
