@@ -9,6 +9,8 @@ use App\Models\Ciclo;
 use App\Models\AlumnoCiclo;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
+use Aws\S3\S3Client;
+use Aws\Exception\AwsException;
 
 class ProyectoController extends Controller
 {
@@ -100,32 +102,55 @@ class ProyectoController extends Controller
     }
 
     public function descargarArchivo($nombreProyecto)
-    {
+{
+    try {
+        // Buscar el proyecto por el nombre
+        $proyecto = Proyectos::where('NombreProyecto', $nombreProyecto)->firstOrFail();
+        $disco = 'archivosPublicos';
+
+        // Construir la ruta completa del archivo
+        $rutaCompleta = str_replace(' ', '_', $proyecto->NombreProyecto) . '/' . $proyecto->Archivos;
+
+        // Log file path for debugging
+        Log::info("Attempting to access file: {$rutaCompleta}");
+
+        // Use AWS SDK to check file existence
+        $s3 = new S3Client([
+            'region'  => env('AWS_DEFAULT_REGION'),
+            'version' => 'latest',
+            'credentials' => [
+                'key'    => env('AWS_ACCESS_KEY_ID'),
+                'secret' => env('AWS_SECRET_ACCESS_KEY'),
+            ],
+            'endpoint' => env('AWS_ENDPOINT'),
+            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
+        ]);
+
         try {
-            // Buscar el proyecto por el nombre
-            $proyecto = Proyectos::where('NombreProyecto', $nombreProyecto)->firstOrFail();
-            $disco = 'archivosPublicos';
-    
-            // Construir la ruta completa del archivo
-            $rutaCompleta = str_replace(' ', '_', $proyecto->NombreProyecto) . '/' . $proyecto->Archivos;
-    
-            // Log file path for debugging
-            Log::info("Attempting to access file: {$rutaCompleta}");
-    
-            // Verificar si el archivo existe
-            if (!Storage::disk($disco)->exists($rutaCompleta)) {
-                Log::error("File not found: {$rutaCompleta}");
-                return response()->json(['error' => 'File not found.'], 404);
-            }
-    
-            // Descargar el archivo desde S3
-            return Storage::disk($disco)->download($rutaCompleta);
-    
-        } catch (\Exception $e) {
-            Log::error("Error downloading file: {$e->getMessage()}");
-            return response()->json(['error' => 'Unable to download file.'], 500);
+            $result = $s3->headObject([
+                'Bucket' => env('AWS_BUCKET'),
+                'Key'    => $rutaCompleta,
+            ]);
+            Log::info("File exists. Size: " . $result['ContentLength']);
+        } catch (AwsException $e) {
+            Log::error("AWS S3 Error: " . $e->getAwsErrorMessage());
+            return response()->json(['error' => 'File not found on S3.'], 404);
         }
+
+        // Verificar si el archivo existe utilizando el disco configurado en Laravel
+        if (!Storage::disk($disco)->exists($rutaCompleta)) {
+            Log::error("File not found on Laravel storage disk: {$rutaCompleta}");
+            return response()->json(['error' => 'File not found.'], 404);
+        }
+
+        // Descargar el archivo desde S3
+        return Storage::disk($disco)->download($rutaCompleta);
+
+    } catch (\Exception $e) {
+        Log::error("Error downloading file: {$e->getMessage()}");
+        return response()->json(['error' => 'Unable to download file.'], 500);
     }
+}
 
     public function descargarDocumentacion($nombreProyecto)
     {
