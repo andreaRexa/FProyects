@@ -46,11 +46,15 @@ class User extends Authenticatable
     {
         return $this->hasOne(AlumnoCiclo::class, 'IdUsuario', 'IdUsuario');
     }
+
     public function familiaAlumno()
     {
         return $this->hasOne(FamiliaAlumno::class, 'IdUsuario', 'IdUsuario');
     }
-    
+    public function alumnoCurso()
+    {
+        return $this->hasOne(AlumnoCurso::class, 'IdUsuario', 'IdUsuario');
+    }
     public function proyectoAlumno()
     {
         return $this->hasMany(ProyectoAlumno::class, 'IdUsuario', 'IdUsuario');
