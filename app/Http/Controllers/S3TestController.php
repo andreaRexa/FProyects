@@ -16,7 +16,7 @@ class S3TestController extends Controller
             file_put_contents($filePath, $fileContent);
 
             // Nombre del archivo en S3
-            $s3FileName = 'ArchivosPublicos/test-file.txt';
+            $s3FileName = 'ArchivosPublicos/zip.png';
 
             // Subir archivo a S3
             $uploadSuccess = Storage::disk('s3')->put($s3FileName, file_get_contents($filePath));
