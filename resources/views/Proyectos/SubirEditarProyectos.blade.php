@@ -137,11 +137,15 @@
             $.ajax({
                 url: '{{ route("subirproyectos.obtenerAutores") }}',
                 method: 'POST',
-                data: {
-                    familia: familia,
-                    ciclo: ciclo,
-                    curso: curso
-                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content'), // Agrega el token CSRF como un campo en los datos
+                        familia: familia,
+                        ciclo: ciclo,
+                        curso: curso
+                    },
                 success: function(response) {
                     $('#autoresDisponibles').empty();
                     console.log();
