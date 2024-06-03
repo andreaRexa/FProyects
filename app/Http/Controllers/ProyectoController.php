@@ -57,7 +57,7 @@ class ProyectoController extends Controller
         return view('Proyectos.listaProyectos', compact('proyectos', 'ciclos', 'cursos'));
     }
 
-    public function showSubir()
+    public function showSubir(Request $request)
     {
         $userData = $request->session()->get('user');
         $alumnoId = $userData['id'];
@@ -70,7 +70,7 @@ class ProyectoController extends Controller
         $cursos = AlumnoCiclo::join('ciclos', 'ciclos.IdCiclo', '=', 'alumnoCiclo.IdCiclo')
                     ->where('IdUsuario', $alumnoId)
                     ->get();   
-                           
+
         return view('Proyectos.SubirEditarProyectos', compact('familias', 'ciclos', 'cursos'));
     }
 
