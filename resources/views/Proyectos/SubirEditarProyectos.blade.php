@@ -74,7 +74,9 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary mt-3">Guardar Cambios</button>
+                        <div class="card-footer text-right">
+                            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                        </div>
                     </div>
                 </div>
             </div>
