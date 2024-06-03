@@ -106,7 +106,7 @@ class ProyectoController extends Controller
     
         // Verificar si el archivo existe
         $nombreArchivo = 'ArchivosPublicos/' . $proyecto->Archivos;
-        dd(Storage::disk('s3')->url($nombreArchivo));
+        //dd(Storage::disk('s3')->url($nombreArchivo));
         // Obtener el flujo de datos del archivo desde S3
         $archivoStream = Storage::disk('s3')->getDriver()->readStream($nombreArchivo);
         
