@@ -135,7 +135,7 @@
             var curso = $('#curso').val();
 
             $.ajax({
-                url: '{{ route("obtenerAutores") }}',
+                url: '{{ route("subirproyectos.obtenerAutores") }}',
                 method: 'POST',
                 data: {
                     familia: familia,
