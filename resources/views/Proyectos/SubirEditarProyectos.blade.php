@@ -47,8 +47,8 @@
                         <div class="mt-3">
                             <label for="curso">Curso:</label>
                             <select id="curso" name="curso" class="form-control">
-                                @foreach($ciclos as $ciclo) 
-                                    <option value="{{$ciclos->IdFamilia}}">{{$familia->NombreFamilia}}</option>
+                                @foreach($cursos as $curso) 
+                                    <option value="{{$curso->IdCrus}}">{{$curso->Curso}}</option>
                                 @endforeach
                             </select>
                         </div>

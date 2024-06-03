@@ -18,8 +18,9 @@
                 </button>
                 <!-- Menú desplegable Alumnos -->
                 <div class="dropdown-menu" aria-labelledby="alumnosDropdown" v-show="subMenus.alumnos">
-                 
-                  <li class="nav-item"><button class="btn nav-link" name="btnSubirProyecto" type="submit" href="#">Subir proyecto</button></li>
+                  <form action="subirproyectos" method="GET" class="form-inline mx-auto">  
+                    <li class="nav-item"><button class="btn nav-link" name="btnSubirProyecto" type="submit" href="#">Subir proyecto</button></li>
+                  </form>
                   <form action="proyectosAlumno" method="GET" class="form-inline mx-auto">  
                     <li class="nav-item"><button class="btn nav-link" name="btnMisProyectosAlumno" type="submit">Mis proyectos</button></li>
                   </form>

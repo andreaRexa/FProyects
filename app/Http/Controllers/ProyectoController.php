@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Proyectos; 
 use App\Models\Ciclo;
 use App\Models\AlumnoCiclo;
+use App\Models\FamiliaAlumno;
+use App\Models\AlumnoCurso;
 use App\Models\Curso;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
@@ -59,7 +61,16 @@ class ProyectoController extends Controller
     {
         $userData = $request->session()->get('user');
         $alumnoId = $userData['id'];
-        return view('Proyectos.SubirEditarProyectos', compact('proyectos', 'ciclos', 'cursos'));
+        $familias = FamiliaAlumno::join('familias', 'familias.IdFamilia', '=', 'familialumno.IdFamilia')
+                    ->where('IdUsuario', $alumnoId)
+                    ->get();
+        $ciclos = AlumnoCiclo::join('ciclos', 'ciclos.IdCiclo', '=', 'alumnoCiclo.IdCiclo')
+                    ->where('IdUsuario', $alumnoId)
+                    ->get();    
+        $cursos = AlumnoCiclo::join('ciclos', 'ciclos.IdCiclo', '=', 'alumnoCiclo.IdCiclo')
+                    ->where('IdUsuario', $alumnoId)
+                    ->get();          
+        return view('Proyectos.SubirEditarProyectos', compact('familias', 'ciclos', 'cursos'));
     }
 
     public function filtrar(Request $request)

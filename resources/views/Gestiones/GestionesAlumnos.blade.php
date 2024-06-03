@@ -54,6 +54,7 @@
                                                 data-correo="{{ $usuario->Correo }}"
                                                 data-ciclo="{{ $usuario->Nombreciclo }}"
                                                 data-curso="{{ $usuario->Curso }}"
+                                                data-idcurso="{{ $usuario->IdCurso }}"
                                                 data-idusu="{{ $usuario->IdUsuario }}"
                                                 data-idciclo="{{ $usuario->IdCiclo }}"
                                                 data-idfam="{{ $usuario->IdFamilia }}"
@@ -82,6 +83,7 @@
                             <div class="col-md-6">
                                 <input type="hidden" id="usuId" name="usuId" class="form-control" readonly>
                                 <input type="hidden" id="cicloId" name="cicloId" class="form-control" readonly>
+                                <input type="hidden" id="cursoId" name="cursoId" class="form-control" readonly>
                                 <input type="hidden" id="IdSolicitudApr" name="IdSolicitudApr" class="form-control" readonly>
                                 <input type="hidden" id="famId" name="famId" class="form-control" readonly>
                                 <div class="mb-3">
@@ -135,6 +137,7 @@
             $('#curso').val($(this).data('curso'));
             $('#usuId').val($(this).data('idusu'));
             $('#cicloId').val($(this).data('idciclo'));
+            $('#cursoId').val($(this).data('idcurso'));
             $('#famId').val($(this).data('idfam'));
             $('#IdSolicitudApr').val($(this).data('idsol'));
             

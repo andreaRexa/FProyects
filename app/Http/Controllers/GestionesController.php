@@ -10,6 +10,7 @@ use App\Models\Familia;
 use App\Models\User;
 use App\Models\FamiliaAlumno;
 use App\Models\AlumnoCiclo;
+use App\Models\AlumnoCurso;
 use App\Models\SolAlumnosPendientes;
 class GestionesController extends Controller
 {
@@ -156,8 +157,12 @@ class GestionesController extends Controller
         $alumnoCiclo = new AlumnoCiclo();
         $alumnoCiclo->IdUsuario=$request->usuId;
         $alumnoCiclo->IdCiclo=$request->cicloId;
-        $alumnoCiclo->FechaCurso=$request->curso;
         $alumnoCiclo->save();
+
+        $alumnoCurso= new AlumnoCurso();
+        $alumnoCurso->IdUsuario=$request->usuId;
+        $alumnoCurso->IdCurso=$request->cursoId;
+        $alumnoCurso->save();
 
         $IdSolicitud = $request->IdSolicitudApr;
 
