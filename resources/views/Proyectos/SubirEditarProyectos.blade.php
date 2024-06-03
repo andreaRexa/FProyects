@@ -18,7 +18,6 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-4">
-                        
                         <img src="" alt="" class="card-fluid mt-2" style="width: 250px; height: 250px; object-fit: contain;">
                         <input type="file" id="foto" name="foto" class="form-control-file">
                         <div class="mt-3">
@@ -52,27 +51,27 @@
                             <label for="curso">Curso:</label>
                             <select id="curso" name="curso" class="form-control">
                                 @foreach($cursos as $curso)
-                                <option value="{{$curso->IdCrus}}">{{$curso->Curso}}</option>
+                                <option value="{{$curso->IdCurso}}">{{$curso->Curso}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="mt-4">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h5 class="card-title">Archivos</h5>
-                                    <label><input type="radio" name="estado_archivos" value="publico"> Público</label>
-                                    <label><input type="radio" name="estado_archivos" value="privado"> Privado</label>
-                                    <img src="/storage/imagenes/zip.png" alt="Archivo ZIP" style="width: 100px; height: 100px;">
-                                    <input type="file" id="archivos" name="archivos" class="form-control-file">
-                                </div>
-                                <div class="col-md-6">
-                                    <h5 class="card-title">Documentación</h5>
-                                    <label><input type="radio" name="estado_documentos" value="publico"> Público</label>
-                                    <label><input type="radio" name="estado_documentos" value="privado"> Privado</label>
-                                    <img src="/storage/imagenes/zip.png" alt="Archivo ZIP" style="width: 100px; height: 100px;">
-                                    <input type="file" id="documentacion" name="documentacion" class="form-control-file">
-                                </div>
+                            <h5 class="card-title">Archivos</h5>
+                            <div class="mt-3">
+                                <label><input type="radio" name="estado_archivos" value="publico"> Público</label>
+                                <label><input type="radio" name="estado_archivos" value="privado"> Privado</label>
                             </div>
+                            <img src="/storage/imagenes/zip.png" alt="Archivo ZIP" style="width: 100px; height: 100px;">
+                            <input type="file" id="archivos" name="archivos" class="form-control-file mt-3">
+                        </div>
+                        <div class="mt-4">
+                            <h5 class="card-title">Documentación</h5>
+                            <div class="mt-3">
+                                <label><input type="radio" name="estado_documentos" value="publico"> Público</label>
+                                <label><input type="radio" name="estado_documentos" value="privado"> Privado</label>
+                            </div>
+                            <img src="/storage/imagenes/zip.png" alt="Archivo ZIP" style="width: 100px; height: 100px;">
+                            <input type="file" id="documentacion" name="documentacion" class="form-control-file mt-3">
                         </div>
                         <button type="submit" class="btn btn-primary mt-3">Guardar Cambios</button>
                     </div>
