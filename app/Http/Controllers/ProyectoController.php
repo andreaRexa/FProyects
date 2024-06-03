@@ -122,7 +122,7 @@ class ProyectoController extends Controller
         if ($request->hasFile('archivos')) {
             $archivo = $request->file('archivos');
             $archivoNombre = str_replace(' ', '_', $request->nombre) . '_' . $archivo->getClientOriginalName();
-            Storage::disk('s3')->put('ArchivosPublicos', file_get_contents($archivo));
+            Storage::disk('s3')->put('ArchivosPublicos/'. $archivoNombre, file_get_contents($archivo));
             $proyecto->Archivos = $archivoNombre;
         }
 
@@ -130,15 +130,13 @@ class ProyectoController extends Controller
         if ($request->hasFile('documentacion')) {
             $documentacion = $request->file('documentacion');
             $documentacionNombre = str_replace(' ', '_', $request->nombre) . '_' . $documentacion->getClientOriginalName();
-            Storage::disk('s3')->put('ArchivosPublicos/', file_get_contents($documentacion));
+            Storage::disk('s3')->put('ArchivosPublicos/'.$documentacionNombre, file_get_contents($documentacion));
             $proyecto->Documentacion = $documentacionNombre;
         }
 
         // Manejar la imagen del proyecto
         if ($request->hasFile('foto')) {
-            $foto = $request->file('foto');
-            $fotoBlob = base64_encode(file_get_contents($foto->getRealPath()));
-            $proyecto->FotoProyecto = $fotoBlob;
+            $proyecto->FotoProyecto = file_get_contents($request->file('foto'));
         }
 
         $proyecto->Estado = $request->estado_proyecto;
@@ -151,7 +149,7 @@ class ProyectoController extends Controller
         $proyecto->MediaValoracion = 0.00;
         $proyecto->save();
 
-        //return redirect()->intended('proyectos');
+        return redirect()->intended('proyectos');
     }
 
     public function filtrar(Request $request)
