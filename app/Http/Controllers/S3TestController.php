@@ -11,7 +11,7 @@ class S3TestController extends Controller
     {
         try {
             // Archivo de prueba
-            $filePath = storage_path('/imagenes/zip.png');
+            $filePath = storage_path('app/public/imagenes/zip.png');
             $fileContent = 'Este es un archivo de prueba para subir a S3';
             file_put_contents($filePath, $fileContent);
 
