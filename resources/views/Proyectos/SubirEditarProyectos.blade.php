@@ -1,12 +1,12 @@
 @extends('layout')
 
-@section('title', 'Editar Proyecto')
+@section('title', 'Subir/Editar Proyecto')
 
 @section('content')
 <div class="container">
     <div class="card mt-4">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="card-title">Editar Proyecto</h5>
+            <h5 class="card-title">Subir/Editar Proyecto</h5>
             <a href="javascript:history.back()" class="btn btn-primary btn-sm">&laquo; Volver</a>
         </div>
         <div class="card-body">
@@ -17,15 +17,15 @@
                 <div class="row">
                     <div class="col-md-4">
                         <label for="nombre">Nombre del Proyecto:</label>
-                        <input type="text" id="nombre" name="nombre" class="form-control" value="{{ $proyecto->NombreProyecto }}">
+                        <input type="text" id="nombre" name="nombre" class="form-control">
                       
-                        <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->FotoProyecto) }}" alt="{{ $proyecto->NombreProyecto }}" class="card-fluid mt-2" style="width: 250px; height: 250px; object-fit: contain;" >
+                        <img src="" alt="" class="card-fluid mt-2" style="width: 250px; height: 250px; object-fit: contain;" >
                         <label for="foto">Foto del Proyecto:</label>
                         <input type="file" id="foto" name="foto" class="form-control-file">
                     </div>
                     <div class="col-md-8">
                         <label for="descripcion">Descripción:</label>
-                        <textarea id="descripcion" name="descripcion" class="form-control" rows="5">{{ $proyecto->Descripcion }}</textarea>
+                        <textarea id="descripcion" name="descripcion" class="form-control" rows="5"></textarea>
 
                         <!-- Agrega los select para Familia, Ciclo y Curso -->
                         <div class="mt-3">
