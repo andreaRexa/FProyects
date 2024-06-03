@@ -105,11 +105,11 @@ class ProyectoController extends Controller
         $proyecto = Proyectos::where('NombreProyecto', $nombreProyecto)->firstOrFail();
     
         // Verificar si el archivo existe
-        $nombreArchivo = 'ArchivosPublicos/' + $proyecto->Archivos;
+        $nombreArchivo = 'ArchivosPublicos/' . $proyecto->Archivos;
        
         // Obtener el flujo de datos del archivo desde S3
         $archivoStream = Storage::disk('s3')->getDriver()->readStream($nombreArchivo);
-    
+        
         // Crear una respuesta HTTP con el flujo de datos del archivo
         $response = new Response($archivoStream, 200, [
             'Content-Type' => Storage::disk('s3')->mimeType($nombreArchivo),
