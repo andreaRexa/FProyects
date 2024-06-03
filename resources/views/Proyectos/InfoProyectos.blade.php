@@ -43,10 +43,12 @@
                                         <img src="/storage/imagenes/nodisponible.png" alt="No disponible" style="width: 100px; height: 100px;">
                                         
                                     @else
-                                        <a href="{{ route('descargarArchivo', $proyecto->NombreProyecto) }}">
+                                    <a href="https://fproyectsarchivos.s3.amazonaws.com/ArchivosPublicos/App_Web_Peluqueria_pruebasArchivos.zip" download>Descargar archivo</a>
+
+                                        <!--<a href="{{ route('descargarArchivo', $proyecto->NombreProyecto) }}">
                                             <img src="/storage/imagenes/zip.png" alt="Archivo ZIP" style="width: 100px; height: 100px;">
                                         </a>
-                                        <p class="mt-2">{{ $proyecto->Archivos }}</p>
+                                        <p class="mt-2">{{ $proyecto->Archivos }}</p>-->
                                     @endif
                                 </div>
                                 <div class="col-md-6">
