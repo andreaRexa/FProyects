@@ -8,6 +8,7 @@ use App\Models\Proyectos;
 use App\Models\Ciclo;
 use App\Models\AlumnoCiclo;
 use App\Models\FamiliaAlumno;
+use App\Models\ProyectoAlumno;
 use App\Models\AlumnoCurso;
 use App\Models\Curso;
 use App\Models\User;
@@ -95,7 +96,7 @@ class ProyectoController extends Controller
     }
 
     public function subirProyecto(Request $request){
-        $maxId = Proyectos::max('IdProyecto');
+        $maxId = Proyectos::max('IdProyecto')+1;
         // Validar los datos del formulario
         $request->validate([
             'nombre' => 'required|string|max:255',
@@ -105,8 +106,15 @@ class ProyectoController extends Controller
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Ajusta los tipos MIME y el tamaño máximo según sea necesario
         ]);
 
+        foreach ($autores as $autor) {
+            $proyectoAlumno = new ProyectoAlumno();
+            $proyectoAlumno->IdProyecto=$maxId;
+            $proyectoAlumno->IdUsuario=$autor;
+            $proyectoAlumno->save();
+        }
+
         $proyecto = new Proyectos();
-        $proyecto->IdProyecto = $maxId + 1;
+        $proyecto->IdProyecto = $maxId;
         $proyecto->NombreProyecto = $request->nombre;
         $proyecto->Descripcion = $request->descripcion;
 
