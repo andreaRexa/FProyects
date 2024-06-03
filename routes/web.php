@@ -8,6 +8,8 @@ use App\Http\Controllers\ProyectoController;
 use App\Http\Controllers\GestionesController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\RecContraseniaController;
+use App\Http\Controllers\S3TestController;
+Route::get('/test-s3-upload', [S3TestController::class, 'uploadTestFile']);
 
 // Ruta principal
 Route::get('/', [HomeController::class, 'showHome']);
