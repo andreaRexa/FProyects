@@ -87,10 +87,11 @@ class ProyectoController extends Controller
             ->where('acur.IdCurso', $curso)
             ->where('fa.IdFamilia', $familia)
             ->pluck('Nombre', 'IdUsuario');
-    
+        dd($alumnosDisponibles);
         // Devolver la lista de alumnos disponibles como respuesta AJAX
         return response()->json($alumnosDisponibles);
     }
+    
     public function filtrar(Request $request)
     {
         // Obtener todos los proyectos
@@ -134,5 +135,4 @@ class ProyectoController extends Controller
         return view('Proyectos.InfoProyectos', compact('proyecto'));
     }
 
-    
-}
+  
