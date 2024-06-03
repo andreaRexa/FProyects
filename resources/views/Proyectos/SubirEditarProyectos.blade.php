@@ -7,7 +7,6 @@
     <div class="card mt-4">
         <form action="{{ route('subirproyectos.subir') }}" method="POST" enctype="multipart/form-data" id="form-subir-proyecto">
             @csrf
-            @method('PUT')
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="card-title">
                     <label for="nombre">Nombre:</label><br>
