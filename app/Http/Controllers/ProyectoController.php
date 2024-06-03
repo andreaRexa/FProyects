@@ -15,6 +15,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Carbon;
+use Aws\S3\S3Client;
+use Aws\Exception\AwsException;
+
 class ProyectoController extends Controller
 {
     public function showListadoProyectos()
@@ -99,7 +102,7 @@ class ProyectoController extends Controller
     {
         try {
             $maxId = Proyectos::max('IdProyecto') + 1;
-    
+
             // Validar los datos del formulario
             $request->validate([
                 'nombre' => 'required|string|max:255',
@@ -108,42 +111,61 @@ class ProyectoController extends Controller
                 'documentacion' => 'required|file', // Cambia los tipos MIME según sea necesario
                 'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Ajusta los tipos MIME y el tamaño máximo según sea necesario
             ]);
-    
+        
             foreach ($request->autores as $autor) {
                 $proyectoAlumno = new ProyectoAlumno();
                 $proyectoAlumno->IdProyecto = $maxId;
                 $proyectoAlumno->IdUsuario = $autor;
                 $proyectoAlumno->save();
             }
-    
-            $proyecto = new Proyectos();
-            $proyecto->IdProyecto = $maxId;
-            $proyecto->NombreProyecto = $request->nombre;
-            $proyecto->Descripcion = $request->descripcion;
-    
+        
+            // Configuración del cliente de S3
+            $s3 = new S3Client([
+                'version' => 'latest',
+                'region' => 'us-east-1', // Cambia esto por tu región de S3
+            ]);
+        
+            // Ruta en S3 donde se almacenarán los archivos
+            $bucket = 'fproyectsarchivos';
+        
             // Manejar archivo de proyecto
             if ($request->hasFile('archivos')) {
                 $archivo = $request->file('archivos');
                 $archivoNombre = str_replace(' ', '_', $request->nombre) . '_' . $archivo->getClientOriginalName();
-                $archivoPath = 'ArchivosPublicos/' . $archivoNombre;
-                $uploadSuccess = Storage::disk('s3')->put($archivoPath, file_get_contents($archivo));
-                if (!$uploadSuccess) {
-                    throw new \Exception('Error al subir archivo a S3');
+        
+                try {
+                    // Subir el archivo a S3
+                    $result = $s3->putObject([
+                        'Bucket' => $bucket,
+                        'Key' => 'ArchivosPublicos/' . $archivoNombre,
+                        'Body' => fopen($archivo->getRealPath(), 'rb'),
+                        'ACL' => 'public-read', // Permite acceso público al archivo
+                    ]);
+                } catch (AwsException $e) {
+                    // Manejo de errores al cargar archivos a S3
+                    return $e->getMessage();
                 }
-                $proyecto->Archivos = $archivoNombre;
             }
-    
+        
             // Manejar documentación del proyecto
             if ($request->hasFile('documentacion')) {
                 $documentacion = $request->file('documentacion');
                 $documentacionNombre = str_replace(' ', '_', $request->nombre) . '_' . $documentacion->getClientOriginalName();
-                $documentacionPath = 'ArchivosPublicos/' . $documentacionNombre;
-                $uploadSuccess = Storage::disk('s3')->put($documentacionPath, file_get_contents($documentacion));
-                if (!$uploadSuccess) {
-                    throw new \Exception('Error al subir documentación a S3');
+        
+                try {
+                    // Subir la documentación a S3
+                    $result = $s3->putObject([
+                        'Bucket' => $bucket,
+                        'Key' => 'ArchivosPublicos/' . $documentacionNombre,
+                        'Body' => fopen($documentacion->getRealPath(), 'rb'),
+                        'ACL' => 'public-read', // Permite acceso público al archivo
+                    ]);
+                } catch (AwsException $e) {
+                    // Manejo de errores al cargar archivos a S3
+                    return $e->getMessage();
                 }
-                $proyecto->Documentacion = $documentacionNombre;
             }
+        
     
             // Manejar la imagen del proyecto
             if ($request->hasFile('foto')) {
