@@ -104,7 +104,7 @@ class ProyectoController extends Controller
         $proyecto = Proyectos::where('NombreProyecto', $nombreProyecto)->firstOrFail();
      
         // Verificar si el archivo existe
-        if (!Storage::disk('s3')->exists($proyecto->Archivos)) {
+        if (!Storage::disk('s3')->get($proyecto->Archivos)) {
             return response()->json(['error' => 'El archivo no existe.'], 404);
         }
     
