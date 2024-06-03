@@ -21,8 +21,8 @@
                         <input type="file" id="foto" name="foto" class="form-control-file">
                         <div class="mt-3">
                             <label>Estado del Proyecto:</label><br>
-                            <label><input type="radio" name="estado_proyecto" value="publico" checked> Público</label>&nbsp&nbsp
-                            <label><input type="radio" name="estado_proyecto" value="privado"> Privado</label>
+                            <label><input type="radio" name="estado_proyecto" value="0" checked> Público</label>&nbsp&nbsp
+                            <label><input type="radio" name="estado_proyecto" value="1"> Privado</label>
                         </div>
                         <div class="mt-3">
                             <label for="descripcion">Descripción:</label>
@@ -73,15 +73,15 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <h5 class="card-title">Archivos</h5>
-                                    <label><input type="radio" name="estado_archivos" value="publico" checked> Público</label>&nbsp&nbsp
-                                    <label><input type="radio" name="estado_archivos" value="privado"> Privado</label><br>
+                                    <label><input type="radio" name="estado_archivos" value="0" checked> Público</label>&nbsp&nbsp
+                                    <label><input type="radio" name="estado_archivos" value="1"> Privado</label><br>
                                     <img src="/storage/imagenes/zip.png" alt="Archivo ZIP" style="width: 100px; height: 100px;"><br>
                                     <input type="file" id="archivos" name="archivos" class="form-control-file">
                                 </div>
                                 <div class="col-md-6">
                                     <h5 class="card-title">Documentación</h5>
-                                    <label><input type="radio" name="estado_documentos" value="publico" checked> Público</label>&nbsp&nbsp
-                                    <label><input type="radio" name="estado_documentos" value="privado"> Privado</label><br>
+                                    <label><input type="radio" name="estado_documentos" value="0" checked> Público</label>&nbsp&nbsp
+                                    <label><input type="radio" name="estado_documentos" value="1"> Privado</label><br>
                                     <img src="/storage/imagenes/zip.png" alt="Archivo ZIP" style="width: 100px; height: 100px;"><br>
                                     <input type="file" id="documentacion" name="documentacion" class="form-control-file">
                                 </div>
