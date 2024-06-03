@@ -57,21 +57,33 @@
                         </div>
                         <div class="mt-4">
                             <h5 class="card-title">Archivos</h5>
-                            <div class="mt-3">
-                                <label><input type="radio" name="estado_archivos" value="publico"> Público</label>
-                                <label><input type="radio" name="estado_archivos" value="privado"> Privado</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mt-3">
+                                        <label><input type="radio" name="estado_archivos" value="publico"> Público</label>
+                                        <label><input type="radio" name="estado_archivos" value="privado"> Privado</label>
+                                    </div>
+                                    <img src="/storage/imagenes/zip.png" alt="Archivo ZIP" style="width: 100px; height: 100px;">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="file" id="archivos" name="archivos" class="form-control-file mt-3">
+                                </div>
                             </div>
-                            <img src="/storage/imagenes/zip.png" alt="Archivo ZIP" style="width: 100px; height: 100px;">
-                            <input type="file" id="archivos" name="archivos" class="form-control-file mt-3">
                         </div>
                         <div class="mt-4">
                             <h5 class="card-title">Documentación</h5>
-                            <div class="mt-3">
-                                <label><input type="radio" name="estado_documentos" value="publico"> Público</label>
-                                <label><input type="radio" name="estado_documentos" value="privado"> Privado</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mt-3">
+                                        <label><input type="radio" name="estado_documentos" value="publico"> Público</label>
+                                        <label><input type="radio" name="estado_documentos" value="privado"> Privado</label>
+                                    </div>
+                                    <img src="/storage/imagenes/zip.png" alt="Archivo ZIP" style="width: 100px; height: 100px;">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="file" id="documentacion" name="documentacion" class="form-control-file mt-3">
+                                </div>
                             </div>
-                            <img src="/storage/imagenes/zip.png" alt="Archivo ZIP" style="width: 100px; height: 100px;">
-                            <input type="file" id="documentacion" name="documentacion" class="form-control-file mt-3">
                         </div>
                         <button type="submit" class="btn btn-primary mt-3">Guardar Cambios</button>
                     </div>
