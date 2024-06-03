@@ -106,11 +106,7 @@ class ProyectoController extends Controller
     
         // Verificar si el archivo existe
         $nombreArchivo = $proyecto->Archivos;
-    
-        if (!Storage::disk('s3')->exists($nombreArchivo)) {
-            return response()->json(['error' => 'El archivo no existe.'], 404);
-        }
-    
+       
         // Obtener el flujo de datos del archivo desde S3
         $archivoStream = Storage::disk('s3')->getDriver()->readStream($nombreArchivo);
     
