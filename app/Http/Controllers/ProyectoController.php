@@ -109,10 +109,10 @@ class ProyectoController extends Controller
         $disco = 'archivosPublicos';
 
         // Construir la ruta completa del archivo
-        $rutaCompleta = str_replace(' ', '_', $proyecto->NombreProyecto) . '/' . $proyecto->Archivos;
+        $rutaCompleta = 'ArchivosPublicos/' . str_replace(' ', '_', $proyecto->NombreProyecto) . '/' . $proyecto->Archivos;
 
         // Log file path for debugging
-        Log::info("Attempting to access file: {$rutaCompleta}");
+        Log::channel('custom_aws')->info("Attempting to access file: {$rutaCompleta}");
 
         // Use AWS SDK to check file existence
         $s3 = new S3Client([
@@ -131,15 +131,19 @@ class ProyectoController extends Controller
                 'Bucket' => env('AWS_BUCKET'),
                 'Key'    => $rutaCompleta,
             ]);
-            Log::info("File exists. Size: " . $result['ContentLength']);
+            Log::channel('custom_aws')->info("File exists. Size: " . $result['ContentLength']);
         } catch (AwsException $e) {
-            Log::error("AWS S3 Error: " . $e->getAwsErrorMessage());
+            Log::channel('custom_aws')->error("AWS S3 Error: " . $e->getAwsErrorMessage());
+            Log::channel('custom_aws')->error("Request ID: " . $e->getAwsRequestId());
+            Log::channel('custom_aws')->error("HTTP Status Code: " . $e->getStatusCode());
+            Log::channel('custom_aws')->error("Error Type: " . $e->getAwsErrorType());
+            Log::channel('custom_aws')->error("Error Code: " . $e->getAwsErrorCode());
             return response()->json(['error' => 'File not found on S3.'], 404);
         }
 
         // Verificar si el archivo existe utilizando el disco configurado en Laravel
         if (!Storage::disk($disco)->exists($rutaCompleta)) {
-            Log::error("File not found on Laravel storage disk: {$rutaCompleta}");
+            Log::channel('custom_aws')->error("File not found on Laravel storage disk: {$rutaCompleta}");
             return response()->json(['error' => 'File not found.'], 404);
         }
 
@@ -147,7 +151,7 @@ class ProyectoController extends Controller
         return Storage::disk($disco)->download($rutaCompleta);
 
     } catch (\Exception $e) {
-        Log::error("Error downloading file: {$e->getMessage()}");
+        Log::channel('custom_aws')->error("Error downloading file: {$e->getMessage()}");
         return response()->json(['error' => 'Unable to download file.'], 500);
     }
 }

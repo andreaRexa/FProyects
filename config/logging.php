@@ -132,6 +132,11 @@ return [
             'via' => \App\Logging\CustomAwsLogger::class,
             'level' => 'debug',
         ],
+        'custom_aws' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/custom_aws.log'),
+            'level' => 'debug',
+        ],
 
     ],
 
