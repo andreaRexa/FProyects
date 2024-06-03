@@ -72,11 +72,8 @@
                                                     </td>
                                                     <td class="align-middle">{{ $proyecto->NombreProyecto }}</td>
                                                     <td class="align-middle">{{ $proyecto->Descripcion }}</td>
-                                                    @php
-                                                        $firstAlumno = $proyecto->proyectoAlumno->first(); 
-                                                    @endphp
-                                                    <td class="align-middle">{{ optional(optional($firstAlumno)->usuario->alumnoCiclo->ciclo)->NombreCiclo }}</td>
-                                                    <td class="align-middle">{{ optional(optional($firstAlumno)->usuario->alumnoCiclo)->FechaCurso }}</td>
+                                                    <td class="align-middle">{{ $proyecto->ciclo->NombreCiclo }}</td>
+                                                    <td class="align-middle">{{ $proyecto->curso->Curso }}</td>
                                                     <td class="align-middle">
                                                         <a href="{{ route('proyectos.detalle', $proyecto->IdProyecto) }}" class="btn btn-primary">Ver más</a>
                                                     </td>

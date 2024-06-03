@@ -22,10 +22,10 @@
                             @php
                                 $firstAlumno = $proyecto->proyectoAlumno->first();
                             @endphp
+                            <li class="list-group-item">Familia: {{ $proyecto->familia->NombreFamilia }}</li>
                             <li class="list-group-item">Ciclo: {{ optional(optional($firstAlumno)->usuario->alumnoCiclo->ciclo)->NombreCiclo }}</li>
                             <li class="list-group-item">Curso: {{ optional(optional($firstAlumno)->usuario->alumnoCiclo)->FechaCurso }}</li>
-                            <li class="list-group-item">Fecha subida: {{ $proyecto->Fecha }}</li>
-                            <li class="list-group-item">Familia: {{ $proyecto->familia->NombreFamilia }}</li>
+                            <li class="list-group-item">Fecha subida: {{ $proyecto->Fecha }}</li>                 
                             @php
                                 $autores = $proyecto->proyectoAlumno->map(function($proyectoAlumno) {
                                     return $proyectoAlumno->usuario->Nombre . ' ' . $proyectoAlumno->usuario->Apellidos;

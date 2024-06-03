@@ -53,6 +53,14 @@ class ProyectoController extends Controller
     
         return view('Proyectos.listaProyectos', compact('proyectos', 'ciclos', 'cursos'));
     }
+
+    public function showSubir()
+    {
+        $userData = $request->session()->get('user');
+        $alumnoId = $userData['id'];
+        return view('Proyectos.SubirEditarProyectos', compact('proyectos', 'ciclos', 'cursos'));
+    }
+
     public function filtrar(Request $request)
     {
         // Obtener todos los proyectos

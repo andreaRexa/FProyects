@@ -21,6 +21,7 @@ class Proyectos extends Model
         'Estado',
         'Fecha',
         'IdCiclo',
+        'IdCurso',
         'FotoProyecto',
         'IdFamilia',
         'ArchivosPriv',
@@ -32,6 +33,12 @@ class Proyectos extends Model
     public function ciclo()
     {
         return $this->belongsTo(Ciclo::class, 'IdCiclo', 'IdCiclo');
+    }
+
+    // Relación con el modelo Ciclo
+    public function curso()
+    {
+        return $this->belongsTo(Curso::class, 'IdCurso', 'IdCurso');
     }
 
     // Relación con el modelo Familia
