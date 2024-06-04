@@ -45,6 +45,8 @@ class ProyectoSubido extends Mailable
                           'proyecto' => $this->proyecto,
                           'archivoNombre' => $this->archivoNombre,
                           'documentacionNombre' => $this->documentacionNombre,
+                          'estadoArch'=>$this->estadoArch,
+                          'estadoDoc'=>$this->estadoDoc,
                       ]);
 
         if ($this->archivo) {
