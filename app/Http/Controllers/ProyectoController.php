@@ -118,7 +118,12 @@ class ProyectoController extends Controller
                 $proyectoAlumno->IdUsuario = $autor;
                 $proyectoAlumno->save();
             }
-        
+          
+            $proyecto = new Proyectos();
+            $proyecto->IdProyecto = $maxId;
+            $proyecto->NombreProyecto = $request->nombre;
+            $proyecto->Descripcion = $request->descripcion;
+
             // Configuración del cliente de S3
             $s3 = new S3Client([
                 'version' => 'latest',
@@ -132,7 +137,7 @@ class ProyectoController extends Controller
             if ($request->hasFile('archivos')) {
                 $archivo = $request->file('archivos');
                 $archivoNombre = str_replace(' ', '_', $request->nombre) . '_' . $archivo->getClientOriginalName();
-        
+                $proyecto->Archivos = $archivoNombre;
                 try {
                     // Subir el archivo a S3
                     $result = $s3->putObject([
@@ -151,7 +156,7 @@ class ProyectoController extends Controller
             if ($request->hasFile('documentacion')) {
                 $documentacion = $request->file('documentacion');
                 $documentacionNombre = str_replace(' ', '_', $request->nombre) . '_' . $documentacion->getClientOriginalName();
-        
+                $proyecto->Documentacion = $documentacionNombre;
                 try {
                     // Subir la documentación a S3
                     $result = $s3->putObject([
@@ -164,6 +169,7 @@ class ProyectoController extends Controller
                     // Manejo de errores al cargar archivos a S3
                     return $e->getMessage();
                 }
+                
             }
         
     
