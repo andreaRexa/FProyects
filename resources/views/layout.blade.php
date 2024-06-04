@@ -7,6 +7,7 @@
     @vite(['resources/js/app.js'])
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/starrr/1.0.1/starrr.css">
     <link rel="icon" href="{{ asset('iconoApp16.ico') }}" type="image/x-icon">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>
@@ -30,6 +31,7 @@
         }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/starrr/1.0.1/starrr.js"></script>
 </head>
 <body> 
     <div id="app">
