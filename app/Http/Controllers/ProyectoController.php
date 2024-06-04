@@ -107,9 +107,9 @@ class ProyectoController extends Controller
             $request->validate([
                 'nombre' => 'required|string|max:255',
                 'descripcion' => 'required|string',
-                'archivos' => 'required|file', // Cambia los tipos MIME según sea necesario
-                'documentacion' => 'required|file', // Cambia los tipos MIME según sea necesario
-                'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Ajusta los tipos MIME y el tamaño máximo según sea necesario
+                'archivos' => 'required|file', 
+                'documentacion' => 'required|file', 
+                'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
             ]);
         
             foreach ($request->autores as $autor) {
@@ -123,53 +123,20 @@ class ProyectoController extends Controller
             $proyecto->IdProyecto = $maxId;
             $proyecto->NombreProyecto = $request->nombre;
             $proyecto->Descripcion = $request->descripcion;
-
-            // Configuración del cliente de S3
-            $s3 = new S3Client([
-                'version' => 'latest',
-                'region' => 'us-east-1', // Cambia esto por tu región de S3
-            ]);
-        
-            // Ruta en S3 donde se almacenarán los archivos
-            $bucket = 'fproyectsarchivos';
         
             // Manejar archivo de proyecto
             if ($request->hasFile('archivos')) {
                 $archivo = $request->file('archivos');
                 $archivoNombre = str_replace(' ', '_', $request->nombre) . '_' . $archivo->getClientOriginalName();
                 $proyecto->Archivos = $archivoNombre;
-                try {
-                    // Subir el archivo a S3
-                    $result = $s3->putObject([
-                        'Bucket' => $bucket,
-                        'Key' => 'ArchivosPublicos/' . $archivoNombre,
-                        'Body' => fopen($archivo->getRealPath(), 'rb'),
-                        'ACL' => 'public-read', // Permite acceso público al archivo
-                    ]);
-                } catch (AwsException $e) {
-                    // Manejo de errores al cargar archivos a S3
-                    return $e->getMessage();
-                }
             }
         
             // Manejar documentación del proyecto
             if ($request->hasFile('documentacion')) {
+
                 $documentacion = $request->file('documentacion');
-                $documentacionNombre = str_replace(' ', '_', $request->nombre) . '_' . $documentacion->getClientOriginalName();
+                $documentacionNombre = str_replace(' ', '_', $request->nombre) . '_' . $documentacion->getClientOriginalName();     
                 $proyecto->Documentacion = $documentacionNombre;
-                try {
-                    // Subir la documentación a S3
-                    $result = $s3->putObject([
-                        'Bucket' => $bucket,
-                        'Key' => 'ArchivosPublicos/' . $documentacionNombre,
-                        'Body' => fopen($documentacion->getRealPath(), 'rb'),
-                        'ACL' => 'public-read', // Permite acceso público al archivo
-                    ]);
-                } catch (AwsException $e) {
-                    // Manejo de errores al cargar archivos a S3
-                    return $e->getMessage();
-                }
-                
             }
         
     
@@ -230,6 +197,74 @@ class ProyectoController extends Controller
         // Cargar la vista con los proyectos filtrados
         return view('Proyectos.listaProyectos', compact('proyectos', 'ciclos', 'cursos'));
     }
+
+    public function subirProyectoS3(Request $request)
+    {
+        try {
+            $maxId = Proyectos::max('IdProyecto') + 1;
+    
+            // Validar los datos del formulario
+            $request->validate([
+                'nombre' => 'required|string|max:255',
+                'descripcion' => 'required|string',
+                'archivos' => 'required|file',
+                'documentacion' => 'required|file',
+                'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+    
+            foreach ($request->autores as $autor) {
+                $proyectoAlumno = new ProyectoAlumno();
+                $proyectoAlumno->IdProyecto = $maxId;
+                $proyectoAlumno->IdUsuario = $autor;
+                $proyectoAlumno->save();
+            }
+    
+            $proyecto = new Proyectos();
+            $proyecto->IdProyecto = $maxId;
+            $proyecto->NombreProyecto = $request->nombre;
+            $proyecto->Descripcion = $request->descripcion;
+    
+            // Manejar archivo de proyecto
+            if ($request->hasFile('archivos')) {
+                $archivo = $request->file('archivos');
+                $archivoNombre = str_replace(' ', '_', $request->nombre) . '_' . $archivo->getClientOriginalName();
+                $archivoPath = $archivo->storeAs('proyectos/archivos', $archivoNombre, 's3');
+                $proyecto->Archivos = Storage::disk('s3')->url($archivoPath);
+            }
+    
+            // Manejar documentación del proyecto
+            if ($request->hasFile('documentacion')) {
+                $documentacion = $request->file('documentacion');
+                $documentacionNombre = str_replace(' ', '_', $request->nombre) . '_' . $documentacion->getClientOriginalName();
+                $documentacionPath = $documentacion->storeAs('proyectos/documentacion', $documentacionNombre, 's3');
+                $proyecto->Documentacion = Storage::disk('s3')->url($documentacionPath);
+            }
+    
+            // Manejar la imagen del proyecto
+            if ($request->hasFile('foto')) {
+                $proyecto->FotoProyecto = file_get_contents($request->file('foto')->getRealPath());
+            }
+    
+            $proyecto->Estado = $request->estado_proyecto;
+            $proyecto->Fecha = Carbon::now();
+            $proyecto->IdCiclo = $request->ciclo;
+            $proyecto->IdCurso = $request->curso;
+            $proyecto->IdFamilia = $request->familia;
+            $proyecto->ArchivosPriv = $request->estado_archivos;
+            $proyecto->DocumentacionPriv = $request->estado_documentos;
+            $proyecto->MediaValoracion = 0.00;
+            $proyecto->save();
+            
+            // Enviar correo con los archivos adjuntos
+            Mail::to('destinatario@example.com')->send(new ProyectoSubido($proyecto, $archivo, $archivoNombre, $documentacion, $documentacionNombre));
+
+            return redirect()->intended('proyectos')->with('success', 'Proyecto subido correctamente');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+    }
+    
+
 
     public function showDetalleProyecto($id)
     {

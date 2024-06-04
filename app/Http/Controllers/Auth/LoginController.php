@@ -14,8 +14,7 @@ class LoginController extends Controller
     {
         return Auth::guard();
     }
-
-    // Método para mostrar el formulario de inicio de sesión
+    
     public function showLoginForm(Request $request)
     {
         return view('Auth.login', ['btnlogin' => $request->query('btnlogin')]);

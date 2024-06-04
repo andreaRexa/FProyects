@@ -38,7 +38,7 @@ class RecContraseniaController extends Controller
 
     public function resetPass(Request $request)
     {
-        //dd($request);
+
         $request->validate([
             'email' => 'required|email',
             'codigo' => 'required|numeric',
@@ -46,7 +46,7 @@ class RecContraseniaController extends Controller
         ]);
 
         $User = User::where('Correo', $request->email)->first();
-        //dd($request->codigo,intval($request->codigo), $User->CodRecContr, gettype($request->codigo), gettype($User->CodRecContr),intval($request->codigo) === $User->CodRecContr);
+       
         // Verificar si el código de recuperación es válido
         
         if (intval($request->codigo) === $User->CodRecContr) {
