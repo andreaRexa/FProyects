@@ -158,7 +158,7 @@ class ProyectoController extends Controller
             $proyecto->MediaValoracion = 0.00;
             $proyecto->save();
             
-            Mail::to('andrea_rexa@outlook.es')->send(new ProyectoSubido($proyecto, $archivo, $archivoNombre,$estadoArch, $documentacion, $documentacionNombre,$estadoDoc));
+            Mail::to('ericagarciad.amor@gmail.com')->send(new ProyectoSubido($proyecto, $archivo, $archivoNombre,$estadoArch, $documentacion, $documentacionNombre,$estadoDoc));
 
             return redirect()->intended('proyectos')->with('success', 'Proyecto subido correctamente');
         } catch (\Exception $e) {
