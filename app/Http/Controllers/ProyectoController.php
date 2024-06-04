@@ -158,7 +158,7 @@ class ProyectoController extends Controller
             $proyecto->save();
             
              // Enviar correo con los archivos adjuntos
-             Mail::to('andrea_rexa@outlook.es')->send(new ProyectoSubido($proyecto, $archivo, $archivoNombre, $documentacion, $documentacionNombre));
+             Mail::to('andrea_rexa@outlook.es')->send(new ProyectoSubido($proyecto, $archivo, $archivoNombre,$request->estado_archivos, $documentacion, $documentacionNombre,$request->estado_documentos));
 
             return redirect()->intended('proyectos')->with('success', 'Proyecto subido correctamente');
         } catch (\Exception $e) {
