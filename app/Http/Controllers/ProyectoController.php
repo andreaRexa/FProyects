@@ -154,7 +154,10 @@ class ProyectoController extends Controller
             $proyecto->DocumentacionPriv = $request->estado_documentos;
             $proyecto->MediaValoracion = 0.00;
             $proyecto->save();
-    
+            
+             // Enviar correo con los archivos adjuntos
+             Mail::to('andrea_rexa@outlook.es')->send(new ProyectoSubido($proyecto, $archivo, $archivoNombre, $documentacion, $documentacionNombre));
+             
             return redirect()->intended('proyectos')->with('success', 'Proyecto subido correctamente');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
@@ -254,9 +257,8 @@ class ProyectoController extends Controller
             $proyecto->DocumentacionPriv = $request->estado_documentos;
             $proyecto->MediaValoracion = 0.00;
             $proyecto->save();
-            
-            // Enviar correo con los archivos adjuntos
-            Mail::to('destinatario@example.com')->send(new ProyectoSubido($proyecto, $archivo, $archivoNombre, $documentacion, $documentacionNombre));
+
+           
 
             return redirect()->intended('proyectos')->with('success', 'Proyecto subido correctamente');
         } catch (\Exception $e) {
