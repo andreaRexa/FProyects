@@ -111,7 +111,7 @@ class ProyectoController extends Controller
                 'descripcion' => 'required|string',
                 'archivos' => 'required|file', 
                 'documentacion' => 'required|file', 
-                'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
+                'foto' => 'required|image', 
             ]);
         
             foreach ($request->autores as $autor) {
@@ -125,14 +125,15 @@ class ProyectoController extends Controller
             $proyecto->IdProyecto = $maxId;
             $proyecto->NombreProyecto = $request->nombre;
             $proyecto->Descripcion = $request->descripcion;
-        
+
+            $estadoArch = $request->estado_archivos;
             // Manejar archivo de proyecto
             if ($request->hasFile('archivos')) {
                 $archivo = $request->file('archivos');
                 $archivoNombre = str_replace(' ', '_', $request->nombre) . '_' . $archivo->getClientOriginalName();
                 $proyecto->Archivos = $archivoNombre;
             }
-        
+            $estadoDoc = $request->estado_documentos;
             // Manejar documentación del proyecto
             if ($request->hasFile('documentacion')) {
 
@@ -157,8 +158,7 @@ class ProyectoController extends Controller
             $proyecto->MediaValoracion = 0.00;
             $proyecto->save();
             
-             // Enviar correo con los archivos adjuntos
-             Mail::to('andrea_rexa@outlook.es')->send(new ProyectoSubido($proyecto, $archivo, $archivoNombre,$request->estado_archivos, $documentacion, $documentacionNombre,$request->estado_documentos));
+            Mail::to('andrea_rexa@outlook.es')->send(new ProyectoSubido($proyecto, $archivo, $archivoNombre,$estadoArch, $documentacion, $documentacionNombre,$estadoDoc));
 
             return redirect()->intended('proyectos')->with('success', 'Proyecto subido correctamente');
         } catch (\Exception $e) {

@@ -46,13 +46,14 @@
                 <li><strong>Nombre del Proyecto:</strong> {{ $proyecto->NombreProyecto }}</li>
                 <li><strong>Descripción:</strong> {{ $proyecto->Descripcion }}</li>
                 <li><strong>Archivos:</strong> {{ $archivoNombre }}</li>
-                @if($estadoArch === 0)
+                @if($estadoArch == 0)
                     <li><strong>Estado archivos:</strong> Publico</li>
                 @else
                     <li><strong>Estado archivos:</strong> Privado</li>
                 @endif
-                <li><strong>Documentación:</strong> {{ $documentacionNombre }}</li>
-                @if($estadoDoc === 0)
+                    <li><strong>Documentación:</strong> {{ $documentacionNombre }}</li>
+                    
+                @if($estadoDoc == 0)
                     <li><strong>Estado documentacion:</strong> Publico</li>
                 @else
                     <li><strong>Estado documentacion:</strong> Privado</li>
