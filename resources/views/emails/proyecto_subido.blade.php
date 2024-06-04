@@ -37,7 +37,7 @@
 <body>
     <div class="email-container">
         <div class="email-header">
-            <h1>Nuevo Proyecto Subido</h1>
+            <h1>Nuevo proyecto subido</h1>
         </div>
         <div class="email-content">
             <p>Hola,</p>
@@ -45,8 +45,18 @@
             <ul>
                 <li><strong>Nombre del Proyecto:</strong> {{ $proyecto->NombreProyecto }}</li>
                 <li><strong>Descripción:</strong> {{ $proyecto->Descripcion }}</li>
-                <li><strong>Archivo:</strong> {{ $archivoNombre }}</li>
+                <li><strong>Archivos:</strong> {{ $archivoNombre }}</li>
+                @if($estadoArch === 0)
+                    <li><strong>Estado archivos:</strong> Publico</li>
+                @else
+                    <li><strong>Estado archivos:</strong> Privado</li>
+                @endif
                 <li><strong>Documentación:</strong> {{ $documentacionNombre }}</li>
+                @if($estadoDoc === 0)
+                    <li><strong>Estado documentacion:</strong> Publico</li>
+                @else
+                    <li><strong>Estado documentacion:</strong> Privado</li>
+                @endif
             </ul>
         </div>
         <div class="email-footer">

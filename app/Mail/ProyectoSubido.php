@@ -21,13 +21,15 @@ class ProyectoSubido extends Mailable
      *
      * @return void
      */
-    public function __construct($proyecto, $archivo, $archivoNombre, $documentacion, $documentacionNombre)
+    public function __construct($proyecto, $archivo, $archivoNombre,$estadoArch, $documentacion, $documentacionNombre,$estadoDoc)
     {
         $this->proyecto = $proyecto;
         $this->archivo = $archivo;
         $this->archivoNombre = $archivoNombre;
+        $this->estadoArch = $estadoArch;
         $this->documentacion = $documentacion;
         $this->documentacionNombre = $documentacionNombre;
+        $this->estadoDoc = $estadoDoc;
     }
 
     /**
