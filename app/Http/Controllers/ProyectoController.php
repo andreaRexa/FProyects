@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Carbon;
 use Aws\S3\S3Client;
 use Aws\Exception\AwsException;
+use App\Mail\ProyectoSubido;
+use Illuminate\Support\Facades\Mail;
 
 class ProyectoController extends Controller
 {
@@ -157,7 +159,7 @@ class ProyectoController extends Controller
             
              // Enviar correo con los archivos adjuntos
              Mail::to('andrea_rexa@outlook.es')->send(new ProyectoSubido($proyecto, $archivo, $archivoNombre, $documentacion, $documentacionNombre));
-             
+
             return redirect()->intended('proyectos')->with('success', 'Proyecto subido correctamente');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
