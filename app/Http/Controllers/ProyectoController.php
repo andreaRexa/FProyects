@@ -276,5 +276,35 @@ class ProyectoController extends Controller
         return view('Proyectos.InfoProyectos', compact('proyecto'));
     }
 
+    public function guardarValoracion(Request $request)
+    {
+        $request->validate([
+            'valoracion' => 'required|integer|min:1|max:5',
+            'proyectoId' => 'required|integer|exists:proyectos,IdProyecto',
+        ]);
+
+        $userData = $request->session()->get('user');
+        $alumnoId = $userData['id'];
+
+        // Save the new rating
+        $valoracion = new Valoracion();
+        $valoracion->IdUsuario = $alumnoId;
+        $valoracion->Valoracion = $request->input('valoracion');
+        $valoracion->IdProyecto = $request->input('proyectoId');
+        $valoracion->FechaVal = Carbon::now();
+
+        $valoracion->save();
+
+        // Calculate the new average rating
+        $proyectoId = $request->input('proyectoId');
+        $proyecto = Proyectos::find($proyectoId);
+        $media = Valoracion::where('IdProyecto', $proyectoId)->avg('Valoracion');
+
+        // Update the average rating in the 'proyectos' table
+        $proyecto->MediaValoracion = round($media, 2);
+        $proyecto->save();
+
+        return response()->json(['message' => 'Valoración guardada y media actualizada correctamente']);
+    }
     
 }
