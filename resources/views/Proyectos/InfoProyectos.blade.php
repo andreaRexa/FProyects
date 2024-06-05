@@ -81,10 +81,9 @@
         @if(session()->has('user'))
             $(document).ready(function() {
                 var $ratingStars = $('#rating-stars');
-                var currentRating = $ratingStars.data('rating');
+
 
                 $ratingStars.starrr({
-                    rating: currentRating,
                     change: function(e, value) {
                         if (value) {
                             $('#rating-value').text(value);
