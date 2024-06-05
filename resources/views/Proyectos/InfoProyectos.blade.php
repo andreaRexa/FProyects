@@ -66,7 +66,7 @@
                     <div class="col-md-12">
                         @if(session()->has('user'))
                             <h5 class="card-title">Valora este proyecto:</h5>
-                            <div id="rating-stars" class="starrr"></div>
+                            <div id="rating-stars" class="starrr" data-rating="{{ $proyecto->MediaValoracion }}"></div>
                             <p class="mt-2">Valoración actual: <span id="rating-value">{{ $proyecto->MediaValoracion }}</span></p>
                         @else
                             <p class="mt-2">Debes estar <a href="{{ route('login') }}">logueado</a> para valorar este proyecto.</p>
@@ -81,9 +81,10 @@
         @if(session()->has('user'))
             $(document).ready(function() {
                 var $ratingStars = $('#rating-stars');
-
+                var currentRating = $ratingStars.data('rating');
 
                 $ratingStars.starrr({
+                    rating: currentRating,
                     change: function(e, value) {
                         if (value) {
                             $('#rating-value').text(value);
