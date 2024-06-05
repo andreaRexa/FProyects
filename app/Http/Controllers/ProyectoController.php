@@ -11,6 +11,7 @@ use App\Models\FamiliaAlumno;
 use App\Models\ProyectoAlumno;
 use App\Models\AlumnoCurso;
 use App\Models\Curso;
+use App\Models\Valoracion;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
@@ -286,7 +287,6 @@ class ProyectoController extends Controller
         $userData = $request->session()->get('user');
         $alumnoId = $userData['id'];
 
-        // Save the new rating
         $valoracion = new Valoracion();
         $valoracion->IdUsuario = $alumnoId;
         $valoracion->Valoracion = $request->input('valoracion');
@@ -295,12 +295,10 @@ class ProyectoController extends Controller
 
         $valoracion->save();
 
-        // Calculate the new average rating
         $proyectoId = $request->input('proyectoId');
         $proyecto = Proyectos::find($proyectoId);
         $media = Valoracion::where('IdProyecto', $proyectoId)->avg('Valoracion');
 
-        // Update the average rating in the 'proyectos' table
         $proyecto->MediaValoracion = round($media, 2);
         $proyecto->save();
 
