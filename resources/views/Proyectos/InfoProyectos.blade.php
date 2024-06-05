@@ -12,7 +12,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-4">
-                        <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->FotoProyecto) }}" alt="{{ $proyecto->NombreProyecto }}" class="card-fluid" style="width: 250px; height: 250px; object-fit: contain;" >
+                        <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->FotoProyecto) }}" alt="{{ $proyecto->NombreProyecto }}" class="card-fluid" style="width: 250px; height: 250px; object-fit: contain;">
                         <h5 class="card-title mt-4">Descripción</h5>
                         <p class="card-text">{{ $proyecto->Descripcion }}</p>
                     </div>
@@ -25,7 +25,7 @@
                             <li class="list-group-item">Familia: {{ $proyecto->familia->NombreFamilia }}</li>
                             <li class="list-group-item">Ciclo: {{ $proyecto->ciclo->NombreCiclo }}</li>
                             <li class="list-group-item">Curso: {{ $proyecto->curso->Curso }}</li>
-                            <li class="list-group-item">Fecha subida: {{ $proyecto->Fecha }}</li>                 
+                            <li class="list-group-item">Fecha subida: {{ $proyecto->Fecha }}</li>
                             @php
                                 $autores = $proyecto->proyectoAlumno->map(function($proyectoAlumno) {
                                     return $proyectoAlumno->usuario->Nombre . ' ' . $proyectoAlumno->usuario->Apellidos;
@@ -39,7 +39,7 @@
                                     <h5 class="card-title">Archivos</h5>
                                     @if($proyecto->ArchivosPriv == 1)
                                         <img src="/storage/imagenes/nodisponible.png" alt="No disponible" style="width: 100px; height: 100px;">
-                                    @else                                 
+                                    @else
                                         <a href="https://fproyectsarchivos.s3.amazonaws.com/ArchivosPublicos/{{ $proyecto->Archivos }}" download>
                                             <img src="/storage/imagenes/zip.png" alt="Archivo ZIP" style="width: 100px; height: 100px;">
                                         </a>
@@ -61,12 +61,11 @@
                         </div>
                     </div>
                 </div>
-                
                 <div class="row mt-4">
                     <div class="col-md-12">
                         @if(session()->has('user'))
                             <h5 class="card-title">Valora este proyecto:</h5>
-                            <div id="rating-stars" class="starrr" data-rating="{{ $proyecto->MediaValoracion }}"></div>
+                            <div id="rating-stars" class="starrr" data-rating="0"></div>
                             <p class="mt-2">Valoración actual: <span id="rating-value">{{ $proyecto->MediaValoracion }}</span></p>
                         @else
                             <p class="mt-2">Debes estar <a href="{{ route('login') }}">logueado</a> para valorar este proyecto.</p>
@@ -98,7 +97,7 @@
                                 },
                                 success: function(response) {
                                     alert(response.message);
-                                    location.reload(); // Reload to update the average rating displayed
+                                    location.reload(); // Recargar para actualizar la valoración media mostrada
                                 },
                                 error: function(xhr) {
                                     alert('Error al guardar la valoración.');
