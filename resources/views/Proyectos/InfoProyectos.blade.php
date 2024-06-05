@@ -61,11 +61,16 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="row mt-4">
                     <div class="col-md-12">
-                        <h5 class="card-title">Valora este proyecto:</h5>
-                        <div id="rating-stars" class="starrr" data-rating="{{ $proyecto->MediaValoracion }}"></div>
-                        <p class="mt-2">Valoración actual: <span id="rating-value">{{ $proyecto->MediaValoracion }}</span></p>
+                        @if(session()->has('user'))
+                            <h5 class="card-title">Valora este proyecto:</h5>
+                            <div id="rating-stars" class="starrr" data-rating="{{ $proyecto->MediaValoracion }}"></div>
+                            <p class="mt-2">Valoración actual: <span id="rating-value">{{ $proyecto->MediaValoracion }}</span></p>
+                        @else
+                            <p class="mt-2">Debes estar <a href="{{ route('login') }}">logueado</a> para valorar este proyecto.</p>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -74,16 +79,30 @@
 
     <script>
         $(document).ready(function() {
-            var $ratingStars = $('#rating-stars');
-            var currentRating = $ratingStars.data('rating');
+            var $ratingStars = $('#valoracion');
+            var val = $ratingStars.data('val');
 
             $ratingStars.starrr({
-                rating: currentRating,
+                rating: val,
                 change: function(e, value) {
                     if (value) {
-                        $('#rating-value').text(value);
-                        // Aquí puedes hacer una petición AJAX para guardar la valoración
-                        // $.post('/ruta/para/guardar/valoracion', { valoracion: value, proyectoId: {{ $proyecto->IdProyecto }} });
+                        $('#valact').text(value);
+                        $.ajax({
+                            url: '{{ route("guardarValoracion") }}',
+                            method: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                valoracion: value,
+                                proyectoId: {{ $proyecto->IdProyecto }}
+                            },
+                            success: function(response) {
+                                alert(response.message);
+                                location.reload(); 
+                            },
+                            error: function(xhr) {
+                                alert('Error al guardar la valoración.');
+                            }
+                        });
                     }
                 }
             });
