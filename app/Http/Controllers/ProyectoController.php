@@ -37,7 +37,7 @@ class ProyectoController extends Controller
         $alumnoId = $userData['id'];
     
         // Obtener los proyectos del alumno logueado
-        $proyectos = c::with('proyectoAlumno.usuario.alumnoCiclo')
+        $proyectos = Proyectos::with('proyectoAlumno.usuario.alumnoCiclo')
                                ->whereHas('proyectoAlumno', function($query) use ($alumnoId) {
                                    $query->where('IdUsuario', $alumnoId);
                                })->get();
