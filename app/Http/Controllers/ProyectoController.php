@@ -286,8 +286,9 @@ class ProyectoController extends Controller
 
         $userData = $request->session()->get('user');
         $alumnoId = $userData['id'];
-
+        $maxId = Valoracion::max('IdProyecto') + 1;
         $valoracion = new Valoracion();
+        $valoracion->IdValoracion =   $maxId;
         $valoracion->IdUsuario = $alumnoId;
         $valoracion->Valoracion = $request->input('valoracion');
         $valoracion->IdProyecto = $request->input('proyectoId');
