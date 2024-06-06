@@ -57,7 +57,7 @@
             <div class="card card-formulario" style="display:none;">
                 <div class="card-body">
                     <h5 class="card-title text-center">Editar familia</h5>
-                    <form id="form-editar-familia" action="{{ route('familia.editar') }}" method="POST">
+                    <form id="form-editar-familia" action="" method="POST">
                         @csrf
                         <input type="text" class="form-control" id="nombre" name="nombre" placeholder="">
                         <select class="form-control select-cursos" name="selectAdmin">
