@@ -141,7 +141,7 @@
             $('#form-subir-proyecto').submit();
         });
 
-        cargarAutoresDisponibles();
+        //cargarAutoresDisponibles();
 
         $('#familia, #ciclo, #curso').change(function() {
             cargarAutoresDisponibles();
