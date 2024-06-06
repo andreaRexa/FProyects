@@ -72,6 +72,15 @@
                         @endif
                     </div>
                 </div>
+                @if(session()->has('user') && $proyecto->proyectoAlumno->pluck('IdUsuario')->contains(session('user.id')))
+                    <div class="d-flex justify-content-end mt-4">
+                        <a href="{{ route('editarProyecto', ['id' => $proyecto->IdProyecto]) }}" class="btn btn-warning btn-sm mr-2">Editar</a>
+                        <form action="{{ route('eliminarProyecto', ['id' => $proyecto->IdProyecto]) }}" method="POST" style="display: inline-block;">
+                            @csrf
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este proyecto?')">Eliminar</button>
+                        </form>
+                    </div>
+                @endif    
             </div>
         </div>
     </div>

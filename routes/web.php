@@ -42,6 +42,8 @@ Route::get('proyectosAlumno', [ProyectoController::class, 'showListadoProyectosA
 Route::get('proyectoFamilia', [ProyectoController::class, 'showListadoProyectosFamilia'])->name('proyectosAlumno');
 Route::get('proyectos/{id}', [ProyectoController::class, 'showDetalleProyecto'])->name('proyectos.detalle');
 Route::post('/guardar-valoracion', [ProyectoController::class, 'guardarValoracion'])->name('guardarValoracion');
+Route::post('proyectos/eliminarProyecto/{id}', [ProyectoController::class, 'eliminarProyecto'])->name('eliminarProyecto');
+Route::post('proyectos/editarProyecto/{id}', [ProyectoController::class, 'editarProyecto'])->name('editarProyecto');
 Route::get('subirproyectos', [ProyectoController::class, 'showSubir'])->name('subirproyectos');
 Route::post('subirproyectos/obtenerAutores', [ProyectoController::class, 'obtenerAutores'])->name('subirproyectos.obtenerAutores');
 Route::post('subirproyectos/subir', [ProyectoController::class, 'subirProyecto'])->name('subirproyectos.subir');
