@@ -34,12 +34,12 @@
                 @endif
                 <div class="row">
                     <div class="col-md-4">       
-                        <img src="{{ isset($proyecto) ? $proyecto->FotoProyecto : '' }}" alt="" id="fotoProyecto" name="fotoProyecto" class="card-fluid mt-2" style="width: 250px; height: 250px; object-fit: contain;">
+                        <img src="" alt="" id="fotoProyecto" name="fotoProyecto" class="card-fluid mt-2" style="width: 250px; height: 250px; object-fit: contain;">
                         <input type="file" id="foto" name="foto" class="form-control-file" accept=".jpg, .jpeg, .png">
                         <div class="mt-3">
                             <label>Estado del Proyecto:</label><br>
-                            <label><input type="radio" name="estado_proyecto" value="0" {{ isset($proyecto) && $proyecto->estado_proyecto == 0 ? 'checked' : '' }}> Público</label>&nbsp&nbsp
-                            <label><input type="radio" name="estado_proyecto" value="1" {{ isset($proyecto) && $proyecto->estado_proyecto == 1 ? 'checked' : '' }}> Privado</label>
+                            <label><input type="radio" name="estado_proyecto" value="0" {{ isset($proyecto) && $proyecto->Estado == 0 ? 'checked' : '' }}> Público</label>&nbsp&nbsp
+                            <label><input type="radio" name="estado_proyecto" value="1" {{ isset($proyecto) && $proyecto->Estado == 1 ? 'checked' : '' }}> Privado</label>
                         </div>
                         <div class="mt-3">
                             <label for="descripcion">Descripción:</label>
