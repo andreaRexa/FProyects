@@ -319,7 +319,7 @@ class ProyectoController extends Controller
         return view('Proyectos.SubirEditarProyectos', compact('proyecto', 'familias', 'ciclos', 'cursos', 'autores'));
     }
 
-    public function updateProyecto($id){
+    public function updateProyecto(Request $request,$id){
         try {
             // Validar los datos del formulario
             $request->validate([
