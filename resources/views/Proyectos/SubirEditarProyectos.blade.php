@@ -118,14 +118,14 @@
 </div>
 <script>
     $(document).ready(function() {
-        $('#foto').change(function() {
+        /*$('#foto').change(function() {
             var reader = new FileReader();
             reader.onload = function(e) {
                 $('#fotoProyecto').attr('src', e.target.result);
             }
             reader.readAsDataURL(this.files[0]);
-        });
-        /*
+        });*/
+        
         $('#btn-add-autor').click(function() {
             $('#autoresDisponibles option:selected').appendTo('#autores');
         });
