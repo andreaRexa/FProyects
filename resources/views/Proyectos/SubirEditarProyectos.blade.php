@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
     <div class="card mt-4">
-        <form action="{{ isset($proyecto) ? route('proyectos.updateProyecto', $proyecto->id) : route('subirproyectos.subir') }}" method="POST" enctype="multipart/form-data" id="form-subir-proyecto">
+        <form action="{{ isset($proyecto) ? route('proyectos.updateProyecto', $proyecto->IdProyecto) : route('subirproyectos.subir') }}" method="POST" enctype="multipart/form-data" id="form-subir-proyecto">
             @csrf
             @if(isset($proyecto))
                 @method('POST')
