@@ -15,7 +15,6 @@
                                 <tr>
                                     <th>ID Familia</th>
                                     <th>Nombre</th>
-                                    <th>Familia</th>
                                     <th>ContraseniaFamilia</th>
                                     <th>Administrador</th>
                                 </tr>
