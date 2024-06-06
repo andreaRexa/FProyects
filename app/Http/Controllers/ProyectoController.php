@@ -330,7 +330,8 @@ class ProyectoController extends Controller
             $proyecto = Proyectos::find($id);
             $proyecto->NombreProyecto = $request->nombre;
             $proyecto->Descripcion = $request->descripcion;
-
+            $archivo = "";
+            $archivoNombre = "";
             $estadoArch = $request->estado_archivos;
             // Manejar archivo de proyecto
             if ($request->hasFile('archivos')) {
@@ -338,6 +339,8 @@ class ProyectoController extends Controller
                 $archivoNombre = str_replace(' ', '_', $request->nombre) . '_' . $archivo->getClientOriginalName();
                 $proyecto->Archivos = $archivoNombre;
             }
+            $documentacion = "";
+            $documentacionNombre = "";
             $estadoDoc = $request->estado_documentos;
             // Manejar documentación del proyecto
             if ($request->hasFile('documentacion')) {
