@@ -324,10 +324,7 @@ class ProyectoController extends Controller
             // Validar los datos del formulario
             $request->validate([
                 'nombre' => 'required|string|max:255',
-                'descripcion' => 'required|string',
-                'archivos' => 'required|file', 
-                'documentacion' => 'required|file', 
-                'foto' => 'required|image', 
+                'descripcion' => 'required|string' 
             ]);
         
             $proyecto = Proyectos::find($id);
