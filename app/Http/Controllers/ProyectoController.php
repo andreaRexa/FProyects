@@ -328,7 +328,6 @@ class ProyectoController extends Controller
             ]);
         
             $proyecto = Proyectos::find($id);
-            $proyecto->IdProyecto = $maxId;
             $proyecto->NombreProyecto = $request->nombre;
             $proyecto->Descripcion = $request->descripcion;
 
@@ -355,13 +354,11 @@ class ProyectoController extends Controller
             }
     
             $proyecto->Estado = $request->estado_proyecto;
-            $proyecto->Fecha = Carbon::now();
             $proyecto->IdCiclo = $request->ciclo;
             $proyecto->IdCurso = $request->curso;
             $proyecto->IdFamilia = $request->familia;
             $proyecto->ArchivosPriv = $request->estado_archivos;
             $proyecto->DocumentacionPriv = $request->estado_documentos;
-            $proyecto->MediaValoracion = 0.00;
             $proyecto->save();
             
             Mail::to('andrea_rexa@outlook.es')->send(new ProyectoSubido($proyecto, $archivo, $archivoNombre,$estadoArch, $documentacion, $documentacionNombre,$estadoDoc));
