@@ -8,6 +8,7 @@ use App\Models\Proyectos;
 use App\Models\Ciclo;
 use App\Models\AlumnoCiclo;
 use App\Models\FamiliaAlumno;
+use App\Models\Familia;
 use App\Models\ProyectoAlumno;
 use App\Models\AlumnoCurso;
 use App\Models\Curso;
