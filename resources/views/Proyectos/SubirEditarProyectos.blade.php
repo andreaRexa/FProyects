@@ -13,7 +13,7 @@
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="card-title">
                     <label for="nombre">Nombre:</label><br>
-                    <input type="text" id="nombre" name="nombre" class="form-control" value="{{ $proyecto->Nombre ?? '' }}">
+                    <input type="text" id="nombre" name="nombre" class="form-control" value="{{ $proyecto->NombreProyecto ?? '' }}">
                 </h5>
                 <a href="javascript:history.back()" class="btn btn-primary btn-sm">&laquo; Volver</a>
             </div>
