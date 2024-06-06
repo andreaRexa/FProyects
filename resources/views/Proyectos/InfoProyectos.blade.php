@@ -12,7 +12,11 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-4">
-                        <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->FotoProyecto) }}" alt="{{ $proyecto->NombreProyecto }}" class="card-fluid" style="width: 250px; height: 250px; object-fit: contain;">
+                        @if(isset($proyecto) && $proyecto->FotoProyecto)
+                            <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->FotoProyecto) }}" alt="Foto del Proyecto" id="fotoProyecto" name="fotoProyecto" class="card-fluid mt-2" style="width: 250px; height: 250px; object-fit: contain;">
+                        @else
+                            <img src="" alt="" id="fotoProyecto" name="fotoProyecto" class="card-fluid mt-2" style="width: 250px; height: 250px; object-fit: contain;">
+                        @endif
                         <h5 class="card-title mt-4">Descripción</h5>
                         <p class="card-text">{{ $proyecto->Descripcion }}</p>
                     </div>
