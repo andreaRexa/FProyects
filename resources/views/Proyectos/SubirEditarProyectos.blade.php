@@ -34,7 +34,7 @@
                 @endif
                 <div class="row">
                     <div class="col-md-4">       
-                        <img src="data:image/jpeg;base64,{{ isset($proyecto) ? base64_encode($proyecto->FotoProyecto) : '' }}" alt="" id="fotoProyecto" name="fotoProyecto" class="card-fluid mt-2" style="width: 250px; height: 250px; object-fit: contain;">
+                        <img src="{{ isset($proyecto) ? $proyecto->FotoProyecto : '' }}" alt="" id="fotoProyecto" name="fotoProyecto" class="card-fluid mt-2" style="width: 250px; height: 250px; object-fit: contain;">
                         <input type="file" id="foto" name="foto" class="form-control-file" accept=".jpg, .jpeg, .png">
                         <div class="mt-3">
                             <label>Estado del Proyecto:</label><br>
