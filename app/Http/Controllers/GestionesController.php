@@ -172,4 +172,8 @@ class GestionesController extends Controller
         return redirect()->intended('gestionesAlumnos');
 
     }
+    public function showFamilia(){
+        $familias = Familia::with('administrador')->get();
+        return view('Gestiones.GestionFamilias', compact('familias'));
+    }
 }

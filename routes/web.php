@@ -60,4 +60,5 @@ Route::get('gestionesAlumnos', [GestionesController::class, 'showListadoAlumnos'
 Route::post('gestionesAlumnos/eliminarsol', [GestionesController::class, 'eliminarSol'])->name('eliminarsol');
 Route::get('gestionesAlumnos/getUsuario', [GestionesController::class, 'getUsuarios'])->name('getUsuario');
 Route::post('gestionesAlumnos/aprobarSolicitud', [GestionesController::class, 'aprobarSolicitud'])->name('aprobarSolicitud');
-
+//Familia
+Route::get('gestionesFamilia', [GestionesController::class, 'showFamilia'])->name('gestionesFamilia');

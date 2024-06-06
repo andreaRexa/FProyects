@@ -47,8 +47,10 @@
                 Administradores
               </button>
               <div class="dropdown-menu" aria-labelledby="administradoresDropdown" v-show="subMenus.administradores">
-                <li class='nav-item'><button class='btn nav-link' name='btnGestFamilias' type='submit' href='#'>Gestión de familias</button></li>
-                <li class='nav-item'><button class='btn nav-link' name='btnGestUsuarios' type='submit' href='#'>Gestión de usuarios</button></li>
+                <form action="gestionesFamilia" method="GET" class="form-inline mx-auto">
+                  <li class='nav-item'><button class='btn nav-link' name='btnGestFamilias' type='submit' href='#'>Gestión de familias</button></li>
+                </form>
+              <li class='nav-item'><button class='btn nav-link' name='btnGestUsuarios' type='submit' href='#'>Gestión de usuarios</button></li>
               </div>
             </li>
           </ul>
