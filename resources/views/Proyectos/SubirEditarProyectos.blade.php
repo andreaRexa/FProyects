@@ -13,7 +13,7 @@
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="card-title">
                     <label for="nombre">Nombre:</label><br>
-                    <input type="text" id="nombre" name="nombre" class="form-control" value="{{ $proyecto->nombre ?? '' }}">
+                    <input type="text" id="nombre" name="nombre" class="form-control" value="{{ $proyecto->NombreProyecto ?? '' }}">
                 </h5>
                 <a href="javascript:history.back()" class="btn btn-primary btn-sm">&laquo; Volver</a>
             </div>
@@ -34,7 +34,7 @@
                 @endif
                 <div class="row">
                     <div class="col-md-4">       
-                        <img src="{{ isset($proyecto) ? asset('storage/proyectos/' . $proyecto->foto) : '' }}" alt="" id="fotoProyecto" name="fotoProyecto" class="card-fluid mt-2" style="width: 250px; height: 250px; object-fit: contain;">
+                        <img src="{{ isset($proyecto) ?data:image/jpeg;base64,{{ base64_encode($proyecto->FotoProyecto)}} : '' }}" alt="" id="fotoProyecto" name="fotoProyecto" class="card-fluid mt-2" style="width: 250px; height: 250px; object-fit: contain;">
                         <input type="file" id="foto" name="foto" class="form-control-file" accept=".jpg, .jpeg, .png">
                         <div class="mt-3">
                             <label>Estado del Proyecto:</label><br>
@@ -43,7 +43,7 @@
                         </div>
                         <div class="mt-3">
                             <label for="descripcion">Descripción:</label>
-                            <textarea id="descripcion" name="descripcion" class="form-control" rows="5">{{ $proyecto->descripcion ?? '' }}</textarea>
+                            <textarea id="descripcion" name="descripcion" class="form-control" rows="5">{{ $proyecto->Descripcion ?? '' }}</textarea>
                         </div>
                     </div>
                     <div class="col-md-8">
@@ -51,7 +51,7 @@
                             <label for="familia">Familia:</label>
                             <select id="familia" name="familia" class="form-control">
                                 @foreach($familias as $familia)
-                                    <option value="{{ $familia->IdFamilia }}" {{ isset($proyecto) && $proyecto->familia_id == $familia->IdFamilia ? 'selected' : '' }}>{{ $familia->NombreFamilia }}</option>
+                                    <option value="{{ $familia->IdFamilia }}" {{ isset($proyecto) && $proyecto->IdFamilia == $familia->IdFamilia ? 'selected' : '' }}>{{ $familia->NombreFamilia }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -59,7 +59,7 @@
                             <label for="ciclo">Ciclo:</label>
                             <select id="ciclo" name="ciclo" class="form-control">
                                 @foreach($ciclos as $ciclo)
-                                    <option value="{{ $ciclo->IdCiclo }}" {{ isset($proyecto) && $proyecto->ciclo_id == $ciclo->IdCiclo ? 'selected' : '' }}>{{ $ciclo->NombreCiclo }}</option>
+                                    <option value="{{ $ciclo->IdCiclo }}" {{ isset($proyecto) && $proyecto->IdCiclo == $ciclo->IdCiclo ? 'selected' : '' }}>{{ $ciclo->NombreCiclo }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -67,7 +67,7 @@
                             <label for="curso">Curso:</label>
                             <select id="curso" name="curso" class="form-control">
                                 @foreach($cursos as $curso)
-                                    <option value="{{ $curso->IdCurso }}" {{ isset($proyecto) && $proyecto->curso_id == $curso->IdCurso ? 'selected' : '' }}>{{ $curso->Curso }}</option>
+                                    <option value="{{ $curso->IdCurso }}" {{ isset($proyecto) && $proyecto->IdCurso == $curso->IdCurso ? 'selected' : '' }}>{{ $curso->Curso }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -93,17 +93,17 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <h5 class="card-title">Archivos</h5>
-                                    <label><input type="radio" name="estado_archivos" value="0" {{ isset($proyecto) && $proyecto->estado_archivos == 0 ? 'checked' : '' }}> Público</label>&nbsp&nbsp
-                                    <label><input type="radio" name="estado_archivos" value="1" {{ isset($proyecto) && $proyecto->estado_archivos == 1 ? 'checked' : '' }}> Privado</label><br>
+                                    <label><input type="radio" name="estado_archivos" value="0" {{ isset($proyecto) && $proyecto->ArchivosPriv == 0 ? 'checked' : '' }}> Público</label>&nbsp&nbsp
+                                    <label><input type="radio" name="estado_archivos" value="1" {{ isset($proyecto) && $proyecto->ArchivosPriv == 1 ? 'checked' : '' }}> Privado</label><br>
                                     <img src="/storage/imagenes/zip.png" alt="Archivo ZIP" style="width: 100px; height: 100px;"><br>
-                                    <input type="file" id="archivos" name="archivos" class="form-control-file" accept=".zip">
+                                    <input type="file" id="archivos" name="archivos" class="form-control-file" accept=".zip" value="{{$proyecto->Archivos}}">
                                 </div>
                                 <div class="col-md-6">
                                     <h5 class="card-title">Documentación</h5>
-                                    <label><input type="radio" name="estado_documentos" value="0" {{ isset($proyecto) && $proyecto->estado_documentos == 0 ? 'checked' : '' }}> Público</label>&nbsp&nbsp
-                                    <label><input type="radio" name="estado_documentos" value="1" {{ isset($proyecto) && $proyecto->estado_documentos == 1 ? 'checked' : '' }}> Privado</label><br>
+                                    <label><input type="radio" name="estado_documentos" value="0" {{ isset($proyecto) && $proyecto->DocumentacionPriv == 0 ? 'checked' : '' }}> Público</label>&nbsp&nbsp
+                                    <label><input type="radio" name="estado_documentos" value="1" {{ isset($proyecto) && $proyecto->DocumentacionPriv == 1 ? 'checked' : '' }}> Privado</label><br>
                                     <img src="/storage/imagenes/zip.png" alt="Archivo ZIP" style="width: 100px; height: 100px;"><br>
-                                    <input type="file" id="documentacion" name="documentacion" class="form-control-file" accept=".zip">
+                                    <input type="file" id="documentacion" name="documentacion" class="form-control-file" accept=".zip" value="{{$proyecto->Documentacion}}">
                                 </div>
                             </div>
                         </div>
