@@ -34,7 +34,11 @@
                 @endif
                 <div class="row">
                     <div class="col-md-4">       
-                        <img src="{{ isset($proyecto) ? data:image/jpeg;base64,base64_encode($proyecto->FotoProyecto) : '' }}" alt="" id="fotoProyecto" name="fotoProyecto" class="card-fluid mt-2" style="width: 250px; height: 250px; object-fit: contain;">
+                        @if(isset($proyecto) && $proyecto->FotoProyecto)
+                            <img src="data:image/jpeg;base64,{{ base64_encode($proyecto->FotoProyecto) }}" alt="Foto del Proyecto" id="fotoProyecto" name="fotoProyecto" class="card-fluid mt-2" style="width: 250px; height: 250px; object-fit: contain;">
+                        @else
+                            <img src="" alt="" id="fotoProyecto" name="fotoProyecto" class="card-fluid mt-2" style="width: 250px; height: 250px; object-fit: contain;">
+                        @endif
                         <input type="file" id="foto" name="foto" class="form-control-file" accept=".jpg, .jpeg, .png">
                         <div class="mt-3">
                             <label>Estado del Proyecto:</label><br>
