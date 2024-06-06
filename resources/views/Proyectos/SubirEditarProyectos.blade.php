@@ -125,7 +125,7 @@
             }
             reader.readAsDataURL(this.files[0]);
         });
-
+        /*
         $('#btn-add-autor').click(function() {
             $('#autoresDisponibles option:selected').appendTo('#autores');
         });
@@ -145,7 +145,7 @@
 
         $('#familia, #ciclo, #curso').change(function() {
             cargarAutoresDisponibles();
-        });*/
+        });
 
         function cargarAutoresDisponibles() {
             var familia = $('#familia').val();
@@ -175,6 +175,6 @@
                 }
             });
         }
-    });
+    });*/
 </script>
 @endsection
