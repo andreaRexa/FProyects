@@ -141,11 +141,11 @@
             $('#form-subir-proyecto').submit();
         });
 
-        //cargarAutoresDisponibles();
+        /*cargarAutoresDisponibles();
 
         $('#familia, #ciclo, #curso').change(function() {
             cargarAutoresDisponibles();
-        });
+        });*/
 
         function cargarAutoresDisponibles() {
             var familia = $('#familia').val();
