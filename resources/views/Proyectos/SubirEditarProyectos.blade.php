@@ -38,12 +38,12 @@
                         <input type="file" id="foto" name="foto" class="form-control-file" accept=".jpg, .jpeg, .png">
                         <div class="mt-3">
                             <label>Estado del Proyecto:</label><br>
-                            <label><input type="radio" name="estado_proyecto" value="0" {{ isset($proyecto) && $proyecto->estado_proyecto == 0 ? 'checked' : '' }}> Público</label>&nbsp&nbsp
-                            <label><input type="radio" name="estado_proyecto" value="1" {{ isset($proyecto) && $proyecto->estado_proyecto == 1 ? 'checked' : '' }}> Privado</label>
+                            <label><input type="radio" name="estado_proyecto" value="0" {{ isset($proyecto) && $proyecto->Estado == 0 ? 'checked' : '' }}> Público</label>&nbsp&nbsp
+                            <label><input type="radio" name="estado_proyecto" value="1" {{ isset($proyecto) && $proyecto->Estado == 1 ? 'checked' : '' }}> Privado</label>
                         </div>
                         <div class="mt-3">
                             <label for="descripcion">Descripción:</label>
-                            <textarea id="descripcion" name="descripcion" class="form-control" rows="5">{{ $proyecto->descripcion ?? '' }}</textarea>
+                            <textarea id="descripcion" name="descripcion" class="form-control" rows="5">{{ $proyecto->Descripcion ?? '' }}</textarea>
                         </div>
                     </div>
                     <div class="col-md-8">
