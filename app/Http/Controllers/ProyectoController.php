@@ -314,7 +314,7 @@ class ProyectoController extends Controller
         $ciclos = Ciclo::all();
         $cursos = Curso::all();
         
-        $autores = $proyecto->proyectoAlumno->pluck('usuario') ;
+        $autores = $proyecto->proyectoAlumno->usuario ;
         dd($autores);
         return view('Proyectos.SubirEditarProyectos', compact('proyecto', 'familias', 'ciclos', 'cursos', 'autores'));
     }
