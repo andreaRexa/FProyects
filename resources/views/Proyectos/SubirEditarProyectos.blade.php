@@ -126,7 +126,7 @@
             reader.readAsDataURL(this.files[0]);
         });*/
         
-        $('#btn-add-autor').click(function() {
+        /*$('#btn-add-autor').click(function() {
             $('#autoresDisponibles option:selected').appendTo('#autores');
         });
 
@@ -139,7 +139,7 @@
             // Seleccionar todas las opciones disponibles
             $('#autores option').prop('selected', true);
             $('#form-subir-proyecto').submit();
-        });
+        });*/
 
         /*cargarAutoresDisponibles();
 
