@@ -309,7 +309,7 @@ class ProyectoController extends Controller
 
     public function editarProyecto($id = null)
     {
-        $proyecto = $id ? Proyectos::with('proyectoAlumno.usuario')->find($id) : null;
+        $proyecto = Proyectos::with('proyectoAlumno.usuario')->find($id);
         $familias = Familia::all();
         $ciclos = Ciclo::all();
         $cursos = Curso::all();
