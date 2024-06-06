@@ -305,5 +305,38 @@ class ProyectoController extends Controller
 
         return response()->json(['message' => 'Valoración guardada y media actualizada correctamente']);
     }
+
+    public function editarProyecto($id = null)
+    {
+        $proyecto = $id ? Proyectos::with('proyectoAlumno.usuario')->find($id) : null;
+        $familias = Familia::all();
+        $ciclos = Ciclo::all();
+        $cursos = Curso::all();
+        
+        $autores = $proyecto ? $proyecto->proyectoAlumno->pluck('usuario') : collect();
+
+        return view('Proyectos.subirEditarProyecto', compact('proyecto', 'familias', 'ciclos', 'cursos', 'autores'));
+    }
+
+    public function eliminarProyecto($id)
+    {
+        // Buscar el proyecto por su ID
+        $proyecto = Proyectos::findOrFail($id);
+
+        // Verificar si el usuario logueado es propietario del proyecto
+        $userData = session()->get('user');
+        $alumnoId = $userData['id'];
+
+        if ($proyecto->proyectoAlumno->pluck('IdUsuario')->contains($alumnoId)) {
+            // Eliminar el proyecto
+            $proyecto->delete();
+
+            // Redireccionar con un mensaje de éxito
+            return redirect()->route('listaProyectos')->with('success', 'Proyecto eliminado exitosamente.');
+        } else {
+            // Redireccionar con un mensaje de error si el usuario no es propietario
+            return redirect()->route('listaProyectos')->with('error', 'No tienes permiso para eliminar este proyecto.');
+        }
+    }
     
 }
