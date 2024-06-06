@@ -76,7 +76,7 @@
                             <div class="d-flex justify-content-between">
                                 <select multiple class="form-control" id="autores" name="autores[]" style="width: 45%; height: 150px;">
                                     @if(isset($proyecto))
-                                        @foreach($proyecto->autores as $autor)
+                                        @foreach(autores as $autor)
                                             <option value="{{ $autor->IdUsuario }}" selected>{{ $autor->Nombre }}</option>
                                         @endforeach
                                     @endif
