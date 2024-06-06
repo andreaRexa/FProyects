@@ -316,7 +316,7 @@ class ProyectoController extends Controller
         
         $autores = $proyecto ? $proyecto->proyectoAlumno->pluck('usuario') : collect();
 
-        return view('Proyectos.subirEditarProyecto', compact('proyecto', 'familias', 'ciclos', 'cursos', 'autores'));
+        return view('Proyectos.subirEditarProyectos', compact('proyecto', 'familias', 'ciclos', 'cursos', 'autores'));
     }
 
     public function eliminarProyecto($id)
