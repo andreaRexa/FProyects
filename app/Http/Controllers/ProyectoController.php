@@ -307,7 +307,7 @@ class ProyectoController extends Controller
         return response()->json(['message' => 'Valoración guardada y media actualizada correctamente']);
     }
 
-    public function editarProyecto($id = null)
+    public function editarProyecto($id)
     {
         $proyecto = Proyectos::with('proyectoAlumno.usuario')->find($id);
         $familias = Familia::all();
@@ -317,6 +317,62 @@ class ProyectoController extends Controller
         $autores = $proyecto->proyectoAlumno->pluck('usuario') ;
         
         return view('Proyectos.SubirEditarProyectos', compact('proyecto', 'familias', 'ciclos', 'cursos', 'autores'));
+    }
+
+    public function guardarEditProyecto($id){
+        try {
+            // Validar los datos del formulario
+            $request->validate([
+                'nombre' => 'required|string|max:255',
+                'descripcion' => 'required|string',
+                'archivos' => 'required|file', 
+                'documentacion' => 'required|file', 
+                'foto' => 'required|image', 
+            ]);
+        
+            $proyecto = Proyectos::find($id);
+            $proyecto->IdProyecto = $maxId;
+            $proyecto->NombreProyecto = $request->nombre;
+            $proyecto->Descripcion = $request->descripcion;
+
+            $estadoArch = $request->estado_archivos;
+            // Manejar archivo de proyecto
+            if ($request->hasFile('archivos')) {
+                $archivo = $request->file('archivos');
+                $archivoNombre = str_replace(' ', '_', $request->nombre) . '_' . $archivo->getClientOriginalName();
+                $proyecto->Archivos = $archivoNombre;
+            }
+            $estadoDoc = $request->estado_documentos;
+            // Manejar documentación del proyecto
+            if ($request->hasFile('documentacion')) {
+
+                $documentacion = $request->file('documentacion');
+                $documentacionNombre = str_replace(' ', '_', $request->nombre) . '_' . $documentacion->getClientOriginalName();     
+                $proyecto->Documentacion = $documentacionNombre;
+            }
+        
+    
+            // Manejar la imagen del proyecto
+            if ($request->hasFile('foto')) {
+                $proyecto->FotoProyecto = file_get_contents($request->file('foto')->getRealPath());
+            }
+    
+            $proyecto->Estado = $request->estado_proyecto;
+            $proyecto->Fecha = Carbon::now();
+            $proyecto->IdCiclo = $request->ciclo;
+            $proyecto->IdCurso = $request->curso;
+            $proyecto->IdFamilia = $request->familia;
+            $proyecto->ArchivosPriv = $request->estado_archivos;
+            $proyecto->DocumentacionPriv = $request->estado_documentos;
+            $proyecto->MediaValoracion = 0.00;
+            $proyecto->save();
+            
+            Mail::to('andrea_rexa@outlook.es')->send(new ProyectoSubido($proyecto, $archivo, $archivoNombre,$estadoArch, $documentacion, $documentacionNombre,$estadoDoc));
+
+            return redirect()->intended('proyectos')->with('success', 'Proyecto subido correctamente');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
     public function eliminarProyecto($id)
