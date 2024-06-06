@@ -51,7 +51,7 @@
                             <label for="familia">Familia:</label>
                             <select id="familia" name="familia" class="form-control">
                                 @foreach($familias as $familia)
-                                    <option value="{{ $familia->IdFamilia }}" {{ isset($proyecto) && $proyecto->familia_id == $familia->IdFamilia ? 'selected' : '' }}>{{ $familia->NombreFamilia }}</option>
+                                    <option value="{{ $familia->IdFamilia }}" {{ isset($proyecto) && $proyecto->IdFamilia == $familia->IdFamilia ? 'selected' : '' }}>{{ $familia->NombreFamilia }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -59,7 +59,7 @@
                             <label for="ciclo">Ciclo:</label>
                             <select id="ciclo" name="ciclo" class="form-control">
                                 @foreach($ciclos as $ciclo)
-                                    <option value="{{ $ciclo->IdCiclo }}" {{ isset($proyecto) && $proyecto->ciclo_id == $ciclo->IdCiclo ? 'selected' : '' }}>{{ $ciclo->NombreCiclo }}</option>
+                                    <option value="{{ $ciclo->IdCiclo }}" {{ isset($proyecto) && $proyecto->IdCiclo == $ciclo->IdCiclo ? 'selected' : '' }}>{{ $ciclo->NombreCiclo }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -67,7 +67,7 @@
                             <label for="curso">Curso:</label>
                             <select id="curso" name="curso" class="form-control">
                                 @foreach($cursos as $curso)
-                                    <option value="{{ $curso->IdCurso }}" {{ isset($proyecto) && $proyecto->curso_id == $curso->IdCurso ? 'selected' : '' }}>{{ $curso->Curso }}</option>
+                                    <option value="{{ $curso->IdCurso }}" {{ isset($proyecto) && $proyecto->IdCurso == $curso->IdCurso ? 'selected' : '' }}>{{ $curso->Curso }}</option>
                                 @endforeach
                             </select>
                         </div>
