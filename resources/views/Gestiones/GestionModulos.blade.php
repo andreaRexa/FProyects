@@ -111,6 +111,7 @@
 
         $('#btn-editar-ciclo').click(function() {
             if (cicloSeleccionado) {
+                $('.card-formulario').hide();
                 var cicloId = cicloSeleccionado.data('ciclo-id');
                 var nombreCiclo = cicloSeleccionado.find('td').eq(1).text();
                 var cursosDelCiclo = cicloSeleccionado.find('select option');
@@ -158,6 +159,7 @@
         });
 
         $('#btn-nuevo-ciclo').click(function() {
+            $('.card-formulario').hide();
             var idFamilia = $('#idfamiliaIn').val();
             // Limpiar los campos del formulario de edición
             $('#nombre').val('');
