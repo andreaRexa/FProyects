@@ -103,7 +103,6 @@
                         text: '{{ $administrador->Apellidos }}, {{ $administrador->Nombre }}'
                         selected: true;
                     }));
-                }
                 @endforeach
                 $('.card-formulario').show();
             } else {
