@@ -93,10 +93,6 @@
                 $('#nombre').val(nombreFamilia);
                 $('#idfamilia').val(familiaId);
 
-                var adimFamiliaIds = cursosDelCiclo.map(function() {
-                    return $(this).val();
-                }).get();
-
                 @foreach($administradores as $administrador)
                     $('#selectAdmin').append($('<option>', {
                         value: '{{ $administrador->IdUsuario }}',
