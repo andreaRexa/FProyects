@@ -335,7 +335,15 @@ class ProyectoController extends Controller
                 'nombre' => 'required|string|max:255',
                 'descripcion' => 'required|string' 
             ]);
-        
+
+            ProyectoAlumno::where('IdProyecto', $id)->delete();
+            foreach ($request->autores as $autor) {
+                $proyectoAlumno = new ProyectoAlumno();
+                $proyectoAlumno->IdProyecto = $id;
+                $proyectoAlumno->IdUsuario = $autor;
+                $proyectoAlumno->save();
+            }
+
             $proyecto = Proyectos::find($id);
             $proyecto->NombreProyecto = $request->nombre;
             $proyecto->Descripcion = $request->descripcion;
@@ -385,15 +393,17 @@ class ProyectoController extends Controller
     {
         // Buscar el proyecto por su ID
         $proyecto = Proyectos::findOrFail($id);
+        $proyectosalumnos = ProyectoAlumno::findOrFail($id);
 
         // Verificar si el usuario logueado es propietario del proyecto
         $userData = session()->get('user');
         $alumnoId = $userData['id'];
 
         if ($proyecto->proyectoAlumno->pluck('IdUsuario')->contains($alumnoId)) {
+            ProyectoAlumno::where('IdProyecto', $id)->delete();
             // Eliminar el proyecto
             $proyecto->delete();
-
+            
             // Redireccionar con un mensaje de éxito
             return redirect()->route('listaProyectos')->with('success', 'Proyecto eliminado exitosamente.');
         } else {

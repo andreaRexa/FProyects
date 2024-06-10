@@ -77,9 +77,11 @@
                     </form>
                 </div>
             </div>
-            <div class="text-right mt-4">
-                <button type="button" class="btn btn-primary" id="bntMatr" >Matriculacion</button>
-            </div>
+            @if(session('user.rol') >= 3)
+                <div class="text-right mt-4">
+                    <button type="button" class="btn btn-primary" id="bntMatr" >Matriculacion</button>
+                </div>
+            @endif
         </div>
     </div>
     
