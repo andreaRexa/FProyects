@@ -32,6 +32,10 @@
                                             <td>{{ $familia->ContraseniaFamilia }}</td>
                                             <td>{{ $familia->administrador->Nombre }}</td>
                                             <td>
+                                                <input type="hidden" id="idadmin" name="idadmin" value="{{$familia->administrador->IdUsuario}}">
+                                                <input type="hidden" id="nombreadmin" name="nombreadmin" value="{{$familia->administrador->Apellidos}},{{$familia->administrador->Nombre}}">
+                                            </td>
+                                            <td>
                                             
                                         </tr>
                                     @endforeach
@@ -93,6 +97,14 @@
 
                 $('#nombre').val(nombreFamilia);
                 $('#idfamilia').val(familiaId);
+                var idAdmin = $('#idadmin').val();
+                var nombreAdmin = $('#nombreadmin').val();
+
+                $('#selectAdmin').append($('<option>', {
+                        value: idAdmin,
+                        text: nombreAdmin,
+                        selected: true
+                }));
                 $('.card-formulario').show();
             } else {
                 alert('Por favor, selecciona una familia antes de editar.');
