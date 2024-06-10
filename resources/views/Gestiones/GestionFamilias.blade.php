@@ -87,6 +87,7 @@
 
         $('#btn-editar-familia').click(function() {
             if (FamiliaSeleccionado) {
+                $('.card-formulario').hide();
                 var familiaId = FamiliaSeleccionado.data('familia-id');
                 var nombreFamilia = FamiliaSeleccionado.find('td').eq(1).text();
 
@@ -109,7 +110,9 @@
         });
 
         $('#btn-nuevo-familia').click(function() {
-            
+            $('.card-formulario').hide();
+            $('#nombre').val('');
+            $('#idfamilia').val('');
             $('.card-formulario').show();
         });
 
