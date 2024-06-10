@@ -92,14 +92,6 @@
 
                 $('#nombre').val(nombreFamilia);
                 $('#idfamilia').val(familiaId);
-
-                @foreach($administradores as $administrador)
-                    $('#selectAdmin').append($('<option>', {
-                        value: '{{ $administrador->IdUsuario }}',
-                        text: '{{ $administrador->Apellidos }}, {{ $administrador->Nombre }}'
-                        selected: true;
-                    }));
-                @endforeach
                 $('.card-formulario').show();
             } else {
                 alert('Por favor, selecciona una familia antes de editar.');
