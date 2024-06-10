@@ -88,7 +88,10 @@ class ProyectoController extends Controller
         $ciclo = $request->input('ciclo');
         $curso = $request->input('curso');
     
-        // Consulta Eloquent para obtener la lista de alumnos disponibles con apellidos
+        // Obtener los IDs de los autores ya seleccionados
+        $autoresSeleccionados = $request->input('autores', []);
+    
+        // Consulta Eloquent para obtener la lista de alumnos disponibles con apellidos, excluyendo los seleccionados
         $alumnosDisponibles = User::select('usuarios.IdUsuario', 'usuarios.Nombre', 'usuarios.Apellidos')
             ->join('alumnociclo as acc', 'usuarios.IdUsuario', '=', 'acc.IdUsuario')
             ->join('alumnocurso as acur', 'usuarios.IdUsuario', '=', 'acur.IdUsuario')
@@ -96,6 +99,7 @@ class ProyectoController extends Controller
             ->where('acc.IdCiclo', $ciclo)
             ->where('acur.IdCurso', $curso)
             ->where('fa.IdFamilia', $familia)
+            ->whereNotIn('usuarios.IdUsuario', $autoresSeleccionados)
             ->get()
             ->map(function($user) {
                 return ['id' => $user->IdUsuario, 'nombre_completo' => $user->Apellidos . ', ' . $user->Nombre];
@@ -104,6 +108,7 @@ class ProyectoController extends Controller
         // Devolver la lista de alumnos disponibles como respuesta AJAX
         return response()->json($alumnosDisponibles);
     }
+    
     
 
     public function subirProyecto(Request $request)

@@ -77,7 +77,7 @@
                                 <select multiple class="form-control" id="autores" name="autores[]" style="width: 45%; height: 150px;">
                                     @if(isset($proyecto))
                                         @foreach($autores as $autor)
-                                            <option value="{{ $autor->IdUsuario }}" selected>{{ $autor->Nombre }},{{ $autor->Apellidos }}</option>
+                                            <option value="{{ $autor->IdUsuario }}" selected>{{ $autor->Apellidos }},{{ $autor->Nombre }}</option>
                                         @endforeach
                                     @endif
                                 </select>
@@ -152,6 +152,9 @@
             var ciclo = $('#ciclo').val();
             var curso = $('#curso').val();
 
+            // Obtener los IDs de los autores ya seleccionados
+            var autoresSeleccionados = $('#autores').val();
+
             $.ajax({
                 url: '{{ route("subirproyectos.obtenerAutores") }}',
                 method: 'POST',
@@ -162,7 +165,8 @@
                     _token: $('meta[name="csrf-token"]').attr('content'), 
                     familia: familia,
                     ciclo: ciclo,
-                    curso: curso
+                    curso: curso,
+                    autores: autoresSeleccionados
                 },
                 success: function(response) {
                     $('#autoresDisponibles').empty();
@@ -175,6 +179,7 @@
                 }
             });
         }
+
     });
 </script>
 @endsection
