@@ -172,8 +172,13 @@ class GestionesController extends Controller
         return redirect()->intended('gestionesAlumnos');
 
     }
+
     public function showFamilia(){
         $familias = Familia::with('administrador')->get();
-        return view('Gestiones.GestionFamilias', compact('familias'));
+        $asignados = $familias->pluck('administrador.IdUsuario');
+        $administradores = User::where('TipoUsuario', "3")
+                           ->whereNotIn('IdUsuario', $asignados)
+                           ->get();
+        return view('Gestiones.GestionFamilias', compact('familias','administradores'));
     }
 }

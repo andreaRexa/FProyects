@@ -127,11 +127,11 @@
         });
 
         $('#btn-add-autor').click(function() {
-            $('#autoresDisponibles option:selected').appendTo('#autores');
+            $('#autores option:selected').appendTo('#autoresDisponibles');
         });
 
         $('#btn-remove-autor').click(function() {
-            $('#autores option:selected').appendTo('#autoresDisponibles');
+            $('#autoresDisponibles option:selected').appendTo('#autores');
         });
 
         $('#btn-guardar').click(function(e) {

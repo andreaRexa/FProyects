@@ -22,7 +22,7 @@
                             <tbody>
                                 @if($familias->count() === 0)
                                     <tr>
-                                        <td colspan="4">No se han encontrado ciclos</td>
+                                        <td colspan="4">No se han encontrado familia</td>
                                     </tr>        
                                 @else
                                     @foreach($familias as $familia)
@@ -59,7 +59,10 @@
                     <form id="form-editar-familia" action="" method="POST">
                         @csrf
                         <input type="text" class="form-control" id="nombre" name="nombre" placeholder="">
-                        <select class="form-control select-cursos" name="selectAdmin">
+                        <select class="form-control select-admin" name="selectAdmin">
+                        @foreach($administradores as $administrador)
+                            <option value="{{ $administrador->IdUsuario}}">{{ $administrador->Apellidos }}, {{ $administrador->Nombre }}</option>
+                        @endforeach
                         </select>
                         <div class="text-center">
                             <button type="submit" id="btn-guardar" class="btn btn-primary">Guardar</button>
