@@ -77,7 +77,7 @@
                                 <select multiple class="form-control" id="autores" name="autores[]" style="width: 45%; height: 150px;">
                                     @if(isset($proyecto))
                                         @foreach($autores as $autor)
-                                            <option value="{{ $autor->IdUsuario }}" selected>{{ $autor->Nombre }}</option>
+                                            <option value="{{ $autor->IdUsuario }}" selected>{{ $autor->Nombre }},{{ $autor->Apellidos }}</option>
                                         @endforeach
                                     @endif
                                 </select>
@@ -166,8 +166,8 @@
                 },
                 success: function(response) {
                     $('#autoresDisponibles').empty();
-                    $.each(response, function(key, value) {
-                        $('#autoresDisponibles').append('<option value="' + key + '">' + value + '</option>');
+                    $.each(response, function(index, autor) {
+                        $('#autoresDisponibles').append('<option value="' + autor.id + '">' + autor.nombre_completo + '</option>');
                     });
                 },
                 error: function(xhr, status, error) {
