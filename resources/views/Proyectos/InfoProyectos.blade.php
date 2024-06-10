@@ -94,7 +94,7 @@
                 $ratingStars.starrr({
                     rating: currentRating,
                     change: function(e, value) {
-                        console.log('Clic en estrella');
+                        console.log('Clic en estrella' + value);
                         if (value) {
                             $('#rating-value').text(value);
                             $.ajax({
