@@ -293,28 +293,40 @@ class ProyectoController extends Controller
             'valoracion' => 'required|integer|min:1|max:5',
             'proyectoId' => 'required|integer|exists:proyectos,IdProyecto',
         ]);
-
+    
         $userData = $request->session()->get('user');
         $alumnoId = $userData['id'];
-        $maxId = Valoracion::max('IdValoracion') + 1;
-        $valoracion = new Valoracion();
-        $valoracion->IdValoracion =   $maxId;
-        $valoracion->IdUsuario = $alumnoId;
-        $valoracion->Valoracion = $request->input('valoracion');
-        $valoracion->IdProyecto = $request->input('proyectoId');
-        $valoracion->FechaVal = Carbon::now();
-
-        $valoracion->save();
-
         $proyectoId = $request->input('proyectoId');
-        $proyecto = Proyectos::find($proyectoId);
+    
+        // Verificar si el usuario ya ha valorado el proyecto
+        $existingValoracion = Valoracion::where('IdUsuario', $alumnoId)
+                                        ->where('IdProyecto', $proyectoId)
+                                        ->first();
+    
+        if ($existingValoracion) {
+            // Actualizar la valoración existente
+            $existingValoracion->Valoracion = $request->input('valoracion');
+            $existingValoracion->FechaVal = Carbon::now();
+            $existingValoracion->save();
+        } else {
+            // Guardar una nueva valoración
+            $valoracion = new Valoracion();
+            $valoracion->IdUsuario = $alumnoId;
+            $valoracion->Valoracion = $request->input('valoracion');
+            $valoracion->IdProyecto = $proyectoId;
+            $valoracion->FechaVal = Carbon::now();
+            $valoracion->save();
+        }
+    
+        // Actualizar la media de valoración del proyecto
         $media = Valoracion::where('IdProyecto', $proyectoId)->avg('Valoracion');
-
+        $proyecto = Proyectos::find($proyectoId);
         $proyecto->MediaValoracion = round($media, 2);
         $proyecto->save();
-
+    
         return response()->json(['message' => 'Valoración guardada y media actualizada correctamente']);
     }
+    
 
     public function editarProyecto($id)
     {

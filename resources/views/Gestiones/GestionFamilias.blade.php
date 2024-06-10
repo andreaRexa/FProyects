@@ -104,7 +104,15 @@
                 var idAdmin = FamiliaSeleccionado.find('#idadmin').val();
                 var nombreAdmin = FamiliaSeleccionado.find('#nombreadmin').val();
 
-                $('#selectAdmin option').last().remove();
+                var countAdmin = parseInt($('#numAdmin').val()); // Obtener el número de opciones
+                var $selectAdmin = $('#selectAdmin');
+                var currentOptions = $selectAdmin.find('option').length; // Obtener el número actual de opciones
+                
+                // Eliminar la última opción solo si hay más de una opción cargada y el número actual de opciones es mayor que countAdmin
+                if (currentOptions > 1 && currentOptions > countAdmin) {
+                    $selectAdmin.find('option:last').remove();
+                }
+                
                 $('#selectAdmin').append($('<option>', {
                         value: idAdmin,
                         text: nombreAdmin,
@@ -127,20 +135,21 @@
         });
 
         $('#btn-nuevo-familia').click(function() {
-            $('.card-formulario').hide();
-            $('#nombre').val('');
-            $('#idfamilia').val('');
-            
-            var countAdmin = parseInt($('#numAdmin').val()); // Obtener el número de opciones
-            var $selectAdmin = $('#selectAdmin');
+        $('.card-formulario').hide();
+        $('#nombre').val('');
+        $('#idfamilia').val('');
+        
+        var countAdmin = parseInt($('#numAdmin').val()); // Obtener el número de opciones
+        var $selectAdmin = $('#selectAdmin');
+        var currentOptions = $selectAdmin.find('option').length; // Obtener el número actual de opciones
+        
+        // Eliminar la última opción solo si hay más de una opción cargada y el número actual de opciones es mayor que countAdmin
+        if (currentOptions > 1 && currentOptions > countAdmin) {
+            $selectAdmin.find('option:last').remove();
+        }
 
-            // Eliminar la última opción solo si hay más de una opción
-            if (countAdmin > 1) {
-                $selectAdmin.find('option:last').remove();
-            }
-
-            $('.card-formulario').show();
-        });
+        $('.card-formulario').show();
+    });
 
 
         $('#btn-cancelar').click(function() {
