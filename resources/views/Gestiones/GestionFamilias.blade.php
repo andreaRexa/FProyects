@@ -58,8 +58,9 @@
                     <h5 class="card-title text-center">Editar familia</h5>
                     <form id="form-editar-familia" action="" method="POST">
                         @csrf
+                        <input type="hidden" id="idfamilia" name="idfamilia">
                         <input type="text" class="form-control" id="nombre" name="nombre" placeholder="">
-                        <select class="form-control select-admin" name="selectAdmin">
+                        <select class="form-control select-admin" id="selectAdmin" name="selectAdmin">
                         @foreach($administradores as $administrador)
                             <option value="{{ $administrador->IdUsuario}}">{{ $administrador->Apellidos }}, {{ $administrador->Nombre }}</option>
                         @endforeach
@@ -78,7 +79,7 @@
     $(document).ready(function() {
         var FamiliaSeleccionado;
 
-        $('.ciclfamiliao-item').click(function() {
+        $('.familia-item').click(function() {
             $('.familia-item').removeClass('table-active');
             $(this).addClass('table-active');
             FamiliaSeleccionado = $(this);
@@ -88,14 +89,22 @@
             if (FamiliaSeleccionado) {
                 var familiaId = FamiliaSeleccionado.data('familia-id');
                 var nombreFamilia = FamiliaSeleccionado.find('td').eq(1).text();
-                var cursosDelCiclo = FamiliaSeleccionado.find('select option');
 
-                $('#nombre').val(nombreCiclo);
-                $('#ciclo_id').val(cicloId);
-                $('#accion').val("editar");
-                $('#cursosDelCiclo').empty();
-                $('#cursosDisponibles').empty();
+                $('#nombre').val(nombreFamilia);
+                $('#idfamilia').val(familiaId);
 
+                var adimFamiliaIds = cursosDelCiclo.map(function() {
+                    return $(this).val();
+                }).get();
+
+                @foreach($administradores as $administrador)
+                    $('#selectAdmin').append($('<option>', {
+                        value: '{{ $administrador->IdUsuario }}',
+                        text: '{{ $administrador->Apellidos }}, {{ $administrador->Nombre }}'
+                        selected: true;
+                    }));
+                }
+                @endforeach
                 $('.card-formulario').show();
             } else {
                 alert('Por favor, selecciona una familia antes de editar.');
