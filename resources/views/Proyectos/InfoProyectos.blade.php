@@ -65,7 +65,7 @@
                     <div class="col-md-12">
                         @if(session()->has('user'))
                             <h5 class="card-title">Valora este proyecto:</h5>
-                            <div id="rating-stars" class="starrr" data-rating="5"></div>
+                            <div id="rating-stars" class="starrr" data-rating="6"></div>
                             <p class="mt-2">Valoración actual: <span id="rating-value">{{ $proyecto->MediaValoracion }}</span></p>
                         @else
                             <p class="mt-2">Debes estar <a href="{{ route('login') }}">logueado</a> para valorar este proyecto.</p>
