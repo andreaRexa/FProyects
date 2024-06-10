@@ -65,9 +65,12 @@
                         <input type="hidden" id="idfamilia" name="idfamilia">
                         <input type="text" class="form-control" id="nombre" name="nombre" placeholder="">
                         <select class="form-control select-admin" id="selectAdmin" name="selectAdmin">
+                        {{$countAdmin=0}}
                         @foreach($administradores as $administrador)
                             <option value="{{ $administrador->IdUsuario}}">{{ $administrador->Apellidos }}, {{ $administrador->Nombre }}</option>
+                            {{$countAdmin+=1}}
                         @endforeach
+                        <input type="hidden" id="numAdmin" name="numAdmin" value="{{$countAdmin}}">
                         </select>
                         <div class="text-center">
                             <button type="submit" id="btn-guardar" class="btn btn-primary">Guardar</button>
@@ -97,9 +100,11 @@
 
                 $('#nombre').val(nombreFamilia);
                 $('#idfamilia').val(familiaId);
-                var idAdmin = $('#idadmin').val();
-                var nombreAdmin = $('#nombreadmin').val();
 
+                var idAdmin = FamiliaSeleccionado.find('#idadmin').val();
+                var nombreAdmin = FamiliaSeleccionado.find('#nombreadmin').val();
+
+                $('#selectAdmin option').last().remove();
                 $('#selectAdmin').append($('<option>', {
                         value: idAdmin,
                         text: nombreAdmin,
@@ -125,6 +130,15 @@
             $('.card-formulario').hide();
             $('#nombre').val('');
             $('#idfamilia').val('');
+            
+            var countAdmin = parseInt($('#numAdmin').val()); // Obtener el número de opciones
+            var $selectAdmin = $('#selectAdmin');
+
+            // Eliminar la última opción solo si hay más de una opción
+            if (countAdmin > 1) {
+                $selectAdmin.find('option:last').remove();
+            }
+
             $('.card-formulario').show();
         });
 
