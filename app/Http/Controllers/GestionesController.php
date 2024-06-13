@@ -37,8 +37,7 @@ class GestionesController extends Controller
 
     public function eliminarModulo($id)
     {
-        $cursisCiclo = CicloCurso::findOrFail($id);
-        $cursisCiclo->delete();
+        CicloCurso::where('IdCiclo', $id)->delete();
         $modulo = Ciclo::findOrFail($id);
         $modulo->delete();
         return redirect()->back();
