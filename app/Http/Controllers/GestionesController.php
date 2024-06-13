@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Ciclo;
+use App\Models\CicloCurso;
 use App\Models\Curso;
 use App\Models\Familia;
 use App\Models\User;
@@ -36,6 +37,8 @@ class GestionesController extends Controller
 
     public function eliminarModulo($id)
     {
+        $cursisCiclo = CicloCurso::findOrFail($id);
+        $cursisCiclo->delete();
         $modulo = Ciclo::findOrFail($id);
         $modulo->delete();
         return redirect()->back();
