@@ -37,24 +37,26 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <h5 class="card-title">Archivos</h5>
-                                    @if($proyecto->ArchivosPriv == 1)
-                                        <img src="/storage/imagenes/nodisponible.png" alt="No disponible" style="width: 100px; height: 100px;">
-                                    @else
+                                    @if($proyecto->ArchivosPriv == 0 || (session()->has('user') && $proyecto->proyectoAlumno->pluck('IdUsuario')->contains(session('user.id'))))
                                         <a href="https://fproyectsarchivos.s3.amazonaws.com/ArchivosPublicos/{{ $proyecto->Archivos }}" download>
                                             <img src="/storage/imagenes/zip.png" alt="Archivo ZIP" style="width: 100px; height: 100px;">
                                         </a>
                                         <p class="mt-2">{{ $proyecto->Archivos }}</p>
+                                    @else
+                                        
+                                        <img src="/storage/imagenes/nodisponible.png" alt="No disponible" style="width: 100px; height: 100px;">
                                     @endif
                                 </div>
                                 <div class="col-md-6">
                                     <h5 class="card-title">Documentación</h5>
-                                    @if($proyecto->DocumentacionPriv == 1)
-                                        <img src="/storage/imagenes/nodisponible.png" alt="No disponible" style="width: 100px; height: 100px;">
-                                    @else
+                                    @if($proyecto->DocumentacionPriv == 0 || (session()->has('user') && $proyecto->proyectoAlumno->pluck('IdUsuario')->contains(session('user.id'))))
                                         <a href="https://fproyectsarchivos.s3.amazonaws.com/ArchivosPublicos/{{ $proyecto->Documentacion }}" download>
                                             <img src="/storage/imagenes/zip.png" alt="Archivo ZIP" style="width: 100px; height: 100px;">
                                         </a>
                                         <p class="mt-2">{{ $proyecto->Documentacion }}</p>
+                                    @else
+                                        
+                                        <img src="/storage/imagenes/nodisponible.png" alt="No disponible" style="width: 100px; height: 100px;">
                                     @endif
                                 </div>
                             </div>
